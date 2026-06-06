@@ -1,13 +1,19 @@
 // @ts-check
-const { defineConfig, devices } = require('@playwright/test');
+
+require('dotenv').config();
+
+const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
+
+  globalSetup: require.resolve('./globalSetup'),
+
   testDir: './tests',
 
-  timeout: 60 * 1000,
+  timeout: 60000,
 
   expect: {
-    timeout: 10 * 1000,
+    timeout: 10000,
   },
 
   fullyParallel: true,
@@ -21,37 +27,10 @@ module.exports = defineConfig({
   ],
 
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    baseURL: process.env.BASE_URL,
 
-    headless: false,
-
-    screenshot: 'only-on-failure',
-
-    video: 'retain-on-failure',
-
-    trace: 'on-first-retry',
+    extraHTTPHeaders: {
+      'Content-Type': 'application/json',
+    },
   },
-
-  projects: [
-    {
-      name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome'],
-      },
-    },
-
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-    },
-
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
-  ],
 });
