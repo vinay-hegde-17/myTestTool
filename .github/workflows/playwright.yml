@@ -8,12 +8,12 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 30
     runs-on: ubuntu-latest
 
     env:
-      HRMS_BASE_URL: ${{ vars.HRMS_BASE_URL || 'http://localhost:3001' }}
-      MARKETING_BASE_URL: ${{ vars.MARKETING_BASE_URL || 'https://phyelements.com' }}
+      API_BASE_URL: ${{ vars.API_BASE_URL || 'http://localhost:3000' }}
+      TEST_EMAIL: ${{ vars.TEST_EMAIL || 'qa.user@company.com' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -21,37 +21,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
+      - name: Install Playwright
+        run: npx playwright install --with-deps
 
-      - name: Restore Google auth session
-        run: mkdir -p .auth
-        continue-on-error: true
-
-      - name: Decode auth state from secret
-        env:
-          PLAYWRIGHT_AUTH_JSON: ${{ secrets.PLAYWRIGHT_AUTH_JSON }}
-        run: |
-          if [ -n "$PLAYWRIGHT_AUTH_JSON" ]; then
-            echo "$PLAYWRIGHT_AUTH_JSON" | base64 -d > .auth/user.json
-          fi
-
-      - name: Run public tests (no auth)
-        run: npx playwright test --project=public-chromium --project=hrms-public
-
-      - name: Run HRMS authenticated tests
-        if: ${{ secrets.PLAYWRIGHT_AUTH_JSON != '' }}
-        run: npx playwright test --project=hrms-chromium
+      - name: Run tests
+        run: npm test
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: playwright-report
+          name: allure-report
           path: |
-            playwright-report/
-            test-results/
-          retention-days: 30
+            reports/allure/
+          retention-days: 14

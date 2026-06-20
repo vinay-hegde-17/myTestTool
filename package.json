@@ -1,44 +1,27 @@
 {
   "name": "phye-hrms-playwright",
   "version": "1.0.0",
-  "description": "Playwright E2E framework for PHYE-HRMS (MERN + Google Auth)",
+  "description": "Playwright SDET framework for PHYE-HRMS API and E2E testing",
   "scripts": {
-    "test": "playwright test --project=public-chromium --project=hrms-public",
-    "test:all": "playwright test",
+    "test": "node scripts/run-tests.js",
+    "test:api": "node scripts/run-tests.js --project=api",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
-    "test:auth-setup": "playwright test --project=setup",
-    "test:hrms": "playwright test --project=hrms-chromium",
-    "test:public": "playwright test --project=public-chromium",
-    "test:login": "playwright test --project=hrms-public",
-    "report": "playwright show-report",
-    "allure:generate": "allure generate allure-results --clean -o allure-report",
-    "allure:open": "allure open allure-report"
+    "test:debug": "playwright test --debug",
+    "report": "npm run allure:open",
+    "allure:open": "node scripts/run-tests.js --open-report"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vinay-hegde-17/myTestTool.git"
   },
-  "keywords": [
-    "playwright",
-    "hrms",
-    "e2e",
-    "mern"
-  ],
-  "author": "",
+  "keywords": ["playwright", "sdet", "api-testing", "hrms"],
   "license": "ISC",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/vinay-hegde-17/myTestTool/issues"
-  },
-  "homepage": "https://github.com/vinay-hegde-17/myTestTool#readme",
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.1",
     "allure-playwright": "^3.9.0",
     "dotenv": "^17.4.2"
-  },
-  "dependencies": {
-    "jsonwebtoken": "^9.0.3"
   }
 }
