@@ -7,19 +7,9 @@ const test = base.extend({
         { request, qaToken },
         use
     ) => {
-
-        const client =
-            new EmployeeClient(
-                request,
-                qaToken
-            );
-
-        await use(client);
+        await use(new EmployeeClient(request, qaToken));
     }
 
 });
 
-module.exports = {
-    test,
-    expect
-};
+module.exports = { test, expect };

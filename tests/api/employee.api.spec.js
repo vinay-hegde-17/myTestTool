@@ -1,11 +1,6 @@
-const {
-  test,
-  expect
-} = require('../../fixtures/employee.fixture');
+const { test, expect } = require('../../fixtures/employee.fixture');
 
-const {
-  HTTP_STATUS
-} = require('../../api/constants/employee.constants');
+const { HTTP_STATUS } = require('../../api/constants/employee.constants');
 
 const employeeData = require('../../test-data/employee.json');
 
@@ -552,17 +547,17 @@ test.describe('Employee Management APIs', () => {
       .toBe(200);
   });
 
-test('TC31 Unassign Asset Invalid Employee', async () => {
+  test('TC31 Unassign Asset Invalid Employee', async () => {
 
     const response =
-        await employeeClient.unassignAsset(
-            process.env.INVALID_EMPLOYEE_ID,
-            process.env.TEST_ASSET_ID
-        );
+      await employeeClient.unassignAsset(
+        process.env.INVALID_EMPLOYEE_ID,
+        process.env.TEST_ASSET_ID
+      );
 
     expect([200, 404, 500])
-        .toContain(response.status());
-});
+      .toContain(response.status());
+  });
 
   test('TC32 Remove Employee Photo', async () => {
 

@@ -5,26 +5,43 @@ const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
   globalSetup: require.resolve('./globalSetup'),
-  testDir: './tests/api',
+
+  testDir: './tests',
+
   testMatch: '**/*.api.spec.js',
-  timeout: process.env.PLAYWRIGHT_TIMEOUT ? parseInt(process.env.PLAYWRIGHT_TIMEOUT, 10) : 60_000,
+
+  timeout: process.env.PLAYWRIGHT_TIMEOUT
+    ? parseInt(process.env.PLAYWRIGHT_TIMEOUT, 10)
+    : 60_000,
+
   expect: {
-    timeout: process.env.PLAYWRIGHT_EXPECT_TIMEOUT ? parseInt(process.env.PLAYWRIGHT_EXPECT_TIMEOUT, 10) : 10_000,
+    timeout: process.env.PLAYWRIGHT_EXPECT_TIMEOUT
+      ? parseInt(process.env.PLAYWRIGHT_EXPECT_TIMEOUT, 10)
+      : 10_000,
   },
+
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 2 : undefined,
+
+  // Exclude empty-data tests by default
+  grepInvert: /@emptydata/,
+
   reporter: [
     ['list'],
-    ['allure-playwright', { resultsDir: 'reports/allure-results' }],
+    ['allure-playwright', {
+      resultsDir: 'reports/allure-results'
+    }]
   ],
+
   use: {
     baseURL: process.env.API_BASE_URL || 'http://localhost:3000',
     extraHTTPHeaders: {
       'Content-Type': 'application/json',
     },
   },
+
   projects: [
     {
       name: 'api',

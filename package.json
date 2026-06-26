@@ -9,7 +9,8 @@
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
     "report": "npm run allure:open",
-    "allure:open": "node scripts/run-tests.js --open-report"
+    "allure:open": "node scripts/run-tests.js --open-report",
+    "test:empty": "npx playwright test tests/empty --grep @emptydata"
   },
   "repository": {
     "type": "git",

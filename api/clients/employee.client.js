@@ -1,5 +1,4 @@
-const { EMPLOYEE_ENDPOINTS } =
-    require('../constants/employee.constants');
+const { EMPLOYEE_ENDPOINTS } = require('../constants/employee.constants');
 
 class EmployeeClient {
 

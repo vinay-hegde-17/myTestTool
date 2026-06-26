@@ -1,0 +1,21 @@
+{
+    "asset": {
+        "description": "Playwright Test Asset",
+        "dateOfPurchase": "2023-06-01",
+        "notInUse": false
+    },
+
+    "assetType": {
+        "type": "Playwright Laptop"
+    },
+
+    "assetModel": {
+        "model": "Playwright Dell"
+    },
+
+    "messages": {
+        "duplicateAsset": "Asset with this ID number already exists.",
+        "duplicateAssetType": "Asset type already exists",
+        "duplicateAssetModel": "Asset Model already exists"
+    }
+}

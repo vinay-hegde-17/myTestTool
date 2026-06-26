@@ -1,29 +1,27 @@
 {
-"createEmployee": {
-"firstName": "Automation",
-"lastName": "User",
-"emailId": "[automation.user@test.com](mailto:automation.user@test.com)",
-"employeeNumber": "AUTO001",
-"activeStatus": true,
-"assignedRoleId": "66a77ce670bd6b1f721cc20b",
-"phone": "9876543210",
-"gender": "Male",
-"bloodGroup": "A+",
-"address": "Automation Address",
-"qualification": "BCA",
-"aadhaarNumber": "123412341234",
-"panNumber": "ABCDE1234F",
-"emergencyContactName": "Emergency User",
-"emergencyContactNumber": "9876543211"
-},
-
-"updateEmployee": {
-"designation": "Senior SDET",
-"qualification": "MCA"
-},
-
-"validation": {
-"invalidHierarchyId": "invalidId",
-"invalidRoleId": "INVALID_ROLE"
-}
+    "createEmployee": {
+        "firstName": "Automation",
+        "lastName": "User",
+        "emailId": "[automation.user@test.com](mailto:automation.user@test.com)",
+        "employeeNumber": "AUTO001",
+        "activeStatus": true,
+        "assignedRoleId": "66a77ce670bd6b1f721cc20b",
+        "phone": "9876543210",
+        "gender": "Male",
+        "bloodGroup": "A+",
+        "address": "Automation Address",
+        "qualification": "BCA",
+        "aadhaarNumber": "123412341234",
+        "panNumber": "ABCDE1234F",
+        "emergencyContactName": "Emergency User",
+        "emergencyContactNumber": "9876543211"
+    },
+    "updateEmployee": {
+        "designation": "Senior SDET",
+        "qualification": "MCA"
+    },
+    "validation": {
+        "invalidHierarchyId": "invalidId",
+        "invalidRoleId": "INVALID_ROLE"
+    }
 }
