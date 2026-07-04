@@ -22,6 +22,27 @@ class AuthClient {
     }
     return this.request.get(AUTH_ENDPOINTS.VALIDATE_TOKEN, options);
   }
+
+  generateJwtTokenWithBody(body = {}) {
+    return this.request.post(AUTH_ENDPOINTS.GENERATE_JWT_TOKEN, {
+      data: body
+    });
+  }
+
+  generateQaTokenWithBody(body = {}) {
+    return this.request.post(AUTH_ENDPOINTS.QA_TOKEN, {
+      data: body
+    });
+  }
+
+  validateTokenWithHeader(headerValue) {
+    return this.request.get(AUTH_ENDPOINTS.VALIDATE_TOKEN, {
+      headers: {
+        Authorization: headerValue
+      }
+    });
+  }
+
 }
 
 module.exports = AuthClient;

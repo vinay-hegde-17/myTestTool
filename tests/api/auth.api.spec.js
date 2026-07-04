@@ -27,11 +27,63 @@ test.describe('Google Authentication APIs', () => {
             );
     });
 
+    test('TC02 Missing Access Token', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateJwtTokenWithBody({});
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC03 Empty Request Body', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateJwtTokenWithBody();
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC04 Empty Access Token', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateJwtToken('');
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC05 Malformed Access Token', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateJwtToken(
+                authData.malformedAccessToken
+            );
+
+        expect([
+            HTTP_STATUS.BAD_REQUEST,
+            HTTP_STATUS.UNAUTHORIZED
+        ]).toContain(response.status());
+
+    });
+
 });
 
 test.describe('QA Token APIs', () => {
 
-    test('TC02 Generate QA Token', async ({
+    test('TC06 Generate QA Token', async ({
         authClient
     }) => {
 
@@ -50,7 +102,7 @@ test.describe('QA Token APIs', () => {
             .toBeTruthy();
     });
 
-    test('TC03 Unauthorized Email', async ({
+    test('TC07 Unauthorized Email', async ({
         authClient
     }) => {
 
@@ -63,7 +115,7 @@ test.describe('QA Token APIs', () => {
             .toBe(HTTP_STATUS.FORBIDDEN);
     });
 
-    test('TC04 Missing Email', async ({
+    test('TC08 Missing Email', async ({
         authClient
     }) => {
 
@@ -74,11 +126,75 @@ test.describe('QA Token APIs', () => {
             .toBe(HTTP_STATUS.FORBIDDEN);
     });
 
+    test('TC09 Empty Email', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateQaToken('');
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.FORBIDDEN);
+
+    });
+
+    test('TC10 Invalid Email Format', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateQaToken(
+                authData.invalidEmailFormat
+            );
+
+        expect([
+            HTTP_STATUS.BAD_REQUEST,
+            HTTP_STATUS.FORBIDDEN
+        ]).toContain(response.status());
+
+    });
+
+    test('TC11 Uppercase Email', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateQaToken(
+                authData.uppercaseEmail
+            );
+
+        expect([
+            HTTP_STATUS.OK,
+            HTTP_STATUS.FORBIDDEN
+        ]).toContain(response.status());
+
+    });
+
+    test('TC12 QA Token Response Schema', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateQaToken(
+                qaEmail
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(body)
+            .toHaveProperty('token');
+
+    });
+
 });
 
 test.describe('Token Validation APIs', () => {
 
-    test('TC05 Validate Generated Token', async ({
+    test('TC13 Validate Generated Token', async ({
         authClient,
         qaToken
     }) => {
@@ -101,7 +217,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(qaEmail);
     });
 
-    test('TC06 Invalid Token', async ({
+    test('TC14 Invalid Token', async ({
         authClient
     }) => {
 
@@ -114,7 +230,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(HTTP_STATUS.UNAUTHORIZED);
     });
 
-    test('TC07 Missing Authorization Header', async ({
+    test('TC15 Missing Authorization Header', async ({
         authClient
     }) => {
 
@@ -123,6 +239,61 @@ test.describe('Token Validation APIs', () => {
 
         expect(response.status())
             .toBe(HTTP_STATUS.UNAUTHORIZED);
+    });
+
+    test('TC16 Malformed JWT Token', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.validateToken(
+                authData.malformedJwtToken
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC17 Empty Bearer Token', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.validateTokenWithHeader(
+                'Bearer '
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC18 Validate Token Response Schema', async ({
+        authClient,
+        qaToken
+    }) => {
+
+        const response =
+            await authClient.validateToken(
+                qaToken
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(body)
+            .toHaveProperty('valid');
+
+        expect(body)
+            .toHaveProperty('user');
+
+        expect(body.user)
+            .toHaveProperty('email');
+
     });
 
 });
