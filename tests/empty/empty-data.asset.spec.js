@@ -1,4 +1,3 @@
-//empty-data.api.spec.js
 const { test, expect } = require('../../fixtures/asset.fixture');
 
 const { HTTP_STATUS } = require('../../api/constants/asset.constants');

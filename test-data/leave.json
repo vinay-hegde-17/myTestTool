@@ -1,0 +1,95 @@
+{
+    "employee": {
+        "employeeId": "6a1f0bd1c9ce1caed4279c13",
+        "approverId": "6a1f0bd1c9ce1caed4279c13",
+        "invalidEmployeeId": "66aaaaaaaaaaaaaaaaaaaaaa",
+        "invalidApproverId": "66bbbbbbbbbbbbbbbbbbbbbb"
+    },
+
+    "leave": {
+
+        "leaveId": "6a46902aea79d955be3ce913",
+        "invalidLeaveId": "66cccccccccccccccccccccc",
+
+        "validLeave": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "approverId": "6a1f0bd1c9ce1caed4279c13",
+            "fromDate": "2026-08-10",
+            "toDate": "2026-08-12",
+            "leaveType": "CL",
+            "reason": "Playwright Automation Testing"
+        },
+
+        "casualLeave": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "approverId": "6a1f0bd1c9ce1caed4279c13",
+            "fromDate": "2026-08-15",
+            "toDate": "2026-08-15",
+            "leaveType": "CL",
+            "reason": "Casual Leave"
+        },
+
+        "sickLeave": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "approverId": "6a1f0bd1c9ce1caed4279c13",
+            "fromDate": "2026-08-18",
+            "toDate": "2026-08-19",
+            "leaveType": "SL",
+            "reason": "Sick Leave"
+        },
+
+        "maternityLeave": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "approverId": "6a1f0bd1c9ce1caed4279c13",
+            "fromDate": "2026-09-01",
+            "toDate": "2026-11-30",
+            "leaveType": "ML",
+            "reason": "Maternity Leave"
+        }
+
+    },
+
+    "update": {
+
+        "approved": {
+            "status": "Approved"
+        },
+
+        "rejected": {
+            "status": "Rejected",
+            "adminRejectComment": "Rejected by automation"
+        },
+
+        "cancelled": {
+            "status": "Canceled"
+        },
+
+        "invalidStatus": {
+            "status": "INVALID"
+        }
+
+    },
+
+    "rejectRequest": {
+
+        "comment": {
+            "employeeRejectRequestComment": "Kindly cancel my leave request."
+        }
+
+    },
+
+    "status": {
+        "pendingStatus": "Pending",
+        "approvedStatus": "Approved",
+        "rejectedStatus": "Rejected",
+        "invalidStatus": "InvalidStatus"
+    },
+
+    "messages": {
+        "leaveDeleted": "Leave deleted successfully",
+        "leaveNotFound": "No Leaves found for employee ID",
+        "invalidStatus": "Bad request. Invalid status value",
+        "rejectRequestUpdated": "'isRejectRequested' updated successfully",
+        "internalServerError": "Internal server error"
+    }
+}

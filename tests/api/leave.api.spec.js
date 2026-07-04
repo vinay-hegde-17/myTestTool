@@ -1,0 +1,1352 @@
+const { test, expect } = require('../../fixtures/leave.fixture');
+const { HTTP_STATUS } = require('../../api/constants/leave.constants');
+const leaveData = require('../../test-data/leave.json');
+
+test.describe('Leave Module APIs', () => {
+
+    test('TC01 Get all leave records', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getLeaves();
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        if (body.length > 0) {
+
+            expect(body[0])
+                .toHaveProperty('_id');
+
+            expect(body[0])
+                .toHaveProperty('employeeId');
+
+            expect(body[0])
+                .toHaveProperty('status');
+
+        }
+
+    });
+
+    test('TC02 Get leave records by Pending status', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getLeaves(
+                leaveData.status.pendingStatus
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        body.forEach((leave) => {
+
+            expect(leave.status)
+                .toBe(
+                    leaveData.status.pendingStatus
+                );
+
+        });
+
+    });
+
+    test('TC03 Get leave records by Approved status', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getLeaves(
+                leaveData.status.approvedStatus
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        body.forEach((leave) => {
+
+            expect(leave.status)
+                .toBe(
+                    leaveData.status.approvedStatus
+                );
+
+        });
+
+    });
+
+    test('TC04 Get leave records by Rejected status', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getLeaves(
+                leaveData.status.rejectedStatus
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        body.forEach((leave) => {
+
+            expect(leave.status)
+                .toBe(
+                    leaveData.status.rejectedStatus
+                );
+
+        });
+
+    });
+
+    test('TC05 Get leave records using invalid status', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getLeaves(
+                leaveData.status.invalidStatus
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        expect(body.length)
+            .toBe(0);
+
+    });
+
+    test('TC06 Get all leave records without Authorization', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getLeavesWithoutAuth();
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC07 Get all leave records with invalid Authorization', async ({
+        request
+    }) => {
+
+        const response =
+            await request.get(
+                '/leaves',
+                {
+                    headers: {
+                        Authorization: 'Bearer InvalidToken'
+                    }
+                }
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC08 Verify leave response schema', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getLeaves();
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        if (body.length > 0) {
+
+            const leave =
+                body[0];
+
+            expect(leave)
+                .toHaveProperty('_id');
+
+            expect(leave)
+                .toHaveProperty('employeeId');
+
+            expect(leave)
+                .toHaveProperty('fromDate');
+
+            expect(leave)
+                .toHaveProperty('toDate');
+
+            expect(leave)
+                .toHaveProperty('numberOfDays');
+
+            expect(leave)
+                .toHaveProperty('leaveType');
+
+            expect(leave)
+                .toHaveProperty('reason');
+
+            expect(leave)
+                .toHaveProperty('status');
+
+            expect(leave)
+                .toHaveProperty('appliedOn');
+
+        }
+
+    });
+
+    test('TC09 Get leave threshold', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getLeaveThreshold();
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+    });
+
+    test('TC10 Verify leave threshold response', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getLeaveThreshold();
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(body)
+            .toHaveProperty(
+                'SICK_LEAVE_THRESHOLD'
+            );
+
+        expect(body)
+            .toHaveProperty(
+                'CASUAL_LEAVE_THRESHOLD'
+            );
+
+        expect(body)
+            .toHaveProperty(
+                'MATERNITY_LEAVE_THRESHOLD'
+            );
+
+    });
+
+    test('TC11 Get leave threshold without Authorization', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getLeaveThresholdWithoutAuth();
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC12 Get leave threshold with invalid Authorization', async ({
+        request
+    }) => {
+
+        const response =
+            await request.get('/leaves/leavesThreshold', {
+                headers: {
+                    Authorization: 'Bearer InvalidToken'
+                }
+            });
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC13 Get employee leave history', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getEmployeeLeaves(
+                leaveData.employee.employeeId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+    });
+
+    test('TC14 Get employee leave history with Pending status', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getEmployeeLeaves(
+                leaveData.employee.employeeId,
+                leaveData.status.pendingStatus
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        body.forEach(item => {
+
+            expect(item.status)
+                .toBe(leaveData.status.pendingStatus);
+
+        });
+
+    });
+
+    test('TC15 Get employee leave history with Approved status', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getEmployeeLeaves(
+                leaveData.employee.employeeId,
+                leaveData.status.approvedStatus
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        body.forEach(item => {
+
+            expect(item.status)
+                .toBe(leaveData.status.approvedStatus);
+
+        });
+
+    });
+
+    test('TC16 Get employee leave history using invalid employeeId', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getEmployeeLeaves(
+                leaveData.employee.invalidEmployeeId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        expect(body.length)
+            .toBe(0);
+
+    });
+
+    test('TC17 Get employee leave history without Authorization', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getEmployeeLeavesWithoutAuth(
+                leaveData.employee.employeeId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC18 Verify employee leave response schema', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getEmployeeLeaves(
+                leaveData.employee.employeeId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        if (body.length > 0) {
+
+            expect(body[0])
+                .toHaveProperty('_id');
+
+            expect(body[0])
+                .toHaveProperty('employeeId');
+
+            expect(body[0])
+                .toHaveProperty('fromDate');
+
+            expect(body[0])
+                .toHaveProperty('toDate');
+
+            expect(body[0])
+                .toHaveProperty('numberOfDays');
+
+            expect(body[0])
+                .toHaveProperty('leaveType');
+
+            expect(body[0])
+                .toHaveProperty('reason');
+
+            expect(body[0])
+                .toHaveProperty('status');
+
+            expect(body[0])
+                .toHaveProperty('appliedOn');
+
+        }
+
+    });
+
+    test('TC19 Get approver leave requests', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getApproverLeaves(
+                leaveData.employee.approverId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+    });
+
+    test('TC20 Get approver leave requests using employee filter', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getApproverLeaves(
+                leaveData.employee.approverId,
+                leaveData.employee.employeeId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+    });
+
+    test('TC21 Get approver leave requests using status filter', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getApproverLeaves(
+                leaveData.employee.approverId,
+                null,
+                leaveData.status.pendingStatus
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        body.forEach(item => {
+
+            expect(item.status)
+                .toBe(leaveData.status.pendingStatus);
+
+        });
+
+    });
+
+    test('TC22 Get approver leave requests using invalid approverId', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getApproverLeaves(
+                leaveData.employee.invalidApproverId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+        expect(body.length)
+            .toBe(0);
+
+    });
+
+    test('TC23 Get approver leave requests without Authorization', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getApproverLeavesWithoutAuth(
+                leaveData.employee.approverId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC24 Get employee financial year leave history', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getFinancialYearLeaves(
+                leaveData.employee.employeeId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+    });
+
+    test('TC25 Get financial year leave history using invalid employeeId', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getFinancialYearLeaves(
+                leaveData.employee.invalidEmployeeId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.NOT_FOUND);
+
+        const body =
+            await response.json();
+
+        expect(body.message)
+            .toContain(
+                leaveData.messages.leaveNotFound
+            );
+
+    });
+
+    test('TC26 Get financial year leave history without Authorization', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getFinancialYearLeavesWithoutAuth(
+                leaveData.employee.employeeId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC27 Verify financial year response schema', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getFinancialYearLeaves(
+                leaveData.employee.employeeId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        if (body.length > 0) {
+
+            expect(body[0])
+                .toHaveProperty('fromDate');
+
+            expect(body[0])
+                .toHaveProperty('toDate');
+
+            expect(body[0])
+                .toHaveProperty('numberOfDays');
+
+            expect(body[0])
+                .toHaveProperty('leaveType');
+
+            expect(body[0])
+                .toHaveProperty('reason');
+
+            expect(body[0])
+                .toHaveProperty('status');
+
+        }
+
+    });
+
+    test('TC28 Apply leave with valid data', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.applyLeave(
+                leaveData.leave.validLeave
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.CREATED);
+
+        const body =
+            await response.json();
+
+        expect(body)
+            .toHaveProperty('_id');
+
+        expect(body.employeeId)
+            .toBe(leaveData.leave.validLeave.employeeId);
+
+        expect(body.approverId)
+            .toBe(leaveData.leave.validLeave.approverId);
+
+        expect(body.leaveType)
+            .toBe(leaveData.leave.validLeave.leaveType);
+
+        expect(body.reason)
+            .toBe(leaveData.leave.validLeave.reason);
+
+        expect(body.status)
+            .toBe('Pending');
+
+    });
+
+    test('TC29 Apply Casual Leave', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.applyLeave(
+                leaveData.leave.casualLeave
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.CREATED);
+
+        const body =
+            await response.json();
+
+        expect(body.leaveType)
+            .toBe('CL');
+
+        expect(body.status)
+            .toBe('Pending');
+
+    });
+
+    test('TC30 Apply Sick Leave', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.applyLeave(
+                leaveData.leave.sickLeave
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.CREATED);
+
+        const body =
+            await response.json();
+
+        expect(body.leaveType)
+            .toBe('SL');
+
+        expect(body.status)
+            .toBe('Pending');
+
+    });
+
+    test('TC31 Apply Maternity Leave', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.applyLeave(
+                leaveData.leave.maternityLeave
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.CREATED);
+
+        const body =
+            await response.json();
+
+        expect(body.leaveType)
+            .toBe('ML');
+
+        expect(body.status)
+            .toBe('Pending');
+
+    });
+
+    test('TC32 Apply leave with invalid employeeId', async ({
+        leaveClient
+    }) => {
+
+        const payload = {
+            ...leaveData.leave.validLeave,
+            employeeId: leaveData.employee.invalidEmployeeId
+        };
+
+        const response = await leaveClient.applyLeave(payload);
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.NOT_FOUND);
+
+        const body = await response.json();
+
+        expect(body.message)
+            .toContain("Employee not found");
+
+    });
+
+    test('TC33 Apply leave with invalid approverId', async ({
+        leaveClient
+    }) => {
+
+        const payload = {
+            ...leaveData.leave.validLeave,
+            approverId: leaveData.employee.invalidApproverId
+        };
+
+        const response = await leaveClient.applyLeave(payload);
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.NOT_FOUND);
+
+        const body = await response.json();
+
+        expect(body.message)
+            .toContain("Approver not found");
+
+    });
+
+    test('TC34 Apply leave with invalid leaveType', async ({
+        leaveClient
+    }) => {
+
+        const leave = {
+            ...leaveData.leave.validLeave,
+            leaveType: 'INVALID'
+        };
+
+        const response =
+            await leaveClient.applyLeave(leave);
+
+        // Backend currently allows invalid leaveType
+        expect(response.status())
+            .toBe(HTTP_STATUS.CREATED);
+
+        const body =
+            await response.json();
+
+        expect(body.leaveType)
+            .toBe('INVALID');
+
+    });
+
+    test('TC35 Apply leave with From Date greater than To Date', async ({
+        leaveClient
+    }) => {
+
+        const leave = {
+            ...leaveData.leave.validLeave,
+            fromDate: '2026-12-20',
+            toDate: '2026-12-15'
+        };
+
+        const response =
+            await leaveClient.applyLeave(leave);
+
+        // Backend currently doesn't validate date order
+        expect(response.status())
+            .toBe(HTTP_STATUS.CREATED);
+
+        const body =
+            await response.json();
+
+        expect(body.fromDate)
+            .toContain('2026-12-20');
+
+        expect(body.toDate)
+            .toContain('2026-12-15');
+
+    });
+
+    test('TC36 Verify business day calculation', async ({
+        leaveClient
+    }) => {
+
+        const leave = {
+            ...leaveData.leave.validLeave,
+            fromDate: '2026-12-14',
+            toDate: '2026-12-18',
+            leaveType: 'CL'
+        };
+
+        const response =
+            await leaveClient.applyLeave(leave);
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.CREATED);
+
+        const body =
+            await response.json();
+
+        expect(body.numberOfDays)
+            .toBe(5);
+
+    });
+
+    test('TC37 Apply leave without Authorization', async ({
+        request
+    }) => {
+
+        const response =
+            await request.post(
+                '/leaves',
+                {
+                    data: leaveData.leave.validLeave
+                }
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC38 Verify created leave response', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.applyLeave(
+                leaveData.leave.validLeave
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.CREATED);
+
+        const body =
+            await response.json();
+
+        expect(body)
+            .toHaveProperty('_id');
+
+        expect(body)
+            .toHaveProperty('employeeId');
+
+        expect(body)
+            .toHaveProperty('fromDate');
+
+        expect(body)
+            .toHaveProperty('toDate');
+
+        expect(body)
+            .toHaveProperty('leaveType');
+
+        expect(body)
+            .toHaveProperty('reason');
+
+        expect(body)
+            .toHaveProperty('numberOfDays');
+
+        expect(body)
+            .toHaveProperty('status');
+
+    });
+
+    test('TC39 Approve leave request', async ({
+        leaveClient
+    }) => {
+
+        const createResponse =
+            await leaveClient.applyLeave(
+                leaveData.leave.validLeave
+            );
+
+        expect(createResponse.status())
+            .toBe(HTTP_STATUS.CREATED);
+
+        const createdLeave =
+            await createResponse.json();
+
+        const response =
+            await leaveClient.updateLeave(
+                createdLeave._id,
+                {
+                    status: leaveData.status.approvedStatus
+                }
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(body.status)
+            .toBe(leaveData.status.approvedStatus);
+
+    });
+
+    test('TC40 Reject leave request', async ({
+        leaveClient
+    }) => {
+
+        const createResponse =
+            await leaveClient.applyLeave(
+                leaveData.leave.validLeave
+            );
+
+        const createdLeave =
+            await createResponse.json();
+
+        const response =
+            await leaveClient.updateLeave(
+                createdLeave._id,
+                {
+                    status: leaveData.status.rejectedStatus,
+                    adminRejectComment: 'Rejected by Playwright'
+                }
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(body.status)
+            .toBe(leaveData.status.rejectedStatus);
+
+    });
+
+    test('TC41 Cancel leave request', async ({
+        leaveClient
+    }) => {
+
+        const createResponse =
+            await leaveClient.applyLeave(
+                leaveData.leave.validLeave
+            );
+
+        const createdLeave =
+            await createResponse.json();
+
+        const response =
+            await leaveClient.updateLeave(
+                createdLeave._id,
+                {
+                    status: 'Canceled'
+                }
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(body.status)
+            .toBe('Canceled');
+
+    });
+
+    test('TC42 Update leave using invalid status', async ({
+        leaveClient
+    }) => {
+
+        const createResponse =
+            await leaveClient.applyLeave(
+                leaveData.leave.validLeave
+            );
+
+        const createdLeave =
+            await createResponse.json();
+
+        const response =
+            await leaveClient.updateLeave(
+                createdLeave._id,
+                {
+                    status: leaveData.status.invalidStatus
+                }
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.BAD_REQUEST);
+
+    });
+
+    test('TC43 Update leave using invalid leaveId', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.updateLeave(
+                leaveData.leave.invalidLeaveId,
+                {
+                    status: leaveData.status.approvedStatus
+                }
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.NOT_FOUND);
+
+    });
+
+    test('TC44 Update leave without Authorization', async ({
+        request
+    }) => {
+
+        const response =
+            await request.put(
+                `/leaves/${leaveData.leave.invalidLeaveId}`,
+                {
+                    data: {
+                        status: leaveData.status.approvedStatus
+                    }
+                }
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC45 Submit reject request', async ({
+        leaveClient
+    }) => {
+
+        const createResponse =
+            await leaveClient.applyLeave(
+                leaveData.leave.validLeave
+            );
+
+        const createdLeave =
+            await createResponse.json();
+
+        const response =
+            await leaveClient.submitRejectRequest(
+                createdLeave._id,
+                {
+                    employeeRejectRequestComment:
+                        'Please cancel this leave'
+                }
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(body.message)
+            .toContain('updated successfully');
+
+        expect(body.leave.isRejectRequested)
+            .toBe(true);
+
+    });
+
+    test('TC46 Submit reject request using invalid leaveId', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.submitRejectRequest(
+                leaveData.leave.invalidLeaveId,
+                {
+                    employeeRejectRequestComment:
+                        'Playwright Test'
+                }
+            );
+
+        // Backend currently returns 200 with leave = null
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(body.leave)
+            .toBeNull();
+
+    });
+
+    test('TC47 Submit reject request without Authorization', async ({
+        request
+    }) => {
+
+        const response =
+            await request.put(
+                `/leaves/reject-request/${leaveData.leave.invalidLeaveId}`,
+                {
+                    data: {
+                        employeeRejectRequestComment:
+                            'Unauthorized'
+                    }
+                }
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC48 Delete leave', async ({
+        leaveClient
+    }) => {
+
+        const createResponse =
+            await leaveClient.applyLeave(
+                leaveData.leave.validLeave
+            );
+
+        const createdLeave =
+            await createResponse.json();
+
+        const response =
+            await leaveClient.deleteLeave(
+                createdLeave._id
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(body.message)
+            .toContain('deleted successfully');
+
+    });
+
+    test('TC49 Delete using invalid leaveId', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.deleteLeave(
+                leaveData.leave.invalidLeaveId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.NOT_FOUND);
+
+        const body =
+            await response.json();
+
+        expect(body.message)
+            .toContain('Leave entry not found');
+
+    });
+
+    test('TC50 Delete leave without Authorization', async ({
+        request
+    }) => {
+
+        const response =
+            await request.delete(
+                `/leaves/${leaveData.leave.invalidLeaveId}`
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC51 Get overall leave summary for all employees', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getOverallLeaves('all');
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+    });
+
+    test('TC52 Get overall leave summary for specific employee', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getOverallLeaves(
+                leaveData.employee.employeeId
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(Array.isArray(body))
+            .toBeTruthy();
+
+    });
+
+    test('TC53 Get overall leave summary using invalid employeeId', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getOverallLeaves(
+                leaveData.employee.invalidEmployeeId
+            );
+
+        // Aggregate returns empty array
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        expect(body.length)
+            .toBe(0);
+
+    });
+
+    test('TC54 Verify overall leave response', async ({
+        leaveClient
+    }) => {
+
+        const response =
+            await leaveClient.getOverallLeaves('all');
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
+
+        const body =
+            await response.json();
+
+        if (body.length > 0) {
+
+            expect(body[0])
+                .toHaveProperty('employeeNumber');
+
+            expect(body[0])
+                .toHaveProperty('name');
+
+            expect(body[0])
+                .toHaveProperty('SL');
+
+            expect(body[0])
+                .toHaveProperty('CL');
+
+            expect(body[0])
+                .toHaveProperty('LOP');
+
+        }
+
+    });
+
+    test('TC55 Get overall leave summary without Authorization', async ({
+        request
+    }) => {
+
+        const response =
+            await request.get(
+                '/leaves/overallleaves/all'
+            );
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+});
