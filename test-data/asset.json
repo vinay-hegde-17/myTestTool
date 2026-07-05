@@ -4,15 +4,17 @@
         "dateOfPurchase": "2023-06-01",
         "notInUse": false
     },
-
     "assetType": {
         "type": "Playwright Laptop"
     },
-
     "assetModel": {
         "model": "Playwright Dell"
     },
-
+    "invalid": {
+        "invalidToken": "invalid.jwt.token",
+        "invalidTypeId": "685000000000000000000001",
+        "invalidModelId": "685000000000000000000002"
+    },
     "messages": {
         "duplicateAsset": "Asset with this ID number already exists.",
         "duplicateAssetType": "Asset type already exists",
