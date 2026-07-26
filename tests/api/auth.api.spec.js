@@ -2,7 +2,8 @@ const { test, expect } = require('../../fixtures/auth.fixture');
 const { HTTP_STATUS } = require('../../api/constants/auth.constants');
 const authData = require('../../test-data/auth.json');
 
-const qaEmail = process.env.TEST_EMAIL;
+const { testData: employeeTestData } = require('../../test-data/employee.json');
+const qaEmail = employeeTestData.testEmail;
 
 test.describe('Google Authentication APIs', () => {
 

@@ -37,9 +37,6 @@ module.exports = defineConfig({
 
   use: {
     baseURL: process.env.API_BASE_URL || 'http://localhost:3000',
-    extraHTTPHeaders: {
-      'Content-Type': 'application/json',
-    },
   },
 
   projects: [

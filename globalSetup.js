@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { request } = require('@playwright/test');
+const employeeData = require('./test-data/employee.json');
 
 module.exports = async function globalSetup() {
   const cacheDir = path.join(process.cwd(), '.cache');
@@ -13,7 +14,9 @@ module.exports = async function globalSetup() {
   });
   try {
     const response = await apiContext.post('/auth/qa-token', {
-      data: { email: process.env.TEST_EMAIL || 'qa.user@company.com' },
+      data: {
+        email: employeeData.testData.testEmail || 'qa.user@company.com'
+      },
     });
 
     if (response.ok()) {

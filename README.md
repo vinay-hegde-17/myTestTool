@@ -40,7 +40,7 @@ Generated at runtime (gitignored): `.cache/`, `reports/`, `test-results/`.
 ```bash
 npm install
 npx playwright install
-# Create .env with API_BASE_URL and TEST_EMAIL (see Environment)
+# Create .env with API_BASE_URL (see Environment)
 npm test
 ```
 
@@ -50,6 +50,9 @@ npm test
 |---------|-------------|
 | `npm test` | Run all tests |
 | `npm run test:api` | Run API project only |
+| `npm run test:smoke` | Run the critical happy-path API checks |
+| `npm run test:sanity` | Run core endpoint validation checks |
+| `npm run test:regression` | Run the full labeled regression suite |
 | `npm run test:ui` | Playwright UI mode |
 | `npm run test:debug` | Debug with Inspector |
 | `npm run report` | Open latest Allure report |
@@ -59,7 +62,26 @@ npm test
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `API_BASE_URL` | `http://localhost:3000` | Backend base URL |
-| `TEST_EMAIL` | `qa.user@company.com` | Allowed QA email for token generation |
+| `TEST_ASSET_ID` | — | Asset test fixture (used by the asset suite) |
+| `TEST_ASSET_TYPE_ID` | — | Asset type test fixture (used by the asset suite) |
+| `TEST_ASSET_MODEL_ID` | — | Asset model test fixture (used by the asset suite) |
+
+## Employee API labels and order
+
+The employee suite keeps its CRUD mutation groups in create, update (including
+asset assignment), then delete (asset unassignment and photo removal) order.
+Mutation tests run serially, which prevents them from changing a record while
+another test is reading or changing it.
+
+Use `@smoke`, `@sanity`, or `@regression` for the standard run levels. Additional
+labels identify the API intent: `@read`, `@create`, `@update`, `@delete`, `@crud`,
+`@assets`, `@files`, `@email`, `@search`, `@roles`, `@dashboard`, and `@hierarchy`.
+
+Employee IDs, emails, file IDs, local upload paths, and the create payload are
+stored only in `test-data/employee.json`. Vinay is used only by GET tests. A
+separate active, disposable employee must be configured before file uploads or
+the upload → remove photo lifecycle can run; Vijay remains the already-null-photo
+fixture.
 
 ## Adding tests
 
@@ -70,4 +92,5 @@ npm test
 
 ## CI
 
-GitHub Actions runs `npm test` on push/PR to `main`/`master`. Set repository variables/secrets for `API_BASE_URL` and `TEST_EMAIL` when running against a deployed backend.
+GitHub Actions runs `npm test` on push/PR to `main`/`master`. Set the repository
+variable/secret for `API_BASE_URL` when running against a deployed backend.

@@ -2,8 +2,8 @@
     "createEmployee": {
         "firstName": "Automation",
         "lastName": "User",
-        "emailId": "[automation.user@test.com](mailto:automation.user@test.com)",
-        "employeeNumber": "AUTO001",
+        "emailId": "auto1783787220866@test.com",
+        "employeeNumber": "EMP001",
         "activeStatus": true,
         "assignedRoleId": "66a77ce670bd6b1f721cc20b",
         "phone": "9876543210",
@@ -23,5 +23,35 @@
     "validation": {
         "invalidHierarchyId": "invalidId",
         "invalidRoleId": "INVALID_ROLE"
+    },
+    "testData": {
+        "employeeId": "6a1f0bd1c9ce1caed4279c13",
+        "employeeIdForUpdates": "6a52fa19ddf6225c7e985f29",
+        "employeeIdForFileUploads": "6a526ed498b5c4d64fa079c4",
+        "employeeIdForAssets": "6a52fa19ddf6225c7e985f29",
+        "employeeIdForPhotos": "6a526ed498b5c4d64fa079c4",
+        "employeeIdWithoutAssets": "6a52fa19ddf6225c7e985f29",
+        "employeeIdWithoutPhoto": "6a52fa19ddf6225c7e985f29",
+        "testEmail": "vinayhegde0824@gmail.com",
+        "existingEmployeeEmail": "vinayhegde0824@gmail.com",
+        "inactiveEmail": "vinayhegde0820@gmail.com",
+        "managerId": "6a1f0bd1c9ce1caed4279c13",
+        "adminEmployeeId": "6a1f0bd1c9ce1caed4279c13",
+        "managerEmployeeId": "6a1f0bd1c9ce1caed4279c13",
+        "roleId": "66a77ce670bd6b1f721cc20b",
+        "assetId": "6a369484acba6340369d61a0",
+        "unassignedAssetId": "6a369484acba6340369d61a0",
+        "invalidAssetId": "66ffffffffffffffffffffff",
+        "invalidEmployeeId": "684111111111111111111111",
+        "employeeNumber": "1",
+        "duplicateEmail": "vinayhegde0824@gmail.com",
+        "fileId": "6a5700f8b80d0148087eb444",
+        "aadhaarFileId": "6a5700f8b80d0148087eb444",
+        "panFileId": "6a3684020265bbdc86fae63b",
+        "photoFileId": "6a645a17f2ad573d14f113fa",
+        "aadhaarFilePath": "test-data/files/aadhaar.pdf",
+        "panFilePath": "test-data/files/pan.pdf",
+        "photoFilePath": "test-data/files/photo.jpg",
+        "invalidFilePath": "test-data/files/sample.exe"
     }
 }
