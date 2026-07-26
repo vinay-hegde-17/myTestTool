@@ -1,57 +1,48 @@
 // @ts-check
-const { defineConfig, devices } = require('@playwright/test');
+require('dotenv').config();
+
+const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
+  globalSetup: require.resolve('./globalSetup'),
+
   testDir: './tests',
 
-  timeout: 60 * 1000,
+  testMatch: '**/*.api.spec.js',
+
+  timeout: process.env.PLAYWRIGHT_TIMEOUT
+    ? parseInt(process.env.PLAYWRIGHT_TIMEOUT, 10)
+    : 60_000,
 
   expect: {
-    timeout: 10 * 1000,
+    timeout: process.env.PLAYWRIGHT_EXPECT_TIMEOUT
+      ? parseInt(process.env.PLAYWRIGHT_EXPECT_TIMEOUT, 10)
+      : 10_000,
   },
 
   fullyParallel: true,
-
+  forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 2 : undefined,
+
+  // Exclude empty-data tests by default
+  grepInvert: /@emptydata/,
 
   reporter: [
     ['list'],
-    ['html'],
-    ['allure-playwright'],
+    ['allure-playwright', {
+      resultsDir: 'reports/allure-results'
+    }]
   ],
 
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
-
-    headless: false,
-
-    screenshot: 'only-on-failure',
-
-    video: 'retain-on-failure',
-
-    trace: 'on-first-retry',
+    baseURL: process.env.API_BASE_URL || 'http://localhost:3000',
   },
 
   projects: [
     {
-      name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome'],
-      },
-    },
-
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-    },
-
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
+      name: 'api',
+      testMatch: '**/*.api.spec.js',
     },
   ],
 });
