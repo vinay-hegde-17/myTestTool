@@ -3,58 +3,61 @@ const { HTTP_STATUS } = require('../../api/constants/asset.constants');
 
 test.describe('Empty Asset Data Scenarios', () => {
 
-    test('TC_EMPTY_001 Get Assets Empty @emptydata',
-        async ({ assetClient }) => {
+    test('TC_EMPTY_001 Get assets from empty database @emptydata', async ({
+        assetClient
+    }) => {
 
-            const response =
-                await assetClient.getAssets();
+        const response =
+            await assetClient.getAssets();
 
-            expect(response.status())
-                .toBe(HTTP_STATUS.OK);
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
 
-            const body =
-                await response.json();
+        const body =
+            await response.json();
 
-            expect(body)
-                .toEqual([]);
+        expect(body)
+            .toEqual([]);
 
-        });
+    });
 
-    test('TC_EMPTY_002 Get Asset Types Empty @emptydata',
-        async ({ assetClient }) => {
+    test('TC_EMPTY_002 Get asset types from empty database @emptydata', async ({
+        assetClient
+    }) => {
 
-            const response =
-                await assetClient.getAssetTypes();
+        const response =
+            await assetClient.getAssetTypes();
 
-            expect(response.status())
-                .toBe(HTTP_STATUS.OK);
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
 
-            const body =
-                await response.json();
+        const body =
+            await response.json();
 
-            expect(body)
-                .toEqual([]);
+        expect(body)
+            .toEqual([]);
 
-        });
+    });
 
-    test('TC_EMPTY_003 Get Asset Models Empty @emptydata',
-        async ({ assetClient }) => {
+    test('TC_EMPTY_003 Get asset models from empty database @emptydata', async ({
+        assetClient
+    }) => {
 
-            const response =
-                await assetClient.getAssetModels();
+        const response =
+            await assetClient.getAssetModels();
 
-            expect(response.status())
-                .toBe(HTTP_STATUS.OK);
+        expect(response.status())
+            .toBe(HTTP_STATUS.OK);
 
-            const body =
-                await response.json();
+        const body =
+            await response.json();
 
-            expect(body)
-                .toEqual([]);
+        expect(body)
+            .toEqual([]);
 
-        });
+    });
 
-    test('TC_EMPTY_004 Create Asset Without AssetId @emptydata', async ({
+    test('TC_EMPTY_004 Create asset without assetId @emptydata', async ({
         assetClient
     }) => {
 
@@ -74,7 +77,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_005 Create Asset Without Type @emptydata', async ({
+    test('TC_EMPTY_005 Create asset without type @emptydata', async ({
         assetClient
     }) => {
 
@@ -94,7 +97,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_006 Create Asset Without Model @emptydata', async ({
+    test('TC_EMPTY_006 Create asset without model @emptydata', async ({
         assetClient
     }) => {
 
@@ -114,7 +117,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_007 Create Asset Without Description @emptydata', async ({
+    test('TC_EMPTY_007 Create asset without description @emptydata', async ({
         assetClient
     }) => {
 
@@ -134,7 +137,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_008 Create Asset Without Date Of Purchase @emptydata', async ({
+    test('TC_EMPTY_008 Create asset without dateOfPurchase @emptydata', async ({
         assetClient
     }) => {
 
@@ -148,6 +151,78 @@ test.describe('Empty Asset Data Scenarios', () => {
 
         const response =
             await assetClient.createAsset(payload);
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.BAD_REQUEST);
+
+    });
+
+    test('TC_EMPTY_009 Create asset with empty request body @emptydata', async ({
+        assetClient
+    }) => {
+
+        const response =
+            await assetClient.createAsset({});
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.BAD_REQUEST);
+
+    });
+
+    test('TC_EMPTY_010 Update asset with empty request body @emptydata', async ({
+        assetClient
+    }) => {
+
+        const response =
+            await assetClient.updateAsset('', {});
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.BAD_REQUEST);
+
+    });
+
+    test('TC_EMPTY_011 Create asset type without type @emptydata', async ({
+        assetClient
+    }) => {
+
+        const response =
+            await assetClient.createAssetType({});
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.BAD_REQUEST);
+
+    });
+
+    test('TC_EMPTY_012 Create asset type with empty request body @emptydata', async ({
+        assetClient
+    }) => {
+
+        const response =
+            await assetClient.createAssetType({});
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.BAD_REQUEST);
+
+    });
+
+    test('TC_EMPTY_013 Create asset model without model @emptydata', async ({
+        assetClient
+    }) => {
+
+        const response =
+            await assetClient.createAssetModel({});
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.BAD_REQUEST);
+
+    });
+
+    test('TC_EMPTY_014 Create asset model with empty request body @emptydata', async ({
+        assetClient
+    }) => {
+
+        const response =
+            await assetClient.createAssetModel({});
 
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);

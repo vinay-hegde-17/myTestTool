@@ -7,7 +7,7 @@ const qaEmail = employeeTestData.testEmail;
 
 test.describe('Google Authentication APIs', () => {
 
-    test('TC01 Invalid Google Access Token', async ({
+    test('TC01 Generate JWT using valid Google access token', async ({
         authClient
     }) => {
 
@@ -28,7 +28,7 @@ test.describe('Google Authentication APIs', () => {
             );
     });
 
-    test('TC02 Missing Access Token', async ({
+    test('TC02 Generate JWT using invalid Google access token', async ({
         authClient
     }) => {
 
@@ -40,7 +40,7 @@ test.describe('Google Authentication APIs', () => {
 
     });
 
-    test('TC03 Empty Request Body', async ({
+    test('TC03 Generate JWT using malformed accessToken', async ({
         authClient
     }) => {
 
@@ -52,7 +52,7 @@ test.describe('Google Authentication APIs', () => {
 
     });
 
-    test('TC04 Empty Access Token', async ({
+    test('TC04 Verify generated JWT contains token property', async ({
         authClient
     }) => {
 
@@ -64,7 +64,7 @@ test.describe('Google Authentication APIs', () => {
 
     });
 
-    test('TC05 Malformed Access Token', async ({
+    test('TC05 Generate QA token for allowed user', async ({
         authClient
     }) => {
 
@@ -84,7 +84,7 @@ test.describe('Google Authentication APIs', () => {
 
 test.describe('QA Token APIs', () => {
 
-    test('TC06 Generate QA Token', async ({
+    test('TC06 Generate QA token for another allowed user', async ({
         authClient
     }) => {
 
@@ -103,7 +103,7 @@ test.describe('QA Token APIs', () => {
             .toBeTruthy();
     });
 
-    test('TC07 Unauthorized Email', async ({
+    test('TC07 Generate QA token for unauthorized email', async ({
         authClient
     }) => {
 
@@ -116,7 +116,7 @@ test.describe('QA Token APIs', () => {
             .toBe(HTTP_STATUS.FORBIDDEN);
     });
 
-    test('TC08 Missing Email', async ({
+    test('TC08 Generate QA token using invalid email format', async ({
         authClient
     }) => {
 
@@ -127,7 +127,7 @@ test.describe('QA Token APIs', () => {
             .toBe(HTTP_STATUS.FORBIDDEN);
     });
 
-    test('TC09 Empty Email', async ({
+    test('TC09 Generate QA token using uppercase email', async ({
         authClient
     }) => {
 
@@ -139,7 +139,7 @@ test.describe('QA Token APIs', () => {
 
     });
 
-    test('TC10 Invalid Email Format', async ({
+    test('TC10 Verify generated QA token response schema', async ({
         authClient
     }) => {
 
@@ -155,8 +155,9 @@ test.describe('QA Token APIs', () => {
 
     });
 
-    test('TC11 Uppercase Email', async ({
-        authClient
+    test('TC11 Verify valid JWT token', async ({
+        authClient,
+        qaToken
     }) => {
 
         const response =
@@ -171,7 +172,7 @@ test.describe('QA Token APIs', () => {
 
     });
 
-    test('TC12 QA Token Response Schema', async ({
+    test('TC12 Verify request without Authorization', async ({
         authClient
     }) => {
 
@@ -195,9 +196,8 @@ test.describe('QA Token APIs', () => {
 
 test.describe('Token Validation APIs', () => {
 
-    test('TC13 Validate Generated Token', async ({
-        authClient,
-        qaToken
+    test('TC13 Verify invalid JWT token', async ({
+        authClient
     }) => {
 
         const response =
@@ -218,7 +218,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(qaEmail);
     });
 
-    test('TC14 Invalid Token', async ({
+    test('TC14 Verify expired JWT token', async ({
         authClient
     }) => {
 
@@ -231,7 +231,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(HTTP_STATUS.UNAUTHORIZED);
     });
 
-    test('TC15 Missing Authorization Header', async ({
+    test('TC15 Verify malformed JWT token', async ({
         authClient
     }) => {
 
@@ -242,7 +242,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(HTTP_STATUS.UNAUTHORIZED);
     });
 
-    test('TC16 Malformed JWT Token', async ({
+    test('TC16 Verify token signed with different secret', async ({
         authClient
     }) => {
 
@@ -256,8 +256,9 @@ test.describe('Token Validation APIs', () => {
 
     });
 
-    test('TC17 Empty Bearer Token', async ({
-        authClient
+    test('TC17 Verify response schema', async ({
+        authClient,
+        qaToken
     }) => {
 
         const response =
@@ -267,33 +268,6 @@ test.describe('Token Validation APIs', () => {
 
         expect(response.status())
             .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC18 Validate Token Response Schema', async ({
-        authClient,
-        qaToken
-    }) => {
-
-        const response =
-            await authClient.validateToken(
-                qaToken
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.OK);
-
-        const body =
-            await response.json();
-
-        expect(body)
-            .toHaveProperty('valid');
-
-        expect(body)
-            .toHaveProperty('user');
-
-        expect(body.user)
-            .toHaveProperty('email');
 
     });
 

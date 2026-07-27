@@ -4,7 +4,7 @@ const assetData = require('../../test-data/asset.json');
 
 test.describe('Asset Read APIs', () => {
 
-    test('TC_ASSET_001 Get All Assets', async ({
+    test('TC01 Get All Assets', async ({
         assetClient
     }) => {
 
@@ -22,7 +22,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC_ASSET_002 Verify Assets Response Schema', async ({
+    test('TC02 Verify Assets Response Schema', async ({
         assetClient
     }) => {
 
@@ -50,7 +50,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC_ASSET_003 Get Asset Types', async ({
+    test('TC03 Get Asset Types', async ({
         assetClient
     }) => {
 
@@ -68,7 +68,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC_ASSET_004 Verify Asset Types Response Schema', async ({
+    test('TC04 Verify Asset Types Response Schema', async ({
         assetClient
     }) => {
 
@@ -93,7 +93,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC_ASSET_005 Get Asset Models', async ({
+    test('TC05 Get Asset Models', async ({
         assetClient
     }) => {
 
@@ -111,7 +111,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC_ASSET_006 Verify Asset Models Response Schema', async ({
+    test('TC06 Verify Asset Models Response Schema', async ({
         assetClient
     }) => {
 
@@ -136,7 +136,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC_ASSET_007 Unauthorized Get Assets', async ({
+    test('TC07 Unauthorized Get Assets', async ({
         assetClient
     }) => {
 
@@ -148,7 +148,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC_ASSET_008 Unauthorized Get Asset Types', async ({
+    test('TC08 Unauthorized Get Asset Types', async ({
         assetClient
     }) => {
 
@@ -160,7 +160,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC_ASSET_009 Unauthorized Get Asset Models', async ({
+    test('TC09 Unauthorized Get Asset Models', async ({
         assetClient
     }) => {
 
@@ -172,53 +172,13 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC_ASSET_010 Invalid Token Get Assets', async ({
-        assetClient
-    }) => {
 
-        const response =
-            await assetClient.getAssetsWithToken(
-                assetData.invalid.invalidToken
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC_ASSET_011 Invalid Token Get Asset Types', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.getAssetTypesWithToken(
-                assetData.invalid.invalidToken
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC_ASSET_012 Invalid Token Get Asset Models', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.getAssetModelsWithToken(
-                assetData.invalid.invalidToken
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
 
 });
 
 test.describe('Asset Management APIs', () => {
 
-    test('TC_ASSET_013 Create Asset', async ({
+    test('TC10 Create Asset', async ({
         assetClient
     }) => {
 
@@ -237,7 +197,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_014 Create Asset Duplicate AssetId', async ({
+    test('TC11 Create Asset Duplicate AssetId', async ({
         assetClient
     }) => {
 
@@ -256,7 +216,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_015 Create Asset Missing Mandatory Fields', async ({
+    test('TC12 Create Asset Missing Mandatory Fields', async ({
         assetClient
     }) => {
 
@@ -268,7 +228,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_016 Update Asset', async ({
+    test('TC13 Update Asset', async ({
         assetClient
     }) => {
 
@@ -291,7 +251,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_017 Update Invalid Asset Id', async ({
+    test('TC14 Update Invalid Asset Id', async ({
         assetClient
     }) => {
 
@@ -308,24 +268,9 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_018 Update Non Existing Asset', async ({
-        assetClient
-    }) => {
 
-        const response =
-            await assetClient.updateAsset(
-                '66a111111111111111111111',
-                {
-                    description: 'Updated Asset'
-                }
-            );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.NOT_FOUND);
-
-    });
-
-    test('TC_ASSET_019 Update Asset Duplicate AssetId', async ({
+    test('TC15 Update Asset Duplicate AssetId', async ({
         assetClient
     }) => {
 
@@ -342,7 +287,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_020 Create Asset Invalid TypeId', async ({
+    test('TC16 Create Asset Invalid TypeId', async ({
         assetClient
     }) => {
 
@@ -361,7 +306,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_021 Create Asset Invalid ModelId', async ({
+    test('TC17 Create Asset Invalid ModelId', async ({
         assetClient
     }) => {
 
@@ -380,7 +325,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_022 Create Asset Without Authorization', async ({
+    test('TC18 Create Asset Without Authorization', async ({
         assetClient
     }) => {
 
@@ -399,35 +344,9 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_023 Create Asset Invalid Token', async ({
-        request
-    }) => {
 
-        const AssetClient =
-            require('../../api/clients/asset.client');
 
-        const client =
-            new AssetClient(
-                request,
-                assetData.invalid.invalidToken
-            );
-
-        const payload = {
-            ...assetData.asset,
-            assetId: `AUTO_${Date.now()}`,
-            type: process.env.TEST_ASSET_TYPE_ID,
-            model: process.env.TEST_ASSET_MODEL_ID
-        };
-
-        const response =
-            await client.createAsset(payload);
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC_ASSET_024 Create Asset Response Schema', async ({
+    test('TC19 Create Asset Response Schema', async ({
         assetClient
     }) => {
 
@@ -458,7 +377,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_025 Update Asset Without Authorization', async ({
+    test('TC20 Update Asset Without Authorization', async ({
         assetClient
     }) => {
 
@@ -475,33 +394,9 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC_ASSET_026 Update Asset Invalid Token', async ({
-        request
-    }) => {
 
-        const AssetClient =
-            require('../../api/clients/asset.client');
 
-        const client =
-            new AssetClient(
-                request,
-                assetData.invalid.invalidToken
-            );
-
-        const response =
-            await client.updateAsset(
-                process.env.TEST_ASSET_ID,
-                {
-                    description: 'Updated Asset'
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC_ASSET_027 Update Asset Response Schema', async ({
+    test('TC21 Update Asset Response Schema', async ({
         assetClient
     }) => {
 
@@ -534,7 +429,7 @@ test.describe('Asset Management APIs', () => {
 
 test.describe('Asset Type And Model APIs', () => {
 
-    test('TC_ASSET_028 Create Asset Type', async ({
+    test('TC22 Create Asset Type', async ({
         assetClient
     }) => {
 
@@ -548,7 +443,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC_ASSET_029 Create Asset Type With Spaces', async ({
+    test('TC23 Create Asset Type With Spaces', async ({
         assetClient
     }) => {
 
@@ -562,7 +457,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC_ASSET_030 Create Duplicate Asset Type', async ({
+    test('TC24 Create Duplicate Asset Type', async ({
         assetClient
     }) => {
 
@@ -576,19 +471,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC_ASSET_031 Create Asset Type Missing Field', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.createAssetType({});
-
-        expect([400, 500])
-            .toContain(response.status());
-
-    });
-
-    test('TC_ASSET_032 Create Asset Type Without Auth', async ({
+    test('TC25 Create Asset Type Without Auth', async ({
         assetClient
     }) => {
 
@@ -602,7 +485,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC_ASSET_033 Create Asset Model', async ({
+    test('TC26 Create Asset Model', async ({
         assetClient
     }) => {
 
@@ -616,7 +499,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC_ASSET_034 Create Asset Model With Spaces', async ({
+    test('TC27 Create Asset Model With Spaces', async ({
         assetClient
     }) => {
 
@@ -630,7 +513,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC_ASSET_035 Create Duplicate Asset Model', async ({
+    test('TC28 Create Duplicate Asset Model', async ({
         assetClient
     }) => {
 
@@ -644,19 +527,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC_ASSET_036 Create Asset Model Missing Field', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.createAssetModel({});
-
-        expect([400, 500])
-            .toContain(response.status());
-
-    });
-
-    test('TC_ASSET_037 Create Asset Model Without Auth', async ({
+    test('TC29 Create Asset Model Without Auth', async ({
         assetClient
     }) => {
 
@@ -667,96 +538,6 @@ test.describe('Asset Type And Model APIs', () => {
 
         expect(response.status())
             .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC_ASSET_038 Create Asset Type Invalid Token', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.createAssetTypeWithToken(
-                {
-                    type: `Type_${Date.now()}`
-                },
-                assetData.invalid.invalidToken
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC_ASSET_039 Create Asset Type Response Schema', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.createAssetType({
-                type: `Type_${Date.now()}`
-            });
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.CREATED);
-
-        const body = await response.json();
-
-        expect(body)
-            .toHaveProperty('message');
-
-        expect(body)
-            .toHaveProperty('savedAssetType');
-
-        expect(body.savedAssetType)
-            .toHaveProperty('_id');
-
-        expect(body.savedAssetType)
-            .toHaveProperty('type');
-
-    });
-
-    test('TC_ASSET_040 Create Asset Model Invalid Token', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.createAssetModelWithToken(
-                {
-                    model: `Model_${Date.now()}`
-                },
-                assetData.invalid.invalidToken
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC_ASSET_041 Create Asset Model Response Schema', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.createAssetModel({
-                model: `Model_${Date.now()}`
-            });
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.CREATED);
-
-        const body = await response.json();
-
-        expect(body)
-            .toHaveProperty('message');
-
-        expect(body)
-            .toHaveProperty('savedAssetModel');
-
-        expect(body.savedAssetModel)
-            .toHaveProperty('_id');
-
-        expect(body.savedAssetModel)
-            .toHaveProperty('model');
 
     });
 

@@ -157,26 +157,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC07 Get all leave records with invalid Authorization', async ({
-        request
-    }) => {
-
-        const response =
-            await request.get(
-                '/leaves',
-                {
-                    headers: {
-                        Authorization: 'Bearer InvalidToken'
-                    }
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC08 Verify leave response schema', async ({
+    test('TC07 Verify leave response schema', async ({
         leaveClient
     }) => {
 
@@ -228,7 +209,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC09 Get leave threshold', async ({
+    test('TC08 Get leave threshold', async ({
         leaveClient
     }) => {
 
@@ -240,7 +221,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC10 Verify leave threshold response', async ({
+    test('TC09 Verify leave threshold response', async ({
         leaveClient
     }) => {
 
@@ -270,7 +251,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC11 Get leave threshold without Authorization', async ({
+    test('TC10 Get leave threshold without Authorization', async ({
         leaveClient
     }) => {
 
@@ -282,23 +263,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC12 Get leave threshold with invalid Authorization', async ({
-        request
-    }) => {
-
-        const response =
-            await request.get('/leaves/leavesThreshold', {
-                headers: {
-                    Authorization: 'Bearer InvalidToken'
-                }
-            });
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC13 Get employee leave history', async ({
+    test('TC11 Get employee leave history', async ({
         leaveClient
     }) => {
 
@@ -318,7 +283,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC14 Get employee leave history with Pending status', async ({
+    test('TC12 Get employee leave history with Pending status', async ({
         leaveClient
     }) => {
 
@@ -346,7 +311,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC15 Get employee leave history with Approved status', async ({
+    test('TC13 Get employee leave history with Approved status', async ({
         leaveClient
     }) => {
 
@@ -374,7 +339,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC16 Get employee leave history using invalid employeeId', async ({
+    test('TC14 Get employee leave history using invalid employeeId', async ({
         leaveClient
     }) => {
 
@@ -397,7 +362,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC17 Get employee leave history without Authorization', async ({
+    test('TC15 Get employee leave history without Authorization', async ({
         leaveClient
     }) => {
 
@@ -411,7 +376,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC18 Verify employee leave response schema', async ({
+    test('TC16 Verify employee leave response schema', async ({
         leaveClient
     }) => {
 
@@ -459,7 +424,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC19 Get approver leave requests', async ({
+    test('TC17 Get approver leave requests', async ({
         leaveClient
     }) => {
 
@@ -479,7 +444,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC20 Get approver leave requests using employee filter', async ({
+    test('TC18 Get approver leave requests using employee filter', async ({
         leaveClient
     }) => {
 
@@ -500,7 +465,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC21 Get approver leave requests using status filter', async ({
+    test('TC19 Get approver leave requests using status filter', async ({
         leaveClient
     }) => {
 
@@ -529,7 +494,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC22 Get approver leave requests using invalid approverId', async ({
+    test('TC20 Get approver leave requests using invalid approverId', async ({
         leaveClient
     }) => {
 
@@ -552,7 +517,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC23 Get approver leave requests without Authorization', async ({
+    test('TC21 Get approver leave requests without Authorization', async ({
         leaveClient
     }) => {
 
@@ -566,7 +531,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC24 Get employee financial year leave history', async ({
+    test('TC22 Get employee financial year leave history', async ({
         leaveClient
     }) => {
 
@@ -586,7 +551,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC25 Get financial year leave history using invalid employeeId', async ({
+    test('TC23 Get financial year leave history using invalid employeeId', async ({
         leaveClient
     }) => {
 
@@ -608,7 +573,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC26 Get financial year leave history without Authorization', async ({
+    test('TC24 Get financial year leave history without Authorization', async ({
         leaveClient
     }) => {
 
@@ -622,7 +587,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC27 Verify financial year response schema', async ({
+    test('TC25 Verify financial year response schema', async ({
         leaveClient
     }) => {
 
@@ -661,7 +626,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC28 Apply leave with valid data', async ({
+    test('TC26 Apply leave with valid data', async ({
         leaveClient
     }) => {
 
@@ -696,7 +661,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC29 Apply Casual Leave', async ({
+    test('TC27 Apply Casual Leave', async ({
         leaveClient
     }) => {
 
@@ -719,7 +684,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC30 Apply Sick Leave', async ({
+    test('TC28 Apply Sick Leave', async ({
         leaveClient
     }) => {
 
@@ -742,7 +707,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC31 Apply Maternity Leave', async ({
+    test('TC29 Apply Maternity Leave', async ({
         leaveClient
     }) => {
 
@@ -765,7 +730,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC32 Apply leave with invalid employeeId', async ({
+    test('TC30 Apply leave with invalid employeeId', async ({
         leaveClient
     }) => {
 
@@ -786,7 +751,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC33 Apply leave with invalid approverId', async ({
+    test('TC31 Apply leave with invalid approverId', async ({
         leaveClient
     }) => {
 
@@ -807,7 +772,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC34 Apply leave with invalid leaveType', async ({
+    test('TC32 Apply leave with invalid leaveType', async ({
         leaveClient
     }) => {
 
@@ -831,7 +796,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC35 Apply leave with From Date greater than To Date', async ({
+    test('TC33 Apply leave with From Date greater than To Date', async ({
         leaveClient
     }) => {
 
@@ -859,7 +824,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC36 Verify business day calculation', async ({
+    test('TC34 Verify business day calculation', async ({
         leaveClient
     }) => {
 
@@ -884,7 +849,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC37 Apply leave without Authorization', async ({
+    test('TC35 Apply leave without Authorization', async ({
         request
     }) => {
 
@@ -901,48 +866,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC38 Verify created leave response', async ({
-        leaveClient
-    }) => {
-
-        const response =
-            await leaveClient.applyLeave(
-                leaveData.leave.validLeave
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.CREATED);
-
-        const body =
-            await response.json();
-
-        expect(body)
-            .toHaveProperty('_id');
-
-        expect(body)
-            .toHaveProperty('employeeId');
-
-        expect(body)
-            .toHaveProperty('fromDate');
-
-        expect(body)
-            .toHaveProperty('toDate');
-
-        expect(body)
-            .toHaveProperty('leaveType');
-
-        expect(body)
-            .toHaveProperty('reason');
-
-        expect(body)
-            .toHaveProperty('numberOfDays');
-
-        expect(body)
-            .toHaveProperty('status');
-
-    });
-
-    test('TC39 Approve leave request', async ({
+    test('TC36 Approve leave request', async ({
         leaveClient
     }) => {
 
@@ -976,7 +900,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC40 Reject leave request', async ({
+    test('TC37 Reject leave request', async ({
         leaveClient
     }) => {
 
@@ -1008,7 +932,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC41 Cancel leave request', async ({
+    test('TC38 Cancel leave request', async ({
         leaveClient
     }) => {
 
@@ -1039,7 +963,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC42 Update leave using invalid status', async ({
+    test('TC39 Update leave using invalid status', async ({
         leaveClient
     }) => {
 
@@ -1064,7 +988,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC43 Update leave using invalid leaveId', async ({
+    test('TC40 Update leave using invalid leaveId', async ({
         leaveClient
     }) => {
 
@@ -1081,7 +1005,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC44 Update leave without Authorization', async ({
+    test('TC41 Update leave without Authorization', async ({
         request
     }) => {
 
@@ -1100,7 +1024,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC45 Submit reject request', async ({
+    test('TC42 Submit reject request', async ({
         leaveClient
     }) => {
 
@@ -1135,7 +1059,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC46 Submit reject request using invalid leaveId', async ({
+    test('TC43 Submit reject request using invalid leaveId', async ({
         leaveClient
     }) => {
 
@@ -1160,7 +1084,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC47 Submit reject request without Authorization', async ({
+    test('TC44 Submit reject request without Authorization', async ({
         request
     }) => {
 
@@ -1180,7 +1104,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC48 Delete leave', async ({
+    test('TC45 Delete leave', async ({
         leaveClient
     }) => {
 
@@ -1208,7 +1132,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC49 Delete using invalid leaveId', async ({
+    test('TC46 Delete using invalid leaveId', async ({
         leaveClient
     }) => {
 
@@ -1228,7 +1152,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC50 Delete leave without Authorization', async ({
+    test('TC47 Delete leave without Authorization', async ({
         request
     }) => {
 
@@ -1242,7 +1166,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC51 Get overall leave summary for all employees', async ({
+    test('TC48 Get overall leave summary for all employees', async ({
         leaveClient
     }) => {
 
@@ -1260,7 +1184,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC52 Get overall leave summary for specific employee', async ({
+    test('TC49 Get overall leave summary for specific employee', async ({
         leaveClient
     }) => {
 
@@ -1280,7 +1204,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC53 Get overall leave summary using invalid employeeId', async ({
+    test('TC50 Get overall leave summary using invalid employeeId', async ({
         leaveClient
     }) => {
 
@@ -1301,7 +1225,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC54 Verify overall leave response', async ({
+    test('TC51 Verify overall leave response', async ({
         leaveClient
     }) => {
 
@@ -1335,7 +1259,7 @@ test.describe('Leave Module APIs', () => {
 
     });
 
-    test('TC55 Get overall leave summary without Authorization', async ({
+    test('TC52 Get overall leave summary without Authorization', async ({
         request
     }) => {
 

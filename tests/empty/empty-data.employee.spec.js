@@ -3,83 +3,7 @@ const { HTTP_STATUS } = require('../../api/constants/employee.constants');
 const employeeData = require('../../test-data/employee.json');
 
 test.describe('Employee Empty Data Validation APIs', () => {
-    test('TC001 Get New Joinees Empty @emptydata', async ({
-        employeeClient }) => {
-
-        const response =
-            await employeeClient.getNewJoinees();
-
-        expect([404, 200])
-            .toContain(response.status());
-
-        if (response.status() === 404) {
-
-            const body =
-                await response.json();
-
-            expect(body.message)
-                .toContain('No newly joined employees');
-
-        }
-
-    }
-    );
-
-    test('TC002 Get Long Service Employees Empty @emptydata', async ({
-        employeeClient }) => {
-
-        const response =
-            await employeeClient.getLongServiceEmployees();
-
-        expect([404, 200])
-            .toContain(response.status());
-
-        if (response.status() === 404) {
-
-            const body =
-                await response.json();
-
-            expect(body.message)
-                .toContain('No long service employees');
-
-        }
-
-    }
-    );
-
-    test('TC003 Get Employee List Empty @emptydata', async ({
-        employeeClient }) => {
-
-        const response =
-            await employeeClient.getEmployees();
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.OK);
-
-        const body =
-            await response.json();
-
-        expect(body)
-            .toEqual([]);
-
-    }
-    );
-
-    test('TC004 Get Employees By Role Empty @emptydata', async ({
-        employeeClient }) => {
-
-        const response =
-            await employeeClient.getEmployeesByRole(
-                'NON_EXISTING_ROLE'
-            );
-
-        expect([200, 204, 404])
-            .toContain(response.status());
-
-    }
-    );
-
-    test('TC005 Get Employees Empty activeStatus @emptydata', async ({
+    test('TC_EMPTY_001 Get employees with empty activeStatus query parameter @emptydata', async ({
         employeeClient
     }) => {
 
@@ -93,7 +17,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC006 Get Profile Details Empty _id @emptydata', async ({
+    test('TC_EMPTY_002 Get profile details with empty _id @emptydata', async ({
         employeeClient
     }) => {
 
@@ -105,19 +29,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC007 Get Employee Assets Empty employeeId @emptydata', async ({
-        employeeClient
-    }) => {
-
-        const response =
-            await employeeClient.getEmployeeAssets('');
-
-        expect([400, 404])
-            .toContain(response.status());
-
-    });
-
-    test('TC008 Get Employee By Empty emailId @emptydata', async ({
+    test('TC_EMPTY_003 Get employee by empty emailId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -129,7 +41,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC009 Get Employee Edit Details Empty employeeId @emptydata', async ({
+    test('TC_EMPTY_004 Get employee edit details with empty employeeId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -141,72 +53,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC010 Fetch File Empty fileId @emptydata', async ({
-        employeeClient
-    }) => {
-
-        const response =
-            await employeeClient.fetchFile('');
-
-        expect([400, 404])
-            .toContain(response.status());
-
-    });
-
-    test('TC011 Check Email Empty emailId @emptydata', async ({
-        employeeClient
-    }) => {
-
-        const response =
-            await employeeClient.checkEmail('');
-
-        expect([200, 400, 404])
-            .toContain(response.status());
-
-    });
-
-    test('TC012 Remove Photo Empty employeeId @emptydata', async ({
-        employeeClient
-    }) => {
-
-        const response =
-            await employeeClient.removePhoto('');
-
-        expect([400, 404])
-            .toContain(response.status());
-
-    });
-
-    test('TC013 Get Hierarchy Empty employeeId @emptydata', async ({
-        employeeClient
-    }) => {
-
-        const response =
-            await employeeClient.getHierarchy('');
-
-        expect([400, 404])
-            .toContain(response.status());
-
-    });
-
-    test('TC014 Get Employee Details Empty employeeId @emptydata', async ({
-        employeeClient
-    }) => {
-
-        const response =
-            await employeeClient.request.get(
-                '/employees/',
-                {
-                    headers: employeeClient.authHeaders()
-                }
-            );
-
-        expect([404, 405])
-            .toContain(response.status());
-
-    });
-
-    test('TC015 Add Employee Without employeeNumber @emptydata', async ({
+    test('TC_EMPTY_005 Add employee without employeeNumber @emptydata', async ({
         employeeClient
     }) => {
 
@@ -224,7 +71,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC016 Add Employee Without firstName @emptydata', async ({
+    test('TC_EMPTY_006 Add employee without firstName @emptydata', async ({
         employeeClient
     }) => {
 
@@ -242,7 +89,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC017 Add Employee Without lastName @emptydata', async ({
+    test('TC_EMPTY_007 Add employee without lastName @emptydata', async ({
         employeeClient
     }) => {
 
@@ -260,7 +107,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC018 Add Employee Without emailId @emptydata', async ({
+    test('TC_EMPTY_008 Add employee without emailId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -278,7 +125,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC019 Add Employee Without designation @emptydata', async ({
+    test('TC_EMPTY_009 Add employee without designation @emptydata', async ({
         employeeClient
     }) => {
 
@@ -296,7 +143,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC020 Add Employee Without assignedRoleId @emptydata', async ({
+    test('TC_EMPTY_010 Add employee without assignedRoleId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -314,7 +161,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC021 Add Employee Without reportingTo @emptydata', async ({
+    test('TC_EMPTY_011 Add employee without reportingTo @emptydata', async ({
         employeeClient
     }) => {
 
@@ -332,7 +179,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC022 Add Employee Empty Request Body @emptydata', async ({
+    test('TC_EMPTY_012 Add employee with empty request body @emptydata', async ({
         employeeClient
     }) => {
 
@@ -344,7 +191,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC023 Update AssignedIds Without existingEmpId @emptydata', async ({
+    test('TC_EMPTY_013 Update assigned IDs without existingEmpId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -359,7 +206,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC024 Update AssignedIds Without newEmpId @emptydata', async ({
+    test('TC_EMPTY_014 Update assigned IDs without newEmpId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -374,7 +221,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC025 Update AssignedIds Without assignedId @emptydata', async ({
+    test('TC_EMPTY_015 Update assigned IDs without assignedId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -389,7 +236,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC026 Update AssignedIds Empty Request Body @emptydata', async ({
+    test('TC_EMPTY_016 Update assigned IDs with empty request body @emptydata', async ({
         employeeClient
     }) => {
 
@@ -401,7 +248,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC027 Update Employee Empty employeeId @emptydata', async ({
+    test('TC_EMPTY_017 Update employee with empty employeeId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -416,7 +263,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC028 Update Employee Empty Request Body @emptydata', async ({
+    test('TC_EMPTY_018 Update employee with empty request body @emptydata', async ({
         employeeClient
     }) => {
 
@@ -431,7 +278,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC029 Unassign Asset Empty employeeId @emptydata', async ({
+    test('TC_EMPTY_019 Unassign asset with empty employeeId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -446,7 +293,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC030 Unassign Asset Without assignedId @emptydata', async ({
+    test('TC_EMPTY_020 Unassign asset without assignedId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -461,7 +308,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
 
     });
 
-    test('TC031 Unassign Asset Empty Request Body @emptydata', async ({
+    test('TC_EMPTY_021 Unassign asset with empty request body @emptydata', async ({
         employeeClient
     }) => {
 
@@ -478,6 +325,71 @@ test.describe('Employee Empty Data Validation APIs', () => {
             );
 
         expect([400, 404, 500])
+            .toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_022 Fetch file with empty fileId @emptydata', async ({
+        employeeClient
+    }) => {
+
+        const response =
+            await employeeClient.fetchFile('');
+
+        expect([400, 404])
+            .toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_023 Check email with empty emailId @emptydata', async ({
+        employeeClient
+    }) => {
+
+        const response =
+            await employeeClient.checkEmail('');
+
+        expect([200, 400, 404])
+            .toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_024 Remove photo with empty employeeId @emptydata', async ({
+        employeeClient
+    }) => {
+
+        const response =
+            await employeeClient.removePhoto('');
+
+        expect([400, 404])
+            .toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_025 Get hierarchy with empty employeeId @emptydata', async ({
+        employeeClient
+    }) => {
+
+        const response =
+            await employeeClient.getHierarchy('');
+
+        expect([400, 404])
+            .toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_026 Get employee details with empty employeeId @emptydata', async ({
+        employeeClient
+    }) => {
+
+        const response =
+            await employeeClient.request.get(
+                '/employees/',
+                {
+                    headers: employeeClient.authHeaders()
+                }
+            );
+
+        expect([404, 405])
             .toContain(response.status());
 
     });

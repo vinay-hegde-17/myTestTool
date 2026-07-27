@@ -3,7 +3,7 @@ const { HTTP_STATUS } = require('../../api/constants/auth.constants');
 
 test.describe('Auth Empty Data APIs', () => {
 
-    test('TC01 Generate JWT without accessToken @emptydata', async ({
+    test('TC_EMPTY_001 Generate JWT without accessToken @emptydata', async ({
         authClient
     }) => {
 
@@ -15,7 +15,7 @@ test.describe('Auth Empty Data APIs', () => {
 
     });
 
-    test('TC02 Generate JWT with empty request body @emptydata', async ({
+    test('TC_EMPTY_002 Generate JWT with empty request body @emptydata', async ({
         authClient
     }) => {
 
@@ -27,7 +27,7 @@ test.describe('Auth Empty Data APIs', () => {
 
     });
 
-    test('TC03 Generate QA token without email @emptydata', async ({
+    test('TC_EMPTY_003 Generate QA token without email @emptydata', async ({
         authClient
     }) => {
 
@@ -39,7 +39,7 @@ test.describe('Auth Empty Data APIs', () => {
 
     });
 
-    test('TC04 Generate QA token with empty email @emptydata', async ({
+    test('TC_EMPTY_004 Generate QA token with empty email @emptydata', async ({
         authClient
     }) => {
 
@@ -51,7 +51,7 @@ test.describe('Auth Empty Data APIs', () => {
 
     });
 
-    test('TC05 Generate QA token with empty request body @emptydata', async ({
+    test('TC_EMPTY_005 Generate QA token with empty request body @emptydata', async ({
         authClient
     }) => {
 
@@ -60,6 +60,18 @@ test.describe('Auth Empty Data APIs', () => {
 
         expect(response.status())
             .toBe(HTTP_STATUS.FORBIDDEN);
+
+    });
+
+    test('TC_EMPTY_006 Validate token with empty Authorization header @emptydata', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.validateTokenWithHeader('');
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
 
     });
 

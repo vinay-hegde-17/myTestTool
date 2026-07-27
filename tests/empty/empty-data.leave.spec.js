@@ -6,7 +6,7 @@ const leaveData = require('../../test-data/leave.json');
 
 test.describe('Leave Module Empty Data APIs', () => {
 
-    test('TC001 Get leave records with empty status @emptydata', async ({
+    test('TC_EMPTY_001 Get leave records with empty status @emptydata', async ({
         leaveClient
     }) => {
 
@@ -18,7 +18,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC002 Get employee leave history with empty employeeId @emptydata', async ({
+    test('TC_EMPTY_002 Get employee leave history with empty employeeId @emptydata', async ({
         request,
         qaToken
     }) => {
@@ -35,7 +35,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC003 Get approver leave requests with empty approverId @emptydata', async ({
+    test('TC_EMPTY_003 Get approver leave requests with empty approverId @emptydata', async ({
         request,
         qaToken
     }) => {
@@ -52,7 +52,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC004 Get financial year leave history with empty employeeId @emptydata', async ({
+    test('TC_EMPTY_004 Get financial year leave history with empty employeeId @emptydata', async ({
         request,
         qaToken
     }) => {
@@ -69,7 +69,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC005 Apply leave without employeeId @emptydata', async ({
+    test('TC_EMPTY_005 Apply leave without employeeId @emptydata', async ({
         leaveClient
     }) => {
 
@@ -87,7 +87,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC006 Apply leave without approverId @emptydata', async ({
+    test('TC_EMPTY_006 Apply leave without approverId @emptydata', async ({
         leaveClient
     }) => {
 
@@ -105,7 +105,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC007 Apply leave without fromDate @emptydata', async ({
+    test('TC_EMPTY_007 Apply leave without fromDate @emptydata', async ({
         leaveClient
     }) => {
 
@@ -123,7 +123,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC008 Apply leave without toDate @emptydata', async ({
+    test('TC_EMPTY_008 Apply leave without toDate @emptydata', async ({
         leaveClient
     }) => {
 
@@ -141,7 +141,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC009 Apply leave without leaveType @emptydata', async ({
+    test('TC_EMPTY_009 Apply leave without leaveType @emptydata', async ({
         leaveClient
     }) => {
 
@@ -159,7 +159,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC010 Apply leave without reason @emptydata', async ({
+    test('TC_EMPTY_010 Apply leave without reason @emptydata', async ({
         leaveClient
     }) => {
 
@@ -177,7 +177,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC011 Apply leave with empty request body @emptydata', async ({
+    test('TC_EMPTY_011 Apply leave with empty request body @emptydata', async ({
         leaveClient
     }) => {
 
@@ -189,7 +189,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC012 Update leave without status @emptydata', async ({
+    test('TC_EMPTY_012 Update leave without status @emptydata', async ({
         leaveClient
     }) => {
 
@@ -204,7 +204,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC013 Update leave with empty request body @emptydata', async ({
+    test('TC_EMPTY_013 Update leave with empty request body @emptydata', async ({
         leaveClient
     }) => {
 
@@ -219,7 +219,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC014 Submit reject request with empty comment @emptydata', async ({
+    test('TC_EMPTY_014 Submit reject request with empty comment @emptydata', async ({
         leaveClient
     }) => {
 
@@ -236,7 +236,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC015 Submit reject request with empty request body @emptydata', async ({
+    test('TC_EMPTY_015 Submit reject request with empty request body @emptydata', async ({
         leaveClient
     }) => {
 
@@ -251,7 +251,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC016 Delete leave with empty leaveId @emptydata', async ({
+    test('TC_EMPTY_016 Delete leave with empty leaveId @emptydata', async ({
         request,
         qaToken
     }) => {
@@ -268,7 +268,7 @@ test.describe('Leave Module Empty Data APIs', () => {
 
     });
 
-    test('TC017 Get overall leave summary with empty employeeId @emptydata', async ({
+    test('TC_EMPTY_017 Get overall leave summary with empty employeeId @emptydata', async ({
         request,
         qaToken
     }) => {
