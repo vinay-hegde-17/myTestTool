@@ -142,34 +142,12 @@ class LeaveClient {
 
     }
 
-    applyLeaveWithoutAuth(leaveData) {
-
-        return this.request.post(
-            LEAVE_ENDPOINTS.CREATE,
-            {
-                data: leaveData
-            }
-        );
-
-    }
-
     updateLeave(leaveId, payload) {
 
         return this.request.put(
             `${LEAVE_ENDPOINTS.UPDATE}/${leaveId}`,
             {
                 headers: this.authHeaders(),
-                data: payload
-            }
-        );
-
-    }
-
-    updateLeaveWithoutAuth(leaveId, payload) {
-
-        return this.request.put(
-            `${LEAVE_ENDPOINTS.UPDATE}/${leaveId}`,
-            {
                 data: payload
             }
         );
@@ -188,17 +166,6 @@ class LeaveClient {
 
     }
 
-    submitRejectRequestWithoutAuth(leaveId, payload) {
-
-        return this.request.put(
-            `${LEAVE_ENDPOINTS.REJECT_REQUEST}/${leaveId}`,
-            {
-                data: payload
-            }
-        );
-
-    }
-
     deleteLeave(leaveId) {
 
         return this.request.delete(
@@ -206,14 +173,6 @@ class LeaveClient {
             {
                 headers: this.authHeaders()
             }
-        );
-
-    }
-
-    deleteLeaveWithoutAuth(leaveId) {
-
-        return this.request.delete(
-            `${LEAVE_ENDPOINTS.DELETE}/${leaveId}`
         );
 
     }
@@ -229,13 +188,6 @@ class LeaveClient {
 
     }
 
-    getOverallLeavesWithoutAuth(employeeId = 'all') {
-
-        return this.request.get(
-            `${LEAVE_ENDPOINTS.OVERALL_LEAVES}/${employeeId}`
-        );
-
-    }
 }
 
 module.exports = LeaveClient;
