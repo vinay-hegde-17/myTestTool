@@ -197,7 +197,8 @@ test.describe('QA Token APIs', () => {
 test.describe('Token Validation APIs', () => {
 
     test('TC13 Verify invalid JWT token @auth @regression', async ({
-        authClient
+        authClient,
+        qaToken
     }) => {
 
         const response =
