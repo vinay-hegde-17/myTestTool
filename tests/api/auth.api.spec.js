@@ -7,7 +7,7 @@ const qaEmail = employeeTestData.testEmail;
 
 test.describe('Google Authentication APIs', () => {
 
-    test('TC01 Generate JWT using valid Google access token', async ({
+    test('TC01 Generate JWT using valid Google access token @auth @regression @smoke @sanity', async ({
         authClient
     }) => {
 
@@ -28,7 +28,7 @@ test.describe('Google Authentication APIs', () => {
             );
     });
 
-    test('TC02 Generate JWT using invalid Google access token', async ({
+    test('TC02 Generate JWT using invalid Google access token @auth @regression', async ({
         authClient
     }) => {
 
@@ -40,7 +40,7 @@ test.describe('Google Authentication APIs', () => {
 
     });
 
-    test('TC03 Generate JWT using malformed accessToken', async ({
+    test('TC03 Generate JWT using malformed accessToken @auth @regression', async ({
         authClient
     }) => {
 
@@ -52,7 +52,7 @@ test.describe('Google Authentication APIs', () => {
 
     });
 
-    test('TC04 Verify generated JWT contains token property', async ({
+    test('TC04 Verify generated JWT contains token property @auth @regression', async ({
         authClient
     }) => {
 
@@ -64,7 +64,7 @@ test.describe('Google Authentication APIs', () => {
 
     });
 
-    test('TC05 Generate QA token for allowed user', async ({
+    test('TC05 Generate QA token for allowed user @auth @regression', async ({
         authClient
     }) => {
 
@@ -84,7 +84,7 @@ test.describe('Google Authentication APIs', () => {
 
 test.describe('QA Token APIs', () => {
 
-    test('TC06 Generate QA token for another allowed user', async ({
+    test('TC06 Generate QA token for another allowed user @auth @regression @smoke @sanity', async ({
         authClient
     }) => {
 
@@ -103,7 +103,7 @@ test.describe('QA Token APIs', () => {
             .toBeTruthy();
     });
 
-    test('TC07 Generate QA token for unauthorized email', async ({
+    test('TC07 Generate QA token for unauthorized email @auth @regression', async ({
         authClient
     }) => {
 
@@ -116,7 +116,7 @@ test.describe('QA Token APIs', () => {
             .toBe(HTTP_STATUS.FORBIDDEN);
     });
 
-    test('TC08 Generate QA token using invalid email format', async ({
+    test('TC08 Generate QA token using invalid email format @auth @regression', async ({
         authClient
     }) => {
 
@@ -127,7 +127,7 @@ test.describe('QA Token APIs', () => {
             .toBe(HTTP_STATUS.FORBIDDEN);
     });
 
-    test('TC09 Generate QA token using uppercase email', async ({
+    test('TC09 Generate QA token using uppercase email @auth @regression', async ({
         authClient
     }) => {
 
@@ -139,7 +139,7 @@ test.describe('QA Token APIs', () => {
 
     });
 
-    test('TC10 Verify generated QA token response schema', async ({
+    test('TC10 Verify generated QA token response schema @auth @regression', async ({
         authClient
     }) => {
 
@@ -155,7 +155,7 @@ test.describe('QA Token APIs', () => {
 
     });
 
-    test('TC11 Verify valid JWT token', async ({
+    test('TC11 Verify valid JWT token @auth @regression @smoke @sanity', async ({
         authClient,
         qaToken
     }) => {
@@ -172,7 +172,7 @@ test.describe('QA Token APIs', () => {
 
     });
 
-    test('TC12 Verify request without Authorization', async ({
+    test('TC12 Verify request without Authorization @auth @regression', async ({
         authClient
     }) => {
 
@@ -196,7 +196,7 @@ test.describe('QA Token APIs', () => {
 
 test.describe('Token Validation APIs', () => {
 
-    test('TC13 Verify invalid JWT token', async ({
+    test('TC13 Verify invalid JWT token @auth @regression', async ({
         authClient
     }) => {
 
@@ -218,7 +218,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(qaEmail);
     });
 
-    test('TC14 Verify expired JWT token', async ({
+    test('TC14 Verify expired JWT token @auth @regression', async ({
         authClient
     }) => {
 
@@ -231,7 +231,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(HTTP_STATUS.UNAUTHORIZED);
     });
 
-    test('TC15 Verify malformed JWT token', async ({
+    test('TC15 Verify malformed JWT token @auth @regression', async ({
         authClient
     }) => {
 
@@ -242,7 +242,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(HTTP_STATUS.UNAUTHORIZED);
     });
 
-    test('TC16 Verify token signed with different secret', async ({
+    test('TC16 Verify token signed with different secret @auth @regression', async ({
         authClient
     }) => {
 
@@ -256,7 +256,7 @@ test.describe('Token Validation APIs', () => {
 
     });
 
-    test('TC17 Verify response schema', async ({
+    test('TC17 Verify response schema @auth @regression', async ({
         authClient,
         qaToken
     }) => {

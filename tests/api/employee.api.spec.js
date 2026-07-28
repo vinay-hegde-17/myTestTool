@@ -64,9 +64,9 @@ const hasDedicatedEmployee = employeeId =>
   Boolean(employeeId) && employeeId !== process.env.TEST_EMPLOYEE_ID;
 
 // READ: list and lookup APIs do not change shared employee records.
-test.describe('Employee List APIs @read @sanity @regression', () => {
+test.describe('Employee List APIs', () => {
 
-  test('TC01 Get Employee List @smoke', async ({
+  test('TC01 Get Employee List @smoke @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -87,7 +87,7 @@ test.describe('Employee List APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC02 Get Employee List Without Token',
+  test('TC02 Get Employee List Without Token @read @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -106,7 +106,7 @@ test.describe('Employee List APIs @read @sanity @regression', () => {
 
     });
 
-  test('TC03 Get Active Employees', async ({
+  test('TC03 Get Active Employees @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -130,7 +130,7 @@ test.describe('Employee List APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC04 Get Employee Dropdown Data', async ({
+  test('TC04 Get Employee Dropdown Data @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -144,7 +144,7 @@ test.describe('Employee List APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC05 Get Inactive Employees', async ({ employeeClient }) => {
+  test('TC05 Get Inactive Employees @read @sanity @regression', async ({ employeeClient }) => {
 
     const response = await employeeClient.listEmployees({
       activeStatus: false
@@ -171,7 +171,7 @@ test.describe('Employee List APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC06 Get Employees Invalid activeStatus', async ({ employeeClient }) => {
+  test('TC06 Get Employees Invalid activeStatus @read @sanity @regression', async ({ employeeClient }) => {
 
     const response =
       await employeeClient.listEmployees({
@@ -187,7 +187,7 @@ test.describe('Employee List APIs @read @sanity @regression', () => {
 
 
 
-  test('TC07 Verify Employee Response Schema', async ({
+  test('TC07 Verify Employee Response Schema @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -224,7 +224,7 @@ test.describe('Employee List APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC08 Verify Sorted By FirstName', async ({
+  test('TC08 Verify Sorted By FirstName @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -250,7 +250,7 @@ test.describe('Employee List APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC09 Verify Reporting Manager Populated', async ({
+  test('TC09 Verify Reporting Manager Populated @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -275,7 +275,7 @@ test.describe('Employee List APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC10 Verify Assigned Assets Populated', async ({
+  test('TC10 Verify Assigned Assets Populated @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -305,9 +305,9 @@ test.describe('Employee List APIs @read @sanity @regression', () => {
 
 });
 
-test.describe('Employee Profile APIs @read @sanity @regression', () => {
+test.describe('Employee Profile APIs', () => {
 
-  test('TC11 Get Employee Profile Details @smoke', async ({
+  test('TC11 Get Employee Profile Details @smoke @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -333,7 +333,7 @@ test.describe('Employee Profile APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC12 Invalid Employee Profile', async ({
+  test('TC12 Invalid Employee Profile @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -347,7 +347,7 @@ test.describe('Employee Profile APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC13 Verify Base64 Photo', async ({
+  test('TC13 Verify Base64 Photo @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -374,7 +374,7 @@ test.describe('Employee Profile APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC14 Get Profile Details Without Authorization', async ({
+  test('TC14 Get Profile Details Without Authorization @read @sanity @regression', async ({
     request
   }) => {
 
@@ -398,9 +398,9 @@ test.describe('Employee Profile APIs @read @sanity @regression', () => {
 
 });
 
-test.describe('Employee Names APIs @read @regression', () => {
+test.describe('Employee Names APIs', () => {
 
-  test('TC15 Get Employee Names', async ({
+  test('TC15 Get Employee Names @read @regression', async ({
     employeeClient
   }) => {
 
@@ -418,7 +418,7 @@ test.describe('Employee Names APIs @read @regression', () => {
 
   });
 
-  test('TC16 Verify Employee Names Are Sorted Alphabetically', async ({
+  test('TC16 Verify Employee Names Are Sorted Alphabetically @read @regression', async ({
     employeeClient
   }) => {
 
@@ -447,7 +447,7 @@ test.describe('Employee Names APIs @read @regression', () => {
 
   });
 
-  test('TC17 Get Employee Names Without Authorization', async ({
+  test('TC17 Get Employee Names Without Authorization @read @regression', async ({
     request
   }) => {
 
@@ -469,9 +469,9 @@ test.describe('Employee Names APIs @read @regression', () => {
 
 });
 
-test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
+test.describe('Employee Assets APIs', () => {
 
-  test('TC18 Get Employees For Assets @smoke', async ({
+  test('TC18 Get Employees For Assets @smoke @read @assets @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -489,7 +489,7 @@ test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
 
   });
 
-  test('TC19 Verify Employees For Assets Response Schema', async ({
+  test('TC19 Verify Employees For Assets Response Schema @read @assets @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -512,7 +512,7 @@ test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
 
   });
 
-  test('TC20 Verify assignedAssetsIds Returned', async ({
+  test('TC20 Verify assignedAssetsIds Returned @read @assets @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -534,7 +534,7 @@ test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
 
   });
 
-  test('TC21 Get Employees For Assets Without Authorization', async ({
+  test('TC21 Get Employees For Assets Without Authorization @read @assets @sanity @regression', async ({
     request
   }) => {
 
@@ -554,7 +554,7 @@ test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
 
 
 
-  test('TC22 Get Employee Assets', async ({
+  test('TC22 Get Employee Assets @read @assets @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -568,7 +568,7 @@ test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
 
   });
 
-  test('TC23 Invalid Employee Assets', async ({
+  test('TC23 Invalid Employee Assets @read @assets @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -582,7 +582,7 @@ test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
 
   });
 
-  test('TC24 Get Employee Without Assigned Assets', async ({
+  test('TC24 Get Employee Without Assigned Assets @read @assets @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -603,7 +603,7 @@ test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
 
   });
 
-  test('TC25 Verify Employee Asset Response Schema', async ({
+  test('TC25 Verify Employee Asset Response Schema @read @assets @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -629,7 +629,7 @@ test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
 
   });
 
-  test('TC26 Verify Asset Type And Model Populated', async ({
+  test('TC26 Verify Asset Type And Model Populated @read @assets @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -656,7 +656,7 @@ test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
 
   });
 
-  test('TC27 Get Employee Assets Without Authorization', async ({
+  test('TC27 Get Employee Assets Without Authorization @read @assets @sanity @regression', async ({
     request
   }) => {
 
@@ -680,9 +680,9 @@ test.describe('Employee Assets APIs @read @assets @sanity @regression', () => {
 
 });
 
-test.describe('Employee Dashboard APIs @read @dashboard @regression', () => {
+test.describe('Employee Dashboard APIs', () => {
 
-  test('TC28 Get New Joinees', async ({
+  test('TC28 Get New Joinees @read @dashboard @regression', async ({
     employeeClient
   }) => {
 
@@ -716,7 +716,7 @@ test.describe('Employee Dashboard APIs @read @dashboard @regression', () => {
 
   });
 
-  test('TC29 Verify New Joinee Base64 Photo', async ({
+  test('TC29 Verify New Joinee Base64 Photo @read @dashboard @regression', async ({
     employeeClient
   }) => {
 
@@ -747,7 +747,7 @@ test.describe('Employee Dashboard APIs @read @dashboard @regression', () => {
 
   });
 
-  test('TC30 Verify Joining Date Range', async ({
+  test('TC30 Verify Joining Date Range @read @dashboard @regression', async ({
     employeeClient
   }) => {
 
@@ -773,7 +773,7 @@ test.describe('Employee Dashboard APIs @read @dashboard @regression', () => {
 
   });
 
-  test('TC31 Get New Joinees Without Authorization', async ({
+  test('TC31 Get New Joinees Without Authorization @read @dashboard @regression', async ({
     request
   }) => {
 
@@ -793,7 +793,7 @@ test.describe('Employee Dashboard APIs @read @dashboard @regression', () => {
 
 
 
-  test('TC32 Get Long Service Employees', async ({
+  test('TC32 Get Long Service Employees @read @dashboard @regression', async ({
     employeeClient
   }) => {
 
@@ -827,7 +827,7 @@ test.describe('Employee Dashboard APIs @read @dashboard @regression', () => {
 
   });
 
-  test('TC33 Verify Long Service Employee Base64 Photo', async ({
+  test('TC33 Verify Long Service Employee Base64 Photo @read @dashboard @regression', async ({
     employeeClient
   }) => {
 
@@ -858,7 +858,7 @@ test.describe('Employee Dashboard APIs @read @dashboard @regression', () => {
 
   });
 
-  test('TC34 Verify Service Period', async ({
+  test('TC34 Verify Service Period @read @dashboard @regression', async ({
     employeeClient
   }) => {
 
@@ -884,7 +884,7 @@ test.describe('Employee Dashboard APIs @read @dashboard @regression', () => {
 
   });
 
-  test('TC35 Get Long Service Employees Without Authorization', async ({
+  test('TC35 Get Long Service Employees Without Authorization @read @dashboard @regression', async ({
     request
   }) => {
 
@@ -906,9 +906,9 @@ test.describe('Employee Dashboard APIs @read @dashboard @regression', () => {
 
 });
 
-test.describe('Employee Search APIs @read @search @sanity @regression', () => {
+test.describe('Employee Search APIs', () => {
 
-  test('TC36 Get Employee By Email @smoke', async ({
+  test('TC36 Get Employee By Email @smoke @read @search @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -922,7 +922,7 @@ test.describe('Employee Search APIs @read @search @sanity @regression', () => {
 
   });
 
-  test('TC37 Verify Employee By Email Response Schema', async ({
+  test('TC37 Verify Employee By Email Response Schema @read @search @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -948,7 +948,7 @@ test.describe('Employee Search APIs @read @search @sanity @regression', () => {
 
   });
 
-  test('TC38 Get Employee Invalid Email Format', async ({
+  test('TC38 Get Employee Invalid Email Format @read @search @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -962,7 +962,7 @@ test.describe('Employee Search APIs @read @search @sanity @regression', () => {
 
   });
 
-  test('TC39 Get Inactive Employee By Email', async ({
+  test('TC39 Get Inactive Employee By Email @read @search @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -976,7 +976,7 @@ test.describe('Employee Search APIs @read @search @sanity @regression', () => {
 
   });
 
-  test('TC40 Get Employee By Email Without Authorization', async ({
+  test('TC40 Get Employee By Email Without Authorization @read @search @sanity @regression', async ({
     request
   }) => {
 
@@ -996,7 +996,7 @@ test.describe('Employee Search APIs @read @search @sanity @regression', () => {
 
   });
 
-  test('TC41 Get Employee By Email Invalid Token', async ({
+  test('TC41 Get Employee By Email Invalid Token @read @search @sanity @regression', async ({
     request
   }) => {
 
@@ -1021,9 +1021,9 @@ test.describe('Employee Search APIs @read @search @sanity @regression', () => {
 
 });
 
-test.describe('Employee Role APIs @read @roles @regression', () => {
+test.describe('Employee Role APIs', () => {
 
-  test('TC42 Get Employees By Role', async ({
+  test('TC42 Get Employees By Role @read @roles @regression', async ({
     employeeClient
   }) => {
 
@@ -1041,7 +1041,7 @@ test.describe('Employee Role APIs @read @roles @regression', () => {
 
   });
 
-  test('TC43 Invalid Role Search', async ({
+  test('TC43 Invalid Role Search @read @roles @regression', async ({
     employeeClient
   }) => {
 
@@ -1055,7 +1055,7 @@ test.describe('Employee Role APIs @read @roles @regression', () => {
 
   });
 
-  test('TC44 Verify Only HR/Admin/Manager Returned', async ({
+  test('TC44 Verify Only HR/Admin/Manager Returned @read @roles @regression', async ({
     employeeClient
   }) => {
 
@@ -1082,7 +1082,7 @@ test.describe('Employee Role APIs @read @roles @regression', () => {
 
   });
 
-  test('TC45 Verify Assigned Role Populated', async ({
+  test('TC45 Verify Assigned Role Populated @read @roles @regression', async ({
     employeeClient
   }) => {
 
@@ -1104,7 +1104,7 @@ test.describe('Employee Role APIs @read @roles @regression', () => {
 
   });
 
-  test('TC46 Get Employees By Role Without Authorization', async ({
+  test('TC46 Get Employees By Role Without Authorization @read @roles @regression', async ({
     request
   }) => {
 
@@ -1122,7 +1122,7 @@ test.describe('Employee Role APIs @read @roles @regression', () => {
 
   });
 
-  test('TC47 Get Employees By Role Invalid Token', async ({
+  test('TC47 Get Employees By Role Invalid Token @read @roles @regression', async ({
     request
   }) => {
 
@@ -1145,9 +1145,9 @@ test.describe('Employee Role APIs @read @roles @regression', () => {
 
 });
 
-test.describe('Employee Edit APIs @read @regression', () => {
+test.describe('Employee Edit APIs', () => {
 
-  test('TC48 Get Employee For Edit', async ({
+  test('TC48 Get Employee For Edit @read @regression', async ({
     employeeClient
   }) => {
 
@@ -1170,7 +1170,7 @@ test.describe('Employee Edit APIs @read @regression', () => {
 
   });
 
-  test('TC49 Invalid Employee For Edit', async ({
+  test('TC49 Invalid Employee For Edit @read @regression', async ({
     employeeClient
   }) => {
 
@@ -1184,7 +1184,7 @@ test.describe('Employee Edit APIs @read @regression', () => {
 
   });
 
-  test('TC50 Verify Assigned Role Populated',
+  test('TC50 Verify Assigned Role Populated @read @regression',
     async ({ employeeClient }) => {
 
       const response =
@@ -1203,7 +1203,7 @@ test.describe('Employee Edit APIs @read @regression', () => {
 
     });
 
-  test('TC51 Get Employee For Edit Without Authorization',
+  test('TC51 Get Employee For Edit Without Authorization @read @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -1222,7 +1222,7 @@ test.describe('Employee Edit APIs @read @regression', () => {
 
     });
 
-  test('TC52 Get Employee For Edit Invalid Token',
+  test('TC52 Get Employee For Edit Invalid Token @read @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -1246,9 +1246,9 @@ test.describe('Employee Edit APIs @read @regression', () => {
 });
 
 // CREATE: generated email and employee number keep each creation isolated.
-test.describe('Employee Creation APIs @create @crud @sanity @regression', () => {
+test.describe('Employee Creation APIs', () => {
 
-  test('TC53 Create Employee @smoke', async ({
+  test('TC53 Create Employee @smoke @create @crud @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -1271,7 +1271,7 @@ test.describe('Employee Creation APIs @create @crud @sanity @regression', () => 
 
   });
 
-  test('TC54 Duplicate Email', async ({
+  test('TC54 Duplicate Email @create @crud @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -1294,7 +1294,7 @@ test.describe('Employee Creation APIs @create @crud @sanity @regression', () => 
 
   });
 
-  test('TC55 Update Employee', async ({
+  test('TC55 Update Employee @create @crud @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -1314,7 +1314,7 @@ test.describe('Employee Creation APIs @create @crud @sanity @regression', () => 
 
   });
 
-  test('TC56 Update Invalid Employee', async ({
+  test('TC56 Update Invalid Employee @create @crud @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -1329,7 +1329,7 @@ test.describe('Employee Creation APIs @create @crud @sanity @regression', () => 
 
   });
 
-  test('TC57 Create Employee Duplicate Employee Number',
+  test('TC57 Create Employee Duplicate Employee Number @create @crud @sanity @regression',
     async ({ employeeClient }) => {
 
       const payload = {
@@ -1351,7 +1351,7 @@ test.describe('Employee Creation APIs @create @crud @sanity @regression', () => 
 
     });
 
-  test('TC58 Create Employee Invalid Reporting Manager',
+  test('TC58 Create Employee Invalid Reporting Manager @create @crud @sanity @regression',
     async ({ employeeClient }) => {
 
       const payload = {
@@ -1374,7 +1374,7 @@ test.describe('Employee Creation APIs @create @crud @sanity @regression', () => 
 
     });
 
-  test('TC59 Create Employee Inactive Reporting Manager',
+  test('TC59 Create Employee Inactive Reporting Manager @create @crud @sanity @regression',
     async ({ employeeClient }) => {
 
       const payload = {
@@ -1398,7 +1398,7 @@ test.describe('Employee Creation APIs @create @crud @sanity @regression', () => 
 
     });
 
-  test('TC60 Create Employee Without Authorization',
+  test('TC60 Create Employee Without Authorization @create @crud @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -1426,7 +1426,7 @@ test.describe('Employee Creation APIs @create @crud @sanity @regression', () => 
 
     });
 
-  test('TC61 Create Employee Invalid Token',
+  test('TC61 Create Employee Invalid Token @create @crud @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -1457,7 +1457,7 @@ test.describe('Employee Creation APIs @create @crud @sanity @regression', () => 
 
     });
 
-  test('TC62 Verify Create Employee Response Schema',
+  test('TC62 Verify Create Employee Response Schema @create @crud @sanity @regression',
     async ({ employeeClient }) => {
 
       const payload = {
@@ -1495,7 +1495,7 @@ test.describe('Employee Creation APIs @create @crud @sanity @regression', () => 
 });
 
 // UPDATE: asset ownership changes are exercised before the unassign (delete) flow.
-test.describe('Employee Asset Assignment APIs @update @crud @assets @regression', () => {
+test.describe('Employee Asset Assignment APIs', () => {
 
 
 
@@ -1504,7 +1504,7 @@ test.describe('Employee Asset Assignment APIs @update @crud @assets @regression'
     'Set TEST_EMPLOYEE_ID_FOR_ASSETS to an employee other than TEST_EMPLOYEE_ID.'
   );
 
-  test('TC63 Assign Asset @smoke', async ({
+  test('TC63 Assign Asset @smoke @update @crud @assets @regression', async ({
     employeeClient
   }) => {
 
@@ -1520,7 +1520,7 @@ test.describe('Employee Asset Assignment APIs @update @crud @assets @regression'
 
   });
 
-  test('TC64 Assign Asset Invalid Employee', async ({
+  test('TC64 Assign Asset Invalid Employee @update @crud @assets @regression', async ({
     employeeClient
   }) => {
 
@@ -1536,7 +1536,7 @@ test.describe('Employee Asset Assignment APIs @update @crud @assets @regression'
 
   });
 
-  test('TC65 Assign Invalid AssetId', async ({
+  test('TC65 Assign Invalid AssetId @update @crud @assets @regression', async ({
     employeeClient
   }) => {
 
@@ -1552,7 +1552,7 @@ test.describe('Employee Asset Assignment APIs @update @crud @assets @regression'
 
   });
 
-  test('TC66 Assign Duplicate Asset', async ({
+  test('TC66 Assign Duplicate Asset @update @crud @assets @regression', async ({
     employeeClient
   }) => {
 
@@ -1568,7 +1568,7 @@ test.describe('Employee Asset Assignment APIs @update @crud @assets @regression'
 
   });
 
-  test('TC67 Assign Asset Without Authorization',
+  test('TC67 Assign Asset Without Authorization @update @crud @assets @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -1589,7 +1589,7 @@ test.describe('Employee Asset Assignment APIs @update @crud @assets @regression'
 
     });
 
-  test('TC68 Assign Asset Invalid Token',
+  test('TC68 Assign Asset Invalid Token @update @crud @assets @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -1610,7 +1610,7 @@ test.describe('Employee Asset Assignment APIs @update @crud @assets @regression'
 
     });
 
-  test('TC69 Verify Assignment Response Message',
+  test('TC69 Verify Assignment Response Message @update @crud @assets @regression',
     async ({ employeeClient }) => {
 
       const response =
@@ -1633,7 +1633,7 @@ test.describe('Employee Asset Assignment APIs @update @crud @assets @regression'
 
 });
 
-test.describe('Employee Update APIs @update @crud @files @sanity @regression', () => {
+test.describe('Employee Update APIs', () => {
 
 
 
@@ -1642,7 +1642,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
     'Set TEST_EMPLOYEE_ID_FOR_UPDATES to an employee other than TEST_EMPLOYEE_ID.'
   );
 
-  test('TC70 Update Designation @smoke',
+  test('TC70 Update Designation @smoke @update @crud @files @sanity @regression',
     async ({ employeeClient }) => {
 
       const response =
@@ -1658,7 +1658,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
     });
 
-  test('TC71 Update Reporting Manager',
+  test('TC71 Update Reporting Manager @update @crud @files @sanity @regression',
     async ({ employeeClient }) => {
 
       const response =
@@ -1674,7 +1674,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
     });
 
-  test('TC72 Update Duplicate Email',
+  test('TC72 Update Duplicate Email @update @crud @files @sanity @regression',
     async ({ employeeClient }) => {
 
       const response =
@@ -1690,7 +1690,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
     });
 
-  test('TC73 Update Duplicate Employee Number',
+  test('TC73 Update Duplicate Employee Number @update @crud @files @sanity @regression',
     async ({ employeeClient }) => {
 
       const response =
@@ -1706,7 +1706,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
     });
 
-  test('TC74 Upload Aadhaar', async ({
+  test('TC74 Upload Aadhaar @update @crud @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -1729,7 +1729,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
   });
 
-  test('TC75 Upload PAN', async ({
+  test('TC75 Upload PAN @update @crud @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -1752,7 +1752,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
   });
 
-  test('TC76 Upload Photo', async ({
+  test('TC76 Upload Photo @update @crud @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -1775,7 +1775,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
   });
 
-  test('TC77 Upload Unsupported File', async ({
+  test('TC77 Upload Unsupported File @update @crud @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -1798,7 +1798,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
   });
 
-  test('TC78 Update Employee Without Authorization',
+  test('TC78 Update Employee Without Authorization @update @crud @files @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -1818,7 +1818,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
     });
 
-  test('TC79 Update Employee Invalid Token',
+  test('TC79 Update Employee Invalid Token @update @crud @files @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -1838,7 +1838,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
     });
 
-  test('TC80 Verify Update Response Schema',
+  test('TC80 Verify Update Response Schema @update @crud @files @sanity @regression',
     async ({ employeeClient }) => {
 
       const response =
@@ -1858,7 +1858,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 
     });
 
-  test('TC81 Verify Updated Employee Data',
+  test('TC81 Verify Updated Employee Data @update @crud @files @sanity @regression',
     async ({ employeeClient }) => {
 
       await employeeClient.updateEmployee(
@@ -1887,7 +1887,7 @@ test.describe('Employee Update APIs @update @crud @files @sanity @regression', (
 });
 
 // DELETE: this runs after asset assignment so it can safely remove that assignment.
-test.describe('Employee Asset Unassign APIs @delete @crud @assets @regression', () => {
+test.describe('Employee Asset Unassign APIs', () => {
 
 
 
@@ -1896,7 +1896,7 @@ test.describe('Employee Asset Unassign APIs @delete @crud @assets @regression', 
     'Set TEST_EMPLOYEE_ID_FOR_ASSETS to an employee other than TEST_EMPLOYEE_ID.'
   );
 
-  test('TC82 Unassign Asset @smoke', async ({
+  test('TC82 Unassign Asset @smoke @delete @crud @assets @regression', async ({
     employeeClient
   }) => {
 
@@ -1917,7 +1917,7 @@ test.describe('Employee Asset Unassign APIs @delete @crud @assets @regression', 
 
   });
 
-  test('TC83 Unassign Invalid Employee', async ({
+  test('TC83 Unassign Invalid Employee @delete @crud @assets @regression', async ({
     employeeClient
   }) => {
 
@@ -1932,7 +1932,7 @@ test.describe('Employee Asset Unassign APIs @delete @crud @assets @regression', 
 
   });
 
-  test('TC84 Unassign Invalid Asset', async ({
+  test('TC84 Unassign Invalid Asset @delete @crud @assets @regression', async ({
     employeeClient
   }) => {
 
@@ -1947,7 +1947,7 @@ test.describe('Employee Asset Unassign APIs @delete @crud @assets @regression', 
 
   });
 
-  test('TC85 Unassign Asset Not Assigned', async ({
+  test('TC85 Unassign Asset Not Assigned @delete @crud @assets @regression', async ({
     employeeClient
   }) => {
 
@@ -1962,7 +1962,7 @@ test.describe('Employee Asset Unassign APIs @delete @crud @assets @regression', 
 
   });
 
-  test('TC86 Unassign Asset Twice', async ({
+  test('TC86 Unassign Asset Twice @delete @crud @assets @regression', async ({
     employeeClient
   }) => {
 
@@ -1982,7 +1982,7 @@ test.describe('Employee Asset Unassign APIs @delete @crud @assets @regression', 
 
   });
 
-  test('TC87 Unassign Without Authorization',
+  test('TC87 Unassign Without Authorization @delete @crud @assets @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2002,7 +2002,7 @@ test.describe('Employee Asset Unassign APIs @delete @crud @assets @regression', 
 
     });
 
-  test('TC88 Unassign Invalid Token',
+  test('TC88 Unassign Invalid Token @delete @crud @assets @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2022,7 +2022,7 @@ test.describe('Employee Asset Unassign APIs @delete @crud @assets @regression', 
 
     });
 
-  test('TC89 Verify Unassign Response Message', async ({
+  test('TC89 Verify Unassign Response Message @delete @crud @assets @regression', async ({
     employeeClient
   }) => {
 
@@ -2049,9 +2049,9 @@ test.describe('Employee Asset Unassign APIs @delete @crud @assets @regression', 
 
 });
 
-test.describe('Employee File APIs @read @files @sanity @regression', () => {
+test.describe('Employee File APIs', () => {
 
-  test('TC90 Fetch File Success @smoke', async ({
+  test('TC90 Fetch File Success @smoke @read @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2068,7 +2068,7 @@ test.describe('Employee File APIs @read @files @sanity @regression', () => {
 
   });
 
-  test('TC91 Fetch File Invalid Id', async ({
+  test('TC91 Fetch File Invalid Id @read @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2082,7 +2082,7 @@ test.describe('Employee File APIs @read @files @sanity @regression', () => {
 
   });
 
-  test('TC92 Download Aadhaar File', async ({
+  test('TC92 Download Aadhaar File @read @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2096,7 +2096,7 @@ test.describe('Employee File APIs @read @files @sanity @regression', () => {
 
   });
 
-  test('TC93 Download PAN File', async ({
+  test('TC93 Download PAN File @read @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2110,7 +2110,7 @@ test.describe('Employee File APIs @read @files @sanity @regression', () => {
 
   });
 
-  test('TC94 Download Photo File', async ({
+  test('TC94 Download Photo File @read @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2129,7 +2129,7 @@ test.describe('Employee File APIs @read @files @sanity @regression', () => {
 
   });
 
-  test('TC95 Verify Content Type Header', async ({
+  test('TC95 Verify Content Type Header @read @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2146,7 +2146,7 @@ test.describe('Employee File APIs @read @files @sanity @regression', () => {
 
   });
 
-  test('TC96 Verify Content Disposition Header', async ({
+  test('TC96 Verify Content Disposition Header @read @files @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2163,7 +2163,7 @@ test.describe('Employee File APIs @read @files @sanity @regression', () => {
 
   });
 
-  test('TC97 Fetch File Without Authorization',
+  test('TC97 Fetch File Without Authorization @read @files @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2182,7 +2182,7 @@ test.describe('Employee File APIs @read @files @sanity @regression', () => {
 
     });
 
-  test('TC98 Fetch File Invalid Token',
+  test('TC98 Fetch File Invalid Token @read @files @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2203,9 +2203,9 @@ test.describe('Employee File APIs @read @files @sanity @regression', () => {
 
 });
 
-test.describe('Employee Email Validation APIs @read @email @sanity @regression', () => {
+test.describe('Employee Email Validation APIs', () => {
 
-  test('TC99 Check Existing Email @smoke', async ({
+  test('TC99 Check Existing Email @smoke @read @email @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2219,7 +2219,7 @@ test.describe('Employee Email Validation APIs @read @email @sanity @regression',
 
   });
 
-  test('TC100 Check Non Existing Email', async ({
+  test('TC100 Check Non Existing Email @read @email @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2233,7 +2233,7 @@ test.describe('Employee Email Validation APIs @read @email @sanity @regression',
 
   });
 
-  test('TC101 Check Invalid Email Format', async ({
+  test('TC101 Check Invalid Email Format @read @email @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2247,7 +2247,7 @@ test.describe('Employee Email Validation APIs @read @email @sanity @regression',
 
   });
 
-  test('TC102 Check Email Different Case', async ({
+  test('TC102 Check Email Different Case @read @email @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2261,7 +2261,7 @@ test.describe('Employee Email Validation APIs @read @email @sanity @regression',
 
   });
 
-  test('TC103 Check Email Without Authorization',
+  test('TC103 Check Email Without Authorization @read @email @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2280,7 +2280,7 @@ test.describe('Employee Email Validation APIs @read @email @sanity @regression',
 
     });
 
-  test('TC104 Check Email Invalid Token',
+  test('TC104 Check Email Invalid Token @read @email @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2302,7 +2302,7 @@ test.describe('Employee Email Validation APIs @read @email @sanity @regression',
 
     });
 
-  test('TC105 Verify Check Email Response Schema',
+  test('TC105 Verify Check Email Response Schema @read @email @sanity @regression',
     async ({ employeeClient }) => {
 
       const response =
@@ -2324,7 +2324,7 @@ test.describe('Employee Email Validation APIs @read @email @sanity @regression',
 
 });
 
-test.describe('Employee Photo APIs @update @delete @crud @files @photo-lifecycle @regression', () => {
+test.describe('Employee Photo APIs', () => {
 
   test.describe.configure({ mode: 'serial' });
 
@@ -2333,7 +2333,7 @@ test.describe('Employee Photo APIs @update @delete @crud @files @photo-lifecycle
     'Set employeeIdForPhotos in test-data/employee.json.'
   );
 
-  test('TC106 Upload Employee Photo Before Removal @smoke', async ({
+  test('TC106 Upload Employee Photo Before Removal @smoke @update @delete @crud @files @photo-lifecycle @regression', async ({
     employeeClient
   }) => {
 
@@ -2351,7 +2351,7 @@ test.describe('Employee Photo APIs @update @delete @crud @files @photo-lifecycle
 
   });
 
-  test('TC107 Remove Employee Photo @smoke', async ({
+  test('TC107 Remove Employee Photo @smoke @update @delete @crud @files @photo-lifecycle @regression', async ({
     employeeClient
   }) => {
 
@@ -2365,7 +2365,7 @@ test.describe('Employee Photo APIs @update @delete @crud @files @photo-lifecycle
 
   });
 
-  test('TC108 Verify Photo Becomes Null',
+  test('TC108 Verify Photo Becomes Null @update @delete @crud @files @photo-lifecycle @regression',
     async ({ employeeClient }) => {
 
       const response =
@@ -2385,7 +2385,7 @@ test.describe('Employee Photo APIs @update @delete @crud @files @photo-lifecycle
 
     });
 
-  test('TC109 Remove Employee Photo Invalid Employee',
+  test('TC109 Remove Employee Photo Invalid Employee @update @delete @crud @files @photo-lifecycle @regression',
     async ({ employeeClient }) => {
 
       const response =
@@ -2398,7 +2398,7 @@ test.describe('Employee Photo APIs @update @delete @crud @files @photo-lifecycle
 
     });
 
-  test('TC110 Remove Already Null Photo',
+  test('TC110 Remove Already Null Photo @update @delete @crud @files @photo-lifecycle @regression',
     async ({ employeeClient }) => {
 
       await employeeClient.removePhoto(
@@ -2415,7 +2415,7 @@ test.describe('Employee Photo APIs @update @delete @crud @files @photo-lifecycle
 
     });
 
-  test('TC111 Remove Photo Without Authorization',
+  test('TC111 Remove Photo Without Authorization @update @delete @crud @files @photo-lifecycle @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2434,7 +2434,7 @@ test.describe('Employee Photo APIs @update @delete @crud @files @photo-lifecycle
 
     });
 
-  test('TC112 Remove Photo Invalid Token',
+  test('TC112 Remove Photo Invalid Token @update @delete @crud @files @photo-lifecycle @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2458,9 +2458,9 @@ test.describe('Employee Photo APIs @update @delete @crud @files @photo-lifecycle
 
 });
 
-test.describe('Employee Hierarchy APIs @read @hierarchy @regression', () => {
+test.describe('Employee Hierarchy APIs', () => {
 
-  test('TC113 Get Employee Hierarchy @smoke', async ({
+  test('TC113 Get Employee Hierarchy @smoke @read @hierarchy @regression', async ({
     employeeClient
   }) => {
 
@@ -2483,7 +2483,7 @@ test.describe('Employee Hierarchy APIs @read @hierarchy @regression', () => {
 
   });
 
-  test('TC114 Invalid Employee Hierarchy', async ({
+  test('TC114 Invalid Employee Hierarchy @read @hierarchy @regression', async ({
     employeeClient
   }) => {
 
@@ -2497,7 +2497,7 @@ test.describe('Employee Hierarchy APIs @read @hierarchy @regression', () => {
 
   });
 
-  test('TC115 Get Admin Hierarchy', async ({
+  test('TC115 Get Admin Hierarchy @read @hierarchy @regression', async ({
     employeeClient
   }) => {
 
@@ -2511,7 +2511,7 @@ test.describe('Employee Hierarchy APIs @read @hierarchy @regression', () => {
 
   });
 
-  test('TC116 Get Manager Hierarchy', async ({
+  test('TC116 Get Manager Hierarchy @read @hierarchy @regression', async ({
     employeeClient
   }) => {
 
@@ -2525,7 +2525,7 @@ test.describe('Employee Hierarchy APIs @read @hierarchy @regression', () => {
 
   });
 
-  test('TC117 Verify Hierarchy Tree Structure', async ({
+  test('TC117 Verify Hierarchy Tree Structure @read @hierarchy @regression', async ({
     employeeClient
   }) => {
 
@@ -2549,7 +2549,7 @@ test.describe('Employee Hierarchy APIs @read @hierarchy @regression', () => {
 
   });
 
-  test('TC118 Verify Reporting Chain', async ({
+  test('TC118 Verify Reporting Chain @read @hierarchy @regression', async ({
     employeeClient
   }) => {
 
@@ -2570,7 +2570,7 @@ test.describe('Employee Hierarchy APIs @read @hierarchy @regression', () => {
 
   });
 
-  test('TC119 Get Hierarchy Without Authorization',
+  test('TC119 Get Hierarchy Without Authorization @read @hierarchy @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2589,7 +2589,7 @@ test.describe('Employee Hierarchy APIs @read @hierarchy @regression', () => {
 
     });
 
-  test('TC120 Get Hierarchy Invalid Token',
+  test('TC120 Get Hierarchy Invalid Token @read @hierarchy @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2613,9 +2613,9 @@ test.describe('Employee Hierarchy APIs @read @hierarchy @regression', () => {
 
 });
 
-test.describe('Employee Details APIs @read @sanity @regression', () => {
+test.describe('Employee Details APIs', () => {
 
-  test('TC121 Get Employee Details @smoke', async ({
+  test('TC121 Get Employee Details @smoke @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2629,7 +2629,7 @@ test.describe('Employee Details APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC122 Verify Response Schema', async ({
+  test('TC122 Verify Response Schema @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2655,7 +2655,7 @@ test.describe('Employee Details APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC123 Verify Reporting Manager', async ({
+  test('TC123 Verify Reporting Manager @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2672,7 +2672,7 @@ test.describe('Employee Details APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC124 Verify Assigned Assets', async ({
+  test('TC124 Verify Assigned Assets @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2689,7 +2689,7 @@ test.describe('Employee Details APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC125 Verify Aadhaar Base64', async ({
+  test('TC125 Verify Aadhaar Base64 @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2710,7 +2710,7 @@ test.describe('Employee Details APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC126 Verify PAN Base64', async ({
+  test('TC126 Verify PAN Base64 @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2731,7 +2731,7 @@ test.describe('Employee Details APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC127 Verify Photo Base64', async ({
+  test('TC127 Verify Photo Base64 @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2752,7 +2752,7 @@ test.describe('Employee Details APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC128 Get Employee Invalid EmployeeId', async ({
+  test('TC128 Get Employee Invalid EmployeeId @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2766,7 +2766,7 @@ test.describe('Employee Details APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC129 Get Non Existing Employee', async ({
+  test('TC129 Get Non Existing Employee @read @sanity @regression', async ({
     employeeClient
   }) => {
 
@@ -2780,7 +2780,7 @@ test.describe('Employee Details APIs @read @sanity @regression', () => {
 
   });
 
-  test('TC130 Get Employee Details Without Authorization',
+  test('TC130 Get Employee Details Without Authorization @read @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =
@@ -2799,7 +2799,7 @@ test.describe('Employee Details APIs @read @sanity @regression', () => {
 
     });
 
-  test('TC131 Get Employee Details Invalid Token',
+  test('TC131 Get Employee Details Invalid Token @read @sanity @regression',
     async ({ request }) => {
 
       const EmployeeClient =

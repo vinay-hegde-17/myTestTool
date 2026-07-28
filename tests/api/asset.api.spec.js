@@ -4,7 +4,7 @@ const assetData = require('../../test-data/asset.json');
 
 test.describe('Asset Read APIs', () => {
 
-    test('TC01 Get All Assets', async ({
+    test('TC01 Get All Assets @read @assets @regression @smoke @sanity', async ({
         assetClient
     }) => {
 
@@ -22,7 +22,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC02 Verify Assets Response Schema', async ({
+    test('TC02 Verify Assets Response Schema @read @assets @regression', async ({
         assetClient
     }) => {
 
@@ -50,7 +50,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC03 Get Asset Types', async ({
+    test('TC03 Get Asset Types @read @assets @regression @sanity', async ({
         assetClient
     }) => {
 
@@ -68,7 +68,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC04 Verify Asset Types Response Schema', async ({
+    test('TC04 Verify Asset Types Response Schema @read @assets @regression', async ({
         assetClient
     }) => {
 
@@ -93,7 +93,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC05 Get Asset Models', async ({
+    test('TC05 Get Asset Models @read @assets @regression @sanity', async ({
         assetClient
     }) => {
 
@@ -111,7 +111,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC06 Verify Asset Models Response Schema', async ({
+    test('TC06 Verify Asset Models Response Schema @read @assets @regression', async ({
         assetClient
     }) => {
 
@@ -136,7 +136,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC07 Unauthorized Get Assets', async ({
+    test('TC07 Unauthorized Get Assets @read @assets @regression', async ({
         assetClient
     }) => {
 
@@ -148,7 +148,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC08 Unauthorized Get Asset Types', async ({
+    test('TC08 Unauthorized Get Asset Types @read @assets @regression', async ({
         assetClient
     }) => {
 
@@ -160,7 +160,7 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC09 Unauthorized Get Asset Models', async ({
+    test('TC09 Unauthorized Get Asset Models @read @assets @regression', async ({
         assetClient
     }) => {
 
@@ -178,7 +178,7 @@ test.describe('Asset Read APIs', () => {
 
 test.describe('Asset Management APIs', () => {
 
-    test('TC10 Create Asset', async ({
+    test('TC10 Create Asset @create @crud @assets @regression @smoke @sanity', async ({
         assetClient
     }) => {
 
@@ -197,7 +197,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC11 Create Asset Duplicate AssetId', async ({
+    test('TC11 Create Asset Duplicate AssetId @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -216,7 +216,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC12 Create Asset Missing Mandatory Fields', async ({
+    test('TC12 Create Asset Missing Mandatory Fields @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -228,7 +228,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC13 Update Asset', async ({
+    test('TC13 Update Asset @update @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -251,7 +251,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC14 Update Invalid Asset Id', async ({
+    test('TC14 Update Invalid Asset Id @update @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -270,7 +270,7 @@ test.describe('Asset Management APIs', () => {
 
 
 
-    test('TC15 Update Asset Duplicate AssetId', async ({
+    test('TC15 Update Asset Duplicate AssetId @update @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -287,7 +287,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC16 Create Asset Invalid TypeId', async ({
+    test('TC16 Create Asset Invalid TypeId @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -306,7 +306,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC17 Create Asset Invalid ModelId', async ({
+    test('TC17 Create Asset Invalid ModelId @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -325,7 +325,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC18 Create Asset Without Authorization', async ({
+    test('TC18 Create Asset Without Authorization @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -346,7 +346,7 @@ test.describe('Asset Management APIs', () => {
 
 
 
-    test('TC19 Create Asset Response Schema', async ({
+    test('TC19 Create Asset Response Schema @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -377,7 +377,7 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC20 Update Asset Without Authorization', async ({
+    test('TC20 Update Asset Without Authorization @update @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -396,7 +396,7 @@ test.describe('Asset Management APIs', () => {
 
 
 
-    test('TC21 Update Asset Response Schema', async ({
+    test('TC21 Update Asset Response Schema @update @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -429,7 +429,7 @@ test.describe('Asset Management APIs', () => {
 
 test.describe('Asset Type And Model APIs', () => {
 
-    test('TC22 Create Asset Type', async ({
+    test('TC22 Create Asset Type @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -443,7 +443,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC23 Create Asset Type With Spaces', async ({
+    test('TC23 Create Asset Type With Spaces @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -457,7 +457,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC24 Create Duplicate Asset Type', async ({
+    test('TC24 Create Duplicate Asset Type @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -471,7 +471,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC25 Create Asset Type Without Auth', async ({
+    test('TC25 Create Asset Type Without Auth @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -485,7 +485,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC26 Create Asset Model', async ({
+    test('TC26 Create Asset Model @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -499,7 +499,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC27 Create Asset Model With Spaces', async ({
+    test('TC27 Create Asset Model With Spaces @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -513,7 +513,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC28 Create Duplicate Asset Model', async ({
+    test('TC28 Create Duplicate Asset Model @create @crud @assets @regression', async ({
         assetClient
     }) => {
 
@@ -527,7 +527,7 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC29 Create Asset Model Without Auth', async ({
+    test('TC29 Create Asset Model Without Auth @create @crud @assets @regression', async ({
         assetClient
     }) => {
 

@@ -112,6 +112,7 @@ labels identify API intent: `@read`, `@create`, `@update`, `@delete`, `@crud`,
 
 ## CI
 
-GitHub Actions runs `npm test` on pushes and pull requests to `main` and
-`master`. Configure the repository `API_BASE_URL` variable when the API is
-deployed outside the CI runner.
+GitHub Actions runs `npm run test:sanity` on pushes and pull requests to `dev`.
+Configure the repository `API_BASE_URL` and `TEST_EMAIL` variables. Set the
+optional `QA_TOKEN` repository secret to use a pre-generated Bearer token;
+otherwise the global setup generates a QA token for `TEST_EMAIL`.

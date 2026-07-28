@@ -18,7 +18,7 @@ const test = base.test.extend({
     let response;
     try {
       response = await authClient.generateQaToken(
-        employeeData.testData.testEmail || 'qa.user@company.com'
+        process.env.TEST_EMAIL || employeeData.testData.testEmail || 'qa.user@company.com'
       );
     } catch (error) {
       testInfo.skip(true, `QA token unavailable - ${error.message}`);

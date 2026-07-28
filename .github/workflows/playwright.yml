@@ -2,9 +2,9 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [main, master]
+    branches: [dev]
   pull_request:
-    branches: [main, master]
+    branches: [dev]
 
 jobs:
   test:
@@ -12,8 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      API_BASE_URL: ${{ vars.API_BASE_URL || 'http://localhost:3000' }}
-      TEST_EMAIL: ${{ vars.TEST_EMAIL || 'qa.user@company.com' }}
+      API_BASE_URL: ${{ vars.API_BASE_URL }}
+      TEST_EMAIL: ${{ vars.TEST_EMAIL }}
+      QA_TOKEN: ${{ secrets.QA_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
@@ -29,8 +30,8 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
 
-      - name: Run tests
-        run: npm test
+      - name: Run sanity tests
+        run: npm run test:sanity
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
