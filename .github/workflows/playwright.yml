@@ -17,11 +17,11 @@ jobs:
       QA_TOKEN: ${{ secrets.QA_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: lts/*
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -30,13 +30,27 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
 
+      - name: Validate API test configuration
+        shell: bash
+        run: |
+          test -n "$API_BASE_URL" || {
+            echo "::error::Set the API_BASE_URL repository variable to a URL reachable from GitHub Actions."
+            exit 1
+          }
+          test -n "$QA_TOKEN" || test -n "$TEST_EMAIL" || {
+            echo "::error::Set the QA_TOKEN repository secret or the TEST_EMAIL repository variable."
+            exit 1
+          }
+
       - name: Run sanity tests
         run: npm run test:sanity
 
-      - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
+      - uses: actions/upload-artifact@v6
+        if: ${{ always() }}
         with:
-          name: allure-report
+          name: playwright-results
           path: |
-            reports/allure/
+            reports/allure-results/
+            test-results/
+          if-no-files-found: ignore
           retention-days: 14

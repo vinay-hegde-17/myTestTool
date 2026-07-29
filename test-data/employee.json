@@ -6,6 +6,8 @@
         "employeeNumber": "EMP001",
         "activeStatus": true,
         "assignedRoleId": "66a77ce670bd6b1f721cc20b",
+        "designation": "Software Engineer",
+        "reportingTo": "6a1f0bd1c9ce1caed4279c13",
         "phone": "9876543210",
         "gender": "Male",
         "bloodGroup": "A+",
