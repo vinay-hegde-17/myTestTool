@@ -1,0 +1,98 @@
+{
+  "holidayId": "6a68e114245f4ee9786ebd7a",
+  "invalidHolidayId": "123",
+  "nonExistingHolidayId": "679393713979a2fec07dd999",
+  "existingYear": 2026,
+  "emptyHolidayYear": 2035,
+  "invalidYear": "abcd",
+  "emptyYear": "",
+  "validHoliday": {
+    "holidayName": "Automation Holiday",
+    "date": "2026-12-25",
+    "holidayType": "Public Holiday"
+  },
+  "updateHoliday": {
+    "holidayName": "Automation Holiday Updated",
+    "date": "2026-12-26",
+    "holidayType": "Public Holiday"
+  },
+  "duplicateHoliday": {
+    "holidayName": "Republic Day",
+    "date": "2026-01-26",
+    "holidayType": "Public Holiday"
+  },
+  "differentYearHoliday": {
+    "holidayName": "Republic Day",
+    "date": "2027-01-26",
+    "holidayType": "Public Holiday"
+  },
+  "invalidDate": {
+    "holidayName": "Holiday",
+    "date": "26-01-2026",
+    "holidayType": "Public Holiday"
+  },
+  "invalidHolidayType": {
+    "holidayName": "Holiday",
+    "date": "2026-01-26",
+    "holidayType": "Random Type"
+  },
+  "importHoliday": {
+    "fromYear": 2026,
+    "toYear": 2027,
+    "replace": false
+  },
+  "importHolidayReplace": {
+    "fromYear": 2026,
+    "toYear": 2027,
+    "replace": true
+  },
+  "invalidFromYear": {
+    "fromYear": "abcd",
+    "toYear": 2027,
+    "replace": false
+  },
+  "invalidToYear": {
+    "fromYear": 2026,
+    "toYear": "abcd",
+    "replace": false
+  },
+  "excelImport": {
+    "toYear": 2027,
+    "replace": false,
+    "holidays": [
+      {
+        "holidayName": "New Year",
+        "date": "2027-01-01",
+        "holidayType": "Public Holiday"
+      }
+    ]
+  },
+  "duplicateExcelHoliday": {
+    "toYear": 2027,
+    "replace": false,
+    "holidays": [
+      {
+        "holidayName": "Republic Day",
+        "date": "2027-01-26",
+        "holidayType": "Public Holiday"
+      },
+      {
+        "holidayName": "Republic Day",
+        "date": "2027-01-26",
+        "holidayType": "Public Holiday"
+      }
+    ]
+  },
+  "invalidHolidayObject": {
+    "toYear": 2027,
+    "replace": false,
+    "holidays": [
+      {
+        "holidayName": "",
+        "date": "",
+        "holidayType": ""
+      }
+    ]
+  },
+  "emptyBody": {}
+}
