@@ -1,7 +1,5 @@
 const { test, expect } = require('../../fixtures/leave.fixture');
-
 const { HTTP_STATUS } = require('../../api/constants/leave.constants');
-
 const leaveData = require('../../test-data/leave.json');
 
 test.describe('Leave Module Empty Data APIs', () => {

@@ -1,0 +1,69 @@
+{
+  "existing": {
+    "userRole": "MANAGER",
+    "description": "Manager",
+    "activeStatus": true,
+    "roleId": "6a6d806bc8d2df8599177576"
+  },
+  "admin": {
+    "userRole": "ADMIN",
+    "roleId": "66a77ce670bd6b1f721cc20b"
+  },
+  "hr": {
+    "userRole": "HR",
+    "roleId": "66a77ccc70bd6b1f721cc207"
+  },
+  "employee": {
+    "userRole": "EMPLOYEE",
+    "roleId": "66a77cf470bd6b1f721cc20f"
+  },
+  "qa": {
+    "userRole": "QA",
+    "roleId": "6a6da078beb87871ca52cea3"
+  },
+  "duplicate": {
+    "sameCase": "ADMIN",
+    "differentCase": "admin",
+    "extraSpaces": "   ADMIN   "
+  },
+  "invalid": {
+    "invalidToken": "invalid.jwt.token",
+    "invalidObjectId": "123",
+    "nonExistingObjectId": "685111111111111111111111",
+    "invalidRoleName": "PLAYWRIGHT_INVALID_ROLE",
+    "specialCharacters": "@#$%^&*",
+    "emptyString": ""
+  },
+  "messages": {
+    "duplicateRole": "User Role already exists",
+    "roleNotFound": "Role not found",
+    "invalidObjectId": "Invalid roleId"
+  },
+  "seedRoles": [
+    {
+      "userRole": "ADMIN",
+      "description": "Administrator",
+      "activeStatus": true
+    },
+    {
+      "userRole": "HR",
+      "description": "Human Resource",
+      "activeStatus": true
+    },
+    {
+      "userRole": "EMPLOYEE",
+      "description": "Employee",
+      "activeStatus": true
+    },
+    {
+      "userRole": "MANAGER",
+      "description": "Manager",
+      "activeStatus": true
+    },
+    {
+      "userRole": "QA",
+      "description": "Quality Assurance",
+      "activeStatus": true
+    }
+  ]
+}
