@@ -1,0 +1,163 @@
+{
+  "existing": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "financialYear": "2026-27",
+    "regime": "new",
+    "fileId": "6a8a1b9e1234567890123456"
+  },
+  "deleteTarget": {
+    "fileId": "6a8a1b9e1234567890123456"
+  },
+  "itDeclaration": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "regime": "old",
+    "financialYear": "2027-28",
+    "ownerPan": "ABCDE1234F",
+    "oldRegimeDetails": {
+      "houseRent": 120000,
+      "medicalInsurance": 25000,
+      "homeLoanInterest": 200000
+    }
+  },
+  "updatedRegime": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "financialYear": "2027-28",
+    "ownerPan": "PQRSX9876K",
+    "oldRegimeDetails": {
+      "houseRent": 180000,
+      "medicalInsurance": 50000,
+      "homeLoanInterest": 250000
+    }
+  },
+  "proof": {
+    "proofId": "HOUSE_RENT",
+    "items": "House Rent",
+    "particulars": "Monthly Rent Receipts"
+  },
+  "configuration": {
+    "uploadProofStatus": true,
+    "editRegimeStatus": true,
+    "itdPolicyUrl": "https://example.com/itd-policy.pdf"
+  },
+  "oldRegime": {
+    "employeeId": "685aaaaaaaaaaaaaaaaaaaa1",
+    "regime": "old",
+    "financialYear": "2027-28",
+    "ownerPan": "ABCDE1234F",
+    "oldRegimeDetails": {
+      "houseRent": 120000,
+      "medicalInsurance": 25000,
+      "homeLoanInterest": 200000
+    }
+  },
+  "newRegime": {
+    "employeeId": "685aaaaaaaaaaaaaaaaaaaa2",
+    "regime": "new",
+    "financialYear": "2027-28",
+    "ownerPan": "ABCDE1234F"
+  },
+  "duplicate": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "regime": "new",
+    "financialYear": "2026-27",
+    "ownerPan": "ABCDE1234F"
+  },
+  "updatedDeclaration": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "financialYear": "2027-28",
+    "regime": "old",
+    "ownerPan": "PQRSX9876K",
+    "oldRegimeDetails": {
+      "houseRent": 180000,
+      "medicalInsurance": 50000,
+      "homeLoanInterest": 250000
+    }
+  },
+  "updatedPan": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "financialYear": "2027-28",
+    "ownerPan": "ZZZZZ9999Z"
+  },
+  "updatedOldRegime": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "financialYear": "2027-28",
+    "oldRegimeDetails": {
+      "houseRent": 220000,
+      "medicalInsurance": 60000,
+      "homeLoanInterest": 300000
+    }
+  },
+  "nonExistingDeclaration": {
+    "employeeId": "685333333333333333333333",
+    "financialYear": "2027-28",
+    "ownerPan": "AAAAA1111A",
+    "oldRegimeDetails": {}
+  },
+  "singleProof": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "financialYear": "2026-27",
+    "proofId": "HOUSE_RENT",
+    "items": "House Rent",
+    "particulars": "Monthly Rent Receipts"
+  },
+  "multipleProofs": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "financialYear": "2026-27",
+    "proofId": "HOUSE_RENT",
+    "items": "House Rent",
+    "particulars": "Monthly Rent Receipts"
+  },
+  "existingProofCategory": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "financialYear": "2026-27",
+    "proofId": "HOUSE_RENT",
+    "items": "House Rent",
+    "particulars": "Monthly Rent Receipts"
+  },
+  "newProofCategory": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "financialYear": "2026-27",
+    "proofId": "MEDICAL",
+    "items": "Medical Insurance",
+    "particulars": "Health Insurance"
+  },
+  "unsupportedProof": {
+    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "financialYear": "2026-27",
+    "proofId": "HOUSE_RENT",
+    "items": "House Rent",
+    "particulars": "Unsupported File"
+  },
+  "enableProofUpload": {
+    "uploadProofStatus": true
+  },
+  "disableProofUpload": {
+    "uploadProofStatus": false
+  },
+  "enableRegimeEditing": {
+    "editRegimeStatus": true
+  },
+  "updatePolicyUrl": {
+    "itdPolicyUrl": "https://example.com/updated-itd-policy.pdf"
+  },
+  "updateAllConfiguration": {
+    "uploadProofStatus": true,
+    "editRegimeStatus": true,
+    "itdPolicyUrl": "https://example.com/updated-itd-policy.pdf"
+  },
+  "invalid": {
+    "invalidToken": "invalid.jwt.token",
+    "invalidEmployeeId": "685000000000000000000001",
+    "invalidFileId": "685000000000000000000002",
+    "invalidFinancialYear": "2020-21",
+    "invalidObjectId": "invalid-object-id",
+    "nonExistingFileId": "685111111111111111111111",
+    "nonExistingEmployeeId": "685222222222222222222222"
+  },
+  "messages": {
+    "invalidFileId": "Invalid file ID format",
+    "fileNotFound": "File not found",
+    "declarationNotFound": "IT declaration not found for the given employee and financial year.",
+    "configurationUpdated": "update successfull"
+  }
+}

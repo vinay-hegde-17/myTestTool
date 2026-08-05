@@ -33,7 +33,4 @@ const USER_ROLE_ENDPOINTS = {
 
 };
 
-module.exports = {
-    USER_ROLE_ENDPOINTS,
-    HTTP_STATUS
-};
+module.exports = { USER_ROLE_ENDPOINTS, HTTP_STATUS };
