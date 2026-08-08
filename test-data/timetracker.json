@@ -1,0 +1,171 @@
+{
+"employee": {
+    "validEmployeeId": "6a1f0bd1c9ce1caed4279c13",
+    "anotherEmployeeId": "6a1f0bd1c9ce1caed4279c14",
+    "invalidEmployeeId": "invalidEmployeeId",
+    "nonExistingEmployeeId": "6fffffffffffffffffffffff",
+    "inactiveEmployeeId": "6a52fa19ddf6225c7e985f29",
+    "lateJoinerEmployeeId": "6a52fa19ddf6225c7e985f29"
+},
+
+  "query": {
+    "month": "August",
+    "year": "2026",
+    "statusAll": "all",
+    "statusApproved": "approved",
+    "statusRequested": "requested",
+    "statusIncomplete": "incomplete",
+    "invalidStatus": "completed"
+  },
+
+  "multipleEmployeesRequest": {
+    "employeeIds": [
+      "6a1f0bd1c9ce1caed4279c13",
+      "6a1f0bd1c9ce1caed4279c14"
+    ],
+    "month": "August",
+    "year": "2026"
+  },
+
+  "createTimesheet": {
+    "month": "August",
+    "year": "2026",
+    "days": [
+      { "date": "2026-08-18", "hoursLogged": 8 },
+      { "date": "2026-08-19", "hoursLogged": 7 }
+    ]
+  },
+
+  "updateTimesheet": {
+    "month": "August",
+    "year": "2026",
+    "days": [
+      { "date": "2026-08-03", "hoursLogged": 9 },
+      { "date": "2026-08-04", "hoursLogged": 6 }
+    ]
+  },
+
+  "newMonthTimesheet": {
+    "month": "September",
+    "year": "2026",
+    "days": [
+      { "date": "2026-09-01", "hoursLogged": 8 },
+      { "date": "2026-09-02", "hoursLogged": 7 }
+    ]
+  },
+
+  "newYearTimesheet": {
+    "month": "January",
+    "year": "2027",
+    "days": [
+      { "date": "2027-01-05", "hoursLogged": 8 }
+    ]
+  },
+
+  "invalidHoursRequest": {
+    "month": "August",
+    "year": "2026",
+    "days": [
+      { "date": "2026-08-20", "hoursLogged": 11 }
+    ]
+  },
+
+  "duplicateDateRequest": {
+    "month": "August",
+    "year": "2026",
+    "days": [
+      { "date": "2026-08-21", "hoursLogged": 8 },
+      { "date": "2026-08-21", "hoursLogged": 6 }
+    ]
+  },
+
+  "leaveTypeRequest": {
+    "month": "August",
+    "year": "2026",
+    "days": [
+      { "date": "2026-08-22", "hoursLogged": "LT" },
+      { "date": "2026-08-25", "hoursLogged": "CH" }
+    ]
+  },
+
+  "emptyBody": {},
+
+  "emptyEmployeeIds": {
+    "employeeIds": [],
+    "month": "August",
+    "year": "2026"
+  },
+
+  "missingMonth": {
+    "year": "2026",
+    "days": [
+      { "date": "2026-08-18", "hoursLogged": 8 }
+    ]
+  },
+
+  "missingYear": {
+    "month": "August",
+    "days": [
+      { "date": "2026-08-18", "hoursLogged": 8 }
+    ]
+  },
+
+  "missingDays": {
+    "month": "August",
+    "year": "2026"
+  },
+
+  "emptyDays": {
+    "month": "August",
+    "year": "2026",
+    "days": []
+  },
+
+  "invalidMonth": {
+    "month": "Smarch",
+    "year": "2026",
+    "days": [
+      { "date": "2026-03-15", "hoursLogged": 8 }
+    ]
+  },
+
+  "invalidYear": {
+    "month": "August",
+    "year": "abcd",
+    "days": [
+      { "date": "2026-08-15", "hoursLogged": 8 }
+    ]
+  },
+
+  "negativeHoursRequest": {
+    "month": "August",
+    "year": "2026",
+    "days": [
+      { "date": "2026-08-23", "hoursLogged": -5 }
+    ]
+  },
+
+  "excessiveHoursRequest": {
+    "month": "August",
+    "year": "2026",
+    "days": [
+      { "date": "2026-08-24", "hoursLogged": 25 }
+    ]
+  },
+
+  "invalidDateFormat": {
+    "month": "August",
+    "year": "2026",
+    "days": [
+      { "date": "08-25-2026", "hoursLogged": 8 }
+    ]
+  },
+
+  "futureDateRequest": {
+    "month": "January",
+    "year": "2100",
+    "days": [
+      { "date": "2100-01-01", "hoursLogged": 8 }
+    ]
+  }
+}

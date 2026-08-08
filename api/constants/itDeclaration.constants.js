@@ -35,7 +35,4 @@ const IT_DECLARATION_ENDPOINTS = {
 
 };
 
-module.exports = {
-    IT_DECLARATION_ENDPOINTS,
-    HTTP_STATUS
-};
+module.exports = { IT_DECLARATION_ENDPOINTS, HTTP_STATUS };
