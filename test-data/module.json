@@ -1,0 +1,30 @@
+{
+    "valid": {
+        "menuItemId": "viewholidays",
+        "secondMenuItemId": "applyleave",
+
+        "existingModuleId": "66e812132803193c4f56ed37",
+        "existingModuleName": "View Holidays",
+
+        "createModule": {
+            "name": "Playwright Module",
+            "description": "Module created via Playwright API automation",
+            "activeStatus": true,
+            "menuItem": "viewholidays"
+        },
+
+        "updateModule": {
+            "name": "Updated Module Name",
+            "description": "Updated module description",
+            "activeStatus": true,
+            "menuItem": "viewholidays"
+        }
+    },
+
+    "invalid": {
+        "invalidModuleId": "invalid-module-id",
+        "nonExistingModuleId": "665f0000000000000000ffff",
+
+        "invalidMenuItemId": "invalid-menu-item-id"
+    }
+}
