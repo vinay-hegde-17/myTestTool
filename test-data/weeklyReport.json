@@ -1,0 +1,152 @@
+{
+    "valid": {
+        "employeeId": "6a1f0bd1c9ce1caed4279c13",
+        "date": "2026-08-05T00:00:00.000Z",
+        "topic": "Weekly report automation",
+        "description": "<p>Weekly report API automation using Playwright</p>",
+        "status": "In Progress"
+    },
+
+    "existingReport": {
+        "employeeId": "6a1f0bd1c9ce1caed4279c13",
+        "date": "2026-08-03T00:00:00.000Z",
+        "topic": "Time trcaker code ",
+        "description": "<p>Time tracker module scuccessfully automated</p>",
+        "status": "Completed"
+    },
+
+    "existingReportUpdated": {
+        "employeeId": "6a1f0bd1c9ce1caed4279c13",
+        "date": "2026-08-03T00:00:00.000Z",
+        "topic": "Time tracker module automation",
+        "description": "<p>Time tracker module automation updated successfully</p>",
+        "status": "In Progress"
+    },
+
+    "secondValid": {
+        "employeeId": "6a1f0bd1c9ce1caed4279c13",
+        "date": "2026-08-06T00:00:00.000Z",
+        "topic": "Holiday module automation",
+        "description": "<p>Holiday module API automation completed</p>",
+        "status": "Completed"
+    },
+
+    "differentWeek": {
+        "employeeId": "6a1f0bd1c9ce1caed4279c13",
+        "date": "2026-07-20T00:00:00.000Z",
+        "topic": "Previous week report",
+        "description": "<p>Weekly report from a previous week</p>",
+        "status": "Completed"
+    },
+
+    "differentYear": {
+        "employeeId": "6a1f0bd1c9ce1caed4279c13",
+        "date": "2025-08-04T00:00:00.000Z",
+        "topic": "Previous year report",
+        "description": "<p>Weekly report from previous year</p>",
+        "status": "Completed"
+    },
+
+    "multipleReports": [
+        {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "date": "2026-08-07T00:00:00.000Z",
+            "topic": "Employee module automation",
+            "description": "<p>Employee module API automation completed</p>",
+            "status": "Completed"
+        },
+        {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "date": "2026-08-08T00:00:00.000Z",
+            "topic": "Weekly report automation",
+            "description": "<p>Weekly report API automation completed</p>",
+            "status": "Completed"
+        }
+    ],
+
+    "invalid": {
+        "invalidEmployeeId": "685000000000000000000001",
+        "nonObjectEmployeeId": "invalid-employee-id",
+        "invalidToken": "invalid.jwt.token",
+        "invalidDate": "invalid-date"
+    },
+
+    "empty": {
+        "emptyArray": [],
+        "emptyObject": {},
+        "withoutEmployeeId": {
+            "date": "2026-08-09T00:00:00.000Z",
+            "topic": "Missing employee ID",
+            "description": "<p>Employee ID is missing</p>",
+            "status": "In Progress"
+        },
+        "withoutDate": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "topic": "Missing date",
+            "description": "<p>Date is missing</p>",
+            "status": "In Progress"
+        },
+        "withoutTopic": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "date": "2026-08-09T00:00:00.000Z",
+            "description": "<p>Topic is missing</p>",
+            "status": "In Progress"
+        },
+        "withoutDescription": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "date": "2026-08-09T00:00:00.000Z",
+            "topic": "Missing description",
+            "status": "In Progress"
+        },
+        "withoutStatus": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "date": "2026-08-09T00:00:00.000Z",
+            "topic": "Missing status",
+            "description": "<p>Status is missing</p>"
+        }
+    },
+
+    "byWeek": {
+        "valid": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "year": 2026,
+            "weekStartDate": "2026-08-03T00:00:00.000Z",
+            "weekEndDate": "2026-08-09T23:59:59.999Z"
+        },
+
+        "noReportsWeek": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "year": 2026,
+            "weekStartDate": "2026-08-10T00:00:00.000Z",
+            "weekEndDate": "2026-08-16T23:59:59.999Z"
+        },
+
+        "differentYear": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "year": 2025,
+            "weekStartDate": "2025-08-04T00:00:00.000Z",
+            "weekEndDate": "2025-08-10T23:59:59.999Z"
+        },
+
+        "differentWeek": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "year": 2026,
+            "weekStartDate": "2026-07-20T00:00:00.000Z",
+            "weekEndDate": "2026-07-26T23:59:59.999Z"
+        },
+
+        "invalidEmployee": {
+            "employeeId": "685000000000000000000001",
+            "year": 2026,
+            "weekStartDate": "2026-08-03T00:00:00.000Z",
+            "weekEndDate": "2026-08-09T23:59:59.999Z"
+        }
+    },
+
+    "messages": {
+        "noWeeklyReports": "No weekly reports found",
+        "badRequest": "Bad request",
+        "noNewReports": "No new reports were created",
+        "success": "Reports processed successfully"
+    }
+}
