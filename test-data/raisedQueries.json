@@ -1,0 +1,34 @@
+{
+    "valid": {
+        "employeeId": "6a1f0bd1c9ce1caed4279c13",
+        "employeeWithoutQueries": "665f0000000000000000aa01",
+        "queryTypeId": "67cfff7d000d3f90fa78a2be",
+        "secondQueryTypeId": "67cfff8d000d3f90fa78a2bf",
+        "existingQueryId": "6a68e26a245f4ee9786ebd9c",
+
+        "createQuery": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "queryType": "67cfff7d000d3f90fa78a2be",
+            "subject": "Playwright API testing",
+            "query": "Raised query created using Playwright API automation"
+        },
+
+        "updateRaisedQuery": {
+            "queryTypeId": "67cfff7d000d3f90fa78a2be",
+            "subject": "Updated subject",
+            "query": "Updated query description"
+        }
+    },
+
+    "invalid": {
+        "invalidEmployeeId": "685000000000000000000001",
+        "invalidQueryTypeId": "invalid-query-type-id",
+        "invalidQueryId": "invalid-query-id",
+        "nonExistingQueryId": "6a68e26a245f4ee9786ebd9f"
+    },
+
+    "messages": {
+        "queryNotFound": "Query not found",
+        "updateSuccessfull": "update successfull"
+    }
+}
