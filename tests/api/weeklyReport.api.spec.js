@@ -2,25 +2,11 @@ const { test, expect } = require('../../fixtures/weeklyReport.fixture');
 const { HTTP_STATUS } = require('../../api/constants/weeklyReport.constants');
 const weeklyReportData = require('../../test-data/weeklyReport.json');
 
-// ---------------------------------------------------------------------------
-// Helpers - generate data that is unique per test RUN, not per file load.
-// This removes the "static JSON date collides with a previous run" problem
-// without relying on a fixed future date that will eventually collide too.
-// ---------------------------------------------------------------------------
-
-/**
- * Returns an ISO date guaranteed not to collide with previous runs.
- * `saltMs` lets you space out multiple dates generated in the same test.
- */
 const uniqueDate = (saltMs = 0) => {
     const random = Math.floor(Math.random() * 1_000_000);
     return new Date(Date.now() + saltMs + random).toISOString();
 };
 
-/**
- * Returns a fresh valid-looking ObjectId string that has never been used
- * to create a report, so it is safe to use for "does not exist" checks.
- */
 const uniqueNonExistentEmployeeId = () => {
     const random = Math.floor(Math.random() * 0xffffffff).toString(16).padStart(8, '0');
     return `7${random}${Date.now().toString(16)}`.padEnd(24, '0').slice(0, 24);
@@ -368,8 +354,6 @@ test.describe('Weekly Report By Week APIs', () => {
 
 test.describe('Weekly Report Create Update APIs', () => {
 
-    // Fixed: unique date per run -> guaranteed to be a brand-new
-    // employeeId+date combo, so the backend always takes the "create" path.
     test('TC13 Create new weekly reports @create @weeklyreport @regression @smoke @sanity', async ({
         weeklyReportClient
     }) => {

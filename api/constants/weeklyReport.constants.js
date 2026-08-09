@@ -19,7 +19,4 @@ const WEEKLY_REPORT_ENDPOINTS = {
 
 };
 
-module.exports = {
-    WEEKLY_REPORT_ENDPOINTS,
-    HTTP_STATUS
-};
+module.exports = { WEEKLY_REPORT_ENDPOINTS, HTTP_STATUS };
