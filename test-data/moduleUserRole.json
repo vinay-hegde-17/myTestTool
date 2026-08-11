@@ -1,0 +1,71 @@
+{
+  "valid": {
+    "userRoleId": "66a77ce670bd6b1f721cc20b",
+    "moduleId": "670cb289cea9ea8788d7ac40",
+    "secondModuleId": "67a30e0f36d3860ee3cef84d",
+    "thirdModuleId": "66e8117d2803193c4f56ecef"
+  },
+  "noAssignedModules": {
+    "userRoleId": "6a785bff228d711b6c4cfa08"
+  },
+  "activeAssignment": {
+    "userRoleId": "66a77ce670bd6b1f721cc20b",
+    "moduleIds": [
+      "670cb289cea9ea8788d7ac40",
+      "67a30e0f36d3860ee3cef84d"
+    ],
+    "activeStatus": true
+  },
+  "singleModule": {
+    "moduleIds": [
+      "670cb289cea9ea8788d7ac40"
+    ],
+    "userRoleId": "66a77ce670bd6b1f721cc20b",
+    "activeStatus": true
+  },
+  "multipleModules": {
+    "moduleIds": [
+      "670cb289cea9ea8788d7ac40",
+      "67a30e0f36d3860ee3cef84d",
+      "66e8117d2803193c4f56ecef"
+    ],
+    "userRoleId": "66a77ce670bd6b1f721cc20b",
+    "activeStatus": true
+  },
+  "update": {
+    "moduleIds": [
+      "670cb289cea9ea8788d7ac40",
+      "67a30e0f36d3860ee3cef84d"
+    ]
+  },
+  "replaceAssignments": {
+    "moduleIds": [
+      "67a30e0f36d3860ee3cef84d",
+      "66e8117d2803193c4f56ecef"
+    ]
+  },
+  "empty": {
+    "emptyArray": [],
+    "emptyObject": {},
+    "withoutModuleIds": {
+      "userRoleId": "66a77ce670bd6b1f721cc20b",
+      "activeStatus": true
+    },
+    "withoutUserRoleId": {
+      "moduleIds": [
+        "670cb289cea9ea8788d7ac40"
+      ],
+      "activeStatus": true
+    },
+    "updateWithoutModuleIds": {},
+    "updateEmptyModules": {
+      "moduleIds": []
+    }
+  },
+  "invalid": {
+    "invalidUserRoleId": "685000000000000000000001",
+    "nonObjectUserRoleId": "invalid-user-role-id",
+    "invalidModuleId": "685000000000000000000002",
+    "nonObjectModuleId": "invalid-module-id"
+  }
+}

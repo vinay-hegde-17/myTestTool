@@ -1,37 +1,3 @@
-/**
- * Verified against the real /modules router (not guesses anymore):
- *
- * - Module document shape: { _id, name, description, activeStatus, menuItem }
- * - menuItem is a plain String field, no ref/validation — any string saves as-is.
- * - POST /modules -> res.status(201).json(savedModule) — RAW object, not
- *   wrapped in { data }.
- * - PUT /modules/:id -> res.json(updatedModule) — also raw, unwrapped.
- * - GET /modulesForPermission -> .select('name description menuItem') —
- *   activeStatus is filtered on but NEVER returned in the payload.
- * - Duplicate name check: normalizes via `.replace(/\s+/g,'').toLowerCase()`
- *   before comparing — so case AND whitespace differences both count as
- *   duplicates. TC15/16/17 assertions match this exactly.
- * - Malformed moduleId -> findById throws a Mongoose CastError -> 500.
- * - modulesByIds: empty match -> 404 "No modules found" (never 200 + []).
- *
- * SUSPECTED BACKEND BUG (not a test issue): GET /modules/menu queries
- * `MenuModuleModel.find({})`, but no MenuModuleModel schema was shared —
- * only ModulesModel. A 500 here is consistent with MenuModuleModel being
- * undefined (not exported from schemas.js), which would throw a TypeError
- * caught by the route's .catch(). TC27/TC30 are left asserting the CORRECT
- * expected behavior (200) rather than weakened to accept 500, so they'll
- * keep failing until that's fixed on the backend — that's intentional.
- *
- * Wherever a test needed a specific existing module, this spec self-seeds
- * via createModule() rather than relying on static "existing ID"
- * placeholders — there's no delete endpoint, so hardcoded IDs would either
- * not exist or accumulate stale duplicates over repeated runs.
- * menuItemId / secondMenuItemId in module.json are real values pulled from
- * the Compass screenshot ("viewholidays" / "applyleave").
- *
- * Empty-data test cases (TC39-47) live in a separate spec file, per request.
- */
-
 const { test, expect } = require('../../fixtures/module.fixture');
 const { HTTP_STATUS } = require('../../api/constants/module.constants');
 const moduleData = require('../../test-data/module.json');
