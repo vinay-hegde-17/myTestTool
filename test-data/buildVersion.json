@@ -1,0 +1,17 @@
+{
+    "expected": {
+        "firstVersion": "1.0.1",
+        "versionPattern": "^\\d+\\.\\d+\\.\\d+$",
+        "defaultReleaseNotes": "Deployment release notes",
+        "defaultStatus": "stable"
+    },
+    "existingVersion": {
+        "versionNumber": "1.0.1"
+    },
+    "emptyDatabase": {
+        "expectedFirstVersion": "1.0.1"
+    },
+    "invalid": {
+        "invalidVersion": "invalid-version"
+    }
+}
