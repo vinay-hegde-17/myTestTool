@@ -1,0 +1,41 @@
+{
+    "valid": {
+        "leaveEmail": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "fromDate": "2026-08-15",
+            "toDate": "2026-08-16",
+            "noOfDays": 2,
+            "leaveType": "Casual Leave",
+            "leaveReason": "Personal work",
+            "id": "6a4699aeea79d955be3cea23"
+        },
+
+        "timesheetApproval": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "month": "August",
+            "year": "2026",
+            "status": "requested"
+        },
+
+        "timesheetStatusUpdate": {
+            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "month": "August",
+            "year": "2026",
+            "status": "approved"
+        }
+    },
+
+    "invalid": {
+        "nonExistingEmployeeId": "685000000000000000000001"
+    },
+
+    "empty": {
+        "emptyObject": {}
+    },
+
+    "expected": {
+        "leaveEmailMessage": "Emails sent successfully",
+        "timesheetRequestedMessage": "Timesheet Approval email sent successfully",
+        "timesheetUpdatedMessage": "Timesheet status updated succesfully"
+    }
+}
