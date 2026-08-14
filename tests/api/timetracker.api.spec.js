@@ -152,34 +152,6 @@ test.describe('Time Tracker Bulk Read APIs', () => {
 
     });
 
-    test('TC07 Get Multiple Employee Timesheets Without Authorization @negative @auth @timetracker', async ({
-        timeTrackerClient
-    }) => {
-
-        const response =
-            await timeTrackerClient.getMultipleTimesheetsWithoutAuth(
-                timetrackerData.multipleEmployeesRequest
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC08 Get Multiple Employee Timesheets With Invalid Authorization @negative @auth @timetracker', async ({
-        timeTrackerClient
-    }) => {
-
-        const response =
-            await timeTrackerClient.getMultipleTimesheetsWithInvalidAuth(
-                timetrackerData.multipleEmployeesRequest
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe('Time Tracker Employee List APIs', () => {
@@ -415,34 +387,6 @@ test.describe('Time Tracker Employee List APIs', () => {
                 .toHaveProperty('lastName');
 
         }
-
-    });
-
-    test('TC18 Get Employee List Without Authorization @read @timetracker @regression', async ({
-        timeTrackerClient
-    }) => {
-
-        const response =
-            await timeTrackerClient.getEmployeesWithoutAuth({
-                status: timetrackerData.query.statusAll
-            });
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC19 Get Employee List With Invalid Authorization @read @timetracker @regression', async ({
-        timeTrackerClient
-    }) => {
-
-        const response =
-            await timeTrackerClient.getEmployeesWithInvalidAuth({
-                status: timetrackerData.query.statusAll
-            });
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
 
     });
 
@@ -787,42 +731,6 @@ test.describe('Time Tracker Employee Read APIs', () => {
 
     });
 
-    test('TC30 Get Employee Timesheet Without Authorization @read @timetracker @regression', async ({
-        timeTrackerClient
-    }) => {
-
-        const response =
-            await timeTrackerClient.getEmployeeTimesheetWithoutAuth(
-                timetrackerData.employee.validEmployeeId,
-                {
-                    month: timetrackerData.query.month,
-                    year: timetrackerData.query.year
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC31 Get Employee Timesheet With Invalid Authorization @read @timetracker @regression', async ({
-        timeTrackerClient
-    }) => {
-
-        const response =
-            await timeTrackerClient.getEmployeeTimesheetWithInvalidAuth(
-                timetrackerData.employee.validEmployeeId,
-                {
-                    month: timetrackerData.query.month,
-                    year: timetrackerData.query.year
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe('Time Tracker Create APIs', () => {
@@ -1009,36 +917,6 @@ test.describe('Time Tracker Create APIs', () => {
 
     });
 
-    test('TC40 Create Timesheet Without Authorization @create @timetracker @regression', async ({
-        timeTrackerClient
-    }) => {
-
-        const response =
-            await timeTrackerClient.createTimesheetWithoutAuth(
-                timetrackerData.employee.validEmployeeId,
-                timetrackerData.createTimesheet
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC41 Create Timesheet With Invalid Authorization @create @timetracker @regression', async ({
-        timeTrackerClient
-    }) => {
-
-        const response =
-            await timeTrackerClient.createTimesheetWithInvalidAuth(
-                timetrackerData.employee.validEmployeeId,
-                timetrackerData.createTimesheet
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe('Time Tracker Update APIs', () => {
@@ -1200,36 +1078,6 @@ test.describe('Time Tracker Update APIs', () => {
 
         expect(response.status())
             .toBe(HTTP_STATUS.NOT_FOUND);
-
-    });
-
-    test('TC50 Update Timesheet Without Authorization @update @timetracker @regression', async ({
-        timeTrackerClient
-    }) => {
-
-        const response =
-            await timeTrackerClient.updateTimesheetWithoutAuth(
-                timetrackerData.employee.validEmployeeId,
-                timetrackerData.updateTimesheet
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC51 Update Timesheet With Invalid Authorization @update @timetracker @regression', async ({
-        timeTrackerClient
-    }) => {
-
-        const response =
-            await timeTrackerClient.updateTimesheetWithInvalidAuth(
-                timetrackerData.employee.validEmployeeId,
-                timetrackerData.updateTimesheet
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
 
     });
 

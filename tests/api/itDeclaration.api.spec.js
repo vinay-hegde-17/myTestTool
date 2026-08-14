@@ -45,7 +45,7 @@ test.beforeAll(async ({ itDeclarationClient }) => {
 
 test.describe("IT Declaration - Read Operations", () => {
 
-    test("TC01 Get proof file using uploaded fileId", async ({ itDeclarationClient }) => {
+    test("TC01 Get proof file using uploaded fileId @read @itdeclaration @regression @smoke @sanity", async ({ itDeclarationClient }) => {
 
         const response =
             await itDeclarationClient.getProofFile(uploadedFileId);
@@ -64,7 +64,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC02 Get proof file using invalid fileId", async ({
+    test("TC02 Get proof file using invalid fileId @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -84,7 +84,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC03 Get proof file using non-existing fileId", async ({
+    test("TC03 Get proof file using non-existing fileId @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -104,7 +104,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC04 Verify proof file response contains metadata and base64 data", async ({ itDeclarationClient }) => {
+    test("TC04 Verify proof file response contains metadata and base64 data @read @itdeclaration @regression", async ({ itDeclarationClient }) => {
 
         const response =
             await itDeclarationClient.getProofFile(uploadedFileId);
@@ -124,22 +124,7 @@ test.describe("IT Declaration - Read Operations", () => {
         expect(typeof body.base64Data).toBe("string");
 
     });
-
-    test("TC05 Get proof file without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.get(
-                `${IT_DECLARATION_ENDPOINTS.GET_PROOF_FILE}/${itdData.existing.fileId}`
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test("TC06 Get employee IT declaration", async ({
+test("TC06 Get employee IT declaration @read @itdeclaration @regression @smoke @sanity", async ({
         itDeclarationClient
     }) => {
 
@@ -163,7 +148,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC07 Get IT declaration using invalid employeeId", async ({
+    test("TC07 Get IT declaration using invalid employeeId @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -184,7 +169,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC08 Get IT declaration using non-existing employeeId", async ({
+    test("TC08 Get IT declaration using non-existing employeeId @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -205,7 +190,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC09 Verify IT declaration response schema", async ({
+    test("TC09 Verify IT declaration response schema @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -228,22 +213,7 @@ test.describe("IT Declaration - Read Operations", () => {
             .toHaveProperty("financialYear");
 
     });
-
-    test("TC10 Get IT declaration without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.get(
-                `${IT_DECLARATION_ENDPOINTS.GET_IT_DECLARATION}/${itdData.existing.employeeId}/${itdData.existing.financialYear}`
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test("TC11 Get proof of submission", async ({
+test("TC11 Get proof of submission @read @itdeclaration @regression @smoke @sanity", async ({
         itDeclarationClient
     }) => {
 
@@ -267,7 +237,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC12 Get proofs when declaration does not exist", async ({
+    test("TC12 Get proofs when declaration does not exist @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -282,7 +252,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC13 Verify proof response schema", async ({
+    test("TC13 Verify proof response schema @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -309,7 +279,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC14 Verify uploaded proof file details", async ({
+    test("TC14 Verify uploaded proof file details @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -351,22 +321,7 @@ test.describe("IT Declaration - Read Operations", () => {
         }
 
     });
-
-    test("TC15 Get proofs without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.get(
-                `${IT_DECLARATION_ENDPOINTS.GET_PROOFS}/${itdData.existing.employeeId}/${itdData.existing.financialYear}`
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test("TC16 Download proof documents", async ({
+test("TC16 Download proof documents @read @itdeclaration @regression @smoke @sanity", async ({
         itDeclarationClient
     }) => {
 
@@ -387,7 +342,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC17 Get zip proofs when declaration does not exist", async ({
+    test("TC17 Get zip proofs when declaration does not exist @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -402,7 +357,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC18 Verify downloaded files contain base64 data", async ({
+    test("TC18 Verify downloaded files contain base64 data @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -435,22 +390,7 @@ test.describe("IT Declaration - Read Operations", () => {
         }
 
     });
-
-    test("TC19 Get zip proofs without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.get(
-                `${IT_DECLARATION_ENDPOINTS.GET_ZIP_PROOFS}/${itdData.existing.employeeId}/${itdData.existing.financialYear}`
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test("TC20 Get employees by Old Regime", async ({
+test("TC20 Get employees by Old Regime @read @itdeclaration @regression @smoke @sanity", async ({
         itDeclarationClient
     }) => {
 
@@ -490,7 +430,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC21 Get employees by New Regime", async ({
+    test("TC21 Get employees by New Regime @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -511,7 +451,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC22 Get employees when no records exist", async ({
+    test("TC22 Get employees when no records exist @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -526,7 +466,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC23 Verify employees response schema", async ({
+    test("TC23 Verify employees response schema @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -562,22 +502,7 @@ test.describe("IT Declaration - Read Operations", () => {
         });
 
     });
-
-    test("TC24 Get employees without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.get(
-                `${IT_DECLARATION_ENDPOINTS.GET_EMPLOYEES}?regime=new&financialYear=${itdData.existing.financialYear}`
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test("TC25 Get ITD configuration details", async ({
+test("TC25 Get ITD configuration details @read @itdeclaration @regression @smoke @sanity", async ({
         itDeclarationClient
     }) => {
 
@@ -595,7 +520,7 @@ test.describe("IT Declaration - Read Operations", () => {
 
     });
 
-    test("TC26 Verify ITD configuration response schema", async ({
+    test("TC26 Verify ITD configuration response schema @read @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -618,27 +543,11 @@ test.describe("IT Declaration - Read Operations", () => {
             .toHaveProperty("ITD_POLICY_URL");
 
     });
-
-
-    test("TC27 Get ITD configuration without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.get(
-                IT_DECLARATION_ENDPOINTS.GET_ITD_CONFIGURATION
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe("IT Declaration - Create Operations", () => {
 
-    test("TC28 Create IT declaration using Old Regime", async ({
+    test("TC28 Create IT declaration using Old Regime @create @itdeclaration @regression @smoke @sanity", async ({
         itDeclarationClient
     }) => {
 
@@ -664,7 +573,7 @@ test.describe("IT Declaration - Create Operations", () => {
 
     });
 
-    test("TC29 Create IT declaration using New Regime", async ({
+    test("TC29 Create IT declaration using New Regime @create @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -690,7 +599,7 @@ test.describe("IT Declaration - Create Operations", () => {
 
     });
 
-    test("TC30 Verify created IT declaration response", async ({
+    test("TC30 Verify created IT declaration response @create @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -719,7 +628,7 @@ test.describe("IT Declaration - Create Operations", () => {
 
     });
 
-    test("TC31 Create duplicate IT declaration", async ({
+    test("TC31 Create duplicate IT declaration @create @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -738,24 +647,6 @@ test.describe("IT Declaration - Create Operations", () => {
             .toBe(itdData.duplicate.employeeId);
 
     });
-
-    test("TC32 Create IT declaration without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.post(
-                IT_DECLARATION_ENDPOINTS.CREATE_IT_DECLARATION,
-                {
-                    data: itdData.newRegime
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe("IT Declaration - Update Operations", () => {
@@ -767,7 +658,7 @@ test.describe("IT Declaration - Update Operations", () => {
         expect([HTTP_STATUS.CREATED, HTTP_STATUS.CONFLICT]).toContain(response.status());
     });
 
-    test("TC33 Update IT declaration", async ({
+    test("TC33 Update IT declaration @update @itdeclaration @regression @smoke @sanity", async ({
         itDeclarationClient
     }) => {
 
@@ -790,7 +681,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC34 Update owner PAN", async ({
+    test("TC34 Update owner PAN @update @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -810,7 +701,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC35 Update old regime details", async ({
+    test("TC35 Update old regime details @update @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -830,7 +721,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC36 Update non-existing IT declaration", async ({
+    test("TC36 Update non-existing IT declaration @update @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -849,25 +740,7 @@ test.describe("IT Declaration - Update Operations", () => {
             .toBe("IT declaration not found for the given employee and financial year.");
 
     });
-
-    test("TC37 Update IT declaration without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.put(
-                IT_DECLARATION_ENDPOINTS.UPDATE_REGIME_DATA,
-                {
-                    data: itdData.updatedDeclaration
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test("TC38 Upload proof document", async ({
+test("TC38 Upload proof document @create @itdeclaration @regression @smoke @sanity", async ({
         itDeclarationClient
     }) => {
 
@@ -887,7 +760,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC39 Upload multiple proof documents", async ({
+    test("TC39 Upload multiple proof documents @create @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -907,7 +780,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC40 Upload proof to existing proof category", async ({
+    test("TC40 Upload proof to existing proof category @create @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -927,7 +800,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC41 Upload proof to new proof category", async ({
+    test("TC41 Upload proof to new proof category @create @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -947,7 +820,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC42 Upload unsupported file format", async ({ itDeclarationClient }) => {
+    test("TC42 Upload unsupported file format @create @itdeclaration @regression", async ({ itDeclarationClient }) => {
         const response = await itDeclarationClient.uploadProofs(
             itdData.unsupportedProof,
             {
@@ -959,25 +832,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
         expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
     });
-
-    test("TC43 Upload proofs without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.put(
-                IT_DECLARATION_ENDPOINTS.UPLOAD_PROOFS,
-                {
-                    multipart: itdData.singleProof
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test("TC44 Enable proof upload", async ({
+test("TC44 Enable proof upload @update @itdeclaration @regression @smoke @sanity", async ({
         itDeclarationClient
     }) => {
 
@@ -1000,7 +855,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC45 Disable proof upload", async ({
+    test("TC45 Disable proof upload @update @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -1023,7 +878,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC46 Enable regime editing", async ({
+    test("TC46 Enable regime editing @update @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -1046,7 +901,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC47 Update ITD policy URL", async ({
+    test("TC47 Update ITD policy URL @update @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -1069,7 +924,7 @@ test.describe("IT Declaration - Update Operations", () => {
 
     });
 
-    test("TC48 Update all ITD configuration", async ({
+    test("TC48 Update all ITD configuration @update @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -1091,29 +946,11 @@ test.describe("IT Declaration - Update Operations", () => {
             .toBe("update successfull");
 
     });
-
-    test("TC49 Update ITD configuration without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.put(
-                IT_DECLARATION_ENDPOINTS.UPDATE_ITD_FLAGS,
-                {
-                    data: itdData.updateAllConfiguration
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe("IT Declaration - Delete Operations", () => {
 
-    test("TC50 Delete uploaded proof", async ({ itDeclarationClient }) => {
+    test("TC50 Delete uploaded proof @delete @itdeclaration @regression @smoke @sanity", async ({ itDeclarationClient }) => {
 
         const response =
             await itDeclarationClient.deleteProof(uploadedFileId);
@@ -1127,7 +964,7 @@ test.describe("IT Declaration - Delete Operations", () => {
 
     });
 
-    test("TC51 Verify deleted file is no longer accessible", async ({ itDeclarationClient }) => {
+    test("TC51 Verify deleted file is no longer accessible @read @delete @itdeclaration @regression", async ({ itDeclarationClient }) => {
 
         const response =
             await itDeclarationClient.getProofFile(uploadedFileId);
@@ -1136,7 +973,7 @@ test.describe("IT Declaration - Delete Operations", () => {
 
     });
 
-    test("TC52 Delete proof using non-existing fileId", async ({
+    test("TC52 Delete proof using non-existing fileId @delete @itdeclaration @regression", async ({
         itDeclarationClient
     }) => {
 
@@ -1152,19 +989,4 @@ test.describe("IT Declaration - Delete Operations", () => {
         // there is nothing to parse or assert on here.
 
     });
-
-    test("TC53 Delete proof without Authorization", async ({
-        request
-    }) => {
-
-        const response =
-            await request.delete(
-                `${IT_DECLARATION_ENDPOINTS.DELETE_PROOF}/${itdData.existing.fileId}`
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });

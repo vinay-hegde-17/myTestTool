@@ -1,4 +1,3 @@
-// @ts-check
 require('dotenv').config();
 
 const { defineConfig } = require('@playwright/test');

@@ -1,6 +1,4 @@
-const {
-    MODULE_USER_ROLE_ENDPOINTS
-} = require('../constants/moduleUserRole.constants');
+const { MODULE_USER_ROLE_ENDPOINTS } = require('../constants/moduleUserRole.constants');
 
 class ModuleUserRoleClient {
 
@@ -18,8 +16,6 @@ class ModuleUserRoleClient {
     }
 
     validateUserRoleId(userRoleId) {
-        console.log('VALIDATING userRoleId:', userRoleId);
-
         const objectIdRegex = /^[0-9a-fA-F]{24}$/;
 
         if (!objectIdRegex.test(userRoleId)) {

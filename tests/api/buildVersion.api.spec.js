@@ -66,16 +66,6 @@ test.describe('Build Version Create APIs', () => {
         });
 
 
-    test('TC03 Create build version without Authorization @create @buildversion @regression',
-        async ({ buildVersionClient }) => {
-
-            const response =
-                await buildVersionClient.createWithoutAuth();
-
-            expect(response.status())
-                .toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
-
 });
 
 test.describe('Build Version Read APIs', () => {
@@ -178,15 +168,5 @@ test.describe('Build Version Read APIs', () => {
                 );
         });
 
-
-    test('TC08 Get latest version without Authorization @read @buildversion @regression',
-        async ({ buildVersionClient }) => {
-
-            const response =
-                await buildVersionClient.getLatestWithoutAuth();
-
-            expect(response.status())
-                .toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
 
 });

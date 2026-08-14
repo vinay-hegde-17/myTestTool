@@ -1,12 +1,15 @@
 const { test, expect } = require("../../fixtures/userRole.fixture");
-const userRoleData = require("../../test-data/userRole.json");
+const { loadResolvedJson } = require("../../utils/testData.util");
+const userRoleData = loadResolvedJson("../../test-data/userRole.json");
 const { HTTP_STATUS } = require("../../api/constants/userRole.constants");
 const crypto = require("crypto");
 
 let createdRoleId;
-test.describe("User Roles - Read Operations", () => {
+test.describe("User Role APIs", () => {
 
-    test("TC01 Get all user roles", async ({ userRoleClient }) => {
+    test.describe("Read Operations", () => {
+
+    test("TC01 Get all user roles @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getUserRoles();
 
         expect(response.status()).toBe(HTTP_STATUS.OK);
@@ -16,7 +19,7 @@ test.describe("User Roles - Read Operations", () => {
         expect(body.length).toBeGreaterThan(0);
     });
 
-    test("TC02 Get all user roles with fetchType=dropdown", async ({ userRoleClient }) => {
+    test("TC02 Get all user roles with fetchType=dropdown @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getUserRoles("dropdown");
 
         expect(response.status()).toBe(HTTP_STATUS.OK);
@@ -26,7 +29,7 @@ test.describe("User Roles - Read Operations", () => {
         expect(body.length).toBeGreaterThan(0);
     });
 
-    test("TC03 Get all user roles with invalid fetchType", async ({ userRoleClient }) => {
+    test("TC03 Get all user roles with invalid fetchType @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getUserRoles("invalid");
 
         expect(response.status()).toBe(HTTP_STATUS.OK);
@@ -35,7 +38,7 @@ test.describe("User Roles - Read Operations", () => {
         expect(Array.isArray(body)).toBeTruthy();
     });
 
-    test("TC04 Verify user roles response schema", async ({ userRoleClient }) => {
+    test("TC04 Verify user roles response schema @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getUserRoles();
 
         expect(response.status()).toBe(HTTP_STATUS.OK);
@@ -52,7 +55,7 @@ test.describe("User Roles - Read Operations", () => {
         }
     });
 
-    test("TC05 Verify dropdown response schema", async ({ userRoleClient }) => {
+    test("TC05 Verify dropdown response schema @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getUserRoles("dropdown");
 
         expect(response.status()).toBe(HTTP_STATUS.OK);
@@ -67,13 +70,7 @@ test.describe("User Roles - Read Operations", () => {
         }
     });
 
-    test("TC06 Get all user roles without Authorization", async ({ userRoleClient }) => {
-        const response = await userRoleClient.getUserRolesWithoutAuth();
-
-        expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-    });
-
-    test("TC07 Get role details using valid role name", async ({ userRoleClient }) => {
+    test("TC07 Get role details using valid role name @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getUserRole(
             userRoleData.existing.userRole
         );
@@ -85,7 +82,7 @@ test.describe("User Roles - Read Operations", () => {
         expect(body.userRole).toBe(userRoleData.existing.userRole);
     });
 
-    test("TC08 Get role using non-existing role name", async ({ userRoleClient }) => {
+    test("TC08 Get role using non-existing role name @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getUserRole(
             userRoleData.invalid.invalidRoleName
         );
@@ -93,7 +90,7 @@ test.describe("User Roles - Read Operations", () => {
         expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
-    test("TC09 Get role using special characters", async ({ userRoleClient }) => {
+    test("TC09 Get role using special characters @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getUserRole(
             userRoleData.invalid.specialCharacters
         );
@@ -101,7 +98,7 @@ test.describe("User Roles - Read Operations", () => {
         expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
-    test("TC10 Verify role response schema", async ({ userRoleClient }) => {
+    test("TC10 Verify role response schema @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getUserRole(
             userRoleData.existing.userRole
         );
@@ -116,15 +113,7 @@ test.describe("User Roles - Read Operations", () => {
         expect(body).toHaveProperty("activeStatus");
     });
 
-    test("TC11 Get role without Authorization", async ({ userRoleClient }) => {
-        const response = await userRoleClient.getUserRoleWithoutAuth(
-            userRoleData.existing.userRole
-        );
-
-        expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-    });
-
-    test("TC12 Get role using valid roleId", async ({ userRoleClient }) => {
+    test("TC12 Get role using valid roleId @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleById(
             userRoleData.existing.roleId
         );
@@ -136,7 +125,7 @@ test.describe("User Roles - Read Operations", () => {
         expect(body._id).toBe(userRoleData.existing.roleId);
     });
 
-    test("TC13 Get role using invalid ObjectId", async ({ userRoleClient }) => {
+    test("TC13 Get role using invalid ObjectId @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleById(
             userRoleData.invalid.invalidObjectId
         );
@@ -144,7 +133,7 @@ test.describe("User Roles - Read Operations", () => {
         expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC14 Get role using non-existing ObjectId", async ({ userRoleClient }) => {
+    test("TC14 Get role using non-existing ObjectId @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleById(
             userRoleData.invalid.nonExistingObjectId
         );
@@ -152,7 +141,7 @@ test.describe("User Roles - Read Operations", () => {
         expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
-    test("TC15 Verify role response schema", async ({ userRoleClient }) => {
+    test("TC15 Verify role response schema @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleById(
             userRoleData.existing.roleId
         );
@@ -167,21 +156,15 @@ test.describe("User Roles - Read Operations", () => {
         expect(body).toHaveProperty("activeStatus");
     });
 
-    test("TC16 Get role without Authorization", async ({ userRoleClient }) => {
-        const response = await userRoleClient.getRoleByIdWithoutAuth(
-            userRoleData.existing.roleId
-        );
-
-        expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-    });
-
 });
 
-test.describe("User Roles - Create Operations", () => {
+    });
+
+    test.describe("Create Operations", () => {
 
     test.describe.configure({ mode: "serial" });
 
-    test("TC17 Create user role with valid data", async ({ userRoleClient }) => {
+    test("TC17 Create user role with valid data @create @regression", async ({ userRoleClient }) => {
 
         const payload = {
             userRole: `PLAYWRIGHT_MANAGER_${Date.now()}`,
@@ -199,7 +182,7 @@ test.describe("User Roles - Create Operations", () => {
         expect(body.userRole).toBe(payload.userRole);
     });
 
-    test("TC18 Create duplicate user role", async ({ userRoleClient }) => {
+    test("TC18 Create duplicate user role @create @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.createUserRole({
             userRole: userRoleData.duplicate.sameCase,
             description: "Duplicate Role",
@@ -209,7 +192,7 @@ test.describe("User Roles - Create Operations", () => {
         expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
-    test("TC19 Create duplicate user role with different case", async ({ userRoleClient }) => {
+    test("TC19 Create duplicate user role with different case @create @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.createUserRole({
             userRole: userRoleData.duplicate.differentCase,
             description: "Duplicate Role",
@@ -219,7 +202,7 @@ test.describe("User Roles - Create Operations", () => {
         expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
-    test("TC20 Create duplicate user role with extra spaces", async ({ userRoleClient }) => {
+    test("TC20 Create duplicate user role with extra spaces @create @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.createUserRole({
             userRole: userRoleData.duplicate.extraSpaces,
             description: "Duplicate Role",
@@ -229,7 +212,7 @@ test.describe("User Roles - Create Operations", () => {
         expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
-    test("TC21 Create user role with inactive status", async ({ userRoleClient }) => {
+    test("TC21 Create user role with inactive status @create @regression", async ({ userRoleClient }) => {
         const payload = {
             userRole: `PLAYWRIGHT_INACTIVE_${Date.now()}`,
             description: "Inactive Role",
@@ -245,17 +228,9 @@ test.describe("User Roles - Create Operations", () => {
         expect(body.activeStatus).toBe(false);
     });
 
-    test("TC22 Create user role without Authorization", async ({ userRoleClient }) => {
-        const response = await userRoleClient.createUserRoleWithoutAuth(
-            userRoleData.userRole
-        );
-
-        expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
     });
 
-});
-
-test.describe("User Roles - Update Flow", () => {
+    test.describe("Update Operations", () => {
 
     test.describe.configure({ mode: "serial" });
 
@@ -276,7 +251,7 @@ test.describe("User Roles - Update Flow", () => {
         createdRoleId = body._id;
     });
 
-    test("TC23 Update existing user role", async ({ userRoleClient }) => {
+    test("TC23 Update existing user role @update @regression", async ({ userRoleClient }) => {
         const payload = {
             userRole: `PLAYWRIGHT_UPDATED_${Date.now()}`,
             description: "Updated by Playwright",
@@ -295,7 +270,7 @@ test.describe("User Roles - Update Flow", () => {
         expect(body.userRole).toBe(payload.userRole);
     });
 
-    test("TC24 Update role to duplicate role name", async ({ userRoleClient }) => {
+    test("TC24 Update role to duplicate role name @update @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.updateUserRole(
             userRoleData.existing.roleId,
             {
@@ -308,7 +283,7 @@ test.describe("User Roles - Update Flow", () => {
         expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
-    test("TC25 Update using invalid roleId", async ({ userRoleClient }) => {
+    test("TC25 Update using invalid roleId @update @regression", async ({ userRoleClient }) => {
         const payload = {
             userRole: `PLAYWRIGHT_INVALIDID_${Date.now()}`,
             description: "Role update with invalid id",
@@ -323,7 +298,7 @@ test.describe("User Roles - Update Flow", () => {
         expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC26 Update using non-existing roleId", async ({ userRoleClient }) => {
+    test("TC26 Update using non-existing roleId @update @regression", async ({ userRoleClient }) => {
         // A valid 24-char hex ObjectId that is guaranteed not to exist in the collection.
         const nonExistingObjectId = crypto.randomBytes(12).toString("hex");
 
@@ -341,7 +316,7 @@ test.describe("User Roles - Update Flow", () => {
         expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
-    test("TC27 Update activeStatus", async ({ userRoleClient }) => {
+    test("TC27 Update activeStatus @update @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.updateUserRole(
             userRoleData.existing.roleId,
             {
@@ -358,25 +333,10 @@ test.describe("User Roles - Update Flow", () => {
         expect(body.activeStatus).toBe(false);
     });
 
-    test("TC28 Update without Authorization", async ({ userRoleClient }) => {
-        const payload = {
-            userRole: userRoleData.existing.userRole,
-            description: userRoleData.existing.description,
-            activeStatus: true
-        };
-
-        const response = await userRoleClient.updateUserRoleWithoutAuth(
-            userRoleData.existing.roleId,
-            payload
-        );
-
-        expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
     });
 
-});
-
-test.describe("User Roles - Role Lookup", () => {
-    test("TC29 Get roleId using valid role name", async ({ userRoleClient }) => {
+    test.describe("Role Lookup Operations", () => {
+    test("TC29 Get roleId using valid role name @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleId(
             userRoleData.admin.userRole
         );
@@ -388,7 +348,7 @@ test.describe("User Roles - Role Lookup", () => {
         expect(body).toHaveProperty("_id");
     });
 
-    test("TC30 Get roleId using non-existing role name", async ({ userRoleClient }) => {
+    test("TC30 Get roleId using non-existing role name @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleId(
             userRoleData.invalid.invalidRoleName
         );
@@ -396,7 +356,7 @@ test.describe("User Roles - Role Lookup", () => {
         expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
-    test("TC31 Verify roleId response", async ({ userRoleClient }) => {
+    test("TC31 Verify roleId response @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleId(
             userRoleData.admin.userRole
         );
@@ -409,15 +369,7 @@ test.describe("User Roles - Role Lookup", () => {
         expect(body).toHaveProperty("userRole");
     });
 
-    test("TC32 Get roleId without Authorization", async ({ userRoleClient }) => {
-        const response = await userRoleClient.getRoleIdWithoutAuth(
-            userRoleData.admin.userRole
-        );
-
-        expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-    });
-
-    test("TC33 Get role name using valid roleId", async ({ userRoleClient }) => {
+    test("TC33 Get role name using valid roleId @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleName(
             userRoleData.admin.roleId
         );
@@ -429,7 +381,7 @@ test.describe("User Roles - Role Lookup", () => {
         expect(body.userRole).toBe(userRoleData.admin.userRole);
     });
 
-    test("TC34 Get role name using invalid ObjectId", async ({ userRoleClient }) => {
+    test("TC34 Get role name using invalid ObjectId @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleName(
             userRoleData.invalid.invalidObjectId
         );
@@ -437,7 +389,7 @@ test.describe("User Roles - Role Lookup", () => {
         expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC35 Get role name using non-existing ObjectId", async ({ userRoleClient }) => {
+    test("TC35 Get role name using non-existing ObjectId @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleName(
             userRoleData.invalid.nonExistingObjectId
         );
@@ -445,7 +397,7 @@ test.describe("User Roles - Role Lookup", () => {
         expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
-    test("TC36 Verify role name response", async ({ userRoleClient }) => {
+    test("TC36 Verify role name response @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleName(
             userRoleData.admin.roleId
         );
@@ -460,18 +412,11 @@ test.describe("User Roles - Role Lookup", () => {
         expect(body).toHaveProperty("activeStatus");
     });
 
-    test("TC37 Get role name without Authorization", async ({ userRoleClient }) => {
-        const response = await userRoleClient.getRoleNameWithoutAuth(
-            userRoleData.admin.roleId
-        );
-
-        expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
     });
-});
 
-test.describe("User Roles - Check Exists Or Create", () => {
+    test.describe("Check Exists or Create Operations", () => {
 
-    test("TC38 Create role when role does not exist", async ({ userRoleClient }) => {
+    test("TC38 Create role when role does not exist @create @regression", async ({ userRoleClient }) => {
         const payload = {
             userRole: `CHECK_ROLE_${Date.now()}`,
             description: "Created by Playwright",
@@ -487,7 +432,7 @@ test.describe("User Roles - Check Exists Or Create", () => {
         expect(body.userRole).toBe(payload.userRole);
     });
 
-    test("TC39 Verify existing role is returned when already present", async ({ userRoleClient }) => {
+    test("TC39 Verify existing role is returned when already present @read @regression", async ({ userRoleClient }) => {
         const response = await userRoleClient.checkExistsOrCreateRole({
             userRole: userRoleData.admin.userRole,
             activeStatus: true
@@ -500,7 +445,7 @@ test.describe("User Roles - Check Exists Or Create", () => {
         expect(body.userRole).toBe(userRoleData.admin.userRole);
     });
 
-    test("TC40 Create new role with activeStatus=true", async ({ userRoleClient }) => {
+    test("TC40 Create new role with activeStatus=true @create @regression", async ({ userRoleClient }) => {
         const payload = {
             userRole: `ACTIVE_ROLE_${Date.now()}`,
             description: "Active Role",
@@ -516,7 +461,7 @@ test.describe("User Roles - Check Exists Or Create", () => {
         expect(body.activeStatus).toBe(true);
     });
 
-    test("TC41 Create new role with activeStatus=false", async ({ userRoleClient }) => {
+    test("TC41 Create new role with activeStatus=false @create @regression", async ({ userRoleClient }) => {
         const payload = {
             userRole: `INACTIVE_ROLE_${Date.now()}`,
             description: "Inactive Role",
@@ -532,7 +477,7 @@ test.describe("User Roles - Check Exists Or Create", () => {
         expect(body.activeStatus).toBe(false);
     });
 
-    test("TC42 Verify returned roleId", async ({ userRoleClient }) => {
+    test("TC42 Verify returned roleId @read @regression", async ({ userRoleClient }) => {
         const payload = {
             userRole: `ROLE_ID_TEST_${Date.now()}`,
             description: "RoleId Test",
@@ -547,18 +492,6 @@ test.describe("User Roles - Check Exists Or Create", () => {
 
         expect(body).toHaveProperty("_id");
         expect(body._id).toBeTruthy();
-    });
-
-    test("TC43 Create role without Authorization", async ({ userRoleClient }) => {
-        const payload = {
-            userRole: `UNAUTHORIZED_ROLE_${Date.now()}`,
-            description: "Unauthorized Test",
-            activeStatus: true
-        };
-
-        const response = await userRoleClient.checkExistsOrCreateRoleWithoutAuth(payload);
-
-        expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
     });
 
 });

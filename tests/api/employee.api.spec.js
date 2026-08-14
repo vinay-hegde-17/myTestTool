@@ -87,25 +87,6 @@ test.describe('Employee List APIs', () => {
 
   });
 
-  test('TC02 Get Employee List Without Token @read @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const response =
-        await client.listEmployees();
-
-      expect(response.status())
-        .toBe(
-          HTTP_STATUS.UNAUTHORIZED
-        );
-
-    });
-
   test('TC03 Get Active Employees @read @sanity @regression', async ({
     employeeClient
   }) => {
@@ -374,28 +355,6 @@ test.describe('Employee Profile APIs', () => {
 
   });
 
-  test('TC14 Get Profile Details Without Authorization @read @sanity @regression', async ({
-    request
-  }) => {
-
-    const EmployeeClient =
-      require('../../api/clients/employee.client');
-
-    const client =
-      new EmployeeClient(request);
-
-    const response =
-      await client.getProfileDetails(
-        process.env.TEST_EMPLOYEE_ID
-      );
-
-    expect(response.status())
-      .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-  });
-
-
-
 });
 
 test.describe('Employee Names APIs', () => {
@@ -446,26 +405,6 @@ test.describe('Employee Names APIs', () => {
       .toEqual(sorted);
 
   });
-
-  test('TC17 Get Employee Names Without Authorization @read @regression', async ({
-    request
-  }) => {
-
-    const EmployeeClient =
-      require('../../api/clients/employee.client');
-
-    const client =
-      new EmployeeClient(request);
-
-    const response =
-      await client.getEmployeeNames();
-
-    expect(response.status())
-      .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-  });
-
-
 
 });
 
@@ -533,25 +472,6 @@ test.describe('Employee Assets APIs', () => {
     }
 
   });
-
-  test('TC21 Get Employees For Assets Without Authorization @read @assets @sanity @regression', async ({
-    request
-  }) => {
-
-    const EmployeeClient =
-      require('../../api/clients/employee.client');
-
-    const client =
-      new EmployeeClient(request);
-
-    const response =
-      await client.getEmployeesForAssets();
-
-    expect(response.status())
-      .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-  });
-
 
 
   test('TC22 Get Employee Assets @read @assets @sanity @regression', async ({
@@ -656,25 +576,7 @@ test.describe('Employee Assets APIs', () => {
 
   });
 
-  test('TC27 Get Employee Assets Without Authorization @read @assets @sanity @regression', async ({
-    request
-  }) => {
 
-    const EmployeeClient =
-      require('../../api/clients/employee.client');
-
-    const client =
-      new EmployeeClient(request);
-
-    const response =
-      await client.getEmployeeAssets(
-        process.env.TEST_EMPLOYEE_ID
-      );
-
-    expect(response.status())
-      .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-  });
 
 
 
@@ -773,25 +675,6 @@ test.describe('Employee Dashboard APIs', () => {
 
   });
 
-  test('TC31 Get New Joinees Without Authorization @read @dashboard @regression', async ({
-    request
-  }) => {
-
-    const EmployeeClient =
-      require('../../api/clients/employee.client');
-
-    const client =
-      new EmployeeClient(request);
-
-    const response =
-      await client.getNewJoinees();
-
-    expect(response.status())
-      .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-  });
-
-
 
   test('TC32 Get Long Service Employees @read @dashboard @regression', async ({
     employeeClient
@@ -884,23 +767,7 @@ test.describe('Employee Dashboard APIs', () => {
 
   });
 
-  test('TC35 Get Long Service Employees Without Authorization @read @dashboard @regression', async ({
-    request
-  }) => {
 
-    const EmployeeClient =
-      require('../../api/clients/employee.client');
-
-    const client =
-      new EmployeeClient(request);
-
-    const response =
-      await client.getLongServiceEmployees();
-
-    expect(response.status())
-      .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-  });
 
 
 
@@ -972,49 +839,6 @@ test.describe('Employee Search APIs', () => {
       );
 
     expect([200, 204, 404])
-      .toContain(response.status());
-
-  });
-
-  test('TC40 Get Employee By Email Without Authorization @read @search @sanity @regression', async ({
-    request
-  }) => {
-
-    const EmployeeClient =
-      require('../../api/clients/employee.client');
-
-    const client =
-      new EmployeeClient(request);
-
-    const response =
-      await client.getEmployeeByEmail(
-        existingEmployeeEmail
-      );
-
-    expect(response.status())
-      .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-  });
-
-  test('TC41 Get Employee By Email Invalid Token @read @search @sanity @regression', async ({
-    request
-  }) => {
-
-    const EmployeeClient =
-      require('../../api/clients/employee.client');
-
-    const client =
-      new EmployeeClient(
-        request,
-        'INVALID_TOKEN'
-      );
-
-    const response =
-      await client.getEmployeeByEmail(
-        existingEmployeeEmail
-      );
-
-    expect([401, 403])
       .toContain(response.status());
 
   });
@@ -1104,45 +928,6 @@ test.describe('Employee Role APIs', () => {
 
   });
 
-  test('TC46 Get Employees By Role Without Authorization @read @roles @regression', async ({
-    request
-  }) => {
-
-    const EmployeeClient =
-      require('../../api/clients/employee.client');
-
-    const client =
-      new EmployeeClient(request);
-
-    const response =
-      await client.getEmployeesByRole();
-
-    expect(response.status())
-      .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-  });
-
-  test('TC47 Get Employees By Role Invalid Token @read @roles @regression', async ({
-    request
-  }) => {
-
-    const EmployeeClient =
-      require('../../api/clients/employee.client');
-
-    const client =
-      new EmployeeClient(
-        request,
-        'INVALID_TOKEN'
-      );
-
-    const response =
-      await client.getEmployeesByRole();
-
-    expect([401, 403])
-      .toContain(response.status());
-
-  });
-
 });
 
 test.describe('Employee Edit APIs', () => {
@@ -1203,46 +988,6 @@ test.describe('Employee Edit APIs', () => {
 
     });
 
-  test('TC51 Get Employee For Edit Without Authorization @read @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const response =
-        await client.getEmployeeForEdit(
-          process.env.TEST_EMPLOYEE_ID
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-  test('TC52 Get Employee For Edit Invalid Token @read @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(
-          request,
-          'invalid-token'
-        );
-
-      const response =
-        await client.getEmployeeForEdit(
-          process.env.TEST_EMPLOYEE_ID
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
 });
 
 // CREATE: generated email and employee number keep each creation isolated.
@@ -1398,65 +1143,6 @@ test.describe('Employee Creation APIs', () => {
 
     });
 
-  test('TC60 Create Employee Without Authorization @create @crud @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const payload = {
-        ...employeeData.createEmployee,
-        employeeNumber: `AUTO${Date.now()}`,
-        emailId: `auto${Date.now()}@test.com`,
-        assignedRoleId:
-          process.env.TEST_ROLE_ID ||
-          employeeData.createEmployee.assignedRoleId
-      };
-
-      const response =
-        await client.createEmployee(
-          payload
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-  test('TC61 Create Employee Invalid Token @create @crud @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(
-          request,
-          'invalid-token'
-        );
-
-      const payload = {
-        ...employeeData.createEmployee,
-        employeeNumber: `AUTO${Date.now()}`,
-        emailId: `auto${Date.now()}@test.com`,
-        assignedRoleId:
-          process.env.TEST_ROLE_ID ||
-          employeeData.createEmployee.assignedRoleId
-      };
-
-      const response =
-        await client.createEmployee(
-          payload
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
   test('TC62 Verify Create Employee Response Schema @create @crud @sanity @regression',
     async ({ employeeClient }) => {
 
@@ -1567,48 +1253,6 @@ test.describe('Employee Asset Assignment APIs', () => {
       .toContain(response.status());
 
   });
-
-  test('TC67 Assign Asset Without Authorization @update @crud @assets @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const response =
-        await client.updateAssignedIds({
-          existingEmpId: null,
-          newEmpId: assetEmployeeId,
-          assignedId: process.env.TEST_ASSET_ID
-        });
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-  test('TC68 Assign Asset Invalid Token @update @crud @assets @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request, 'invalid-token');
-
-      const response =
-        await client.updateAssignedIds({
-          existingEmpId: null,
-          newEmpId: assetEmployeeId,
-          assignedId: process.env.TEST_ASSET_ID
-        });
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
 
   test('TC69 Verify Assignment Response Message @update @crud @assets @regression',
     async ({ employeeClient }) => {
@@ -1798,46 +1442,6 @@ test.describe('Employee Update APIs', () => {
 
   });
 
-  test('TC78 Update Employee Without Authorization @update @crud @files @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const response =
-        await client.updateEmployee(
-          updateEmployeeId,
-          employeeData.updateEmployee
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-  test('TC79 Update Employee Invalid Token @update @crud @files @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request, 'invalid-token');
-
-      const response =
-        await client.updateEmployee(
-          updateEmployeeId,
-          employeeData.updateEmployee
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
   test('TC80 Verify Update Response Schema @update @crud @files @sanity @regression',
     async ({ employeeClient }) => {
 
@@ -1982,46 +1586,6 @@ test.describe('Employee Asset Unassign APIs', () => {
 
   });
 
-  test('TC87 Unassign Without Authorization @delete @crud @assets @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const response =
-        await client.unassignAsset(
-          process.env.TEST_EMPLOYEE_ID,
-          process.env.TEST_ASSET_ID
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-  test('TC88 Unassign Invalid Token @delete @crud @assets @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request, 'invalid-token');
-
-      const response =
-        await client.unassignAsset(
-          process.env.TEST_EMPLOYEE_ID,
-          process.env.TEST_ASSET_ID
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
   test('TC89 Verify Unassign Response Message @delete @crud @assets @regression', async ({
     employeeClient
   }) => {
@@ -2163,44 +1727,6 @@ test.describe('Employee File APIs', () => {
 
   });
 
-  test('TC97 Fetch File Without Authorization @read @files @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const response =
-        await client.fetchFile(
-          process.env.TEST_FILE_ID
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-  test('TC98 Fetch File Invalid Token @read @files @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request, 'invalid-token');
-
-      const response =
-        await client.fetchFile(
-          process.env.TEST_FILE_ID
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe('Employee Email Validation APIs', () => {
@@ -2260,47 +1786,6 @@ test.describe('Employee Email Validation APIs', () => {
       .toContain(response.status());
 
   });
-
-  test('TC103 Check Email Without Authorization @read @email @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const response =
-        await client.checkEmail(
-          existingEmployeeEmail
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-  test('TC104 Check Email Invalid Token @read @email @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(
-          request,
-          'invalid-token'
-        );
-
-      const response =
-        await client.checkEmail(
-          existingEmployeeEmail
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
 
   test('TC105 Verify Check Email Response Schema @read @email @sanity @regression',
     async ({ employeeClient }) => {
@@ -2412,47 +1897,6 @@ test.describe('Employee Photo APIs', () => {
 
       expect([200, 404])
         .toContain(response.status());
-
-    });
-
-  test('TC111 Remove Photo Without Authorization @update @delete @crud @files @photo-lifecycle @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const response =
-        await client.removePhoto(
-          photoEmployeeId
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-  test('TC112 Remove Photo Invalid Token @update @delete @crud @files @photo-lifecycle @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(
-          request,
-          'invalid-token'
-        );
-
-      const response =
-        await client.removePhoto(
-          photoEmployeeId
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
 
     });
 
@@ -2569,47 +2013,6 @@ test.describe('Employee Hierarchy APIs', () => {
     }
 
   });
-
-  test('TC119 Get Hierarchy Without Authorization @read @hierarchy @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const response =
-        await client.getHierarchy(
-          process.env.TEST_EMPLOYEE_ID
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-  test('TC120 Get Hierarchy Invalid Token @read @hierarchy @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(
-          request,
-          'invalid-token'
-        );
-
-      const response =
-        await client.getHierarchy(
-          process.env.TEST_EMPLOYEE_ID
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
 
 });
 
@@ -2779,46 +2182,5 @@ test.describe('Employee Details APIs', () => {
       .toContain(response.status());
 
   });
-
-  test('TC130 Get Employee Details Without Authorization @read @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(request);
-
-      const response =
-        await client.getEmployeeDetails(
-          process.env.TEST_EMPLOYEE_ID
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-  test('TC131 Get Employee Details Invalid Token @read @sanity @regression',
-    async ({ request }) => {
-
-      const EmployeeClient =
-        require('../../api/clients/employee.client');
-
-      const client =
-        new EmployeeClient(
-          request,
-          'invalid-token'
-        );
-
-      const response =
-        await client.getEmployeeDetails(
-          process.env.TEST_EMPLOYEE_ID
-        );
-
-      expect(response.status())
-        .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
 
 });

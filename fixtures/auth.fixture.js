@@ -1,7 +1,8 @@
 const base = require('@playwright/test');
 const AuthClient = require('../api/clients/auth.client');
 const { getCachedToken } = require('../utils/token.util');
-const employeeData = require('../test-data/employee.json');
+const { loadResolvedJson } = require('../utils/testData.util');
+const employeeData = loadResolvedJson('../test-data/employee.json');
 
 const test = base.test.extend({
   authClient: async ({ request }, use) => {

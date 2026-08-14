@@ -1,99 +1,48 @@
 const { test, expect } = require('../../fixtures/sendEmail.fixture');
 const { HTTP_STATUS } = require('../../api/constants/sendEmail.constants');
-const sendEmailData = require('../../test-data/sendEmail.json');
+const { loadResolvedJson } = require('../../utils/testData.util');
+const sendEmailData = loadResolvedJson('../../test-data/sendEmail.json');
 
-test.describe('Send Email Functional APIs', () => {
+test.describe('Send Email APIs', () => {
 
-    test(
-        'TC01 Send leave request email successfully @create @sendemail @regression',
-        async ({ sendEmailClient }) => {
+    test.describe('Create Operations', () => {
+        test('TC01 should send leave request email successfully @read @regression', async ({ sendEmailClient }) => {
+            const response = await sendEmailClient.sendLeaveEmail(sendEmailData.valid.leaveEmail);
 
-            const response =
-                await sendEmailClient.sendLeaveEmail(
-                    sendEmailData.valid.leaveEmail
-                );
+            expect(response.status()).toBe(HTTP_STATUS.OK);
 
-            expect(response.status())
-                .toBe(HTTP_STATUS.OK);
+            const body = await response.json();
+            expect(body.message).toBe(sendEmailData.expected.leaveEmailMessage);
+        });
 
-            const body =
-                await response.json();
-
-            expect(body.message)
-                .toBe(
-                    sendEmailData.expected.leaveEmailMessage
-                );
-        }
-    );
-
-
-    test(
-        'TC02 Send leave email for non-existing employee @negative @sendemail @regression',
-        async ({ sendEmailClient }) => {
-
+        test('TC02 should return server error when sending leave email for a non-existing employee @read @regression', async ({ sendEmailClient }) => {
             const payload = {
                 ...sendEmailData.valid.leaveEmail,
-                employeeId:
-                    sendEmailData.invalid.nonExistingEmployeeId
+                employeeId: sendEmailData.invalid.nonExistingEmployeeId
             };
 
-            const response =
-                await sendEmailClient.sendLeaveEmail(
-                    payload
-                );
+            const response = await sendEmailClient.sendLeaveEmail(payload);
+            expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+        });
 
-            expect(response.status())
-                .toBe(
-                    HTTP_STATUS.INTERNAL_SERVER_ERROR
-                );
-        }
-    );
+        test('TC03 should send timesheet approval request successfully @read @regression', async ({ sendEmailClient }) => {
+            const response = await sendEmailClient.requestTimesheetApproval(sendEmailData.valid.timesheetApproval);
 
+            expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    test(
-        'TC03 Send timesheet approval request successfully @create @sendemail @regression',
-        async ({ sendEmailClient }) => {
+            const body = await response.json();
+            expect(body.message).toBe(sendEmailData.expected.timesheetRequestedMessage);
+        });
+    });
 
-            const response =
-                await sendEmailClient.requestTimesheetApproval(
-                    sendEmailData.valid.timesheetApproval
-                );
+    test.describe('Update Operations', () => {
+        test('TC04 should verify timesheet approval request status message @read @regression', async ({ sendEmailClient }) => {
+            const response = await sendEmailClient.requestTimesheetApproval(sendEmailData.valid.timesheetApproval);
 
-            expect(response.status())
-                .toBe(HTTP_STATUS.OK);
+            expect(response.status()).toBe(HTTP_STATUS.OK);
 
-            const body =
-                await response.json();
-
-            expect(body.message)
-                .toBe(
-                    sendEmailData.expected
-                        .timesheetRequestedMessage
-                );
-        }
-    );
-
-
-    test(
-        'TC04 Verify timesheet approval status updated to Requested @update @sendemail @regression',
-        async ({ sendEmailClient }) => {
-
-            const response =
-                await sendEmailClient.requestTimesheetApproval(
-                    sendEmailData.valid.timesheetApproval
-                );
-
-            expect(response.status())
-                .toBe(HTTP_STATUS.OK);
-
-            const body =
-                await response.json();
-
-            expect(body.message)
-                .toBe(
-                    sendEmailData.expected
-                        .timesheetRequestedMessage
-                );
+            const body = await response.json();
+            expect(body.message).toBe(sendEmailData.expected.timesheetRequestedMessage);
 
             /*
              * API response does not return the updated
@@ -101,35 +50,16 @@ test.describe('Send Email Functional APIs', () => {
              *
              * This test currently verifies the successful
              * requested-status flow.
-             *
-             * Direct DB verification should only be added
-             * if your framework already has DB access.
              */
-        }
-    );
+        });
 
+        test('TC05 should update timesheet status without sending email @update @regression', async ({ sendEmailClient }) => {
+            const response = await sendEmailClient.requestTimesheetApproval(sendEmailData.valid.timesheetStatusUpdate);
 
-    test(
-        'TC05 Update timesheet status without sending email @update @sendemail @regression',
-        async ({ sendEmailClient }) => {
+            expect(response.status()).toBe(HTTP_STATUS.OK);
 
-            const response =
-                await sendEmailClient.requestTimesheetApproval(
-                    sendEmailData.valid.timesheetStatusUpdate
-                );
-
-            expect(response.status())
-                .toBe(HTTP_STATUS.OK);
-
-            const body =
-                await response.json();
-
-            expect(body.message)
-                .toBe(
-                    sendEmailData.expected
-                        .timesheetUpdatedMessage
-                );
-        }
-    );
-
+            const body = await response.json();
+            expect(body.message).toBe(sendEmailData.expected.timesheetUpdatedMessage);
+        });
+    });
 });

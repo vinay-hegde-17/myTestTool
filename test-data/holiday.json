@@ -1,5 +1,5 @@
 {
-  "holidayId": "6a68e114245f4ee9786ebd7a",
+  "holidayId": "{{TEST_HOLIDAY_ID}}",
   "invalidHolidayId": "123",
   "nonExistingHolidayId": "679393713979a2fec07dd999",
   "existingYear": 2026,

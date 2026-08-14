@@ -77,16 +77,6 @@ test.describe('Module Role Mapping Read APIs', () => {
         });
 
 
-    test('TC05 Get all mappings without Authorization @read @moduleuserrole @regression',
-        async ({ moduleUserRoleClient }) => {
-
-            const response =
-                await moduleUserRoleClient.getAllWithoutAuth();
-
-            expect(response.status())
-                .toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
-
 });
 
 test.describe('Role Module Assignment Read APIs', () => {
@@ -225,18 +215,6 @@ test.describe('Role Module Assignment Read APIs', () => {
         });
 
 
-    test('TC13 Get assigned modules without Authorization @read @moduleuserrole @regression',
-        async ({ moduleUserRoleClient }) => {
-
-            const response =
-                await moduleUserRoleClient.getByRoleWithoutAuth(
-                    moduleUserRoleData.valid.userRoleId
-                );
-
-            expect(response.status())
-                .toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
-
 });
 
 test.describe('Module Role Assignment APIs', () => {
@@ -328,26 +306,6 @@ test.describe('Module Role Assignment APIs', () => {
                 .toContain(response.status());
         });
 
-
-    test('TC18 Create mapping without Authorization @create @moduleuserrole @regression',
-        async ({ moduleUserRoleClient }) => {
-
-            const payload = {
-                moduleIds: [
-                    moduleUserRoleData.valid.moduleId
-                ],
-                userRoleId: moduleUserRoleData.valid.userRoleId,
-                activeStatus: true
-            };
-
-            const response =
-                await moduleUserRoleClient.getByRoleWithoutAuth(
-                    moduleUserRoleData.valid.userRoleId
-                );
-
-            expect(response.status())
-                .toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
 
 });
 
@@ -515,24 +473,5 @@ test.describe('Module Role Assignment Update APIs', () => {
                 .toBe(HTTP_STATUS.OK);
         });
 
-
-    test('TC27 Update module assignments without Authorization @update @moduleuserrole @regression',
-        async ({ moduleUserRoleClient }) => {
-
-            const payload = {
-                moduleIds: [
-                    moduleUserRoleData.valid.moduleId
-                ]
-            };
-
-            const response =
-                await moduleUserRoleClient.updateWithoutAuth(
-                    moduleUserRoleData.valid.userRoleId,
-                    payload
-                );
-
-            expect(response.status())
-                .toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
 
 });

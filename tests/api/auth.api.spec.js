@@ -1,13 +1,16 @@
 const { test, expect } = require('../../fixtures/auth.fixture');
 const { HTTP_STATUS } = require('../../api/constants/auth.constants');
-const authData = require('../../test-data/auth.json');
+const { loadResolvedJson } = require('../../utils/testData.util');
+const authData = loadResolvedJson('../../test-data/auth.json');
 
-const { testData: employeeTestData } = require('../../test-data/employee.json');
+const { testData: employeeTestData } = loadResolvedJson('../../test-data/employee.json');
 const qaEmail = employeeTestData.testEmail;
 
-test.describe('Google Authentication APIs', () => {
+test.describe('Authentication APIs', () => {
 
-    test('TC01 Generate JWT using valid Google access token @auth @regression @smoke @sanity', async ({
+    test.describe('JWT Generation', () => {
+
+    test('TC01 Generate JWT with valid Google access token @auth @read @regression', async ({
         authClient
     }) => {
 
@@ -28,7 +31,7 @@ test.describe('Google Authentication APIs', () => {
             );
     });
 
-    test('TC02 Generate JWT using invalid Google access token @auth @regression', async ({
+    test('TC02 Generate JWT with invalid Google access token @auth @read @regression', async ({
         authClient
     }) => {
 
@@ -40,7 +43,7 @@ test.describe('Google Authentication APIs', () => {
 
     });
 
-    test('TC03 Generate JWT using malformed accessToken @auth @regression', async ({
+    test('TC03 Generate JWT with malformed accessToken @auth @read @regression', async ({
         authClient
     }) => {
 
@@ -52,7 +55,7 @@ test.describe('Google Authentication APIs', () => {
 
     });
 
-    test('TC04 Verify generated JWT contains token property @auth @regression', async ({
+    test('TC04 Verify JWT contains token property @auth @read @regression', async ({
         authClient
     }) => {
 
@@ -64,7 +67,7 @@ test.describe('Google Authentication APIs', () => {
 
     });
 
-    test('TC05 Generate QA token for allowed user @auth @regression', async ({
+    test('TC05 Generate QA token for allowed user @auth @read @regression', async ({
         authClient
     }) => {
 
@@ -80,11 +83,11 @@ test.describe('Google Authentication APIs', () => {
 
     });
 
-});
+    });
 
-test.describe('QA Token APIs', () => {
+    test.describe('QA Token Generation', () => {
 
-    test('TC06 Generate QA token for another allowed user @auth @regression @smoke @sanity', async ({
+    test('TC06 Generate QA token for another allowed user @auth @read @regression', async ({
         authClient
     }) => {
 
@@ -103,7 +106,7 @@ test.describe('QA Token APIs', () => {
             .toBeTruthy();
     });
 
-    test('TC07 Generate QA token for unauthorized email @auth @regression', async ({
+    test('TC07 Generate QA token for unauthorized email @auth @read @regression', async ({
         authClient
     }) => {
 
@@ -116,7 +119,7 @@ test.describe('QA Token APIs', () => {
             .toBe(HTTP_STATUS.FORBIDDEN);
     });
 
-    test('TC08 Generate QA token using invalid email format @auth @regression', async ({
+    test('TC08 Generate QA token with invalid email format @auth @read @regression', async ({
         authClient
     }) => {
 
@@ -127,7 +130,7 @@ test.describe('QA Token APIs', () => {
             .toBe(HTTP_STATUS.FORBIDDEN);
     });
 
-    test('TC09 Generate QA token using uppercase email @auth @regression', async ({
+    test('TC09 Generate QA token with uppercase email @auth @read @regression', async ({
         authClient
     }) => {
 
@@ -139,7 +142,7 @@ test.describe('QA Token APIs', () => {
 
     });
 
-    test('TC10 Verify generated QA token response schema @auth @regression', async ({
+    test('TC10 Verify QA token response schema @auth @read @regression', async ({
         authClient
     }) => {
 
@@ -155,7 +158,7 @@ test.describe('QA Token APIs', () => {
 
     });
 
-    test('TC11 Verify valid JWT token @auth @regression @smoke @sanity', async ({
+    test('TC11 Verify valid JWT token @read @regression', async ({
         authClient,
         qaToken
     }) => {
@@ -172,7 +175,7 @@ test.describe('QA Token APIs', () => {
 
     });
 
-    test('TC12 Verify request without Authorization @auth @regression', async ({
+    test('TC12 Verify request without Authorization @read @regression', async ({
         authClient
     }) => {
 
@@ -192,11 +195,11 @@ test.describe('QA Token APIs', () => {
 
     });
 
-});
+    });
 
-test.describe('Token Validation APIs', () => {
+    test.describe('Token Validation', () => {
 
-    test('TC13 Verify invalid JWT token @auth @regression', async ({
+    test('TC13 Verify invalid JWT token @read @regression', async ({
         authClient,
         qaToken
     }) => {
@@ -219,7 +222,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(qaEmail);
     });
 
-    test('TC14 Verify expired JWT token @auth @regression', async ({
+    test('TC14 Verify expired JWT token @read @regression', async ({
         authClient
     }) => {
 
@@ -232,7 +235,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(HTTP_STATUS.UNAUTHORIZED);
     });
 
-    test('TC15 Verify malformed JWT token @auth @regression', async ({
+    test('TC15 Verify malformed JWT token @read @regression', async ({
         authClient
     }) => {
 
@@ -243,7 +246,7 @@ test.describe('Token Validation APIs', () => {
             .toBe(HTTP_STATUS.UNAUTHORIZED);
     });
 
-    test('TC16 Verify token signed with different secret @auth @regression', async ({
+    test('TC16 Verify token signed with different secret @read @regression', async ({
         authClient
     }) => {
 
@@ -257,7 +260,7 @@ test.describe('Token Validation APIs', () => {
 
     });
 
-    test('TC17 Verify response schema @auth @regression', async ({
+    test('TC17 Verify response schema @read @regression', async ({
         authClient,
         qaToken
     }) => {
@@ -272,4 +275,5 @@ test.describe('Token Validation APIs', () => {
 
     });
 
+    });
 });

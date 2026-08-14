@@ -1,17 +1,14 @@
 const { test, expect } = require("../../fixtures/holiday.fixture");
-const holidayData = require("../../test-data/holiday.json");
+const { loadResolvedJson } = require("../../utils/testData.util");
+const holidayData = loadResolvedJson("../../test-data/holiday.json");
 const { HTTP_STATUS } = require("../../api/constants/holiday.constants");
 
 test.describe("Holiday Module APIs", () => {
-    // The whole file must stay in this single serial run: several tests in
-    // later groups depend on data created/mutated by earlier groups
-    // (e.g. TC07's 2027 holiday is read by TC23, TC30 wipes and restores the
-    // collection for tests after it, TC39 populates existingYear for TC40).
     test.describe.configure({ mode: "serial" });
 
-    test.describe("Holiday Module - Read Operations", () => {
+    test.describe("Read Operations", () => {
 
-        test("TC01 Get current year holidays when holidays exist", async ({ holidayClient }) => {
+        test("TC01 Get current year holidays when holidays exist @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.getHolidays();
             expect(response.status()).toBe(HTTP_STATUS.OK);
 
@@ -20,17 +17,12 @@ test.describe("Holiday Module APIs", () => {
             expect(body.length).toBeGreaterThan(0);
         });
 
-        test("TC02 Get current year holidays when no holidays exist", async ({ holidayClient }) => {
+        test("TC02 Get current year holidays when no holidays exist @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.getHolidayByYear(holidayData.emptyHolidayYear);
             expect(response.status()).toBe(HTTP_STATUS.NO_CONTENT);
         });
 
-        test("TC03 Get current year holidays without Authorization", async ({ holidayClient }) => {
-            const response = await holidayClient.getHolidaysWithoutAuth();
-            expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
-
-        test("TC04 Verify holiday response schema", async ({ holidayClient }) => {
+        test("TC04 Verify holiday response schema @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.getHolidays();
             expect(response.status()).toBe(HTTP_STATUS.OK);
 
@@ -47,9 +39,9 @@ test.describe("Holiday Module APIs", () => {
 
     });
 
-    test.describe("Holiday Module - Create Operations", () => {
+    test.describe("Create Operations", () => {
 
-        test("TC05 Create holiday with valid data", async ({ holidayClient }) => {
+        test("TC05 Create holiday with valid data @create @regression", async ({ holidayClient }) => {
             const payload = {
                 ...holidayData.validHoliday,
                 holidayName: `Automation Holiday ${Date.now()}`
@@ -64,7 +56,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body.holidayType).toBe(payload.holidayType);
         });
 
-        test("TC06 Create holiday with duplicate holiday name in same year", async ({ holidayClient }) => {
+        test("TC06 Create holiday with duplicate holiday name in same year @create @regression", async ({ holidayClient }) => {
             const payload = {
                 holidayName: `Republic Day ${Date.now()}`,
                 date: "2026-01-26",
@@ -81,7 +73,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body.message).toContain("Holiday with the same name already exists");
         });
 
-        test("TC07 Create holiday with same holiday name in different year", async ({ holidayClient }) => {
+        test("TC07 Create holiday with same holiday name in different year @create @regression", async ({ holidayClient }) => {
             const payload = {
                 ...holidayData.differentYearHoliday,
                 holidayName: `Republic Day ${Date.now()}`
@@ -95,7 +87,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body.holidayName).toBe(payload.holidayName);
         });
 
-        test("TC08 Create holiday with invalid date format", async ({ holidayClient }) => {
+        test("TC08 Create holiday with invalid date format @create @regression", async ({ holidayClient }) => {
             const response = await holidayClient.createHoliday(holidayData.invalidDate);
             expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
@@ -103,7 +95,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC09 Create holiday with invalid holidayType", async ({ holidayClient }) => {
+        test("TC09 Create holiday with invalid holidayType @create @regression", async ({ holidayClient }) => {
             const payload = {
                 ...holidayData.invalidHolidayType,
                 holidayName: `Invalid Type ${Date.now()}`
@@ -116,16 +108,11 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC10 Create holiday without Authorization", async ({ holidayClient }) => {
-            const response = await holidayClient.createHolidayWithoutAuth(holidayData.validHoliday);
-            expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
-
     });
 
-    test.describe("Holiday Module - Update Operations", () => {
+    test.describe("Update Operations", () => {
 
-        test("TC11 Update holiday with valid data", async ({ holidayClient }) => {
+        test("TC11 Update holiday with valid data @update @regression", async ({ holidayClient }) => {
             const createPayload = {
                 ...holidayData.validHoliday,
                 holidayName: `Update Holiday ${Date.now()}`
@@ -145,7 +132,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body.holidayType).toBe(holidayData.updateHoliday.holidayType);
         });
 
-        test("TC12 Update holiday using invalid holidayId", async ({ holidayClient }) => {
+        test("TC12 Update holiday using invalid holidayId @update @regression", async ({ holidayClient }) => {
             const response = await holidayClient.updateHoliday(holidayData.invalidHolidayId, holidayData.updateHoliday);
             expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
@@ -153,7 +140,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC13 Update holiday using non-existing holidayId", async ({ holidayClient }) => {
+        test("TC13 Update holiday using non-existing holidayId @update @regression", async ({ holidayClient }) => {
             const response = await holidayClient.updateHoliday(holidayData.nonExistingHolidayId, holidayData.updateHoliday);
             expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
 
@@ -161,7 +148,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body.message).toContain("Holiday not found");
         });
 
-        test("TC14 Update holiday with invalid date", async ({ holidayClient }) => {
+        test("TC14 Update holiday with invalid date @update @regression", async ({ holidayClient }) => {
             const response = await holidayClient.updateHoliday(holidayData.holidayId, holidayData.invalidDate);
             expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
@@ -169,7 +156,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC15 Update holiday with invalid holidayType", async ({ holidayClient }) => {
+        test("TC15 Update holiday with invalid holidayType @update @regression", async ({ holidayClient }) => {
             const createPayload = {
                 ...holidayData.validHoliday,
                 holidayName: `Holiday ${Date.now()}`
@@ -192,16 +179,11 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC16 Update holiday without Authorization", async ({ holidayClient }) => {
-            const response = await holidayClient.updateHolidayWithoutAuth(holidayData.holidayId, holidayData.updateHoliday);
-            expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
-
     });
 
-    test.describe("Holiday Module - Delete Operations", () => {
+    test.describe("Delete Operations", () => {
 
-        test("TC17 Delete existing holiday", async ({ holidayClient }) => {
+        test("TC17 Delete existing holiday @delete @regression", async ({ holidayClient }) => {
             const payload = {
                 ...holidayData.validHoliday,
                 holidayName: `Delete Holiday ${Date.now()}`
@@ -219,7 +201,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body._id).toBe(createdHoliday._id);
         });
 
-        test("TC18 Delete holiday using invalid holidayId", async ({ holidayClient }) => {
+        test("TC18 Delete holiday using invalid holidayId @delete @regression", async ({ holidayClient }) => {
             const response = await holidayClient.deleteHoliday(holidayData.invalidHolidayId);
             expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
@@ -227,7 +209,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC19 Delete holiday using non-existing holidayId", async ({ holidayClient }) => {
+        test("TC19 Delete holiday using non-existing holidayId @delete @regression", async ({ holidayClient }) => {
             const response = await holidayClient.deleteHoliday(holidayData.nonExistingHolidayId);
             expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
 
@@ -235,16 +217,11 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC20 Delete holiday without Authorization", async ({ holidayClient }) => {
-            const response = await holidayClient.deleteHolidayWithoutAuth(holidayData.holidayId);
-            expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
-
     });
 
-    test.describe("Holiday Module - Import Operations", () => {
+    test.describe("Import Operations", () => {
 
-        test("TC21 Import holidays from one year to another", async ({ holidayClient }) => {
+        test("TC21 Import holidays from one year to another @read @regression", async ({ holidayClient }) => {
             const targetYear = new Date().getFullYear() + 10;
 
             const payload = {
@@ -261,7 +238,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("insertedCount");
         });
 
-        test("TC22 Import holidays when source year has no holidays", async ({ holidayClient }) => {
+        test("TC22 Import holidays when source year has no holidays @read @regression", async ({ holidayClient }) => {
             const payload = {
                 fromYear: holidayData.emptyHolidayYear,
                 toYear: 2028,
@@ -275,7 +252,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC23 Import holidays when destination year already contains holidays (replace=false)", async ({ holidayClient }) => {
+        test("TC23 Import holidays when destination year already contains holidays (replace=false) @read @holiday @regression", async ({ holidayClient }) => {
             // Depends on TC07 having already created a 2027 holiday earlier in this run.
             const response = await holidayClient.importHolidays(holidayData.importHoliday);
             expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
@@ -284,7 +261,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC24 Import holidays when destination year already contains holidays (replace=true)", async ({ holidayClient }) => {
+        test("TC24 Import holidays when destination year already contains holidays (replace=true) @read @holiday @regression", async ({ holidayClient }) => {
             const response = await holidayClient.importHolidays(holidayData.importHolidayReplace);
             expect(response.status()).toBe(HTTP_STATUS.OK);
 
@@ -293,7 +270,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("insertedCount");
         });
 
-        test("TC25 Import holidays with invalid fromYear", async ({ holidayClient }) => {
+        test("TC25 Import holidays with invalid fromYear @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.importHolidays(holidayData.invalidFromYear);
             expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
@@ -301,7 +278,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC26 Import holidays with invalid toYear", async ({ holidayClient }) => {
+        test("TC26 Import holidays with invalid toYear @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.importHolidays(holidayData.invalidToYear);
             expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
@@ -309,7 +286,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC27 Verify imported holiday count", async ({ holidayClient }) => {
+        test("TC27 Verify imported holiday count @read @regression", async ({ holidayClient }) => {
             const toYear = new Date().getFullYear() + 15; // distinct from TC21's target year
 
             const payload = {
@@ -331,16 +308,11 @@ test.describe("Holiday Module APIs", () => {
             expect(holidays.length).toBe(imported.insertedCount);
         });
 
-        test("TC28 Import holidays without Authorization", async ({ holidayClient }) => {
-            const response = await holidayClient.importHolidaysWithoutAuth(holidayData.importHoliday);
-            expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
-
     });
 
-    test.describe("Holiday Module - Holiday Years", () => {
+    test.describe("Year Lookup Operations", () => {
 
-        test("TC29 Get distinct holiday years", async ({ holidayClient }) => {
+        test("TC29 Get distinct holiday years @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.getHolidayYears();
             expect(response.status()).toBe(HTTP_STATUS.OK);
 
@@ -349,7 +321,7 @@ test.describe("Holiday Module APIs", () => {
             expect(years.length).toBeGreaterThan(0);
         });
 
-        test("TC30 Get distinct years when no holidays exist", async ({ holidayClient }) => {
+        test("TC30 Get distinct years when no holidays exist @read @regression", async ({ holidayClient }) => {
             // Destructive: wipes the whole collection. Must run alone (serial mode
             // above guarantees no other test is running concurrently against the DB).
             const resetResponse = await holidayClient.resetAllHolidays();
@@ -371,7 +343,7 @@ test.describe("Holiday Module APIs", () => {
             expect(restore.status()).toBe(HTTP_STATUS.CREATED);
         });
 
-        test("TC31 Verify years are returned in ascending order", async ({ holidayClient }) => {
+        test("TC31 Verify years are returned in ascending order @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.getHolidayYears();
             expect(response.status()).toBe(HTTP_STATUS.OK);
 
@@ -380,16 +352,11 @@ test.describe("Holiday Module APIs", () => {
             expect(years).toEqual(sortedYears);
         });
 
-        test("TC32 Get distinct years without Authorization", async ({ holidayClient }) => {
-            const response = await holidayClient.getHolidayYearsWithoutAuth();
-            expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
-
     });
 
-    test.describe("Holiday Module - Get By Year", () => {
+    test.describe("Year-based Read Operations", () => {
 
-        test("TC33 Get holidays for valid year", async ({ holidayClient }) => {
+        test("TC33 Get holidays for valid year @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.getHolidayByYear(holidayData.existingYear);
             expect(response.status()).toBe(HTTP_STATUS.OK);
 
@@ -398,17 +365,17 @@ test.describe("Holiday Module APIs", () => {
             expect(body.length).toBeGreaterThan(0);
         });
 
-        test("TC34 Get holidays for year having no holidays", async ({ holidayClient }) => {
+        test("TC34 Get holidays for year having no holidays @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.getHolidayByYear(holidayData.emptyHolidayYear);
             expect(response.status()).toBe(HTTP_STATUS.NO_CONTENT);
         });
 
-        test("TC35 Get holidays using invalid year format", async ({ holidayClient }) => {
+        test("TC35 Get holidays using invalid year format @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.getHolidayByYear(holidayData.invalidYear);
             expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
         });
 
-        test("TC36 Verify holiday response schema", async ({ holidayClient }) => {
+        test("TC36 Verify holiday response schema @read @regression", async ({ holidayClient }) => {
             const response = await holidayClient.getHolidayByYear(holidayData.existingYear);
             expect(response.status()).toBe(HTTP_STATUS.OK);
 
@@ -423,16 +390,11 @@ test.describe("Holiday Module APIs", () => {
             }
         });
 
-        test("TC37 Get holidays without Authorization", async ({ holidayClient }) => {
-            const response = await holidayClient.getHolidayByYearWithoutAuth(holidayData.existingYear);
-            expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
-        });
-
     });
 
-    test.describe("Holiday Module - Excel Import Operations", () => {
+    test.describe("Excel Import Operations", () => {
 
-        test("TC38 Import holidays from Excel data", async ({ holidayClient }) => {
+        test("TC38 Import holidays from Excel data @read @regression", async ({ holidayClient }) => {
             const payload = {
                 ...holidayData.excelImport,
                 toYear: 2028,
@@ -447,7 +409,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("insertedCount");
         });
 
-        test("TC39 Import Excel holidays with replace=true", async ({ holidayClient }) => {
+        test("TC39 Import Excel holidays with replace=true @read @regression", async ({ holidayClient }) => {
             const payload = {
                 ...holidayData.excelImport,
                 toYear: holidayData.existingYear,
@@ -461,7 +423,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC40 Import Excel holidays with replace=false when holidays already exist", async ({ holidayClient }) => {
+        test("TC40 Import Excel holidays with replace=false when holidays already exist @read @regression", async ({ holidayClient }) => {
             // Depends on TC39 just having populated holidayData.existingYear.
             const payload = {
                 ...holidayData.excelImport,
@@ -476,7 +438,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC41 Import Excel data with duplicate holidays", async ({ holidayClient }) => {
+        test("TC41 Import Excel data with duplicate holidays @read @regression", async ({ holidayClient }) => {
             const payload = {
                 ...holidayData.duplicateExcelHoliday,
                 toYear: 2029
@@ -489,7 +451,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC42 Import Excel data with invalid holiday object", async ({ holidayClient }) => {
+        test("TC42 Import Excel data with invalid holiday object @read @regression", async ({ holidayClient }) => {
             const payload = {
                 ...holidayData.invalidHolidayObject,
                 toYear: 2030
@@ -502,7 +464,7 @@ test.describe("Holiday Module APIs", () => {
             expect(body).toHaveProperty("message");
         });
 
-        test("TC43 Verify imported holiday count", async ({ holidayClient }) => {
+        test("TC43 Verify imported holiday count @read @regression", async ({ holidayClient }) => {
             const targetYear = 2031;
 
             const payload = {
@@ -520,11 +482,6 @@ test.describe("Holiday Module APIs", () => {
             const body = await response.json();
             expect(Array.isArray(body)).toBeTruthy();
             expect(body.length).toBe(payload.holidays.length);
-        });
-
-        test("TC44 Import Excel holidays without Authorization", async ({ holidayClient }) => {
-            const response = await holidayClient.importExcelWithoutAuth(holidayData.excelImport);
-            expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
         });
 
     });

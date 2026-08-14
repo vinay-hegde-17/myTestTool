@@ -1,118 +1,225 @@
 # PHYE-HRMS Playwright SDET Framework
 
-Lean Playwright framework for testing the PHYE-HRMS API. It uses Playwright's
-API request context, shared fixtures, JSON test data, and Allure reporting.
+This project is a Playwright-based API automation framework for the HRMS backend. It follows a modular structure with shared fixtures, centralized HTTP status constants, environment-driven test data, and grouped test suites for CRUD and validation scenarios.
 
-## Structure
+## Project layout
 
 ```text
 .
 |-- .github/
 |   `-- workflows/
-|       `-- playwright.yml             # CI workflow
+|       `-- playwright.yml              # GitHub Actions CI workflow
 |-- api/
-|   |-- clients/
-|   |   |-- asset.client.js            # Asset API client
-|   |   |-- auth.client.js             # Authentication API client
-|   |   |-- employee.client.js         # Employee API client
-|   |   `-- leave.client.js            # Leave API client
+|   |-- clients/                        # Feature-specific API wrappers
+|   |   |-- approveLeave.client.js
+|   |   |-- asset.client.js
+|   |   |-- auth.client.js
+|   |   |-- buildVersion.client.js
+|   |   |-- employee.client.js
+|   |   |-- holiday.client.js
+|   |   |-- itDeclaration.client.js
+|   |   |-- leave.client.js
+|   |   |-- module.client.js
+|   |   |-- moduleUserRole.client.js
+|   |   |-- raisedQueries.client.js
+|   |   |-- sendEmail.client.js
+|   |   |-- sendMail.client.js
+|   |   |-- timetracker.client.js
+|   |   |-- userRole.client.js
+|   |   `-- weeklyReportClient.js
 |   `-- constants/
-|       |-- asset.constants.js         # Asset endpoints and HTTP status codes
-|       |-- auth.constants.js          # Auth endpoints and HTTP status codes
-|       |-- employee.constants.js      # Employee endpoints and HTTP status codes
-|       `-- leave.constants.js         # Leave endpoints and HTTP status codes
+|       |-- approveLeave.constants.js
+|       |-- asset.constants.js
+|       |-- auth.constants.js
+|       |-- buildVersion.constants.js
+|       |-- employee.constants.js
+|       |-- holiday.constants.js
+|       |-- httpStatus.constants.js     # Shared HTTP status constants
+|       |-- itDeclaration.constants.js
+|       |-- leave.constants.js
+|       |-- module.constants.js
+|       |-- moduleUserRole.constants.js
+|       |-- raisedQueries.constants.js
+|       |-- sendEmail.constants.js
+|       |-- sendMail.constants.js
+|       |-- timetracker.constants.js
+|       |-- userRole.constants.js
+|       `-- weeklyReport.constants.js
 |-- fixtures/
+|   |-- approveLeave.fixture.js
 |   |-- asset.fixture.js
-|   |-- auth.fixture.js                # Provides the QA token
+|   |-- auth.fixture.js                 # Shared base fixture and token handling
+|   |-- buildVersion.fixture.js
 |   |-- employee.fixture.js
-|   `-- leave.fixture.js
+|   |-- holiday.fixture.js
+|   |-- itDeclaration.fixture.js
+|   |-- leave.fixture.js
+|   |-- module.fixture.js
+|   |-- moduleUserRole.fixture.js
+|   |-- raisedQueries.fixture.js
+|   |-- sendEmail.fixture.js
+|   |-- sendMail.fixture.js
+|   |-- timetracker.fixture.js
+|   |-- userRole.fixture.js
+|   `-- weeklyReport.fixture.js
 |-- scripts/
-|   `-- run-tests.js                   # Test runner and Allure report helper
+|   `-- run-tests.js                   # Runs Playwright and generates Allure report
 |-- test-data/
+|   |-- approveLeave.json
 |   |-- asset.json
 |   |-- auth.json
+|   |-- buildVersion.json
 |   |-- employee.json
+|   |-- holiday.json
+|   |-- itDeclaration.json
 |   |-- leave.json
-|   `-- files/                         # Upload fixtures (PDF, image, invalid file)
+|   |-- module.json
+|   |-- moduleUserRole.json
+|   |-- raisedQueries.json
+|   |-- sendEmail.json
+|   |-- sendMail.json
+|   |-- timetracker.json
+|   |-- userRole.json
+|   |-- weeklyReport.json
+|   `-- files/                         # Upload examples and invalid-file fixtures
 |-- tests/
-|   |-- api/
+|   |-- api/                           # Normal API validation suites
+|   |   |-- approveLeave.api.spec.js
 |   |   |-- asset.api.spec.js
 |   |   |-- auth.api.spec.js
+|   |   |-- buildVersion.api.spec.js
 |   |   |-- employee.api.spec.js
-|   |   `-- leave.api.spec.js
-|   `-- empty/                         # Empty-data scenarios
+|   |   |-- holiday.api.spec.js
+|   |   |-- httpStatus.constants.api.spec.js
+|   |   |-- itDeclaration.api.spec.js
+|   |   |-- leave.api.spec.js
+|   |   |-- module.api.spec.js
+|   |   |-- moduleUserRole.api.spec.js
+|   |   |-- raisedQueries.api.spec.js
+|   |   |-- sendEmail.api.spec.js
+|   |   |-- sendMail.api.spec.js
+|   |   |-- timetracker.api.spec.js
+|   |   |-- userRole.api.spec.js
+|   |   `-- weeklyReport.api.spec.js
+|   `-- empty/                         # Empty/invalid input validation suites
+|       |-- empty-data.asset.spec.js
+|       |-- empty-data.auth.spec.js
+|       |-- empty-data.employee.spec.js
+|       |-- empty-data.holiday.spec.js
+|       |-- empty-data.itDeclaration.spec.js
+|       |-- empty-data.leave.spec.js
+|       |-- empty-data.module.spec.js
+|       |-- empty-data.moduleUserRole.spec.js
+|       |-- empty-data.raisedQueries.spec.js
+|       |-- empty-data.sendEmail.api.spec.js
+|       |-- empty-data.sendMail.api.spec.js
+|       |-- empty-data.timetracker.spec.js
+|       |-- empty-data.userRole.spec.js
+|       |-- empty-data.weeklyReport.spec.js
 |-- utils/
-|   `-- token.util.js                  # Cached-token reader
-|-- globalSetup.js                     # Creates the cached QA token
-|-- playwright.config.js
+|   |-- testData.util.js               # Resolves env-based template values
+|   `-- token.util.js                  # Reads cached QA bearer token
+|-- .gitignore
+|-- globalSetup.js                    # Creates cached QA token if missing
 |-- package.json
-`-- .env                              # Local configuration; not committed
+|-- playwright.config.js
+|-- reports/                          # Generated by Allure
+|-- .cache/                           # Cached auth state, generated locally
+|-- .env                              # Local environment configuration
+`-- README.md
 ```
 
-Generated, gitignored directories: `.cache/`, `reports/`, and `test-results/`.
+Generated runtime folders are ignored by Git: `.cache/`, `reports/`, `test-results/`, `playwright-report/`, and `blob-report/`.
+
+## Core patterns used in this framework
+
+- Centralized HTTP status constants: [api/constants/httpStatus.constants.js](api/constants/httpStatus.constants.js)
+- Environment-driven JSON data via [utils/testData.util.js](utils/testData.util.js)
+- Shared QA token setup via [fixtures/auth.fixture.js](fixtures/auth.fixture.js) and [globalSetup.js](globalSetup.js)
+- Grouped functional suites by read/create/update/delete operations
+- Consistent test tagging using `@read`, `@create`, `@update`, `@delete`, `@smoke`, `@sanity`, `@regression`, and module tags such as `@employee`, `@leave`, `@userrole`, `@assets`, etc.
+- Empty-data validation kept separate from normal API-positive suites
 
 ## Quick start
 
 ```bash
 npm install
-npx playwright install
-# Create .env with API_BASE_URL and required test-fixture values.
+npx playwright install --with-deps
+```
+
+Create a local `.env` file with the runtime configuration, for example:
+
+```env
+API_BASE_URL=https://your-hrms-api-host
+TEST_EMAIL=qa.user@company.com
+# Optional if you already have a generated token
+QA_TOKEN=your-token
+
+PLAYWRIGHT_TIMEOUT=60000
+PLAYWRIGHT_EXPECT_TIMEOUT=10000
+```
+
+Then run:
+
+```bash
 npm test
 ```
 
-## Commands
+## Available commands
 
-| Command | Description |
-|---------|-------------|
-| `npm test` | Run the default API suite. |
-| `npm run test:api` | Run the `api` Playwright project. |
-| `npm run test:smoke` | Run tests labelled `@smoke`. |
-| `npm run test:sanity` | Run tests labelled `@sanity`. |
-| `npm run test:regression` | Run tests labelled `@regression`. |
-| `npm run test:headed` | Run Playwright in headed mode. |
-| `npm run test:ui` | Open Playwright UI mode. |
-| `npm run test:debug` | Run with the Playwright Inspector. |
-| `npm run report` | Open the latest Allure report. |
-| `npm run test:empty` | Run empty-data scenarios; this currently requires a config change because `testMatch` includes only `*.api.spec.js`. |
+| Command | Purpose |
+|---|---|
+| `npm test` | Run the default project flow |
+| `npm run test:api` | Run all API suites |
+| `npm run test:smoke` | Run tests tagged with `@smoke` |
+| `npm run test:sanity` | Run tests tagged with `@sanity` |
+| `npm run test:regression` | Run tests tagged with `@regression` |
+| `npm run test:empty` | Run empty-data validation suites |
+| `npm run test:headed` | Run Playwright in headed mode |
+| `npm run test:ui` | Open Playwright UI |
+| `npm run test:debug` | Run with Playwright Inspector |
+| `npm run report` | Open the generated Allure report |
 
-## Environment
+## Test-data model
 
-`API_BASE_URL` defaults to `http://localhost:3000`. The suites also use
-test-fixture IDs, emails, file IDs, and upload paths. Configure values for the
-tests you intend to run in `.env`.
+Most test-data files use environment placeholders instead of hardcoded runtime IDs. Example values are loaded and resolved in [utils/testData.util.js](utils/testData.util.js), which replaces placeholders such as `{{TEST_EMPLOYEE_ID}}`, `{{TEST_ROLE_ID}}`, and `{{TEST_MANAGER_ID}}` from environment variables or fallback defaults.
 
-| Group | Variables |
-|-------|-----------|
-| API and Playwright | `API_BASE_URL`, `PLAYWRIGHT_TIMEOUT`, `PLAYWRIGHT_EXPECT_TIMEOUT` |
-| Asset tests | `TEST_ASSET_ID`, `TEST_ASSET_TYPE_ID`, `TEST_ASSET_MODEL_ID`, `INVALID_ASSET_ID`, `TEST_UNASSIGNED_ASSET_ID` |
-| Employee tests | `TEST_EMPLOYEE_ID`, `INVALID_EMPLOYEE_ID`, `TEST_EMPLOYEE_ID_FOR_UPDATES`, `TEST_EMPLOYEE_ID_FOR_ASSETS`, `TEST_EMPLOYEE_ID_FOR_PHOTOS`, `TEST_EMPLOYEE_WITHOUT_ASSETS_ID`, `TEST_EMPLOYEE_ID_WITHOUT_PHOTO` |
-| Employee identities | `TEST_EMAIL`, `TEST_EXISTING_EMPLOYEE_EMAIL`, `TEST_INACTIVE_EMAIL`, `DUPLICATE_EMAIL`, `TEST_EMPLOYEE_NUMBER` |
-| Related records | `TEST_ROLE_ID`, `TEST_MANAGER_ID`, `INACTIVE_MANAGER_ID`, `ADMIN_EMPLOYEE_ID`, `MANAGER_EMPLOYEE_ID` |
-| Files | `TEST_FILE_ID`, `TEST_AADHAAR_FILE_ID`, `TEST_PAN_FILE_ID`, `TEST_PHOTO_FILE_ID`, `AADHAAR_FILE`, `PAN_FILE`, `PHOTO_FILE`, `INVALID_FILE` |
+This keeps the suite portable across local, QA, and CI setup without embedding a single environment-specific record ID in the repository.
 
-`test-data/employee.json` contains the standard employee payloads and the
-repository-relative paths for upload fixtures.
+## Empty-data validation vs normal API tests
 
-## Employee API labels and order
+The framework keeps two layers:
 
-The employee suite keeps mutation groups in create, update (including asset
-assignment), then delete (asset unassignment and photo removal) order. Mutation
-tests run serially so that they do not modify a record while another test uses it.
+- Normal API suites: real contract and behavior tests under [tests/api](tests/api)
+- Empty-data suites: invalid/empty/missing input validation under [tests/empty](tests/empty)
 
-Use `@smoke`, `@sanity`, or `@regression` for the standard run levels. Additional
-labels identify API intent: `@read`, `@create`, `@update`, `@delete`, `@crud`,
-`@assets`, `@files`, `@email`, `@search`, `@roles`, `@dashboard`, and `@hierarchy`.
+This separation helps keep the suite readable and easier to debug:
+- API tests verify the expected happy-path and contract behavior
+- empty-data tests validate malformed or incomplete inputs
 
-## Adding tests
+## CI / GitHub Actions
 
-1. Add endpoints and status codes in `api/constants/`.
-2. Add the required request method in `api/clients/`.
-3. Add or extend the relevant fixture in `fixtures/`.
-4. Create `tests/api/<feature>.api.spec.js` and add test data under `test-data/`.
+The GitHub workflow expects a real backend URL and a valid QA auth path, not `localhost` from a GitHub-hosted runner.
 
-## CI
+Important:
+- `API_BASE_URL` must point to a host reachable from GitHub Actions
+- either `QA_TOKEN` or `TEST_EMAIL` must be provided
+- for local execution, `localhost` is valid if the API is running on the machine
+- for GitHub-hosted runners, use a remote backend or self-hosted runner
 
-GitHub Actions runs `npm run test:sanity` on pushes and pull requests to `dev`.
-Configure the repository `API_BASE_URL` and `TEST_EMAIL` variables. Set the
-optional `QA_TOKEN` repository secret to use a pre-generated Bearer token;
-otherwise the global setup generates a QA token for `TEST_EMAIL`.
+The workflow file is in [.github/workflows/playwright.yml](.github/workflows/playwright.yml).
+
+## Adding or extending a module
+
+1. Add endpoint constants in `api/constants/`
+2. Add request methods in `api/clients/`
+3. Add or extend the shared fixture in `fixtures/`
+4. Add JSON examples in `test-data/`
+5. Create/update the suite in `tests/api/` or `tests/empty/`
+6. Keep module tags and CRUD grouping consistent with the rest of the suite
+
+## Notes
+
+- The suite is designed for API validation and contract testing, not browser automation by default.
+- Allure is enabled for reporting and results are stored under `reports/allure-results/`.
+- Local auth state is cached under `.cache/` to reduce repeated QA token generation.

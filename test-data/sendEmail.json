@@ -1,24 +1,24 @@
 {
     "valid": {
         "leaveEmail": {
-            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "employeeId": "{{TEST_EMPLOYEE_ID}}",
             "fromDate": "2026-08-15",
             "toDate": "2026-08-16",
             "noOfDays": 2,
             "leaveType": "Casual Leave",
             "leaveReason": "Personal work",
-            "id": "6a4699aeea79d955be3cea23"
+            "id": "{{TEST_LEAVE_ID}}"
         },
 
         "timesheetApproval": {
-            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "employeeId": "{{TEST_EMPLOYEE_ID}}",
             "month": "August",
             "year": "2026",
             "status": "requested"
         },
 
         "timesheetStatusUpdate": {
-            "employeeId": "6a1f0bd1c9ce1caed4279c13",
+            "employeeId": "{{TEST_EMPLOYEE_ID}}",
             "month": "August",
             "year": "2026",
             "status": "approved"

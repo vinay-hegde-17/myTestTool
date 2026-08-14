@@ -1,5 +1,5 @@
 const { test: base, expect } = require('./auth.fixture');
-const ModuleClient = require('../api/clients/module.clinet');
+const ModuleClient = require('../api/clients/module.client');
 
 const test = base.extend({
 

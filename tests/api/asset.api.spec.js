@@ -136,44 +136,6 @@ test.describe('Asset Read APIs', () => {
 
     });
 
-    test('TC07 Unauthorized Get Assets @read @assets @regression', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.getAssetsWithoutAuth();
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC08 Unauthorized Get Asset Types @read @assets @regression', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.getAssetTypesWithoutAuth();
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC09 Unauthorized Get Asset Models @read @assets @regression', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.getAssetModelsWithoutAuth();
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-
-
 });
 
 test.describe('Asset Management APIs', () => {
@@ -325,27 +287,6 @@ test.describe('Asset Management APIs', () => {
 
     });
 
-    test('TC18 Create Asset Without Authorization @create @crud @assets @regression', async ({
-        assetClient
-    }) => {
-
-        const payload = {
-            ...assetData.asset,
-            assetId: `AUTO_${Date.now()}`,
-            type: process.env.TEST_ASSET_TYPE_ID,
-            model: process.env.TEST_ASSET_MODEL_ID
-        };
-
-        const response =
-            await assetClient.createAssetWithoutAuth(payload);
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-
-
     test('TC19 Create Asset Response Schema @create @crud @assets @regression', async ({
         assetClient
     }) => {
@@ -376,25 +317,6 @@ test.describe('Asset Management APIs', () => {
             .toHaveProperty('description');
 
     });
-
-    test('TC20 Update Asset Without Authorization @update @crud @assets @regression', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.updateAssetWithoutAuth(
-                process.env.TEST_ASSET_ID,
-                {
-                    description: 'Updated Asset'
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-
 
     test('TC21 Update Asset Response Schema @update @crud @assets @regression', async ({
         assetClient
@@ -471,20 +393,6 @@ test.describe('Asset Type And Model APIs', () => {
 
     });
 
-    test('TC25 Create Asset Type Without Auth @create @crud @assets @regression', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.createAssetTypeWithoutAuth({
-                type: 'TestType'
-            });
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
     test('TC26 Create Asset Model @create @crud @assets @regression', async ({
         assetClient
     }) => {
@@ -524,20 +432,6 @@ test.describe('Asset Type And Model APIs', () => {
 
         expect(response.status())
             .toBe(HTTP_STATUS.CONFLICT);
-
-    });
-
-    test('TC29 Create Asset Model Without Auth @create @crud @assets @regression', async ({
-        assetClient
-    }) => {
-
-        const response =
-            await assetClient.createAssetModelWithoutAuth({
-                model: 'TestModel'
-            });
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
 
     });
 

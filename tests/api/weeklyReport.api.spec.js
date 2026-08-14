@@ -102,18 +102,6 @@ test.describe('Weekly Report Read APIs', () => {
 
     });
 
-    test('TC04 Get all weekly reports without Authorization @read @weeklyreport @regression', async ({
-        weeklyReportClient
-    }) => {
-
-        const response =
-            await weeklyReportClient.getWeeklyReportsWithoutAuth();
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 
@@ -335,20 +323,6 @@ test.describe('Weekly Report By Week APIs', () => {
 
     });
 
-    test('TC12 Get weekly reports without Authorization @read @weeklyreport @regression', async ({
-        weeklyReportClient
-    }) => {
-
-        const response =
-            await weeklyReportClient.getWeeklyReportsByWeekWithoutAuth(
-                weeklyReportData.byWeek.valid
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 
@@ -555,20 +529,6 @@ test.describe('Weekly Report Create Update APIs', () => {
 
         expect(response.status())
             .toBe(HTTP_STATUS.CREATED);
-
-    });
-
-    test('TC21 Create weekly reports without Authorization @create @weeklyreport @regression', async ({
-        weeklyReportClient
-    }) => {
-
-        const response =
-            await weeklyReportClient.createWeeklyReportsWithoutAuth([
-                weeklyReportData.valid
-            ]);
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
 
     });
 

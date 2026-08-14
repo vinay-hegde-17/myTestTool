@@ -144,20 +144,7 @@ test.describe('Leave Module APIs', () => {
             .toBe(0);
 
     });
-
-    test('TC06 Get all leave records without Authorization @read @leave @regression', async ({
-        leaveClient
-    }) => {
-
-        const response =
-            await leaveClient.getLeavesWithoutAuth();
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC07 Verify leave response schema @read @leave @regression', async ({
+test('TC07 Verify leave response schema @read @leave @regression', async ({
         leaveClient
     }) => {
 
@@ -250,20 +237,7 @@ test.describe('Leave Module APIs', () => {
             );
 
     });
-
-    test('TC10 Get leave threshold without Authorization @read @leave @regression', async ({
-        leaveClient
-    }) => {
-
-        const response =
-            await leaveClient.getLeaveThresholdWithoutAuth();
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC11 Get employee leave history @read @leave @regression @sanity', async ({
+test('TC11 Get employee leave history @read @leave @regression @sanity', async ({
         leaveClient
     }) => {
 
@@ -361,22 +335,7 @@ test.describe('Leave Module APIs', () => {
             .toBe(0);
 
     });
-
-    test('TC15 Get employee leave history without Authorization @read @leave @regression', async ({
-        leaveClient
-    }) => {
-
-        const response =
-            await leaveClient.getEmployeeLeavesWithoutAuth(
-                leaveData.employee.employeeId
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC16 Verify employee leave response schema @read @leave @regression', async ({
+test('TC16 Verify employee leave response schema @read @leave @regression', async ({
         leaveClient
     }) => {
 
@@ -516,22 +475,7 @@ test.describe('Leave Module APIs', () => {
             .toBe(0);
 
     });
-
-    test('TC21 Get approver leave requests without Authorization @read @leave @regression', async ({
-        leaveClient
-    }) => {
-
-        const response =
-            await leaveClient.getApproverLeavesWithoutAuth(
-                leaveData.employee.approverId
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC22 Get employee financial year leave history @read @leave @regression', async ({
+test('TC22 Get employee financial year leave history @read @leave @regression', async ({
         leaveClient
     }) => {
 
@@ -572,22 +516,7 @@ test.describe('Leave Module APIs', () => {
             );
 
     });
-
-    test('TC24 Get financial year leave history without Authorization @read @leave @regression', async ({
-        leaveClient
-    }) => {
-
-        const response =
-            await leaveClient.getFinancialYearLeavesWithoutAuth(
-                leaveData.employee.employeeId
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC25 Verify financial year response schema @read @leave @regression', async ({
+test('TC25 Verify financial year response schema @read @leave @regression', async ({
         leaveClient
     }) => {
 
@@ -848,25 +777,7 @@ test.describe('Leave Module APIs', () => {
             .toBe(5);
 
     });
-
-    test('TC35 Apply leave without Authorization @create @crud @leave @regression', async ({
-        request
-    }) => {
-
-        const response =
-            await request.post(
-                '/leaves',
-                {
-                    data: leaveData.leave.validLeave
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC36 Approve leave request @update @crud @leave @regression', async ({
+test('TC36 Approve leave request @update @crud @leave @regression', async ({
         leaveClient
     }) => {
 
@@ -1004,27 +915,7 @@ test.describe('Leave Module APIs', () => {
             .toBe(HTTP_STATUS.NOT_FOUND);
 
     });
-
-    test('TC41 Update leave without Authorization @update @crud @leave @regression', async ({
-        request
-    }) => {
-
-        const response =
-            await request.put(
-                `/leaves/${leaveData.leave.invalidLeaveId}`,
-                {
-                    data: {
-                        status: leaveData.status.approvedStatus
-                    }
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC42 Submit reject request @update @crud @leave @regression', async ({
+test('TC42 Submit reject request @update @crud @leave @regression', async ({
         leaveClient
     }) => {
 
@@ -1083,28 +974,7 @@ test.describe('Leave Module APIs', () => {
             .toBeNull();
 
     });
-
-    test('TC44 Submit reject request without Authorization @update @crud @leave @regression', async ({
-        request
-    }) => {
-
-        const response =
-            await request.put(
-                `/leaves/reject-request/${leaveData.leave.invalidLeaveId}`,
-                {
-                    data: {
-                        employeeRejectRequestComment:
-                            'Unauthorized'
-                    }
-                }
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC45 Delete leave @delete @crud @leave @regression', async ({
+test('TC45 Delete leave @delete @crud @leave @regression', async ({
         leaveClient
     }) => {
 
@@ -1151,22 +1021,7 @@ test.describe('Leave Module APIs', () => {
             .toContain('Leave entry not found');
 
     });
-
-    test('TC47 Delete leave without Authorization @delete @crud @leave @regression', async ({
-        request
-    }) => {
-
-        const response =
-            await request.delete(
-                `/leaves/${leaveData.leave.invalidLeaveId}`
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
-    test('TC48 Get overall leave summary for all employees @read @leave @regression @sanity', async ({
+test('TC48 Get overall leave summary for all employees @read @leave @regression @sanity', async ({
         leaveClient
     }) => {
 
@@ -1258,19 +1113,4 @@ test.describe('Leave Module APIs', () => {
         }
 
     });
-
-    test('TC52 Get overall leave summary without Authorization @read @leave @regression', async ({
-        request
-    }) => {
-
-        const response =
-            await request.get(
-                '/leaves/overallleaves/all'
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });

@@ -3,7 +3,7 @@
         "menuItemId": "viewholidays",
         "secondMenuItemId": "applyleave",
 
-        "existingModuleId": "66e812132803193c4f56ed37",
+        "existingModuleId": "{{TEST_MODULE_ID}}",
         "existingModuleName": "View Holidays",
 
         "createModule": {

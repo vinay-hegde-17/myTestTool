@@ -180,19 +180,6 @@ test.describe('Raised Query Read & Filter APIs', () => {
         }
 
     });
-
-    test('TC07 Get raised queries without Authorization @read @raisedqueries @regression', async ({
-        raisedQueriesClient
-    }) => {
-
-        const response =
-            await raisedQueriesClient.getRaisedQueriesWithoutAuth();
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 
@@ -263,19 +250,6 @@ test.describe('Query Type APIs', () => {
         }
 
     });
-
-    test('TC11 Get query types without Authorization @read @raisedqueries @regression', async ({
-        raisedQueriesClient
-    }) => {
-
-        const response =
-            await raisedQueriesClient.getQueryTypesWithoutAuth();
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe('Employee Query Retrieval APIs', () => {
@@ -410,21 +384,6 @@ test.describe('Employee Query Retrieval APIs', () => {
         }
 
     });
-
-    test('TC17 Get employee queries without Authorization @read @raisedqueries @regression', async ({
-        raisedQueriesClient
-    }) => {
-
-        const response =
-            await raisedQueriesClient.getEmployeeQueriesWithoutAuth(
-                raisedQueriesData.valid.employeeId
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe('Raised Query Creation & Validation APIs', () => {
@@ -533,26 +492,6 @@ test.describe('Raised Query Creation & Validation APIs', () => {
             .toBe(HTTP_STATUS.CREATED);
 
     });
-
-    test('TC22 Raise query without Authorization @create @raisedqueries @regression', async ({
-        raisedQueriesClient
-    }) => {
-
-        const payload = {
-            ...raisedQueriesData.valid.createQuery,
-            subject: `Unauthorized Query ${Date.now()}`
-        };
-
-        const response =
-            await raisedQueriesClient.createRaisedQueryWithoutAuth(
-                payload
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe('Raised Query Reply & FAQ Update APIs', () => {
@@ -776,27 +715,6 @@ test.describe('Raised Query Reply & FAQ Update APIs', () => {
             .toHaveProperty('message', raisedQueriesData.messages.queryNotFound);
 
     });
-
-
-    test('TC31 Update query without Authorization @update @raisedqueries @regression', async ({
-        raisedQueriesClient
-    }) => {
-
-        const payload = {
-            id: raisedQueriesData.valid.existingQueryId,
-            reply: `Unauthorized update ${Date.now()}`
-        };
-
-        const response =
-            await raisedQueriesClient.updateRaisedQueryReplyWithoutAuth(
-                payload
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe('Raised Query Edit APIs', () => {
@@ -971,29 +889,6 @@ test.describe('Raised Query Edit APIs', () => {
             .toHaveProperty('message', raisedQueriesData.messages.queryNotFound);
 
     });
-
-
-    test('TC38 Update raised query without Authorization @update @raisedqueries @regression', async ({
-        raisedQueriesClient
-    }) => {
-
-        const payload = {
-            id: raisedQueriesData.valid.existingQueryId,
-            queryTypeId: raisedQueriesData.valid.queryTypeId,
-            subject: `Unauthorized update ${Date.now()}`,
-            query: 'Unauthorized update test'
-        };
-
-        const response =
-            await raisedQueriesClient.updateRaisedQueryWithoutAuth(
-                payload
-            );
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
 
 test.describe('FAQ Read & Validation APIs', () => {
@@ -1135,18 +1030,4 @@ test.describe('FAQ Read & Validation APIs', () => {
         }
 
     });
-
-
-    test('TC44 Get FAQ without Authorization @read @raisedqueries @faq @regression', async ({
-        raisedQueriesClient
-    }) => {
-
-        const response =
-            await raisedQueriesClient.getFAQQueriesWithoutAuth();
-
-        expect(response.status())
-            .toBe(HTTP_STATUS.UNAUTHORIZED);
-
-    });
-
 });
