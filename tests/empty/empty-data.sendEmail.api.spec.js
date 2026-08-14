@@ -4,8 +4,7 @@ const sendEmailData = require('../../test-data/sendEmail.json');
 
 test.describe('Send Email Empty Data APIs', () => {
 
-    test(
-        'TC06 Send leave email with empty request body @emptydata @sendemail @regression',
+    test( 'TC_EMPTY_001 Send leave email with empty request body @emptydata @sendemail @regression',
         async ({ sendEmailClient }) => {
 
             const response =
@@ -25,8 +24,7 @@ test.describe('Send Email Empty Data APIs', () => {
     );
 
 
-    test(
-        'TC07 Send timesheet approval with empty request body @emptydata @sendemail @regression',
+    test( 'TC_EMPTY_002 Send timesheet approval with empty request body @emptydata @sendemail @regression',
         async ({ sendEmailClient }) => {
 
             const response =

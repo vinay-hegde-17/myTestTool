@@ -1,0 +1,24 @@
+{
+    "valid": {
+        "leaveId": "6a486fb22a69200d6d5daef9",
+        "approveLeaveId": "6a486fb22a69200d6d5daef9",
+        "rejectLeaveId": "6a486fb22a69200d6d5daef9",
+        "approveStatus": "Approved",
+        "rejectStatus": "Rejected"
+    },
+
+    "processed": {
+        "leaveId": "6a469076ea79d955be3ce91d",
+        "expectedMessage": "Leave Request Already Processed"
+    },
+
+    "invalid": {
+        "nonExistingLeaveId": "507f1f77bcf86cd799439011"
+    },
+
+    "expected": {
+        "approvedMessage": "Leave Approved Successfully!",
+        "rejectedMessage": "Leave Rejected Successfully!",
+        "notFoundMessage": "Leave record not found"
+    }
+}

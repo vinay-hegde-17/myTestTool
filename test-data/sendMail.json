@@ -1,0 +1,114 @@
+{
+    "valid": {
+        "basicEmail": {
+            "to": "vinayhegde0824@gmail.com",
+            "subject": "QA API Test - Basic Email",
+            "text": "This is a basic email sent by API automation."
+        },
+
+        "htmlEmail": {
+            "to": "vinayhegde0824@gmail.com",
+            "subject": "QA API Test - HTML Email",
+            "text": "This is the plain text version.",
+            "html": "<h2>QA API Test</h2><p>This is an <strong>HTML email</strong> sent by API automation.</p>"
+        },
+
+        "singleAttachment": {
+            "to": "vinayhegde0824@gmail.com",
+            "subject": "QA API Test - Single Attachment",
+            "text": "This email contains one attachment.",
+            "attachments": [
+                {
+                    "filename": "test.txt",
+                    "contentType": "text/plain",
+                    "encoding": "base64",
+                    "content": "VGhpcyBpcyBhIHRlc3QgYXR0YWNobWVudC4="
+                }
+            ]
+        },
+
+        "multipleAttachments": {
+            "to": "vinayhegde0824@gmail.com",
+            "subject": "QA API Test - Multiple Attachments",
+            "text": "This email contains multiple attachments.",
+            "attachments": [
+                {
+                    "filename": "test1.txt",
+                    "contentType": "text/plain",
+                    "encoding": "base64",
+                    "content": "VGVzdCBhdHRhY2htZW50IDE="
+                },
+                {
+                    "filename": "test2.txt",
+                    "contentType": "text/plain",
+                    "encoding": "base64",
+                    "content": "VGVzdCBhdHRhY2htZW50IDI="
+                }
+            ]
+        },
+
+        "multipleRecipients": {
+            "to": [
+                "vinayhegde0820@gmail.com",
+                "vinayhegde0824@gmail.com"
+            ],
+            "subject": "QA API Test - Multiple Recipients",
+            "text": "This email is sent to multiple recipients."
+        },
+
+        "withoutAttachments": {
+            "to": "vinayhegde0824@gmail.com",
+            "subject": "QA API Test - No Attachments",
+            "text": "This email intentionally has no attachments."
+        }
+    },
+
+    "empty": {
+        "withoutTo": {
+            "subject": "QA API Test",
+            "text": "Testing missing recipient."
+        },
+
+        "withoutSubject": {
+            "to": "vinayhegde0824@gmail.com",
+            "text": "Testing missing subject."
+        },
+
+        "withoutText": {
+            "to": "vinayhegde0824@gmail.com",
+            "subject": "QA API Test"
+        },
+
+        "emptyObject": {},
+
+        "attachmentsNonArray": {
+            "to": "vinayhegde0824@gmail.com",
+            "subject": "QA API Test",
+            "text": "Testing invalid attachments type.",
+            "attachments": "invalid-attachment"
+        },
+
+        "invalidAttachmentContent": {
+            "to": "vinayhegde0824@gmail.com",
+            "subject": "QA API Test - Invalid Attachment",
+            "text": "Testing invalid attachment content.",
+            "attachments": [
+                {
+                    "filename": "invalid.txt",
+                    "contentType": "text/plain",
+                    "encoding": "base64",
+                    "content": null
+                }
+            ]
+        }
+    },
+
+    "expected": {
+        "success": true,
+        "successMessage": "Email sent successfully.",
+
+        "missingFieldsMessage": "Missing required fields: to, subject, and text are required.",
+
+        "attachmentsArrayMessage": "attachments must be an array."
+    }
+}
