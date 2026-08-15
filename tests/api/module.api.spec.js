@@ -746,3 +746,155 @@ test.describe('API 6 - POST /modules/modulesByIds', () => {
     });
 
 });
+
+// Empty-data scenarios moved from tests/empty/empty-data.module.api.spec.js
+test.describe('Modules Module - Empty Data Test Cases', () => {
+
+    test('TC_EMPTY_001 Create module without name @create @modules @emptydata @regression @smoke @sanity', async ({
+        moduleClient
+    }) => {
+
+        const { name, ...payload } = uniqueModulePayload();
+
+        const response =
+            await moduleClient.createModule(payload);
+
+        expect([
+            HTTP_STATUS.BAD_REQUEST,
+            HTTP_STATUS.INTERNAL_SERVER_ERROR
+        ]).toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_002 Create module without description @create @modules @emptydata @regression', async ({
+        moduleClient
+    }) => {
+
+        const { description, ...payload } = uniqueModulePayload();
+
+        const response =
+            await moduleClient.createModule(payload);
+
+        expect([
+            HTTP_STATUS.CREATED,
+            HTTP_STATUS.BAD_REQUEST,
+            HTTP_STATUS.INTERNAL_SERVER_ERROR
+        ]).toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_003 Create module without activeStatus @create @modules @emptydata @regression', async ({
+        moduleClient
+    }) => {
+
+        const { activeStatus, ...payload } = uniqueModulePayload();
+
+        const response =
+            await moduleClient.createModule(payload);
+
+        expect([
+            HTTP_STATUS.CREATED,
+            HTTP_STATUS.BAD_REQUEST,
+            HTTP_STATUS.INTERNAL_SERVER_ERROR
+        ]).toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_004 Create module without menuItem @create @modules @emptydata @regression', async ({
+        moduleClient
+    }) => {
+
+        const { menuItem, ...payload } = uniqueModulePayload();
+
+        const response =
+            await moduleClient.createModule(payload);
+
+        expect([
+            HTTP_STATUS.CREATED,
+            HTTP_STATUS.BAD_REQUEST,
+            HTTP_STATUS.INTERNAL_SERVER_ERROR
+        ]).toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_005 Create module with empty request body @create @modules @emptydata @regression', async ({
+        moduleClient
+    }) => {
+
+        const response =
+            await moduleClient.createModule({});
+
+        expect([
+            HTTP_STATUS.BAD_REQUEST,
+            HTTP_STATUS.INTERNAL_SERVER_ERROR
+        ]).toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_006 Update module with empty request body @update @modules @emptydata @regression @sanity', async ({
+        moduleClient
+    }) => {
+
+        const createResponse =
+            await moduleClient.createModule(uniqueModulePayload());
+
+        expect(createResponse.status())
+            .toBe(HTTP_STATUS.CREATED);
+
+        const created =
+            await createResponse.json();
+
+        const response =
+            await moduleClient.updateModule(created.data._id, {});
+
+        expect([
+            HTTP_STATUS.OK,
+            HTTP_STATUS.BAD_REQUEST
+        ]).toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_007 Get modules by IDs without moduleIds @read @modules @emptydata @regression @sanity', async ({
+        moduleClient
+    }) => {
+
+        const response =
+            await moduleClient.postModulesByIdsRaw({});
+
+        expect([
+            HTTP_STATUS.BAD_REQUEST,
+            HTTP_STATUS.INTERNAL_SERVER_ERROR
+        ]).toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_008 Get modules by IDs with empty array @read @modules @emptydata @regression @sanity', async ({
+        moduleClient
+    }) => {
+
+        const response =
+            await moduleClient.getModulesByIds([]);
+
+        expect([
+            HTTP_STATUS.OK,
+            HTTP_STATUS.NO_CONTENT,
+            HTTP_STATUS.BAD_REQUEST
+        ]).toContain(response.status());
+
+    });
+
+    test('TC_EMPTY_009 Get modules by IDs with null moduleIds @read @modules @emptydata @regression', async ({
+        moduleClient
+    }) => {
+
+        const response =
+            await moduleClient.postModulesByIdsRaw({ moduleIds: null });
+
+        expect([
+            HTTP_STATUS.BAD_REQUEST,
+            HTTP_STATUS.INTERNAL_SERVER_ERROR
+        ]).toContain(response.status());
+
+    });
+
+});

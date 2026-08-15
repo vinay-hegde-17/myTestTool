@@ -25,9 +25,6 @@ module.exports = defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 2 : undefined,
 
-  // Exclude empty-data tests by default
-  grepInvert: /@emptydata/,
-
   reporter: [
     ['list'],
     ['allure-playwright', {
