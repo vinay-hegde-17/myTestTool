@@ -1,14 +1,4 @@
-const HTTP_STATUS = {
-    OK: 200,
-    CREATED: 201,
-    NO_CONTENT: 204,
-    BAD_REQUEST: 400,
-    UNAUTHORIZED: 401,
-    NOT_FOUND: 404,
-    CONFLICT: 409,
-    INTERNAL_SERVER_ERROR: 500
-};
-
+const { HTTP_STATUS } = require('./httpStatus');
 
 const MODULE_USER_ROLE_ENDPOINTS = {
 
@@ -19,6 +9,7 @@ const MODULE_USER_ROLE_ENDPOINTS = {
     CREATE: '/moduleUserRole',
 
     UPDATE_BY_ROLE: '/moduleUserRole'
+
 };
 
 module.exports = { MODULE_USER_ROLE_ENDPOINTS, HTTP_STATUS };

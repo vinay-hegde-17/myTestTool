@@ -1246,7 +1246,7 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
 
             const response =
                 await timeTrackerClient.getMultipleTimesheets(
-                    timeTrackerData.emptyEmployeeIds
+                    timetrackerData.emptyEmployeeIds
                 );
 
             expect(response.status())
@@ -1289,7 +1289,7 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
 
             const payload = {
                 employeeIds: [
-                    timeTrackerData.employee.validEmployeeId
+                    timetrackerData.employee.validEmployeeId
                 ],
                 year: '2026'
             };
@@ -1314,7 +1314,7 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
 
             const payload = {
                 employeeIds: [
-                    timeTrackerData.employee.validEmployeeId
+                    timetrackerData.employee.validEmployeeId
                 ],
                 month: 'August'
             };
@@ -1339,7 +1339,7 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
 
             const response =
                 await timeTrackerClient.getMultipleTimesheets(
-                    timeTrackerData.emptyBody
+                    timetrackerData.emptyBody
                 );
 
             expect(response.status())
@@ -1450,7 +1450,7 @@ test.describe('GET /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.getEmployeeTimesheet(
-                timeTrackerData.employee.validEmployeeId,
+                timetrackerData.employee.validEmployeeId,
                 {
                     year: '2026'
                 }
@@ -1477,7 +1477,7 @@ test.describe('GET /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.getEmployeeTimesheet(
-                timeTrackerData.employee.validEmployeeId,
+                timetrackerData.employee.validEmployeeId,
                 {
                     month: 'August'
                 }
@@ -1504,8 +1504,8 @@ test.describe('POST /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.createTimesheet(
-                timeTrackerData.employee.validEmployeeId,
-                timeTrackerData.missingYear
+                timetrackerData.employee.validEmployeeId,
+                timetrackerData.missingYear
             );
 
         expect(response.status())
@@ -1525,8 +1525,8 @@ test.describe('POST /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.createTimesheet(
-                timeTrackerData.employee.validEmployeeId,
-                timeTrackerData.missingMonth
+                timetrackerData.employee.validEmployeeId,
+                timetrackerData.missingMonth
             );
 
         expect(response.status())
@@ -1546,8 +1546,8 @@ test.describe('POST /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.createTimesheet(
-                timeTrackerData.employee.validEmployeeId,
-                timeTrackerData.missingDays
+                timetrackerData.employee.validEmployeeId,
+                timetrackerData.missingDays
             );
 
         expect(response.status())
@@ -1567,8 +1567,8 @@ test.describe('POST /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.createTimesheet(
-                timeTrackerData.employee.validEmployeeId,
-                timeTrackerData.emptyDays
+                timetrackerData.employee.validEmployeeId,
+                timetrackerData.emptyDays
             );
 
         expect(response.status())
@@ -1588,8 +1588,8 @@ test.describe('POST /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.createTimesheet(
-                timeTrackerData.employee.validEmployeeId,
-                timeTrackerData.emptyBody
+                timetrackerData.employee.validEmployeeId,
+                timetrackerData.emptyBody
             );
 
         expect(response.status())
@@ -1613,8 +1613,8 @@ test.describe('PUT /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.updateTimesheet(
-                timeTrackerData.employee.validEmployeeId,
-                timeTrackerData.missingYear
+                timetrackerData.employee.validEmployeeId,
+                timetrackerData.missingYear
             );
 
         expect(response.status())
@@ -1634,8 +1634,8 @@ test.describe('PUT /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.updateTimesheet(
-                timeTrackerData.employee.validEmployeeId,
-                timeTrackerData.missingMonth
+                timetrackerData.employee.validEmployeeId,
+                timetrackerData.missingMonth
             );
 
         expect(response.status())
@@ -1655,8 +1655,8 @@ test.describe('PUT /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.updateTimesheet(
-                timeTrackerData.employee.validEmployeeId,
-                timeTrackerData.missingDays
+                timetrackerData.employee.validEmployeeId,
+                timetrackerData.missingDays
             );
 
         expect(response.status())
@@ -1676,8 +1676,8 @@ test.describe('PUT /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.updateTimesheet(
-                timeTrackerData.employee.validEmployeeId,
-                timeTrackerData.emptyDays
+                timetrackerData.employee.validEmployeeId,
+                timetrackerData.emptyDays
             );
 
         expect(response.status())
@@ -1697,8 +1697,8 @@ test.describe('PUT /timetracker/:employeeId', () => {
 
         const response =
             await timeTrackerClient.updateTimesheet(
-                timeTrackerData.employee.validEmployeeId,
-                timeTrackerData.emptyBody
+                timetrackerData.employee.validEmployeeId,
+                timetrackerData.emptyBody
             );
 
         expect(response.status())
