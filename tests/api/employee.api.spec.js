@@ -55,13 +55,22 @@ const applyEnvironmentOverrides = () => {
 
 applyEnvironmentOverrides();
 
-const updateEmployeeId = process.env.TEST_EMPLOYEE_ID_FOR_UPDATES;
-const assetEmployeeId = process.env.TEST_EMPLOYEE_ID_FOR_ASSETS;
-const photoEmployeeId = process.env.TEST_EMPLOYEE_ID_FOR_PHOTOS;
-const fileUploadEmployeeId = employeeData.testData.employeeIdForFileUploads;
-const existingEmployeeEmail = process.env.TEST_EXISTING_EMPLOYEE_EMAIL || process.env.TEST_EMAIL;
+const getDefinedValue = (envKey, fallbackValue = '') => {
+  const envValue = process.env[envKey];
+  if (typeof envValue === 'string' && envValue.trim() !== '') {
+    return envValue;
+  }
+  return fallbackValue;
+};
+
+const resolvedAssetId = employeeData.testData.assetId || '';
+const updateEmployeeId = getDefinedValue('TEST_EMPLOYEE_ID_FOR_UPDATES', employeeData.testData.employeeIdForUpdates || '');
+const assetEmployeeId = getDefinedValue('TEST_EMPLOYEE_ID_FOR_ASSETS', employeeData.testData.employeeIdForAssets || '');
+const photoEmployeeId = getDefinedValue('TEST_EMPLOYEE_ID_FOR_PHOTOS', employeeData.testData.employeeIdForPhotos || '');
+const fileUploadEmployeeId = employeeData.testData.employeeIdForFileUploads || '';
+const existingEmployeeEmail = getDefinedValue('TEST_EXISTING_EMPLOYEE_EMAIL', employeeData.testData.existingEmployeeEmail || getDefinedValue('TEST_EMAIL', employeeData.testData.testEmail || ''));
 const hasDedicatedEmployee = employeeId =>
-  Boolean(employeeId) && employeeId !== process.env.TEST_EMPLOYEE_ID;
+  Boolean(employeeId) && employeeId !== getDefinedValue('TEST_EMPLOYEE_ID', employeeData.testData.employeeId || '');
 
 // READ: list and lookup APIs do not change shared employee records.
 test.describe('Employee List APIs', () => {
@@ -1198,7 +1207,7 @@ test.describe('Employee Asset Assignment APIs', () => {
       await employeeClient.updateAssignedIds({
         existingEmpId: null,
         newEmpId: assetEmployeeId,
-        assignedId: process.env.TEST_ASSET_ID
+        assignedId: resolvedAssetId
       });
 
     expect(response.status())
@@ -1214,7 +1223,7 @@ test.describe('Employee Asset Assignment APIs', () => {
       await employeeClient.updateAssignedIds({
         existingEmpId: null,
         newEmpId: process.env.INVALID_EMPLOYEE_ID,
-        assignedId: process.env.TEST_ASSET_ID
+        assignedId: resolvedAssetId
       });
 
     expect([200, 400, 404, 500])
@@ -1246,7 +1255,7 @@ test.describe('Employee Asset Assignment APIs', () => {
       await employeeClient.updateAssignedIds({
         existingEmpId: null,
         newEmpId: assetEmployeeId,
-        assignedId: process.env.TEST_ASSET_ID
+        assignedId: resolvedAssetId
       });
 
     expect([200, 400, 409])
@@ -1261,7 +1270,7 @@ test.describe('Employee Asset Assignment APIs', () => {
         await employeeClient.updateAssignedIds({
           existingEmpId: null,
           newEmpId: assetEmployeeId,
-          assignedId: process.env.TEST_ASSET_ID
+          assignedId: resolvedAssetId
         });
 
       expect(response.status())
@@ -1507,7 +1516,7 @@ test.describe('Employee Asset Unassign APIs', () => {
     const response =
       await employeeClient.unassignAsset(
         assetEmployeeId,
-        process.env.TEST_ASSET_ID
+        resolvedAssetId
       );
 
     expect(response.status())
@@ -1528,7 +1537,7 @@ test.describe('Employee Asset Unassign APIs', () => {
     const response =
       await employeeClient.unassignAsset(
         process.env.INVALID_EMPLOYEE_ID,
-        process.env.TEST_ASSET_ID
+        resolvedAssetId
       );
 
     expect([404, 500])
@@ -1572,13 +1581,13 @@ test.describe('Employee Asset Unassign APIs', () => {
 
     await employeeClient.unassignAsset(
       assetEmployeeId,
-      process.env.TEST_ASSET_ID
+      resolvedAssetId
     );
 
     const response =
       await employeeClient.unassignAsset(
         assetEmployeeId,
-        process.env.TEST_ASSET_ID
+        resolvedAssetId
       );
 
     expect([200, 404])
@@ -1593,7 +1602,7 @@ test.describe('Employee Asset Unassign APIs', () => {
     const response =
       await employeeClient.unassignAsset(
         assetEmployeeId,
-        process.env.TEST_ASSET_ID
+        resolvedAssetId
       );
 
     if (response.status() === 200) {

@@ -1,3 +1,5 @@
+const path = require('path');
+
 const DEFAULT_ENV_FALLBACKS = {
   TEST_EMPLOYEE_ID: '',
   TEST_EMPLOYEE_ID_FOR_UPDATES: '',
@@ -7,6 +9,8 @@ const DEFAULT_ENV_FALLBACKS = {
   ADMIN_EMPLOYEE_ID: '',
   MANAGER_EMPLOYEE_ID: '',
   TEST_ASSET_ID: '',
+  TEST_ASSET_TYPE_ID: '',
+  TEST_ASSET_MODEL_ID: '',
   TEST_EMPLOYEE_WITHOUT_ASSETS_ID: '',
   TEST_EMPLOYEE_ID_WITHOUT_PHOTO: '',
   TEST_ROLE_ID: '',
@@ -69,10 +73,29 @@ const resolveTemplateValues = (value) => {
   return value;
 };
 
-const loadResolvedJson = (filePath) => resolveTemplateValues(require(filePath));
+const resolveProjectJsonPath = (filePath) => {
+  const normalizedPath = filePath.replace(/\\/g, '/');
+  const testDataIndex = normalizedPath.indexOf('test-data/');
+
+  if (testDataIndex !== -1) {
+    return path.resolve(process.cwd(), normalizedPath.slice(testDataIndex));
+  }
+
+  return path.isAbsolute(filePath)
+    ? filePath
+    : path.resolve(process.cwd(), filePath);
+};
+
+// Load JSON from the project root even when callers pass paths like
+// '../test-data/employee.json' or '../../test-data/employee.json'.
+const loadResolvedJson = (filePath) => {
+  const resolvedPath = resolveProjectJsonPath(filePath);
+  return resolveTemplateValues(require(resolvedPath));
+};
 
 module.exports = {
   DEFAULT_ENV_FALLBACKS,
+  resolveProjectJsonPath,
   resolveTemplateString,
   resolveTemplateValues,
   loadResolvedJson

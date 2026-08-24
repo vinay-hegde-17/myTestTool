@@ -1,5 +1,10 @@
 const { test, expect } = require('../../fixtures/asset.fixture');
 const { HTTP_STATUS } = require('../../api/constants/asset.constants');
+const { loadResolvedJson } = require('../../utils/testData.util');
+const assetData = loadResolvedJson('../../test-data/asset.json');
+
+const resolvedAssetTypeId = assetData.testData.assetTypeId || '';
+const resolvedAssetModelId = assetData.testData.assetModelId || '';
 
 test.describe('Asset Module - Empty Data Validation', () => {
     test.describe('Read Operations', () => {
@@ -31,8 +36,8 @@ test.describe('Asset Module - Empty Data Validation', () => {
     test.describe('Create Operations', () => {
         test('TC_EMPTY_004 Create asset without assetId @emptydata @sanity @create', async ({ assetClient }) => {
             const payload = {
-                type: process.env.TEST_ASSET_TYPE_ID,
-                model: process.env.TEST_ASSET_MODEL_ID,
+                type: resolvedAssetTypeId,
+                model: resolvedAssetModelId,
                 description: 'Playwright Test Asset',
                 dateOfPurchase: '2023-06-01',
                 notInUse: false
@@ -45,7 +50,7 @@ test.describe('Asset Module - Empty Data Validation', () => {
         test('TC_EMPTY_005 Create asset without type @emptydata @regression @create', async ({ assetClient }) => {
             const payload = {
                 assetId: `AUTO_${Date.now()}`,
-                model: process.env.TEST_ASSET_MODEL_ID,
+                model: resolvedAssetModelId,
                 description: 'Playwright Test Asset',
                 dateOfPurchase: '2023-06-01',
                 notInUse: false
@@ -58,7 +63,7 @@ test.describe('Asset Module - Empty Data Validation', () => {
         test('TC_EMPTY_006 Create asset without model @emptydata @regression @create', async ({ assetClient }) => {
             const payload = {
                 assetId: `AUTO_${Date.now()}`,
-                type: process.env.TEST_ASSET_TYPE_ID,
+                type: resolvedAssetTypeId,
                 description: 'Playwright Test Asset',
                 dateOfPurchase: '2023-06-01',
                 notInUse: false
@@ -71,8 +76,8 @@ test.describe('Asset Module - Empty Data Validation', () => {
         test('TC_EMPTY_007 Create asset without description @emptydata @regression @create', async ({ assetClient }) => {
             const payload = {
                 assetId: `AUTO_${Date.now()}`,
-                type: process.env.TEST_ASSET_TYPE_ID,
-                model: process.env.TEST_ASSET_MODEL_ID,
+                type: resolvedAssetTypeId,
+                model: resolvedAssetModelId,
                 dateOfPurchase: '2023-06-01',
                 notInUse: false
             };
@@ -84,8 +89,8 @@ test.describe('Asset Module - Empty Data Validation', () => {
         test('TC_EMPTY_008 Create asset without dateOfPurchase @emptydata @regression @create', async ({ assetClient }) => {
             const payload = {
                 assetId: `AUTO_${Date.now()}`,
-                type: process.env.TEST_ASSET_TYPE_ID,
-                model: process.env.TEST_ASSET_MODEL_ID,
+                type: resolvedAssetTypeId,
+                model: resolvedAssetModelId,
                 description: 'Playwright Test Asset',
                 notInUse: false
             };

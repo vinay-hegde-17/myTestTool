@@ -1,6 +1,11 @@
 const { test, expect } = require('../../fixtures/asset.fixture');
 const { HTTP_STATUS } = require('../../api/constants/asset.constants');
-const assetData = require('../../test-data/asset.json');
+const { loadResolvedJson } = require('../../utils/testData.util');
+const assetData = loadResolvedJson('../../test-data/asset.json');
+
+const resolvedAssetTypeId = assetData.testData.assetTypeId || '';
+const resolvedAssetModelId = assetData.testData.assetModelId || '';
+const resolvedAssetId = assetData.testData.assetId || '';
 
 test.describe('Asset Read APIs', () => {
 
@@ -147,8 +152,8 @@ test.describe('Asset Management APIs', () => {
         const payload = {
             ...assetData.asset,
             assetId: `AUTO_${Date.now()}`,
-            type: process.env.TEST_ASSET_TYPE_ID,
-            model: process.env.TEST_ASSET_MODEL_ID
+            type: resolvedAssetTypeId,
+            model: resolvedAssetModelId
         };
 
         const response =
@@ -166,8 +171,8 @@ test.describe('Asset Management APIs', () => {
         const payload = {
             ...assetData.asset,
             assetId: 'As1',
-            type: process.env.TEST_ASSET_TYPE_ID,
-            model: process.env.TEST_ASSET_MODEL_ID
+            type: resolvedAssetTypeId,
+            model: resolvedAssetModelId
         };
 
         const response =
@@ -196,12 +201,12 @@ test.describe('Asset Management APIs', () => {
 
         const response =
             await assetClient.updateAsset(
-                process.env.TEST_ASSET_ID,
+                resolvedAssetId,
                 {
                     ...assetData.asset,
                     assetId: 'As1',
-                    type: process.env.TEST_ASSET_TYPE_ID,
-                    model: process.env.TEST_ASSET_MODEL_ID,
+                    type: resolvedAssetTypeId,
+                    model: resolvedAssetModelId,
                     description: 'Updated Asset',
                     dateOfPurchase: '2023-06-01',
                     notInUse: false
@@ -238,7 +243,7 @@ test.describe('Asset Management APIs', () => {
 
         const response =
             await assetClient.updateAsset(
-                process.env.TEST_ASSET_ID,
+                resolvedAssetId,
                 {
                     assetId: 'As1'
                 }
@@ -257,7 +262,7 @@ test.describe('Asset Management APIs', () => {
             ...assetData.asset,
             assetId: `AUTO_${Date.now()}`,
             type: assetData.invalid.invalidTypeId,
-            model: process.env.TEST_ASSET_MODEL_ID
+            model: resolvedAssetModelId
         };
 
         const response =
@@ -275,7 +280,7 @@ test.describe('Asset Management APIs', () => {
         const payload = {
             ...assetData.asset,
             assetId: `AUTO_${Date.now()}`,
-            type: process.env.TEST_ASSET_TYPE_ID,
+            type: resolvedAssetTypeId,
             model: assetData.invalid.invalidModelId
         };
 
@@ -294,8 +299,8 @@ test.describe('Asset Management APIs', () => {
         const payload = {
             ...assetData.asset,
             assetId: `AUTO_${Date.now()}`,
-            type: process.env.TEST_ASSET_TYPE_ID,
-            model: process.env.TEST_ASSET_MODEL_ID
+            type: resolvedAssetTypeId,
+            model: resolvedAssetModelId
         };
 
         const response =
@@ -324,7 +329,7 @@ test.describe('Asset Management APIs', () => {
 
         const response =
             await assetClient.updateAsset(
-                process.env.TEST_ASSET_ID,
+                resolvedAssetId,
                 {
                     description: 'Schema Validation'
                 }

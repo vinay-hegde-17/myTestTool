@@ -7,8 +7,6 @@ module.exports = defineConfig({
 
   testDir: './tests',
 
-  testMatch: '**/*.api.spec.js',
-
   timeout: process.env.PLAYWRIGHT_TIMEOUT
     ? parseInt(process.env.PLAYWRIGHT_TIMEOUT, 10)
     : 60_000,
@@ -24,9 +22,6 @@ module.exports = defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 2 : undefined,
 
-  // Exclude empty-data tests by default
-  grepInvert: /@emptydata/,
-
   reporter: [
     ['list'],
     ['allure-playwright', {
@@ -41,7 +36,13 @@ module.exports = defineConfig({
   projects: [
     {
       name: 'api',
-      testMatch: '**/*.api.spec.js',
+      testMatch: ['**/*.api.spec.js'],
+      grepInvert: /@emptydata/i,
+    },
+    {
+      name: 'empty',
+      testMatch: ['empty/**/*.spec.js'],
+      grep: /@emptydata/i,
     },
   ],
 });

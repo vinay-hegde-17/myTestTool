@@ -2,6 +2,7 @@ const { test, expect } = require('../../fixtures/employee.fixture');
 const { HTTP_STATUS } = require('../../api/constants/employee.constants');
 const { loadResolvedJson } = require('../../utils/testData.util');
 const employeeData = loadResolvedJson('../../test-data/employee.json');
+const resolvedAssetId = employeeData.testData.assetId || '';
 
 test.describe('Employee Module - Empty Data Validation', () => {
     test.describe('Read Operations', () => {
@@ -108,7 +109,7 @@ test.describe('Employee Module - Empty Data Validation', () => {
         test('TC_EMPTY_013 Update assigned IDs without existingEmpId @emptydata @sanity @update', async ({ employeeClient }) => {
             const response = await employeeClient.updateAssignedIds({
                 newEmpId: process.env.TEST_EMPLOYEE_ID,
-                assignedId: process.env.TEST_ASSET_ID
+                assignedId: resolvedAssetId
             });
             expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND, HTTP_STATUS.INTERNAL_SERVER_ERROR]).toContain(response.status());
         });
@@ -116,7 +117,7 @@ test.describe('Employee Module - Empty Data Validation', () => {
         test('TC_EMPTY_014 Update assigned IDs without newEmpId @emptydata @sanity @update', async ({ employeeClient }) => {
             const response = await employeeClient.updateAssignedIds({
                 existingEmpId: process.env.TEST_EMPLOYEE_ID,
-                assignedId: process.env.TEST_ASSET_ID
+                assignedId: resolvedAssetId
             });
             expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND, HTTP_STATUS.INTERNAL_SERVER_ERROR]).toContain(response.status());
         });
@@ -147,7 +148,7 @@ test.describe('Employee Module - Empty Data Validation', () => {
 
     test.describe('Delete and Utility Operations', () => {
         test('TC_EMPTY_019 Unassign asset with empty employeeId @emptydata @sanity @delete', async ({ employeeClient }) => {
-            const response = await employeeClient.unassignAsset('', process.env.TEST_ASSET_ID);
+            const response = await employeeClient.unassignAsset('', resolvedAssetId);
             expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(response.status());
         });
 
