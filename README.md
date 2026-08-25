@@ -1,6 +1,6 @@
 # PHYE-HRMS Playwright SDET Framework
 
-This project is a Playwright-based API automation framework for the HRMS backend. It follows a modular structure with shared fixtures, centralized HTTP status constants, environment-driven test data, and grouped test suites for CRUD and validation scenarios.
+This project is a Playwright-based API automation framework for the HRMS backend. It follows a modular structure with shared fixtures, centralized HTTP status constants, environment-driven test data, and grouped test suites for CRUD, schema contract, security, negative, and empty-data validation scenarios across 687 automated test cases.
 
 ## Project layout
 
@@ -24,6 +24,7 @@ This project is a Playwright-based API automation framework for the HRMS backend
 |   |   |-- raisedQueries.client.js
 |   |   |-- sendEmail.client.js
 |   |   |-- sendMail.client.js
+|   |   |-- server.client.js
 |   |   |-- timetracker.client.js
 |   |   |-- userRole.client.js
 |   |   `-- weeklyReport.client.js
@@ -42,6 +43,7 @@ This project is a Playwright-based API automation framework for the HRMS backend
 |       |-- raisedQueries.constants.js
 |       |-- sendEmail.constants.js
 |       |-- sendMail.constants.js
+|       |-- server.constants.js
 |       |-- timetracker.constants.js
 |       |-- userRole.constants.js
 |       `-- weeklyReport.constants.js
@@ -59,6 +61,7 @@ This project is a Playwright-based API automation framework for the HRMS backend
 |   |-- raisedQueries.fixture.js
 |   |-- sendEmail.fixture.js
 |   |-- sendMail.fixture.js
+|   |-- server.fixture.js
 |   |-- timetracker.fixture.js
 |   |-- userRole.fixture.js
 |   `-- weeklyReport.fixture.js
@@ -83,38 +86,24 @@ This project is a Playwright-based API automation framework for the HRMS backend
 |   |-- weeklyReport.json
 |   `-- files/                         # Upload examples and invalid-file fixtures
 |-- tests/
-|   |-- api/                           # Normal API validation suites
-|   |   |-- approveLeave.api.spec.js
-|   |   |-- asset.api.spec.js
-|   |   |-- auth.api.spec.js
-|   |   |-- buildVersion.api.spec.js
-|   |   |-- employee.api.spec.js
-|   |   |-- holiday.api.spec.js
-|   |   |-- itDeclaration.api.spec.js
-|   |   |-- leave.api.spec.js
-|   |   |-- module.api.spec.js
-|   |   |-- moduleUserRole.api.spec.js
-|   |   |-- raisedQueries.api.spec.js
-|   |   |-- sendEmail.api.spec.js
-|   |   |-- sendMail.api.spec.js
-|   |   |-- timetracker.api.spec.js
-|   |   |-- userRole.api.spec.js
-|   |   `-- weeklyReport.api.spec.js
-|   `-- empty/                         # Empty/invalid input validation suites
-|       |-- empty-data.asset.spec.js
-|       |-- empty-data.auth.spec.js
-|       |-- empty-data.employee.spec.js
-|       |-- empty-data.holiday.spec.js
-|       |-- empty-data.itDeclaration.spec.js
-|       |-- empty-data.leave.spec.js
-|       |-- empty-data.module.spec.js
-|       |-- empty-data.moduleUserRole.spec.js
-|       |-- empty-data.raisedQueries.spec.js
-|       |-- empty-data.sendEmail.api.spec.js
-|       |-- empty-data.sendMail.api.spec.js
-|       |-- empty-data.timetracker.spec.js
-|       |-- empty-data.userRole.spec.js
-|       |-- empty-data.weeklyReport.spec.js
+|   `-- api/                           # Consolidated API test suites (687 tests)
+|       |-- approveLeave.api.spec.js
+|       |-- asset.api.spec.js
+|       |-- auth.api.spec.js
+|       |-- buildVersion.api.spec.js
+|       |-- employee.api.spec.js
+|       |-- holiday.api.spec.js
+|       |-- itDeclaration.api.spec.js
+|       |-- leave.api.spec.js
+|       |-- module.api.spec.js
+|       |-- moduleUserRole.api.spec.js
+|       |-- raisedQueries.api.spec.js
+|       |-- sendEmail.api.spec.js
+|       |-- sendMail.api.spec.js
+|       |-- server.api.spec.js
+|       |-- timetracker.api.spec.js
+|       |-- userRole.api.spec.js
+|       `-- weeklyReport.api.spec.js
 |-- utils/
 |   |-- testData.util.js               # Resolves env-based template values
 |   `-- token.util.js                  # Reads cached QA bearer token
@@ -139,8 +128,10 @@ Generated runtime folders are ignored by Git: `.cache/`, `reports/`, `test-resul
 - Environment-driven JSON data via [utils/testData.util.js](utils/testData.util.js)
 - Shared QA token setup via [fixtures/auth.fixture.js](fixtures/auth.fixture.js) and [globalSetup.js](globalSetup.js)
 - Grouped functional suites by read/create/update/delete operations
-- Consistent test tagging using `@read`, `@create`, `@update`, `@delete`, `@smoke`, `@sanity`, `@regression`, and module tags such as `@employee`, `@leave`, `@userrole`, `@assets`, etc.
-- Empty-data validation kept separate from normal API-positive suites
+- Standardized test tagging across all 687 tests:
+  - **Domain Tags**: `@approveleave`, `@assets`, `@auth`, `@buildversion`, `@employee`, `@holiday`, `@itdeclaration`, `@leave`, `@module`, `@moduleuserrole`, `@raisedqueries`, `@sendemail`, `@sendmail`, `@server`, `@timetracker`, `@userrole`, `@weeklyreport`
+  - **Validation Tags**: `@schema`, `@negative`, `@security`, `@emptydata`
+  - **Suite Tags**: `@smoke`, `@sanity`, `@regression`
 
 ## Quick start
 
@@ -169,47 +160,42 @@ npm test
 
 ## Available commands
 
-| Command | Purpose |
-|---|---|
-| `npm test` | Run the default project flow |
-| `npm run test:api` | Run all API suites |
-| `npm run test:smoke` | Run tests tagged with `@smoke` |
-| `npm run test:sanity` | Run tests tagged with `@sanity` |
-| `npm run test:regression` | Run tests tagged with `@regression` |
-| `npm run test:empty` | Run empty-data validation suites |
-| `npm run test:headed` | Run Playwright in headed mode |
-| `npm run test:ui` | Open Playwright UI |
-| `npm run test:debug` | Run with Playwright Inspector |
-| `npm run report` | Open the generated Allure report |
+| Command                   | Purpose                                                   |
+| ------------------------- | --------------------------------------------------------- |
+| `npm test`                | Run the default API test suite                            |
+| `npm run test:api`        | Run all 687 API tests in parallel                         |
+| `npm run test:smoke`      | Run fast smoke tests tagged with `@smoke`                 |
+| `npm run test:sanity`     | Run sanity tests tagged with `@sanity`                    |
+| `npm run test:regression` | Run full regression suite tagged with `@regression`       |
+| `npm run test:empty`      | Run empty-data validation suites tagged with `@emptydata` |
+| `npm run test:headed`     | Run Playwright in headed mode                             |
+| `npm run test:ui`         | Open Playwright UI                                        |
+| `npm run test:debug`      | Run with Playwright Inspector                             |
+| `npm run report`          | Open the generated Allure report                          |
 
 ## Test-data model
 
 Most test-data files use environment placeholders instead of hardcoded runtime IDs. Example values are loaded and resolved in [utils/testData.util.js](utils/testData.util.js), which replaces placeholders such as `{{TEST_EMPLOYEE_ID}}`, `{{TEST_ROLE_ID}}`, and `{{TEST_MANAGER_ID}}` from environment variables or fallback defaults.
 
-This keeps the suite portable across local, QA, and CI setup without embedding a single environment-specific record ID in the repository.
+This keeps the suite portable across local, QA, and CI setups without embedding a single environment-specific record ID in the repository.
 
-## Empty-data validation vs normal API tests
+## Test suite architecture
 
-The framework keeps two layers:
+All API test suites under [tests/api](tests/api) are structured with standardized describe blocks:
 
-- Normal API suites: real contract and behavior tests under [tests/api](tests/api)
-- Empty-data suites: invalid/empty/missing input validation under [tests/empty](tests/empty)
-
-This separation helps keep the suite readable and easier to debug:
-- API tests verify the expected happy-path and contract behavior
-- empty-data tests validate malformed or incomplete inputs
+- **Functional Operations**: Feature-based describes (`Read Operations`, `Create Operations`, `Update Operations`, `Delete Operations`)
+- **Authorization & Security Validation**: Tests unauthenticated access against protected endpoints
+- **Empty Data Validation**: Validates missing mandatory parameters and empty JSON payloads
 
 ## CI / GitHub Actions
 
-The GitHub workflow expects a real backend URL and a valid QA auth path, not `localhost` from a GitHub-hosted runner.
+The GitHub workflow expects a hosted backend URL and valid QA authentication settings.
 
 Important:
-- `API_BASE_URL` must point to a host reachable from GitHub Actions
-- either `QA_TOKEN` or `TEST_EMAIL` must be provided
-- for local execution, `localhost` is valid if the API is running on the machine
-- for GitHub-hosted runners, use a remote backend or self-hosted runner
 
-The workflow file is in [.github/workflows/playwright.yml](.github/workflows/playwright.yml).
+- `API_BASE_URL` must point to a host reachable from GitHub Actions (set as a GitHub Repository Variable)
+- Either `QA_TOKEN` or `TEST_EMAIL` must be provided in GitHub Secrets / Variables
+- The workflow file is located in [.github/workflows/playwright.yml](.github/workflows/playwright.yml).
 
 ## Adding or extending a module
 
@@ -217,11 +203,5 @@ The workflow file is in [.github/workflows/playwright.yml](.github/workflows/pla
 2. Add request methods in `api/clients/`
 3. Add or extend the shared fixture in `fixtures/`
 4. Add JSON examples in `test-data/`
-5. Create/update the suite in `tests/api/` or `tests/empty/`
-6. Keep module tags and CRUD grouping consistent with the rest of the suite
-
-## Notes
-
-- The suite is designed for API validation and contract testing, not browser automation by default.
-- Allure is enabled for reporting. Raw results are stored under `reports/allure-results/`, and the generated HTML report is stored under `reports/allure-report/`.
-- Local auth state is cached under `.cache/` to reduce repeated QA token generation.
+5. Create or update the spec file in `tests/api/`
+6. Apply appropriate domain (`@domain`) and functional (`@smoke`, `@sanity`, `@regression`, `@schema`, `@negative`, `@security`, `@emptydata`) tags.
