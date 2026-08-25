@@ -137,12 +137,6 @@ test.describe("Time Tracker Employee List APIs", () => {
     expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 
-  // ---------------------------------------------------------------
-  // TC14 was rewritten to match the ACTUAL response contract of
-  // GET /employees, which returns [{ _id, firstName, lastName }],
-  // not { name }. The backend also sorts by firstName only, so we
-  // assert against that, not a concatenated full name.
-  // ---------------------------------------------------------------
   test("TC14 Verify Employees Are Sorted Alphabetically @read @timetracker @regression", async ({
     timeTrackerClient,
   }) => {
@@ -157,13 +151,6 @@ test.describe("Time Tracker Employee List APIs", () => {
     expect(firstNames).toEqual(sortedFirstNames);
   });
 
-  // ---------------------------------------------------------------
-  // TC15: the API filters inactive employees server-side (via
-  // `activeStatus: true` in the populate/match clause) but does not
-  // expose an `isActive` field in the response, so we can't assert
-  // on that field directly. Instead we assert that a known inactive
-  // employee's _id never appears in the "all" list.
-  // ---------------------------------------------------------------
   test("TC15 Verify Inactive Employees Are Excluded @read @timetracker @regression", async ({
     timeTrackerClient,
   }) => {
@@ -182,12 +169,6 @@ test.describe("Time Tracker Employee List APIs", () => {
     expect(ids).not.toContain(timetrackerData.employee.inactiveEmployeeId);
   });
 
-  // ---------------------------------------------------------------
-  // TC16: the API filters by dateOfJoining server-side but does not
-  // return a `joiningDate` field, so we can't assert on the field
-  // directly. Instead assert that a known late joiner's _id never
-  // appears in the filtered list.
-  // ---------------------------------------------------------------
   test("TC16 Verify Employees Joined After Selected Month Are Excluded @read @timetracker @regression", async ({
     timeTrackerClient,
   }) => {
@@ -208,11 +189,6 @@ test.describe("Time Tracker Employee List APIs", () => {
     expect(ids).not.toContain(timetrackerData.employee.lateJoinerEmployeeId);
   });
 
-  // ---------------------------------------------------------------
-  // TC17: schema check updated to the fields the backend actually
-  // returns: _id, firstName, lastName. No `name` or `status` field
-  // exists on this endpoint.
-  // ---------------------------------------------------------------
   test("TC17 Verify Employee List Response Schema @schema @timetracker @regression", async ({
     timeTrackerClient,
   }) => {

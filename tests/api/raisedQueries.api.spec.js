@@ -53,9 +53,6 @@ test.describe("Raised Query Read & Filter APIs", () => {
     }
   });
 
-  // TC03/TC04 originally asserted 204 for "no unanswered" / "no answered" queries.
-  // There is no delete/cleanup endpoint on this router, so the seed data can never be driven to an empty state.
-  // Skipped until a dedicated empty-state fixture/DB is available.
   test.skip("TC03 Get queries when no unanswered queries exist @read @raisedqueries @regression", async ({
     raisedQueriesClient,
   }) => {
@@ -116,7 +113,6 @@ test.describe("Query Type APIs", () => {
     expect(Array.isArray(body)).toBeTruthy();
   });
 
-  // No delete/cleanup endpoint exists to empty the query-type collection. Skipped.
   test.skip("TC09 Get query types when no records exist @read @raisedqueries @regression", async ({
     raisedQueriesClient,
   }) => {
@@ -495,7 +491,6 @@ test.describe("FAQ Read & Validation APIs", () => {
     expect(body.length).toBeGreaterThan(0);
   });
 
-  // No delete/cleanup endpoint exists to guarantee showInFAQ is false on every record. Skipped.
   test.skip("TC40 Get FAQ when no records exist @read @raisedqueries @faq @regression", async ({
     raisedQueriesClient,
   }) => {
