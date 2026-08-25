@@ -1,14 +1,13 @@
-const { HTTP_STATUS } = require('./httpStatus.constants');
+const { HTTP_STATUS } = require("./httpStatus.constants");
 
 const MODULE_USER_ROLE_ENDPOINTS = {
+  GET_ALL: "/moduleUserRole",
 
-    GET_ALL: '/moduleUserRole',
+  GET_BY_ROLE: "/moduleUserRole",
 
-    GET_BY_ROLE: '/moduleUserRole',
+  CREATE: "/moduleUserRole",
 
-    CREATE: '/moduleUserRole',
-
-    UPDATE_BY_ROLE: '/moduleUserRole'
+  UPDATE_BY_ROLE: "/moduleUserRole",
 };
 
 module.exports = { MODULE_USER_ROLE_ENDPOINTS, HTTP_STATUS };

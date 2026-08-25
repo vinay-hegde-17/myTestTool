@@ -1,21 +1,19 @@
-const { HTTP_STATUS } = require('./httpStatus.constants');
+const { HTTP_STATUS } = require("./httpStatus.constants");
 
 const ASSET_ENDPOINTS = {
+  GET_ASSETS: "/assets",
 
-    GET_ASSETS: '/assets',
+  GET_ASSET_TYPES: "/assets/types",
 
-    GET_ASSET_TYPES: '/assets/types',
+  GET_ASSET_MODELS: "/assets/models",
 
-    GET_ASSET_MODELS: '/assets/models',
+  CREATE_ASSET: "/assets",
 
-    CREATE_ASSET: '/assets',
+  UPDATE_ASSET: "/assets",
 
-    UPDATE_ASSET: '/assets',
+  CREATE_ASSET_TYPE: "/assets/type",
 
-    CREATE_ASSET_TYPE: '/assets/type',
-
-    CREATE_ASSET_MODEL: '/assets/model'
-
+  CREATE_ASSET_MODEL: "/assets/model",
 };
 
 module.exports = { ASSET_ENDPOINTS, HTTP_STATUS };

@@ -1,25 +1,23 @@
-const { HTTP_STATUS } = require('./httpStatus.constants');
+const { HTTP_STATUS } = require("./httpStatus.constants");
 
 const HOLIDAY_ENDPOINTS = {
+  GET_HOLIDAYS: "/holidays",
 
-    GET_HOLIDAYS: "/holidays",
+  CREATE_HOLIDAY: "/holidays",
 
-    CREATE_HOLIDAY: "/holidays",
+  UPDATE_HOLIDAY: "/holidays",
 
-    UPDATE_HOLIDAY: "/holidays",
+  DELETE_HOLIDAY: "/holidays",
 
-    DELETE_HOLIDAY: "/holidays",
+  IMPORT_HOLIDAYS: "/holidays/import",
 
-    IMPORT_HOLIDAYS: "/holidays/import",
+  GET_HOLIDAY_YEARS: "/holidays/years",
 
-    GET_HOLIDAY_YEARS: "/holidays/years",
+  GET_HOLIDAYS_BY_YEAR: "/holidays",
 
-    GET_HOLIDAYS_BY_YEAR: "/holidays",
+  IMPORT_HOLIDAYS_EXCEL: "/holidays/importFromExcel",
 
-    IMPORT_HOLIDAYS_EXCEL: "/holidays/importFromExcel",
-
-    RESET_HOLIDAYS: "/holidays/test/reset"
-
+  RESET_HOLIDAYS: "/holidays/test/reset",
 };
 
 module.exports = { HOLIDAY_ENDPOINTS, HTTP_STATUS };

@@ -1,11 +1,9 @@
-const { HTTP_STATUS } = require('./httpStatus.constants');
+const { HTTP_STATUS } = require("./httpStatus.constants");
 
 const SEND_EMAIL_ENDPOINTS = {
+  SEND_LEAVE_EMAIL: "/sendEmail",
 
-    SEND_LEAVE_EMAIL: '/sendEmail',
-
-    TIMESHEET_APPROVAL: '/sendEmail/timeSheetApproval'
-
+  TIMESHEET_APPROVAL: "/sendEmail/timeSheetApproval",
 };
 
 module.exports = { HTTP_STATUS, SEND_EMAIL_ENDPOINTS };

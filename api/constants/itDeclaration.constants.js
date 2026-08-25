@@ -1,29 +1,27 @@
-const { HTTP_STATUS } = require('./httpStatus.constants');
+const { HTTP_STATUS } = require("./httpStatus.constants");
 
 const IT_DECLARATION_ENDPOINTS = {
+  GET_PROOF_FILE: "/itdeclaration/file",
 
-    GET_PROOF_FILE: "/itdeclaration/file",
+  GET_IT_DECLARATION: "/itdeclaration",
 
-    GET_IT_DECLARATION: "/itdeclaration",
+  GET_PROOFS: "/itdeclaration/proofs",
 
-    GET_PROOFS: "/itdeclaration/proofs",
+  GET_ZIP_PROOFS: "/itdeclaration/zipProofs",
 
-    GET_ZIP_PROOFS: "/itdeclaration/zipProofs",
+  GET_EMPLOYEES: "/itdeclaration",
 
-    GET_EMPLOYEES: "/itdeclaration",
+  GET_ITD_CONFIGURATION: "/itdeclaration/ITDConfigurationDetails",
 
-    GET_ITD_CONFIGURATION: "/itdeclaration/ITDConfigurationDetails",
+  CREATE_IT_DECLARATION: "/itdeclaration",
 
-    CREATE_IT_DECLARATION: "/itdeclaration",
+  UPDATE_REGIME_DATA: "/itdeclaration/updateRegimeData",
 
-    UPDATE_REGIME_DATA: "/itdeclaration/updateRegimeData",
+  UPLOAD_PROOFS: "/itdeclaration/proofs",
 
-    UPLOAD_PROOFS: "/itdeclaration/proofs",
+  UPDATE_ITD_FLAGS: "/itdeclaration/ITDFlags",
 
-    UPDATE_ITD_FLAGS: "/itdeclaration/ITDFlags",
-
-    DELETE_PROOF: "/itdeclaration"
-
+  DELETE_PROOF: "/itdeclaration",
 };
 
 module.exports = { IT_DECLARATION_ENDPOINTS, HTTP_STATUS };

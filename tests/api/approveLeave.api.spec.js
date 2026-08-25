@@ -1,83 +1,106 @@
-const { test, expect } = require('../../fixtures/approveLeave.fixture');
-const { HTTP_STATUS } = require('../../api/constants/approveLeave.constants');
-const { loadResolvedJson } = require('../../utils/testData.util');
-const approveLeaveData = loadResolvedJson('../../test-data/approveLeave.json');
+const { test, expect } = require("../../fixtures/approveLeave.fixture");
+const { HTTP_STATUS } = require("../../api/constants/approveLeave.constants");
+const { loadResolvedJson } = require("../../utils/testData.util");
+const approveLeaveData = loadResolvedJson("../../test-data/approveLeave.json");
 
-test.describe('Approve Leave APIs', () => {
+test.describe("Approve Leave APIs", () => {
+  test.describe("Update Operations", () => {
+    test("TC01 Approve leave request successfully @update @approveleave @smoke @sanity @regression", async ({
+      approveLeaveClient,
+    }) => {
+      const response = await approveLeaveClient.updateLeaveStatus(
+        approveLeaveData.valid.leaveId,
+        approveLeaveData.valid.approveStatus,
+      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    test.describe('Update Operations', () => {
-        test('TC01 should approve leave successfully @read @regression', async ({ approveLeaveClient }) => {
-            const response = await approveLeaveClient.updateLeaveStatus(
-                approveLeaveData.valid.leaveId,
-                approveLeaveData.valid.approveStatus
-            );
-
-            expect(response.status()).toBe(HTTP_STATUS.OK);
-
-            const body = await response.text();
-            expect(body).toContain(approveLeaveData.expected.approvedMessage);
-        });
-
-        test('TC02 should reject leave successfully @read @regression', async ({ approveLeaveClient }) => {
-            const response = await approveLeaveClient.updateLeaveStatus(
-                approveLeaveData.valid.rejectLeaveId,
-                approveLeaveData.valid.rejectStatus
-            );
-
-            expect(response.status()).toBe(HTTP_STATUS.OK);
-
-            const body = await response.text();
-            expect(body).toContain(approveLeaveData.expected.rejectedMessage);
-        });
-
-        test('TC03 should return approved message for approval flow @read @regression', async ({ approveLeaveClient }) => {
-            const response = await approveLeaveClient.updateLeaveStatus(
-                approveLeaveData.valid.approveLeaveId,
-                approveLeaveData.valid.approveStatus
-            );
-
-            expect(response.status()).toBe(HTTP_STATUS.OK);
-
-            const body = await response.text();
-            expect(body).toContain(approveLeaveData.expected.approvedMessage);
-        });
-
-        test('TC04 should return rejected message for rejection flow @read @regression', async ({ approveLeaveClient }) => {
-            const response = await approveLeaveClient.updateLeaveStatus(
-                approveLeaveData.valid.rejectLeaveId,
-                approveLeaveData.valid.rejectStatus
-            );
-
-            expect(response.status()).toBe(HTTP_STATUS.OK);
-
-            const body = await response.text();
-            expect(body).toContain(approveLeaveData.expected.rejectedMessage);
-        });
+      const body = await response.text();
+      expect(body).toContain(approveLeaveData.expected.approvedMessage);
     });
 
-    test.describe('Validation and Error Handling', () => {
-        test('TC05 should reject already processed leave request @read @regression', async ({ approveLeaveClient }) => {
-            const response = await approveLeaveClient.updateLeaveStatus(
-                approveLeaveData.processed.leaveId,
-                approveLeaveData.valid.approveStatus
-            );
+    test("TC02 Reject leave request successfully @update @approveleave @sanity @regression", async ({
+      approveLeaveClient,
+    }) => {
+      const response = await approveLeaveClient.updateLeaveStatus(
+        approveLeaveData.valid.rejectLeaveId,
+        approveLeaveData.valid.rejectStatus,
+      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
-            expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
-
-            const body = await response.text();
-            expect(body).toContain(approveLeaveData.processed.expectedMessage);
-        });
-
-        test('TC06 should return not found for non-existing leave id @read @regression', async ({ approveLeaveClient }) => {
-            const response = await approveLeaveClient.updateLeaveStatus(
-                approveLeaveData.invalid.nonExistingLeaveId,
-                approveLeaveData.valid.approveStatus
-            );
-
-            expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
-
-            const body = await response.text();
-            expect(body).toBe(approveLeaveData.expected.notFoundMessage);
-        });
+      const body = await response.text();
+      expect(body).toContain(approveLeaveData.expected.rejectedMessage);
     });
+
+    test("TC03 Update leave status using pre-encoded parameters @update @approveleave @regression", async ({
+      approveLeaveClient,
+    }) => {
+      const encodedLeaveId = Buffer.from(
+        approveLeaveData.valid.leaveId,
+      ).toString("base64");
+      const encodedStatus = Buffer.from(
+        approveLeaveData.valid.approveStatus,
+      ).toString("base64");
+
+      const response = await approveLeaveClient.updateLeaveStatusWithEncodedId(
+        encodedLeaveId,
+        encodedStatus,
+      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
+
+      const body = await response.text();
+      expect(body).toContain(approveLeaveData.expected.approvedMessage);
+    });
+  });
+
+  test.describe("Validation and Error Handling", () => {
+    test("TC04 Reject already processed leave request @negative @update @approveleave @regression", async ({
+      approveLeaveClient,
+    }) => {
+      const response = await approveLeaveClient.updateLeaveStatus(
+        approveLeaveData.processed.leaveId,
+        approveLeaveData.valid.approveStatus,
+      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+
+      const body = await response.text();
+      expect(body).toContain(approveLeaveData.processed.expectedMessage);
+    });
+
+    test("TC05 Return not found for non-existing leave id @negative @update @approveleave @regression", async ({
+      approveLeaveClient,
+    }) => {
+      const response = await approveLeaveClient.updateLeaveStatus(
+        approveLeaveData.invalid.nonExistingLeaveId,
+        approveLeaveData.valid.approveStatus,
+      );
+      expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
+
+      const body = await response.text();
+      expect(body).toBe(approveLeaveData.expected.notFoundMessage);
+    });
+  });
+
+  test.describe("Approve Leave Module - Empty Data Validation", () => {
+    test.describe("Update Operations", () => {
+      test("TC_EMPTY_001 Update status with empty leaveId @emptydata @approveleave @sanity @update", async ({
+        approveLeaveClient,
+      }) => {
+        const response = await approveLeaveClient.updateLeaveStatus(
+          "",
+          approveLeaveData.valid.approveStatus,
+        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+      });
+
+      test("TC_EMPTY_002 Update status with empty status query @emptydata @approveleave @regression @update", async ({
+        approveLeaveClient,
+      }) => {
+        const response = await approveLeaveClient.updateLeaveStatus(
+          approveLeaveData.valid.leaveId,
+          "",
+        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+      });
+    });
+  });
 });

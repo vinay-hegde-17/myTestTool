@@ -37,11 +37,17 @@ module.exports = defineConfig({
     {
       name: 'api',
       testMatch: ['**/*.api.spec.js'],
-      grepInvert: /@emptydata/i,
+      grepInvert: /@emptydata|@destructive/i,
+    },
+    {
+      name: 'destructive',
+      testMatch: ['**/*.api.spec.js'],
+      grep: /@destructive/i,
+      fullyParallel: false,
     },
     {
       name: 'empty',
-      testMatch: ['empty/**/*.spec.js'],
+      testMatch: ['**/*.api.spec.js'],
       grep: /@emptydata/i,
     },
   ],
