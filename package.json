@@ -12,8 +12,9 @@
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
-    "report": "npm run allure:open",
-    "allure:open": "node scripts/run-tests.js --open-report",
+    "report": "npx allure generate reports/allure-results --clean -o reports/allure-report; npx allure open reports/allure-report",
+    "allure:generate": "npx allure generate reports/allure-results --clean -o reports/allure-report",
+    "allure:open": "npx allure open reports/allure-report",
     "test:empty": "npx playwright test --project=api --grep @emptydata"
   },
   "repository": {
