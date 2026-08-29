@@ -1,4 +1,4 @@
-const { HTTP_STATUS } = require("./httpStatus.constants");
+const { HTTP_STATUS } = require('./httpStatus');
 
 const USER_ROLE_ENDPOINTS = {
   GET_USER_ROLES: "/userRoles",

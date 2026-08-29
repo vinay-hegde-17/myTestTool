@@ -194,3 +194,81 @@ test.describe("Authentication APIs", () => {
     });
   });
 });
+
+
+// Empty-data scenarios moved from tests/empty/empty-data.auth.api.spec.js
+test.describe('Auth Empty Data APIs', () => {
+
+    test('TC_EMPTY_001 Generate JWT without accessToken @emptydata @auth @regression @smoke @sanity', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateJwtTokenWithBody({});
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC_EMPTY_002 Generate JWT with empty request body @emptydata @auth @regression @sanity', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateJwtTokenWithBody();
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+    test('TC_EMPTY_003 Generate QA token without email @emptydata @auth @regression @smoke @sanity', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateQaTokenWithBody({});
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.FORBIDDEN);
+
+    });
+
+    test('TC_EMPTY_004 Generate QA token with empty email @emptydata @auth @regression @sanity', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateQaToken('');
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.FORBIDDEN);
+
+    });
+
+    test('TC_EMPTY_005 Generate QA token with empty request body @emptydata @auth @regression @sanity', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.generateQaTokenWithBody();
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.FORBIDDEN);
+
+    });
+
+    test('TC_EMPTY_006 Validate token with empty Authorization header @emptydata @auth @regression @sanity', async ({
+        authClient
+    }) => {
+
+        const response =
+            await authClient.validateTokenWithHeader('');
+
+        expect(response.status())
+            .toBe(HTTP_STATUS.UNAUTHORIZED);
+
+    });
+
+});

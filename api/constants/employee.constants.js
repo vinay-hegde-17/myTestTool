@@ -1,4 +1,4 @@
-const { HTTP_STATUS } = require("./httpStatus.constants");
+const { HTTP_STATUS } = require('./httpStatus');
 
 const EMPLOYEE_ENDPOINTS = {
   LIST: "/employees",
@@ -35,7 +35,10 @@ const EMPLOYEE_ENDPOINTS = {
 
   UNASSIGN_ASSET: "/employees",
 
-  REMOVE_PHOTO: "/employees",
+    UNASSIGN_ASSET: '/employees',
+
+    REMOVE_PHOTO: '/employees'
+
 };
 
 module.exports = { HTTP_STATUS, EMPLOYEE_ENDPOINTS };

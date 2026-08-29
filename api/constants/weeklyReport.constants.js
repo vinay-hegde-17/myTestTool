@@ -1,4 +1,4 @@
-const { HTTP_STATUS } = require("./httpStatus.constants");
+const { HTTP_STATUS } = require('./httpStatus');
 
 const WEEKLY_REPORT_ENDPOINTS = {
   GET_WEEKLY_REPORTS: "/weeklyReports",

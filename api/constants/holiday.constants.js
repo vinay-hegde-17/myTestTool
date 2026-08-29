@@ -1,4 +1,4 @@
-const { HTTP_STATUS } = require("./httpStatus.constants");
+const { HTTP_STATUS } = require('./httpStatus');
 
 const HOLIDAY_ENDPOINTS = {
   GET_HOLIDAYS: "/holidays",

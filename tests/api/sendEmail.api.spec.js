@@ -105,3 +105,47 @@ test.describe("Send Email APIs", () => {
     });
   });
 });
+
+
+// Empty-data scenarios moved from tests/empty/empty-data.sendEmail.api.spec.js
+test.describe('Send Email Empty Data APIs', () => {
+
+    test( 'TC_EMPTY_001 Send leave email with empty request body @emptydata @sendemail @regression',
+        async ({ sendEmailClient }) => {
+
+            const response =
+                await sendEmailClient.sendLeaveEmail(
+                    sendEmailData.empty.emptyObject
+                );
+
+            /*
+             * Current backend has no request validation.
+             * Empty employeeId eventually causes failure.
+             */
+            expect(response.status())
+                .toBe(
+                    HTTP_STATUS.INTERNAL_SERVER_ERROR
+                );
+        }
+    );
+
+
+    test( 'TC_EMPTY_002 Send timesheet approval with empty request body @emptydata @sendemail @regression',
+        async ({ sendEmailClient }) => {
+
+            const response =
+                await sendEmailClient.requestTimesheetApproval(
+                    sendEmailData.empty.emptyObject
+                );
+
+            /*
+             * Current backend has no request validation.
+             */
+            expect(response.status())
+                .toBe(
+                    HTTP_STATUS.INTERNAL_SERVER_ERROR
+                );
+        }
+    );
+
+});

@@ -1,4 +1,4 @@
-const { HTTP_STATUS } = require("./httpStatus.constants");
+const { HTTP_STATUS } = require('./httpStatus');
 
 const TIME_TRACKER_ENDPOINTS = {
   GET_MULTIPLE_TIMESHEETS: "/timesheettracker",

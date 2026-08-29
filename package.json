@@ -14,7 +14,7 @@
     "test:debug": "playwright test --debug",
     "report": "npm run allure:open",
     "allure:open": "node scripts/run-tests.js --open-report",
-    "db:clean": "node scripts/clean-framework-db-data.js"
+    "test:empty": "npx playwright test --project=api --grep @emptydata"
   },
   "repository": {
     "type": "git",

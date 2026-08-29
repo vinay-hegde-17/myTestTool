@@ -1,4 +1,4 @@
-const { HTTP_STATUS } = require("./httpStatus.constants");
+const { HTTP_STATUS } = require('./httpStatus');
 
 const IT_DECLARATION_ENDPOINTS = {
   GET_PROOF_FILE: "/itdeclaration/file",

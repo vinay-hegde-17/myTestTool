@@ -1,4 +1,4 @@
-const { HTTP_STATUS } = require("./httpStatus.constants");
+const { HTTP_STATUS } = require('./httpStatus');
 
 const ASSET_ENDPOINTS = {
   GET_ASSETS: "/assets",

@@ -1,4 +1,4 @@
-const { HTTP_STATUS } = require("./httpStatus.constants");
+const { HTTP_STATUS } = require('./httpStatus');
 
 const RAISED_QUERIES_ENDPOINTS = {
   GET_ALL: "/raiseQueries",
@@ -11,7 +11,11 @@ const RAISED_QUERIES_ENDPOINTS = {
 
   UPDATE_QUERY: "/raiseQueries/update",
 
-  UPDATE_RAISE_QUERY: "/raiseQueries/updateRaiseQuery",
+    UPDATE_QUERY: '/raiseQueries/update',
+
+    UPDATE_RAISE_QUERY: '/raiseQueries/updateRaiseQuery',
+
+    GET_FAQ: '/raiseQueries/faq/all',
 
   GET_FAQ: "/raiseQueries/faq/all",
 };
