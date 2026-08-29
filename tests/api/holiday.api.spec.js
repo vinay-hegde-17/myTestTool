@@ -1232,5 +1232,5 @@ test.describe("Holiday Module - Empty Data Validation", () => {
         const response = await holidayClient.importExcel({});
         expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
-
+});
 });
