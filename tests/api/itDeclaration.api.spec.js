@@ -30,7 +30,7 @@ test.beforeAll(async ({ itDeclarationClient }) => {
   );
   expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(proofs.status());
 
-  let body = {}; try { body = await proofs.json(); } catch(e) {}
+  let body = {}; try { body = await proofs.json(); } catch (e) { }
   if (body && Array.isArray(body.proofOfSubmission)) {
     const proof = body.proofOfSubmission.find((p) => p.proofId === "TEMP_TEST");
     if (proof && Array.isArray(proof.files) && proof.files.length > 0) {
@@ -43,17 +43,14 @@ test.describe("IT Declaration - Read Operations", () => {
   test("TC01 Get proof file using uploaded fileId @read @itdeclaration @regression @smoke @sanity", async ({
     itDeclarationClient,
   }) => {
-    if (!uploadedFileId) return;
     const response = await itDeclarationClient.getProofFile(uploadedFileId);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    if (body && body.fileId) {
-      try { expect(body.fileId.toString()).toBe(uploadedFileId.toString()); } catch(e) {}
-      try { expect(body.fileName).toBeTruthy(); } catch(e) {}
-      try { expect(body.fileType).toBeTruthy(); } catch(e) {}
-      try { expect(body.base64Data).toBeTruthy(); } catch(e) {}
-    }
+    const body = await response.json();
+    expect(body.fileId.toString()).toBe(uploadedFileId.toString());
+    expect(body.fileName).toBeTruthy();
+    expect(body.fileType).toBeTruthy();
+    expect(body.base64Data).toBeTruthy();
   });
 
   test("TC02 Get proof file using invalid fileId @negative @read @itdeclaration @regression", async ({
@@ -62,10 +59,10 @@ test.describe("IT Declaration - Read Operations", () => {
     const response = await itDeclarationClient.getProofFile(
       itdData.invalid.invalidObjectId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.message).toBe(itdData.messages.invalidFileId); } catch(e) {}
+    const body = await response.json();
+    expect(body.message).toBe(itdData.messages.invalidFileId);
   });
 
   test("TC03 Get proof file using non-existing fileId @negative @read @itdeclaration @regression", async ({
@@ -74,24 +71,24 @@ test.describe("IT Declaration - Read Operations", () => {
     const response = await itDeclarationClient.getProofFile(
       itdData.invalid.nonExistingFileId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.message).toBe(itdData.messages.fileNotFound); } catch(e) {}
+    const body = await response.json();
+    expect(body.message).toBe(itdData.messages.fileNotFound);
   });
 
   test("TC04 Verify proof file response contains metadata and base64 data @schema @read @itdeclaration @regression", async ({
     itDeclarationClient,
   }) => {
     const response = await itDeclarationClient.getProofFile(uploadedFileId);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body).toHaveProperty("fileId"); } catch(e) {}
-    try { expect(body).toHaveProperty("fileName"); } catch(e) {}
-    try { expect(body).toHaveProperty("fileType"); } catch(e) {}
-    try { expect(body).toHaveProperty("base64Data"); } catch(e) {}
-    try { expect(typeof body.base64Data).toBe("string"); } catch(e) {}
+    const body = await response.json();
+    expect(body).toHaveProperty("fileId");
+    expect(body).toHaveProperty("fileName");
+    expect(body).toHaveProperty("fileType");
+    expect(body).toHaveProperty("base64Data");
+    expect(typeof body.base64Data).toBe("string");
   });
 
   test("TC06 Get employee IT declaration @read @itdeclaration @regression @smoke @sanity", async ({
@@ -101,11 +98,11 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.existing.employeeId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.regime).toBe(itdData.existing.regime); } catch(e) {}
-    try { expect(body).toHaveProperty("financialYear"); } catch(e) {}
+    const body = await response.json();
+    expect(body.regime).toBe(itdData.existing.regime);
+    expect(body).toHaveProperty("financialYear");
   });
 
   test("TC07 Get IT declaration using invalid employeeId @negative @read @itdeclaration @regression", async ({
@@ -115,10 +112,10 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.invalid.invalidObjectId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body).toBeNull(); } catch(e) {}
+    const body = await response.json();
+    expect(body).toBeNull();
   });
 
   test("TC08 Get IT declaration using non-existing employeeId @negative @read @itdeclaration @regression", async ({
@@ -128,10 +125,10 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.invalid.nonExistingEmployeeId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body).toBeNull(); } catch(e) {}
+    const body = await response.json();
+    expect(body).toBeNull();
   });
 
   test("TC09 Verify IT declaration response schema @schema @read @itdeclaration @regression", async ({
@@ -141,11 +138,11 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.existing.employeeId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body).toHaveProperty("regime"); } catch(e) {}
-    try { expect(body).toHaveProperty("financialYear"); } catch(e) {}
+    const body = await response.json();
+    expect(body).toHaveProperty("regime");
+    expect(body).toHaveProperty("financialYear");
   });
 
   test("TC11 Get proof of submission @read @itdeclaration @regression @smoke @sanity", async ({
@@ -155,11 +152,11 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.existing.employeeId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body).toHaveProperty("proofOfSubmission"); } catch(e) {}
-    try { expect(Array.isArray(body.proofOfSubmission)).toBeTruthy(); } catch(e) {}
+    const body = await response.json();
+    expect(body).toHaveProperty("proofOfSubmission");
+    expect(Array.isArray(body.proofOfSubmission)).toBeTruthy();
   });
 
   test("TC12 Get proofs when declaration does not exist @negative @read @itdeclaration @regression", async ({
@@ -169,7 +166,7 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.invalid.nonExistingEmployeeId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NO_CONTENT);
   });
 
   test("TC13 Verify proof response schema @schema @read @itdeclaration @regression", async ({
@@ -179,12 +176,12 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.existing.employeeId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body).toHaveProperty("_id"); } catch(e) {}
-    try { expect(body).toHaveProperty("oldRegimeDetails"); } catch(e) {}
-    try { expect(body).toHaveProperty("proofOfSubmission"); } catch(e) {}
+    const body = await response.json();
+    expect(body).toHaveProperty("_id");
+    expect(body).toHaveProperty("oldRegimeDetails");
+    expect(body).toHaveProperty("proofOfSubmission");
   });
 
   test("TC14 Verify uploaded proof file details @read @itdeclaration @regression", async ({
@@ -194,18 +191,18 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.existing.employeeId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
+    const body = await response.json();
     const proof = (body && Array.isArray(body.proofOfSubmission)) ? body.proofOfSubmission[0] : null;
-    try { expect(proof).toHaveProperty("proofId"); } catch(e) {}
-    try { expect(proof).toHaveProperty("items"); } catch(e) {}
-    try { expect(proof).toHaveProperty("particulars"); } catch(e) {}
-    try { expect(Array.isArray(proof.files)).toBeTruthy(); } catch(e) {}
+    expect(proof).toHaveProperty("proofId");
+    expect(proof).toHaveProperty("items");
+    expect(proof).toHaveProperty("particulars");
+    expect(Array.isArray(proof.files)).toBeTruthy();
 
     if (proof && Array.isArray(proof.files) && proof.files.length > 0) {
-      try { expect(proof.files[0]).toHaveProperty("fileId"); } catch(e) {}
-      try { expect(proof.files[0]).toHaveProperty("filename"); } catch(e) {}
+      expect(proof.files[0]).toHaveProperty("fileId");
+      expect(proof.files[0]).toHaveProperty("filename");
     }
   });
 
@@ -216,10 +213,10 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.existing.employeeId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body).toHaveProperty("proofOfSubmission"); } catch(e) {}
+    const body = await response.json();
+    expect(body).toHaveProperty("proofOfSubmission");
   });
 
   test("TC17 Get zip proofs when declaration does not exist @negative @read @itdeclaration @regression", async ({
@@ -229,7 +226,7 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.invalid.nonExistingEmployeeId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NO_CONTENT);
   });
 
   test("TC18 Verify downloaded files contain base64 data @read @itdeclaration @regression", async ({
@@ -239,15 +236,15 @@ test.describe("IT Declaration - Read Operations", () => {
       itdData.existing.employeeId,
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
+    const body = await response.json();
     const proof = (body && Array.isArray(body.proofOfSubmission)) ? body.proofOfSubmission[0] : null;
-    try { expect(Array.isArray(proof.files)).toBeTruthy(); } catch(e) {}
+    expect(Array.isArray(proof.files)).toBeTruthy();
 
     if (proof && Array.isArray(proof.files) && proof.files.length > 0) {
-      try { expect(proof.files[0]).toHaveProperty("base64Data"); } catch(e) {}
-      try { expect(typeof proof.files[0].base64Data).toBe("string"); } catch(e) {}
+      expect(proof.files[0]).toHaveProperty("base64Data");
+      expect(typeof proof.files[0].base64Data).toBe("string");
     }
   });
 
@@ -258,16 +255,16 @@ test.describe("IT Declaration - Read Operations", () => {
       "old",
       itdData.oldRegime.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+    const body = await response.json();
+    expect(Array.isArray(body)).toBeTruthy();
     (Array.isArray(body) ? body : []).forEach((employee) => {
-      try { expect(employee).toHaveProperty("employeeId"); } catch(e) {}
-      try { expect(employee).toHaveProperty("firstName"); } catch(e) {}
-      try { expect(employee).toHaveProperty("lastName"); } catch(e) {}
-      try { expect(employee).toHaveProperty("employeeNumber"); } catch(e) {}
-      try { expect(employee).toHaveProperty("panNumber"); } catch(e) {}
+      expect(employee).toHaveProperty("employeeId");
+      expect(employee).toHaveProperty("firstName");
+      expect(employee).toHaveProperty("lastName");
+      expect(employee).toHaveProperty("employeeNumber");
+      expect(employee).toHaveProperty("panNumber");
     });
   });
 
@@ -278,17 +275,17 @@ test.describe("IT Declaration - Read Operations", () => {
       "new",
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+    const body = await response.json();
+    expect(Array.isArray(body)).toBeTruthy();
   });
 
   test("TC22 Get employees when no records exist @negative @read @itdeclaration @regression", async ({
     itDeclarationClient,
   }) => {
     const response = await itDeclarationClient.getEmployees("old", "2099-00");
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NO_CONTENT);
   });
 
   test("TC23 Verify employees response schema @schema @read @itdeclaration @regression", async ({
@@ -298,15 +295,15 @@ test.describe("IT Declaration - Read Operations", () => {
       "new",
       itdData.existing.financialYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
+    const body = await response.json();
     (Array.isArray(body) ? body : []).forEach((employee) => {
-      try { expect(employee).toHaveProperty("employeeId"); } catch(e) {}
-      try { expect(employee).toHaveProperty("firstName"); } catch(e) {}
-      try { expect(employee).toHaveProperty("lastName"); } catch(e) {}
-      try { expect(employee).toHaveProperty("employeeNumber"); } catch(e) {}
-      try { expect(employee).toHaveProperty("panNumber"); } catch(e) {}
+      expect(employee).toHaveProperty("employeeId");
+      expect(employee).toHaveProperty("firstName");
+      expect(employee).toHaveProperty("lastName");
+      expect(employee).toHaveProperty("employeeNumber");
+      expect(employee).toHaveProperty("panNumber");
     });
   });
 
@@ -314,22 +311,22 @@ test.describe("IT Declaration - Read Operations", () => {
     itDeclarationClient,
   }) => {
     const response = await itDeclarationClient.getITDConfiguration();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body).toBeTruthy(); } catch(e) {}
+    const body = await response.json();
+    expect(body).toBeTruthy();
   });
 
   test("TC26 Verify ITD configuration response schema @schema @read @itdeclaration @regression", async ({
     itDeclarationClient,
   }) => {
     const response = await itDeclarationClient.getITDConfiguration();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body).toHaveProperty("ENABLE_PROOF_OF_SUBMISSION"); } catch(e) {}
-    try { expect(body).toHaveProperty("REGIME_DETAILS_EDITABLE"); } catch(e) {}
-    try { expect(body).toHaveProperty("ITD_POLICY_URL"); } catch(e) {}
+    const body = await response.json();
+    expect(body).toHaveProperty("ENABLE_PROOF_OF_SUBMISSION");
+    expect(body).toHaveProperty("REGIME_DETAILS_EDITABLE");
+    expect(body).toHaveProperty("ITD_POLICY_URL");
   });
 });
 
@@ -340,12 +337,12 @@ test.describe("IT Declaration - Create Operations", () => {
     const response = await itDeclarationClient.createITDeclaration(
       itdData.oldRegime,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.employeeId).toBe(itdData.oldRegime.employeeId); } catch(e) {}
-    try { expect(body.regime).toBe("old"); } catch(e) {}
-    try { expect(body.financialYear).toBe(itdData.oldRegime.financialYear); } catch(e) {}
+    const body = await response.json();
+    expect(body.employeeId).toBe(itdData.oldRegime.employeeId);
+    expect(body.regime).toBe("old");
+    expect(body.financialYear).toBe(itdData.oldRegime.financialYear);
   });
 
   test("TC29 Create IT declaration using New Regime @create @itdeclaration @regression", async ({
@@ -354,12 +351,12 @@ test.describe("IT Declaration - Create Operations", () => {
     const response = await itDeclarationClient.createITDeclaration(
       itdData.newRegime,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.employeeId).toBe(itdData.newRegime.employeeId); } catch(e) {}
-    try { expect(body.regime).toBe("new"); } catch(e) {}
-    try { expect(body.financialYear).toBe(itdData.newRegime.financialYear); } catch(e) {}
+    const body = await response.json();
+    expect(body.employeeId).toBe(itdData.newRegime.employeeId);
+    expect(body.regime).toBe("new");
+    expect(body.financialYear).toBe(itdData.newRegime.financialYear);
   });
 
   test("TC30 Verify created IT declaration response @schema @create @itdeclaration @regression", async ({
@@ -368,13 +365,13 @@ test.describe("IT Declaration - Create Operations", () => {
     const response = await itDeclarationClient.createITDeclaration(
       itdData.newRegime,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body).toHaveProperty("_id"); } catch(e) {}
-    try { expect(body).toHaveProperty("employeeId"); } catch(e) {}
-    try { expect(body).toHaveProperty("regime"); } catch(e) {}
-    try { expect(body).toHaveProperty("financialYear"); } catch(e) {}
+    const body = await response.json();
+    expect(body).toHaveProperty("_id");
+    expect(body).toHaveProperty("employeeId");
+    expect(body).toHaveProperty("regime");
+    expect(body).toHaveProperty("financialYear");
   });
 
   test("TC31 Create duplicate IT declaration @create @itdeclaration @regression", async ({
@@ -383,10 +380,10 @@ test.describe("IT Declaration - Create Operations", () => {
     const response = await itDeclarationClient.createITDeclaration(
       itdData.duplicate,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.employeeId).toBe(itdData.duplicate.employeeId); } catch(e) {}
+    const body = await response.json();
+    expect(body.employeeId).toBe(itdData.duplicate.employeeId);
   });
 });
 
@@ -406,11 +403,11 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.updateITDeclaration(
       itdData.updatedDeclaration,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.employeeId).toBe(itdData.updatedDeclaration.employeeId); } catch(e) {}
-    try { expect(body.ownerPan).toBe(itdData.updatedDeclaration.ownerPan); } catch(e) {}
+    const body = await response.json();
+    expect(body.employeeId).toBe(itdData.updatedDeclaration.employeeId);
+    expect(body.ownerPan).toBe(itdData.updatedDeclaration.ownerPan);
   });
 
   test("TC34 Update owner PAN @update @itdeclaration @regression", async ({
@@ -419,10 +416,10 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.updateITDeclaration(
       itdData.updatedPan,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.ownerPan).toBe(itdData.updatedPan.ownerPan); } catch(e) {}
+    const body = await response.json();
+    expect(body.ownerPan).toBe(itdData.updatedPan.ownerPan);
   });
 
   test("TC35 Update old regime details @update @itdeclaration @regression", async ({
@@ -431,12 +428,12 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.updateITDeclaration(
       itdData.updatedOldRegime,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.oldRegimeDetails).toEqual(
+    const body = await response.json();
+    expect(body.oldRegimeDetails).toEqual(
       itdData.updatedOldRegime.oldRegimeDetails,
-    ); } catch(e) {}
+    );
   });
 
   test("TC36 Update non-existing IT declaration @negative @update @itdeclaration @regression", async ({
@@ -445,12 +442,12 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.updateITDeclaration(
       itdData.nonExistingDeclaration,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.message).toBe(
+    const body = await response.json();
+    expect(body.message).toBe(
       "IT declaration not found for the given employee and financial year.",
-    ); } catch(e) {}
+    );
   });
 
   test("TC38 Upload proof document @create @itdeclaration @regression @smoke @sanity", async ({
@@ -459,10 +456,10 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.uploadProofs(
       itdData.singleProof,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.message).toBe("Proof uploaded successfully"); } catch(e) {}
+    const body = await response.json();
+    expect(body.message).toBe("Proof uploaded successfully");
   });
 
   test("TC39 Upload multiple proof documents @create @itdeclaration @regression", async ({
@@ -471,10 +468,10 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.uploadProofs(
       itdData.multipleProofs,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.message).toBe("Proof uploaded successfully"); } catch(e) {}
+    const body = await response.json();
+    expect(body.message).toBe("Proof uploaded successfully");
   });
 
   test("TC40 Upload proof to existing proof category @create @itdeclaration @regression", async ({
@@ -483,10 +480,10 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.uploadProofs(
       itdData.existingProofCategory,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.message).toBe("Proof uploaded successfully"); } catch(e) {}
+    const body = await response.json();
+    expect(body.message).toBe("Proof uploaded successfully");
   });
 
   test("TC41 Upload proof to new proof category @create @itdeclaration @regression", async ({
@@ -495,10 +492,10 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.uploadProofs(
       itdData.newProofCategory,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.message).toBe("Proof uploaded successfully"); } catch(e) {}
+    const body = await response.json();
+    expect(body.message).toBe("Proof uploaded successfully");
   });
 
   test("TC42 Upload unsupported file format @negative @create @itdeclaration @regression", async ({
@@ -512,7 +509,7 @@ test.describe("IT Declaration - Update Operations", () => {
         buffer: Buffer.from("fake binary content"),
       },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
   });
 
   test("TC44 Enable proof upload @update @itdeclaration @regression @smoke @sanity", async ({
@@ -521,11 +518,11 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.updateITDFlags(
       itdData.enableProofUpload,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.status).toBe(HTTP_STATUS.OK); } catch(e) {}
-    try { expect(body.message).toBe("update successfull"); } catch(e) {}
+    const body = await response.json();
+    expect(body.status).toBe(HTTP_STATUS.OK);
+    expect(body.message).toBe("update successfull");
   });
 
   test("TC45 Disable proof upload @update @itdeclaration @regression", async ({
@@ -534,11 +531,11 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.updateITDFlags(
       itdData.disableProofUpload,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.status).toBe(HTTP_STATUS.OK); } catch(e) {}
-    try { expect(body.message).toBe("update successfull"); } catch(e) {}
+    const body = await response.json();
+    expect(body.status).toBe(HTTP_STATUS.OK);
+    expect(body.message).toBe("update successfull");
   });
 
   test("TC46 Enable regime editing @update @itdeclaration @regression", async ({
@@ -547,11 +544,11 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.updateITDFlags(
       itdData.enableRegimeEditing,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.status).toBe(HTTP_STATUS.OK); } catch(e) {}
-    try { expect(body.message).toBe("update successfull"); } catch(e) {}
+    const body = await response.json();
+    expect(body.status).toBe(HTTP_STATUS.OK);
+    expect(body.message).toBe("update successfull");
   });
 
   test("TC47 Update ITD policy URL @update @itdeclaration @regression", async ({
@@ -560,11 +557,11 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.updateITDFlags(
       itdData.updatePolicyUrl,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.status).toBe(HTTP_STATUS.OK); } catch(e) {}
-    try { expect(body.message).toBe("update successfull"); } catch(e) {}
+    const body = await response.json();
+    expect(body.status).toBe(HTTP_STATUS.OK);
+    expect(body.message).toBe("update successfull");
   });
 
   test("TC48 Update all ITD configuration @update @itdeclaration @regression", async ({
@@ -573,11 +570,11 @@ test.describe("IT Declaration - Update Operations", () => {
     const response = await itDeclarationClient.updateITDFlags(
       itdData.updateAllConfiguration,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.status).toBe(HTTP_STATUS.OK); } catch(e) {}
-    try { expect(body.message).toBe("update successfull"); } catch(e) {}
+    const body = await response.json();
+    expect(body.status).toBe(HTTP_STATUS.OK);
+    expect(body.message).toBe("update successfull");
   });
 });
 
@@ -602,7 +599,7 @@ test.describe("IT Declaration - Delete Operations", () => {
       },
     );
 
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     const proofs = await itDeclarationClient.getProofs(
       itdData.singleProof.employeeId,
@@ -611,8 +608,10 @@ test.describe("IT Declaration - Delete Operations", () => {
 
     expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(proofs.status());
 
-    let body = {}; try { body = await proofs.json(); } catch(e) {}
-    const proof = (body && Array.isArray(body.proofOfSubmission)) ? body.proofOfSubmission.find((p) => p.proofId === "TEMP_DELETE_TEST") : null;
+    const body = await proofs.json();
+    const proof = body.proofOfSubmission.find(
+      (p) => p.proofId === "TEMP_DELETE_TEST",
+    );
 
     if (proof && proof.files && proof.files.length > 0) {
       fileToDeleteId = proof.files[0].fileId;
@@ -623,17 +622,17 @@ test.describe("IT Declaration - Delete Operations", () => {
     itDeclarationClient,
   }) => {
     const response = await itDeclarationClient.deleteProof(fileToDeleteId);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-    try { expect(body.message).toBe("File deleted successfully and proof updated"); } catch(e) {}
+    const body = await response.json();
+    expect(body.message).toBe("File deleted successfully and proof updated");
   });
 
   test("TC51 Verify deleted file is no longer accessible @read @delete @itdeclaration @regression", async ({
     itDeclarationClient,
   }) => {
     const response = await itDeclarationClient.getProofFile(fileToDeleteId);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
   });
 
   test("TC52 Delete proof using non-existing fileId @negative @delete @itdeclaration @regression", async ({
@@ -642,7 +641,7 @@ test.describe("IT Declaration - Delete Operations", () => {
     const response = await itDeclarationClient.deleteProof(
       itdData.invalid.nonExistingFileId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NO_CONTENT);
   });
 });
 
@@ -651,21 +650,21 @@ test.describe("IT Declaration Module - Empty Data Validation", () => {
     test("TC_EMPTY_011 Get employees without regime query parameter @emptydata @itdeclaration @regression @read", async ({
       itDeclarationClient,
     }) => {
-      const response = await itDeclarationClient.getEmployees(
+      const response = await itDeclarationClient.getEmployeesByRegime(
         "",
         "2027-28",
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.NO_CONTENT);
     });
 
     test("TC_EMPTY_012 Get employees without financialYear query parameter @emptydata @itdeclaration @regression @read", async ({
       itDeclarationClient,
     }) => {
-      const response = await itDeclarationClient.getEmployees(
+      const response = await itDeclarationClient.getEmployeesByRegime(
         "old",
         "",
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.NO_CONTENT);
     });
   });
 
@@ -677,7 +676,7 @@ test.describe("IT Declaration Module - Empty Data Validation", () => {
         regime: "old",
         financialYear: "2027-28",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
     test("TC_EMPTY_002 Create declaration without regime @emptydata @itdeclaration @sanity @create", async ({
@@ -687,7 +686,7 @@ test.describe("IT Declaration Module - Empty Data Validation", () => {
         employeeId: process.env.TEST_EMPLOYEE_ID || "",
         financialYear: "2027-28",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
     test("TC_EMPTY_003 Create declaration without financialYear @emptydata @itdeclaration @sanity @create", async ({
@@ -697,14 +696,14 @@ test.describe("IT Declaration Module - Empty Data Validation", () => {
         employeeId: process.env.TEST_EMPLOYEE_ID || "",
         regime: "old",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
     test("TC_EMPTY_004 Create declaration with empty request body @emptydata @itdeclaration @regression @create", async ({
       itDeclarationClient,
     }) => {
       const response = await itDeclarationClient.createITDeclaration({});
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
   });
 
@@ -712,26 +711,26 @@ test.describe("IT Declaration Module - Empty Data Validation", () => {
     test("TC_EMPTY_005 Update regime with empty request body @emptydata @itdeclaration @regression @update", async ({
       itDeclarationClient,
     }) => {
-      const response = await itDeclarationClient.updateRegime({});
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      const response = await itDeclarationClient.updateRegimeData({});
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
     test("TC_EMPTY_006 Update regime without employeeId @emptydata @itdeclaration @sanity @update", async ({
       itDeclarationClient,
     }) => {
-      const response = await itDeclarationClient.updateRegime({
+      const response = await itDeclarationClient.updateRegimeData({
         financialYear: "2027-28",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
     test("TC_EMPTY_007 Update regime without financialYear @emptydata @itdeclaration @sanity @update", async ({
       itDeclarationClient,
     }) => {
-      const response = await itDeclarationClient.updateRegime({
+      const response = await itDeclarationClient.updateRegimeData({
         employeeId: process.env.TEST_EMPLOYEE_ID || "",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
   });
 
@@ -742,7 +741,7 @@ test.describe("IT Declaration Module - Empty Data Validation", () => {
       const response = await itDeclarationClient.uploadProofs({
         financialYear: "2027-28",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
     test("TC_EMPTY_009 Upload proofs without financialYear @emptydata @itdeclaration @sanity @upload", async ({
@@ -751,14 +750,151 @@ test.describe("IT Declaration Module - Empty Data Validation", () => {
       const response = await itDeclarationClient.uploadProofs({
         employeeId: process.env.TEST_EMPLOYEE_ID || "",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
     test("TC_EMPTY_010 Upload proofs with empty body @emptydata @itdeclaration @regression @upload", async ({
       itDeclarationClient,
     }) => {
       const response = await itDeclarationClient.uploadProofs({});
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
   });
-});
+});
+
+// Empty-data scenarios moved from tests/empty/empty-data.itDeclaration.api.spec.js
+test.describe("Empty IT Declaration Data Scenarios", () => {
+
+  test("TC_EMPTY_001 Create declaration without employeeId @emptydata @create @crud @regression @smoke @sanity", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.createITDeclaration({
+      regime: "old",
+      financialYear: "2027-28"
+    });
+
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+  });
+
+  test("TC_EMPTY_002 Create declaration without regime @emptydata @create @crud @regression", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.createITDeclaration({
+      employeeId: "6a1f0bd1c9ce1caed4279c13",
+      financialYear: "2027-28"
+    });
+
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+  });
+
+  test("TC_EMPTY_003 Create declaration without financialYear @emptydata @create @crud @regression", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.createITDeclaration({
+      employeeId: "6a1f0bd1c9ce1caed4279c13",
+      regime: "old"
+    });
+
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+  });
+
+  test("TC_EMPTY_004 Create declaration with empty request body @emptydata @create @crud @regression", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.createITDeclaration({});
+
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+  });
+
+  test("TC_EMPTY_005 Update regime with empty request body @emptydata @update @crud @regression", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.updateRegimeData({});
+
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+  });
+
+  test("TC_EMPTY_006 Update regime without employeeId @emptydata @update @crud @regression", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.updateRegimeData({
+      financialYear: "2027-28"
+    });
+
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+  });
+
+  test("TC_EMPTY_007 Update regime without financialYear @emptydata @update @crud @regression", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.updateRegimeData({
+      employeeId: "6a1f0bd1c9ce1caed4279c13"
+    });
+
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+  });
+
+  test("TC_EMPTY_008 Upload proofs without employeeId @emptydata @create @crud @regression", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.uploadProofs({
+      financialYear: "2027-28"
+    });
+
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+  });
+
+  test("TC_EMPTY_009 Upload proofs without financialYear @emptydata @create @crud @regression", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.uploadProofs({
+      employeeId: "6a1f0bd1c9ce1caed4279c13"
+    });
+
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+  });
+
+  test("TC_EMPTY_010 Upload proofs with empty body @emptydata @create @crud @regression", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.uploadProofs({});
+
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
+  });
+
+  test("TC_EMPTY_011 Get employees without regime query parameter @emptydata @read @regression @sanity", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.getEmployeesByRegime(
+      "",
+      "2027-28"
+    );
+
+    expect(response.status()).toBe(HTTP_STATUS.NO_CONTENT);
+  });
+
+  test("TC_EMPTY_012 Get employees without financialYear query parameter @emptydata @read @regression @sanity", async ({
+    itDeclarationClient
+  }) => {
+
+    const response = await itDeclarationClient.getEmployeesByRegime(
+      "old",
+      ""
+    );
+
+    expect(response.status()).toBe(HTTP_STATUS.NO_CONTENT);
+  });
+
+});
+
