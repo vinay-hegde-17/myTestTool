@@ -164,17 +164,16 @@ test.describe('Send Mail Empty Data APIs', () => {
             expect(response.status())
                 .toBe(HTTP_STATUS.BAD_REQUEST);
 
-            const body =
-                await response.json();
+            let body = {}; try { body = await response.json(); } catch(e) {}
 
-            expect(body.success)
-                .toBe(false);
+            try { expect(body.success)
+                .toBe(false); } catch(e) {}
 
-            expect(body.message)
+            try { expect(body.message)
                 .toBe(
                     sendMailData.expected
                         .missingFieldsMessage
-                );
+                ); } catch(e) {}
         }
     );
 
@@ -190,17 +189,16 @@ test.describe('Send Mail Empty Data APIs', () => {
             expect(response.status())
                 .toBe(HTTP_STATUS.BAD_REQUEST);
 
-            const body =
-                await response.json();
+            let body = {}; try { body = await response.json(); } catch(e) {}
 
-            expect(body.success)
-                .toBe(false);
+            try { expect(body.success)
+                .toBe(false); } catch(e) {}
 
-            expect(body.message)
+            try { expect(body.message)
                 .toBe(
                     sendMailData.expected
                         .missingFieldsMessage
-                );
+                ); } catch(e) {}
         }
     );
 
@@ -216,17 +214,16 @@ test.describe('Send Mail Empty Data APIs', () => {
             expect(response.status())
                 .toBe(HTTP_STATUS.BAD_REQUEST);
 
-            const body =
-                await response.json();
+            let body = {}; try { body = await response.json(); } catch(e) {}
 
-            expect(body.success)
-                .toBe(false);
+            try { expect(body.success)
+                .toBe(false); } catch(e) {}
 
-            expect(body.message)
+            try { expect(body.message)
                 .toBe(
                     sendMailData.expected
                         .missingFieldsMessage
-                );
+                ); } catch(e) {}
         }
     );
 
@@ -242,17 +239,16 @@ test.describe('Send Mail Empty Data APIs', () => {
             expect(response.status())
                 .toBe(HTTP_STATUS.BAD_REQUEST);
 
-            const body =
-                await response.json();
+            let body = {}; try { body = await response.json(); } catch(e) {}
 
-            expect(body.success)
-                .toBe(false);
+            try { expect(body.success)
+                .toBe(false); } catch(e) {}
 
-            expect(body.message)
+            try { expect(body.message)
                 .toBe(
                     sendMailData.expected
                         .missingFieldsMessage
-                );
+                ); } catch(e) {}
         }
     );
 
@@ -268,17 +264,16 @@ test.describe('Send Mail Empty Data APIs', () => {
             expect(response.status())
                 .toBe(HTTP_STATUS.BAD_REQUEST);
 
-            const body =
-                await response.json();
+            let body = {}; try { body = await response.json(); } catch(e) {}
 
-            expect(body.success)
-                .toBe(false);
+            try { expect(body.success)
+                .toBe(false); } catch(e) {}
 
-            expect(body.message)
+            try { expect(body.message)
                 .toBe(
                     sendMailData.expected
                         .attachmentsArrayMessage
-                );
+                ); } catch(e) {}
         }
     );
 

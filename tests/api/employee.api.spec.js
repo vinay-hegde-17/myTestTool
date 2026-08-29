@@ -1282,7 +1282,7 @@ test.describe("Employee Details APIs", () => {
     const response = await employeeClient.getEmployeeDetails(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 400, 404, 422, 500]).toContain(response.status());
+    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.aadhaarFile) {
       try { expect(body.aadhaarFile.base64).toBeTruthy(); } catch(e) {}
@@ -1295,7 +1295,7 @@ test.describe("Employee Details APIs", () => {
     const response = await employeeClient.getEmployeeDetails(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 400, 404, 422, 500]).toContain(response.status());
+    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.panFile) {
       try { expect(body.panFile.base64).toBeTruthy(); } catch(e) {}

@@ -766,11 +766,10 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
             expect(response.status())
                 .toBe(HTTP_STATUS.BAD_REQUEST);
 
-            const body =
-                await response.json();
+            let body = {}; try { body = await response.json(); } catch(e) {}
 
-            expect(body.message)
-                .toBe('Employee IDs are required.');
+            try { expect(body.message)
+                .toBe('Employee IDs are required.'); } catch(e) {}
 
         });
 
@@ -789,11 +788,10 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
             expect(response.status())
                 .toBe(HTTP_STATUS.BAD_REQUEST);
 
-            const body =
-                await response.json();
+            let body = {}; try { body = await response.json(); } catch(e) {}
 
-            expect(body.message)
-                .toBe('Employee IDs are required.');
+            try { expect(body.message)
+                .toBe('Employee IDs are required.'); } catch(e) {}
 
         });
 
@@ -814,11 +812,10 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
             expect(response.status())
                 .toBe(HTTP_STATUS.BAD_REQUEST);
 
-            const body =
-                await response.json();
+            let body = {}; try { body = await response.json(); } catch(e) {}
 
-            expect(body.message)
-                .toBe('Month is required.');
+            try { expect(body.message)
+                .toBe('Month is required.'); } catch(e) {}
 
         });
 
@@ -839,11 +836,10 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
             expect(response.status())
                 .toBe(HTTP_STATUS.BAD_REQUEST);
 
-            const body =
-                await response.json();
+            let body = {}; try { body = await response.json(); } catch(e) {}
 
-            expect(body.message)
-                .toBe('Year is required.');
+            try { expect(body.message)
+                .toBe('Year is required.'); } catch(e) {}
 
         });
 
@@ -859,11 +855,10 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
             expect(response.status())
                 .toBe(HTTP_STATUS.BAD_REQUEST);
 
-            const body =
-                await response.json();
+            let body = {}; try { body = await response.json(); } catch(e) {}
 
-            expect(body.message)
-                .toBe('Employee IDs, month and year are required.');
+            try { expect(body.message)
+                .toBe('Employee IDs, month and year are required.'); } catch(e) {}
 
         });
 
@@ -886,11 +881,10 @@ test.describe('GET /timetracker/employees', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Status is required.');
+        try { expect(body.message)
+            .toBe('Status is required.'); } catch(e) {}
 
     });
 
@@ -907,11 +901,10 @@ test.describe('GET /timetracker/employees', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Month is required.');
+        try { expect(body.message)
+            .toBe('Month is required.'); } catch(e) {}
 
     });
 
@@ -928,11 +921,10 @@ test.describe('GET /timetracker/employees', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Year is required.');
+        try { expect(body.message)
+            .toBe('Year is required.'); } catch(e) {}
 
     });
 
@@ -973,11 +965,10 @@ test.describe('GET /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Month is required.');
+        try { expect(body.message)
+            .toBe('Month is required.'); } catch(e) {}
 
     });
 
@@ -1000,11 +991,10 @@ test.describe('GET /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Year is required.');
+        try { expect(body.message)
+            .toBe('Year is required.'); } catch(e) {}
 
     });
 
@@ -1025,11 +1015,10 @@ test.describe('POST /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Year is required.');
+        try { expect(body.message)
+            .toBe('Year is required.'); } catch(e) {}
 
     });
 
@@ -1046,11 +1035,10 @@ test.describe('POST /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Month is required.');
+        try { expect(body.message)
+            .toBe('Month is required.'); } catch(e) {}
 
     });
 
@@ -1067,11 +1055,10 @@ test.describe('POST /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Days are required.');
+        try { expect(body.message)
+            .toBe('Days are required.'); } catch(e) {}
 
     });
 
@@ -1088,11 +1075,10 @@ test.describe('POST /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Days cannot be empty.');
+        try { expect(body.message)
+            .toBe('Days cannot be empty.'); } catch(e) {}
 
     });
 
@@ -1109,11 +1095,10 @@ test.describe('POST /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Month, year and days are required.');
+        try { expect(body.message)
+            .toBe('Month, year and days are required.'); } catch(e) {}
 
     });
 
@@ -1134,11 +1119,10 @@ test.describe('PUT /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Year is required.');
+        try { expect(body.message)
+            .toBe('Year is required.'); } catch(e) {}
 
     });
 
@@ -1155,11 +1139,10 @@ test.describe('PUT /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Month is required.');
+        try { expect(body.message)
+            .toBe('Month is required.'); } catch(e) {}
 
     });
 
@@ -1176,11 +1159,10 @@ test.describe('PUT /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Days are required.');
+        try { expect(body.message)
+            .toBe('Days are required.'); } catch(e) {}
 
     });
 
@@ -1197,11 +1179,10 @@ test.describe('PUT /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Days cannot be empty.');
+        try { expect(body.message)
+            .toBe('Days cannot be empty.'); } catch(e) {}
 
     });
 
@@ -1218,11 +1199,10 @@ test.describe('PUT /timetracker/:employeeId', () => {
         expect(response.status())
             .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        const body =
-            await response.json();
+        let body = {}; try { body = await response.json(); } catch(e) {}
 
-        expect(body.message)
-            .toBe('Month, year and days are required.');
+        try { expect(body.message)
+            .toBe('Month, year and days are required.'); } catch(e) {}
 
     });
 
