@@ -9,7 +9,7 @@ API request context, shared fixtures, JSON test data, and Allure reporting for f
 .
 |-- .github/
 |   `-- workflows/
-|       `-- playwright.yml             # CI workflow
+|       `-- playwright.yml              # GitHub Actions CI workflow
 |-- api/
 |   |-- clients/                        # API request wrappers per module
 |   |   |-- approveLeave.client.js
@@ -373,20 +373,21 @@ npm run report
 - **Allure reports** are generated in `reports/allure-report/` and viewable via `npm run report`.
 - **Test results** are saved in `test-results/` for CI artifact upload.
 
-Use `@smoke`, `@sanity`, or `@regression` for the standard run levels. Additional
-labels identify API intent: `@read`, `@create`, `@update`, `@delete`, `@crud`,
-`@assets`, `@files`, `@email`, `@search`, `@roles`, `@dashboard`, and `@hierarchy`.
+## CI / GitHub Actions
 
-## Adding tests
+The GitHub workflow expects a hosted backend URL and valid QA authentication settings.
 
-1. Add endpoints and status codes in `api/constants/`.
-2. Add the required request method in `api/clients/`.
-3. Add or extend the relevant fixture in `fixtures/`.
-4. Create `tests/api/<feature>.api.spec.js` and add test data under `test-data/`.
+Important:
 
-## CI
+- `API_BASE_URL` must point to a host reachable from GitHub Actions (set as a GitHub Repository Variable)
+- Either `QA_TOKEN` or `TEST_EMAIL` must be provided in GitHub Secrets / Variables
+- The workflow file is located in [.github/workflows/playwright.yml](.github/workflows/playwright.yml).
 
-GitHub Actions runs `npm run test:sanity` on pushes and pull requests to `dev`.
-Configure the repository `API_BASE_URL` and `TEST_EMAIL` variables. Set the
-optional `QA_TOKEN` repository secret to use a pre-generated Bearer token;
-otherwise the global setup generates a QA token for `TEST_EMAIL`.
+## Adding or extending a module
+
+1. Add endpoint constants in `api/constants/`
+2. Add request methods in `api/clients/`
+3. Add or extend the shared fixture in `fixtures/`
+4. Add JSON examples in `test-data/`
+5. Create or update the spec file in `tests/api/`
+6. Apply appropriate domain (`@domain`) and functional (`@smoke`, `@sanity`, `@regression`, `@schema`, `@negative`, `@security`, `@emptydata`) tags.

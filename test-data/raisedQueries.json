@@ -1,20 +1,20 @@
 {
     "valid": {
-        "employeeId": "6a1f0bd1c9ce1caed4279c13",
+        "employeeId": "{{TEST_EMPLOYEE_ID}}",
         "employeeWithoutQueries": "665f0000000000000000aa01",
-        "queryTypeId": "67cfff7d000d3f90fa78a2be",
-        "secondQueryTypeId": "67cfff8d000d3f90fa78a2bf",
-        "existingQueryId": "6a68e26a245f4ee9786ebd9c",
+        "queryTypeId": "{{TEST_QUERY_TYPE_ID}}",
+        "secondQueryTypeId": "{{TEST_SECOND_QUERY_TYPE_ID}}",
+        "existingQueryId": "{{TEST_EXISTING_QUERY_ID}}",
 
         "createQuery": {
-            "employeeId": "6a1f0bd1c9ce1caed4279c13",
-            "queryType": "67cfff7d000d3f90fa78a2be",
+            "employeeId": "{{TEST_EMPLOYEE_ID}}",
+            "queryType": "{{TEST_QUERY_TYPE_ID}}",
             "subject": "Playwright API testing",
             "query": "Raised query created using Playwright API automation"
         },
 
         "updateRaisedQuery": {
-            "queryTypeId": "67cfff7d000d3f90fa78a2be",
+            "queryTypeId": "{{TEST_QUERY_TYPE_ID}}",
             "subject": "Updated subject",
             "query": "Updated query description"
         }

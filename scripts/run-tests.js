@@ -25,10 +25,12 @@ const runtimeDirs = [
 
 function removeDir(dir) {
   if (fs.existsSync(dir)) {
-    fs.rmSync(dir, {
-      recursive: true,
-      force: true,
-    });
+    try {
+      fs.rmSync(dir, {
+        recursive: true,
+        force: true,
+      });
+    } catch (e) {}
   }
 }
 
@@ -79,10 +81,6 @@ function generateAllureReport() {
     console.warn(result.stderr || result.stdout);
     return;
   }
-
-  console.log(
-    `Allure report generated: ${reportDir}`
-  );
 }
 
 for (const dir of runtimeDirs) {

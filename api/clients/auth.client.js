@@ -1,4 +1,4 @@
-const { AUTH_ENDPOINTS } = require('../constants/auth.constants');
+const { AUTH_ENDPOINTS } = require("../constants/auth.constants");
 
 class AuthClient {
   constructor(request) {
@@ -25,24 +25,23 @@ class AuthClient {
 
   generateJwtTokenWithBody(body = {}) {
     return this.request.post(AUTH_ENDPOINTS.GENERATE_JWT_TOKEN, {
-      data: body
+      data: body,
     });
   }
 
   generateQaTokenWithBody(body = {}) {
     return this.request.post(AUTH_ENDPOINTS.QA_TOKEN, {
-      data: body
+      data: body,
     });
   }
 
   validateTokenWithHeader(headerValue) {
     return this.request.get(AUTH_ENDPOINTS.VALIDATE_TOKEN, {
       headers: {
-        Authorization: headerValue
-      }
+        Authorization: headerValue,
+      },
     });
   }
-
 }
 
 module.exports = AuthClient;

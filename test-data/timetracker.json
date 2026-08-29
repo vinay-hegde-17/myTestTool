@@ -1,11 +1,11 @@
 {
 "employee": {
-    "validEmployeeId": "6a1f0bd1c9ce1caed4279c13",
-    "anotherEmployeeId": "6a1f0bd1c9ce1caed4279c14",
+    "validEmployeeId": "{{TEST_EMPLOYEE_ID}}",
+    "anotherEmployeeId": "{{TEST_EMPLOYEE_ID_FOR_UPDATES}}",
     "invalidEmployeeId": "invalidEmployeeId",
     "nonExistingEmployeeId": "6fffffffffffffffffffffff",
-    "inactiveEmployeeId": "6a52fa19ddf6225c7e985f29",
-    "lateJoinerEmployeeId": "6a52fa19ddf6225c7e985f29"
+    "inactiveEmployeeId": "{{TEST_EMPLOYEE_ID_FOR_UPDATES}}",
+    "lateJoinerEmployeeId": "{{TEST_EMPLOYEE_ID_FOR_UPDATES}}"
 },
 
   "query": {
@@ -20,8 +20,8 @@
 
   "multipleEmployeesRequest": {
     "employeeIds": [
-      "6a1f0bd1c9ce1caed4279c13",
-      "6a1f0bd1c9ce1caed4279c14"
+      "{{TEST_EMPLOYEE_ID}}",
+      "{{TEST_EMPLOYEE_ID_FOR_UPDATES}}"
     ],
     "month": "August",
     "year": "2026"

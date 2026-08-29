@@ -1,25 +1,25 @@
 {
   "existing": {
-    "userRole": "MANAGER",
-    "description": "Manager",
+    "userRole": "ADMIN",
+    "description": "Administrator",
     "activeStatus": true,
-    "roleId": "6a6d806bc8d2df8599177576"
+    "roleId": "{{TEST_USER_ROLE_ID}}"
   },
   "admin": {
     "userRole": "ADMIN",
-    "roleId": "66a77ce670bd6b1f721cc20b"
+    "roleId": "{{TEST_ROLE_ID}}"
   },
   "hr": {
     "userRole": "HR",
-    "roleId": "66a77ccc70bd6b1f721cc207"
+    "roleId": "{{TEST_USER_ROLE_ID}}"
   },
   "employee": {
     "userRole": "EMPLOYEE",
-    "roleId": "66a77cf470bd6b1f721cc20f"
+    "roleId": "{{TEST_USER_ROLE_ID}}"
   },
   "qa": {
     "userRole": "QA",
-    "roleId": "6a6da078beb87871ca52cea3"
+    "roleId": "{{TEST_USER_ROLE_ID}}"
   },
   "duplicate": {
     "sameCase": "ADMIN",

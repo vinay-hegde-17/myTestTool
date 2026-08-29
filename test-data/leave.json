@@ -1,40 +1,40 @@
 {
     "employee": {
-        "employeeId": "6a1f0bd1c9ce1caed4279c13",
-        "approverId": "6a1f0bd1c9ce1caed4279c13",
+        "employeeId": "{{TEST_EMPLOYEE_ID}}",
+        "approverId": "{{TEST_APPROVER_ID}}",
         "invalidEmployeeId": "66aaaaaaaaaaaaaaaaaaaaaa",
         "invalidApproverId": "66bbbbbbbbbbbbbbbbbbbbbb"
     },
     "leave": {
-        "leaveId": "6a46902aea79d955be3ce913",
+        "leaveId": "{{TEST_LEAVE_ID}}",
         "invalidLeaveId": "66cccccccccccccccccccccc",
         "validLeave": {
-            "employeeId": "6a1f0bd1c9ce1caed4279c13",
-            "approverId": "6a1f0bd1c9ce1caed4279c13",
+            "employeeId": "{{TEST_EMPLOYEE_ID}}",
+            "approverId": "{{TEST_APPROVER_ID}}",
             "fromDate": "2026-08-10",
             "toDate": "2026-08-12",
             "leaveType": "CL",
             "reason": "Playwright Automation Testing"
         },
         "casualLeave": {
-            "employeeId": "6a1f0bd1c9ce1caed4279c13",
-            "approverId": "6a1f0bd1c9ce1caed4279c13",
+            "employeeId": "{{TEST_EMPLOYEE_ID}}",
+            "approverId": "{{TEST_APPROVER_ID}}",
             "fromDate": "2026-08-15",
             "toDate": "2026-08-15",
             "leaveType": "CL",
             "reason": "Casual Leave"
         },
         "sickLeave": {
-            "employeeId": "6a1f0bd1c9ce1caed4279c13",
-            "approverId": "6a1f0bd1c9ce1caed4279c13",
+            "employeeId": "{{TEST_EMPLOYEE_ID}}",
+            "approverId": "{{TEST_APPROVER_ID}}",
             "fromDate": "2026-08-18",
             "toDate": "2026-08-19",
             "leaveType": "SL",
             "reason": "Sick Leave"
         },
         "maternityLeave": {
-            "employeeId": "6a1f0bd1c9ce1caed4279c13",
-            "approverId": "6a1f0bd1c9ce1caed4279c13",
+            "employeeId": "{{TEST_EMPLOYEE_ID}}",
+            "approverId": "{{TEST_APPROVER_ID}}",
             "fromDate": "2026-09-01",
             "toDate": "2026-11-30",
             "leaveType": "ML",

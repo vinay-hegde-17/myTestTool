@@ -1,27 +1,25 @@
 const { HTTP_STATUS } = require('./httpStatus');
 
 const LEAVE_ENDPOINTS = {
+  LIST: "/leaves",
 
-    LIST: '/leaves',
+  LEAVE_THRESHOLD: "/leaves/leavesThreshold",
 
-    LEAVE_THRESHOLD: '/leaves/leavesThreshold',
+  EMPLOYEE_LEAVES: "/leaves",
 
-    EMPLOYEE_LEAVES: '/leaves',
+  APPROVER_LEAVES: "/leaves/approver",
 
-    APPROVER_LEAVES: '/leaves/approver',
+  FINANCIAL_YEAR: "/leaves",
 
-    FINANCIAL_YEAR: '/leaves',
+  CREATE: "/leaves",
 
-    CREATE: '/leaves',
+  UPDATE: "/leaves",
 
-    UPDATE: '/leaves',
+  REJECT_REQUEST: "/leaves/reject-request",
 
-    REJECT_REQUEST: '/leaves/reject-request',
+  DELETE: "/leaves",
 
-    DELETE: '/leaves',
-
-    OVERALL_LEAVES: '/leaves/overallleaves'
-
+  OVERALL_LEAVES: "/leaves/overallleaves",
 };
 
 module.exports = { HTTP_STATUS, LEAVE_ENDPOINTS };

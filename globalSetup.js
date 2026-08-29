@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const { request } = require('@playwright/test');
-const employeeData = require('./test-data/employee.json');
+const { loadResolvedJson } = require('./utils/testData.util');
+const employeeData = loadResolvedJson('./test-data/employee.json');
 
 module.exports = async function globalSetup() {
   const cacheDir = path.join(process.cwd(), '.cache');

@@ -1,10 +1,11 @@
 const { HTTP_STATUS } = require('./httpStatus');
 
 const MODULE_USER_ROLE_ENDPOINTS = {
+  GET_ALL: "/moduleUserRole",
 
-    GET_ALL: '/moduleUserRole',
+  GET_BY_ROLE: "/moduleUserRole",
 
-    GET_BY_ROLE: '/moduleUserRole',
+  CREATE: "/moduleUserRole",
 
     CREATE: '/moduleUserRole',
 

@@ -1,38 +1,39 @@
 const { HTTP_STATUS } = require('./httpStatus');
 
 const EMPLOYEE_ENDPOINTS = {
+  LIST: "/employees",
 
-    LIST: '/employees',
+  PROFILE_DETAILS: "/employees/profileDetails",
 
-    PROFILE_DETAILS: '/employees/profileDetails',
+  EMPLOYEE_NAMES: "/employees/employeeNames",
 
-    EMPLOYEE_NAMES: '/employees/employeeNames',
+  EMPLOYEES_FOR_ASSETS: "/employees/employeesForAssets",
 
-    EMPLOYEES_FOR_ASSETS: '/employees/employeesForAssets',
+  EMPLOYEE_ASSETS: "/employees/assets",
 
-    EMPLOYEE_ASSETS: '/employees/assets',
+  TO_EDIT: "/employees/ToEdit",
 
-    TO_EDIT: '/employees/ToEdit',
+  EMAIL_ID: "/employees/emailId",
 
-    EMAIL_ID: '/employees/emailId',
+  BY_ROLE: "/employees/ByRole",
 
-    BY_ROLE: '/employees/ByRole',
+  CHECK_EMAIL: "/employees/check-email",
 
-    CHECK_EMAIL: '/employees/check-email',
+  GET_NEW_JOINEES: "/employees/getNewJoinees",
 
-    GET_NEW_JOINEES: '/employees/getNewJoinees',
+  GET_LONG_SERVICE_EMP: "/employees/getLongServiceEmpList",
 
-    GET_LONG_SERVICE_EMP: '/employees/getLongServiceEmpList',
+  HIERARCHY: "/employees",
 
-    HIERARCHY: '/employees',
+  FETCH_FILE: "/employees/fetchFile",
 
-    FETCH_FILE: '/employees/fetchFile',
+  CREATE: "/employees",
 
-    CREATE: '/employees',
+  UPDATE: "/employees",
 
-    UPDATE: '/employees',
+  UPDATE_ASSIGNED_IDS: "/employees/updateAssignedIds",
 
-    UPDATE_ASSIGNED_IDS: '/employees/updateAssignedIds',
+  UNASSIGN_ASSET: "/employees",
 
     UNASSIGN_ASSET: '/employees',
 

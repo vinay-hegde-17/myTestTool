@@ -1,15 +1,15 @@
 {
   "existing": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "financialYear": "2026-27",
     "regime": "new",
-    "fileId": "6a8a1b9e1234567890123456"
+    "fileId": "{{TEST_FILE_ID}}"
   },
   "deleteTarget": {
-    "fileId": "6a8a1b9e1234567890123456"
+    "fileId": "{{TEST_FILE_ID}}"
   },
   "itDeclaration": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "regime": "old",
     "financialYear": "2027-28",
     "ownerPan": "ABCDE1234F",
@@ -20,7 +20,7 @@
     }
   },
   "updatedRegime": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "financialYear": "2027-28",
     "ownerPan": "PQRSX9876K",
     "oldRegimeDetails": {
@@ -57,13 +57,13 @@
     "ownerPan": "ABCDE1234F"
   },
   "duplicate": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "regime": "new",
     "financialYear": "2026-27",
     "ownerPan": "ABCDE1234F"
   },
   "updatedDeclaration": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "financialYear": "2027-28",
     "regime": "old",
     "ownerPan": "PQRSX9876K",
@@ -74,12 +74,12 @@
     }
   },
   "updatedPan": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "financialYear": "2027-28",
     "ownerPan": "ZZZZZ9999Z"
   },
   "updatedOldRegime": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "financialYear": "2027-28",
     "oldRegimeDetails": {
       "houseRent": 220000,
@@ -94,35 +94,35 @@
     "oldRegimeDetails": {}
   },
   "singleProof": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "financialYear": "2026-27",
     "proofId": "HOUSE_RENT",
     "items": "House Rent",
     "particulars": "Monthly Rent Receipts"
   },
   "multipleProofs": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "financialYear": "2026-27",
     "proofId": "HOUSE_RENT",
     "items": "House Rent",
     "particulars": "Monthly Rent Receipts"
   },
   "existingProofCategory": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "financialYear": "2026-27",
     "proofId": "HOUSE_RENT",
     "items": "House Rent",
     "particulars": "Monthly Rent Receipts"
   },
   "newProofCategory": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "financialYear": "2026-27",
     "proofId": "MEDICAL",
     "items": "Medical Insurance",
     "particulars": "Health Insurance"
   },
   "unsupportedProof": {
-    "employeeId": "6a1f0bd1c9ce1caed4279c13",
+    "employeeId": "{{TEST_EMPLOYEE_ID}}",
     "financialYear": "2026-27",
     "proofId": "HOUSE_RENT",
     "items": "House Rent",

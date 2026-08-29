@@ -1,14 +1,14 @@
 {
     "valid": {
-        "leaveId": "6a486fb22a69200d6d5daef9",
-        "approveLeaveId": "6a486fb22a69200d6d5daef9",
-        "rejectLeaveId": "6a486fb22a69200d6d5daef9",
+        "leaveId": "{{TEST_LEAVE_ID}}",
+        "approveLeaveId": "{{TEST_LEAVE_ID}}",
+        "rejectLeaveId": "{{TEST_LEAVE_ID}}",
         "approveStatus": "Approved",
         "rejectStatus": "Rejected"
     },
 
     "processed": {
-        "leaveId": "6a469076ea79d955be3ce91d",
+        "leaveId": "{{TEST_LEAVE_ID}}",
         "expectedMessage": "Leave Request Already Processed"
     },
 

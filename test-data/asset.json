@@ -10,6 +10,11 @@
     "assetModel": {
         "model": "Playwright Dell"
     },
+    "testData": {
+        "assetId": "{{TEST_ASSET_ID}}",
+        "assetTypeId": "{{TEST_ASSET_TYPE_ID}}",
+        "assetModelId": "{{TEST_ASSET_MODEL_ID}}"
+    },
     "invalid": {
         "invalidToken": "invalid.jwt.token",
         "invalidTypeId": "685000000000000000000001",

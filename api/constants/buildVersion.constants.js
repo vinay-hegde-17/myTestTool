@@ -1,6 +1,7 @@
 const { HTTP_STATUS } = require('./httpStatus');
 
 const BUILD_VERSION_ENDPOINTS = {
+  CREATE: "/build-version",
 
     CREATE: '/build-version',
 
