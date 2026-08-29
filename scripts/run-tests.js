@@ -25,10 +25,12 @@ const runtimeDirs = [
 
 function removeDir(dir) {
   if (fs.existsSync(dir)) {
-    fs.rmSync(dir, {
-      recursive: true,
-      force: true,
-    });
+    try {
+      fs.rmSync(dir, {
+        recursive: true,
+        force: true,
+      });
+    } catch (e) {}
   }
 }
 

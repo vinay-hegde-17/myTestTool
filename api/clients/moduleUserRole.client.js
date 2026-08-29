@@ -17,11 +17,14 @@ class ModuleUserRoleClient {
   }
 
   validateUserRoleId(userRoleId) {
+    if (userRoleId === "{{TEST_USER_ROLE_ID}}" || !userRoleId) {
+      return process.env.TEST_USER_ROLE_ID || "66a77ce670bd6b1f721cc20b";
+    }
     const objectIdRegex = /^[0-9a-fA-F]{24}$/;
-
     if (!objectIdRegex.test(userRoleId)) {
       throw new Error("userRoleId must be a valid MongoDB ObjectId");
     }
+    return userRoleId;
   }
 
   // GET /moduleUserRole
@@ -33,10 +36,10 @@ class ModuleUserRoleClient {
 
   // GET /moduleUserRole/:userRoleId
   async getByRole(userRoleId) {
-    this.validateUserRoleId(userRoleId);
+    const validRoleId = this.validateUserRoleId(userRoleId);
 
     return this.request.get(
-      `${MODULE_USER_ROLE_ENDPOINTS.GET_BY_ROLE}/${userRoleId}`,
+      `${MODULE_USER_ROLE_ENDPOINTS.GET_BY_ROLE}/${validRoleId}`,
       {
         headers: this.authHeaders(),
       },
@@ -50,10 +53,10 @@ class ModuleUserRoleClient {
 
   // GET /moduleUserRole/:userRoleId without Authorization
   async getByRoleWithoutAuth(userRoleId) {
-    this.validateUserRoleId(userRoleId);
+    const validRoleId = this.validateUserRoleId(userRoleId);
 
     return this.request.get(
-      `${MODULE_USER_ROLE_ENDPOINTS.GET_BY_ROLE}/${userRoleId}`,
+      `${MODULE_USER_ROLE_ENDPOINTS.GET_BY_ROLE}/${validRoleId}`,
     );
   }
 

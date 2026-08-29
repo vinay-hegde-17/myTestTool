@@ -1,7 +1,7 @@
 {
   "existing": {
-    "userRole": "MANAGER",
-    "description": "Manager",
+    "userRole": "ADMIN",
+    "description": "Administrator",
     "activeStatus": true,
     "roleId": "{{TEST_USER_ROLE_ID}}"
   },

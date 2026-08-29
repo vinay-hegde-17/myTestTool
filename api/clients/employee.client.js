@@ -203,6 +203,18 @@ class EmployeeClient {
       headers: this.authHeaders(),
     });
   }
+
+  getEmployeeListWithoutAuth(params = {}) {
+    return this.request.get(EMPLOYEE_ENDPOINTS.LIST, { params });
+  }
+
+  getEmployeeNamesWithoutAuth() {
+    return this.request.get(EMPLOYEE_ENDPOINTS.EMPLOYEE_NAMES);
+  }
+
+  getEmployeesForAssetsWithoutAuth() {
+    return this.request.get(EMPLOYEE_ENDPOINTS.EMPLOYEES_FOR_ASSETS);
+  }
 }
 
 module.exports = EmployeeClient;

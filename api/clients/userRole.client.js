@@ -26,6 +26,10 @@ class UserRoleClient {
     return await this.request.get(url);
   }
 
+  async getRolesWithoutAuth(fetchType) {
+    return await this.getUserRolesWithoutAuth(fetchType);
+  }
+
   async getUserRole(userRole) {
     return await this.request.get(
       `${USER_ROLE_ENDPOINTS.GET_USER_ROLE}/${userRole}`,

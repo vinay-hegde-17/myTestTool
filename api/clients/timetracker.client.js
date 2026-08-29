@@ -29,6 +29,10 @@ class TimeTrackerClient {
     });
   }
 
+  getEmployeeTimesheetLogsWithoutAuth(payload) {
+    return this.getMultipleTimesheetsWithoutAuth(payload);
+  }
+
   getMultipleTimesheetsWithInvalidAuth(payload) {
     return this.request.post(TIME_TRACKER_ENDPOINTS.GET_MULTIPLE_TIMESHEETS, {
       data: payload,

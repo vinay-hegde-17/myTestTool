@@ -46,6 +46,10 @@ class BuildVersionClient {
   getLatestWithoutAuth() {
     return this.request.get(BUILD_VERSION_ENDPOINTS.GET_LATEST);
   }
+
+  getLatestBuildVersionWithoutAuth() {
+    return this.getLatestWithoutAuth();
+  }
 }
 
 module.exports = BuildVersionClient;

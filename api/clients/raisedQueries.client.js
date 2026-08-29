@@ -80,6 +80,10 @@ class RaisedQueriesClient {
     });
   }
 
+  getUnansweredQueriesWithoutAuth() {
+    return this.getRaisedQueriesWithoutAuth(false);
+  }
+
   getQueryTypesWithoutAuth() {
     return this.request.get(RAISED_QUERIES_ENDPOINTS.GET_TYPES);
   }

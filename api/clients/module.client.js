@@ -20,6 +20,10 @@ class ModuleClient {
     return this.request.get(MODULES_ENDPOINTS.GET_ALL);
   }
 
+  getModulesWithoutAuth() {
+    return this.getAllModulesWithoutAuth();
+  }
+
   getModulesForPermission() {
     return this.request.get(MODULES_ENDPOINTS.GET_FOR_PERMISSION, {
       headers: this.authHeaders(),
