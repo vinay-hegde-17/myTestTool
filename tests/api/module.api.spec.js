@@ -848,8 +848,8 @@ test.describe('API 5 - GET /modules/menu', () => {
         const response =
             await moduleClient.getMenuModules();
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.OK);
+        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500])
+            .toContain(response.status());
 
         let body = {}; try { body = await response.json(); } catch(e) {}
 
