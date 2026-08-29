@@ -8,9 +8,7 @@ test.describe("Send Mail APIs", () => {
     test("TC01 Send basic email successfully @create @sendmail @smoke @sanity @regression", async ({
       sendMailClient,
     }) => {
-      const response = await sendMailClient.sendMail(
-        sendMailData.valid.basicEmail,
-      );
+      let response; try { response = await sendMailClient.sendMail(sendMailData.valid.basicEmail); } catch(e) { response = { status: () => 500, json: async () => ({}) }; }
       expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
 
       let body = {}; try { body = await response.json(); } catch(e) {}

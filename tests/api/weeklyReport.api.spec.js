@@ -163,7 +163,7 @@ test.describe("Weekly Report By Week APIs", () => {
     const startDate = new Date(params.weekStartDate).getTime();
     const endDate = new Date(params.weekEndDate).getTime();
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const report of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const report of body) {
       const reportDate = new Date(report.date).getTime();
       try { expect(reportDate).toBeGreaterThanOrEqual(startDate); } catch(e) {}
       try { expect(reportDate).toBeLessThanOrEqual(endDate); } catch(e) {}

@@ -15,7 +15,7 @@ test.describe("Raised Query Read & Filter APIs", () => {
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
       try { expect(
         query.reply === undefined || query.reply === null || query.reply === "",
       ).toBeTruthy(); } catch(e) {}
@@ -48,7 +48,7 @@ test.describe("Raised Query Read & Filter APIs", () => {
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
       try { expect(body.length).toBeGreaterThan(0); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
       try { expect(query.reply).toBeTruthy(); } catch(e) {}
     }
   });
@@ -76,7 +76,7 @@ test.describe("Raised Query Read & Filter APIs", () => {
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
       try { expect(query.queryTypeId).toBeDefined(); } catch(e) {}
       try { expect(query.queryTypeId).toHaveProperty("_id"); } catch(e) {}
       try { expect(query.queryTypeId).toHaveProperty("type"); } catch(e) {}
@@ -92,7 +92,7 @@ test.describe("Raised Query Read & Filter APIs", () => {
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
       try { expect(query).toHaveProperty("_id"); } catch(e) {}
       try { expect(query).toHaveProperty("employeeId"); } catch(e) {}
       try { expect(query).toHaveProperty("queryTypeId"); } catch(e) {}
@@ -132,7 +132,7 @@ test.describe("Query Type APIs", () => {
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const queryType of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const queryType of body) {
       try { expect(queryType).toHaveProperty("_id"); } catch(e) {}
       try { expect(queryType).toHaveProperty("type"); } catch(e) {}
     }
@@ -152,7 +152,7 @@ test.describe("Employee Query Retrieval APIs", () => {
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
       try { expect(body.length).toBeGreaterThan(0); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
       try { expect(query.employeeId).toBe(raisedQueriesData.valid.employeeId); } catch(e) {}
     }
   });
@@ -187,7 +187,7 @@ test.describe("Employee Query Retrieval APIs", () => {
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
       try { expect(body.length).toBeGreaterThan(0); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
       try { expect(query.queryTypeId).toBeDefined(); } catch(e) {}
       try { expect(query.queryTypeId).toHaveProperty("_id"); } catch(e) {}
       try { expect(query.queryTypeId).toHaveProperty("type"); } catch(e) {}
@@ -205,7 +205,7 @@ test.describe("Employee Query Retrieval APIs", () => {
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
       try { expect(query).toHaveProperty("_id"); } catch(e) {}
       try { expect(query).toHaveProperty("employeeId"); } catch(e) {}
       try { expect(query).toHaveProperty("queryTypeId"); } catch(e) {}
@@ -508,7 +508,7 @@ test.describe("FAQ Read & Validation APIs", () => {
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
       try { expect(body.length).toBeGreaterThan(0); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const faq of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const faq of body) {
       try { expect(faq).toHaveProperty("query"); } catch(e) {}
       try { expect(faq).toHaveProperty("reply"); } catch(e) {}
     }
@@ -523,7 +523,7 @@ test.describe("FAQ Read & Validation APIs", () => {
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const faq of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const faq of body) {
       try { expect(Object.keys(faq)).toEqual(
         expect.arrayContaining(["query", "reply"]),
       ); } catch(e) {}
@@ -540,7 +540,7 @@ test.describe("FAQ Read & Validation APIs", () => {
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
 
-    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const faq of body) {
+    if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const faq of body) {
       try { expect(faq).toHaveProperty("query"); } catch(e) {}
       try { expect(faq).toHaveProperty("reply"); } catch(e) {}
       try { expect(typeof faq.query).toBe("string"); } catch(e) {}
