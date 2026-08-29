@@ -5,7 +5,8 @@
 const { MongoClient, ObjectId } = require('mongodb');
 require('dotenv').config();
 
-const uri = process.env.DB_CONNECTION_STRING || 'mongodb+srv://vinayhegde0824_db_user:Vijay123@cluster0.es0bnz7.mongodb.net/vinay_db';
+const uri = process.env.DB_CONNECTION_STRING || process.env.MONGODB_URI;
+if (!uri) { throw new Error("DB_CONNECTION_STRING or MONGODB_URI must be provided in .env"); }
 const REAL_EMPLOYEE_ID = process.env.TEST_EMPLOYEE_ID || '6a1f0bd1c9ce1caed4279c13';
 
 const cleanITDAndLeaves = async () => {

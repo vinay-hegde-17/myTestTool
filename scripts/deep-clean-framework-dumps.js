@@ -14,7 +14,8 @@
 const { MongoClient, ObjectId } = require('mongodb');
 require('dotenv').config();
 
-const uri = process.env.DB_CONNECTION_STRING || 'mongodb+srv://vinayhegde0824_db_user:Vijay123@cluster0.es0bnz7.mongodb.net/vinay_db';
+const uri = process.env.DB_CONNECTION_STRING || process.env.MONGODB_URI;
+if (!uri) { throw new Error("DB_CONNECTION_STRING or MONGODB_URI must be provided in .env"); }
 
 // List of 21 Core Real Modules
 const REAL_MODULE_IDS = [
