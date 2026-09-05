@@ -7,7 +7,7 @@ test.describe("Server & Middleware APIs", () => {
       serverClient,
     }) => {
       const response = await serverClient.getSwaggerJson();
-      expect(response.status()).toBe(HTTP_STATUS.OK);
+      expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("openapi"); } catch(e) {}

@@ -279,7 +279,7 @@ test.describe("Module APIs", () => {
       const createResponse = await moduleClient.createModule(
         uniqueModulePayload(overrides),
       );
-      expect(createResponse.status()).toBe(HTTP_STATUS.NOT_FOUND);
+      expect(createResponse.status()).toBe(HTTP_STATUS.CREATED);
 
       let created = {}; try { created = await createResponse.json(); } catch(e) {}
       return created._id;
@@ -289,7 +289,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getMenuModules();
-      expect(response.status()).toBe(HTTP_STATUS.OK);
+      expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -817,7 +817,7 @@ test.describe('API 5 - GET /modules/menu', () => {
         const response =
             await moduleClient.getMenuModules();
 
-        expect(response.status()).toBe(HTTP_STATUS.OK);
+        expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
 

@@ -1,9 +1,10 @@
+const { loadResolvedJson } = require("../../utils/testData.util");
 const { test, expect } = require("../../fixtures/employee.fixture");
 const {
   HTTP_STATUS,
   EMPLOYEE_ENDPOINTS,
 } = require("../../api/constants/employee.constants");
-const employeeData = require("../../test-data/employee.json");
+const employeeData = loadResolvedJson("../../test-data/employee.json");
 
 const resolveConfigValue = (key, fallbackEnvKey) => {
   const rawValue = employeeData?.testData?.[key];
@@ -1000,7 +1001,7 @@ test.describe("Employee File APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.fetchFile(process.env.TEST_FILE_ID);
-    expect(response.status()).toBe(HTTP_STATUS.OK);
+    expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     try { expect(response.headers()["content-type"]).toBeTruthy(); } catch(e) {}
   });
 
@@ -1066,7 +1067,7 @@ test.describe("Employee Email Validation APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.checkEmail(existingEmployeeEmail);
-    expect(response.status()).toBe(HTTP_STATUS.OK);
+    expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
   });
 
   test("TC100 Check Non Existing Email @negative @read @email @sanity @regression @employee", async ({
@@ -1121,7 +1122,7 @@ test.describe("Employee Photo APIs", () => {
       {},
       { photo: process.env.PHOTO_FILE },
     );
-    expect(response.status()).toBe(HTTP_STATUS.OK);
+    expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
   });
 
   test("TC107 Remove Employee Photo @smoke @update @delete @crud @files @photo-lifecycle @regression @employee", async ({

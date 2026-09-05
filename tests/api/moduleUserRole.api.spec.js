@@ -1,6 +1,7 @@
+const { loadResolvedJson } = require("../../utils/testData.util");
 const { test, expect } = require("../../fixtures/moduleUserRole.fixture");
 const { HTTP_STATUS } = require("../../api/constants/moduleUserRole.constants");
-const moduleUserRoleData = require("../../test-data/moduleUserRole.json");
+const moduleUserRoleData = loadResolvedJson("../../test-data/moduleUserRole.json");
 
 test.describe("Module Role Mapping Read APIs", () => {
   test("TC01 Get all module-role mappings @read @moduleuserrole @regression @smoke @sanity", async ({

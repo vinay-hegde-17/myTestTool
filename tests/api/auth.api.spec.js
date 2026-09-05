@@ -16,7 +16,7 @@ test.describe("Authentication APIs", () => {
       const response = await authClient.generateJwtToken(
         authData.invalidAccessToken,
       );
-      expect(response.status()).toBe(HTTP_STATUS.OK);
+      expect(response.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });

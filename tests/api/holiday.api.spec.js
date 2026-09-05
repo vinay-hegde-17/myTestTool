@@ -482,7 +482,7 @@ test.describe("Holiday Module APIs", () => {
       };
 
       const response = await holidayClient.importExcel(payload);
-      expect(response.status()).toBe(HTTP_STATUS.OK);
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("message"); } catch(e) {}

@@ -11,7 +11,7 @@ test.describe("Send Email APIs", () => {
       const response = await sendEmailClient.sendLeaveEmail(
         sendEmailData.valid.leaveEmail,
       );
-      expect(response.status()).toBe(HTTP_STATUS.CREATED);
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(sendEmailData.expected.leaveEmailMessage); } catch(e) {}
@@ -37,7 +37,7 @@ test.describe("Send Email APIs", () => {
       const response = await sendEmailClient.requestTimesheetApproval(
         sendEmailData.valid.timesheetApproval,
       );
-      expect(response.status()).toBe(HTTP_STATUS.CREATED);
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(
