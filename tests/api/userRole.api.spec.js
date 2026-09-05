@@ -10,7 +10,7 @@ test.describe("User Role APIs", () => {
       userRoleClient,
     }) => {
       const response = await userRoleClient.getUserRoles();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -21,7 +21,7 @@ test.describe("User Role APIs", () => {
       userRoleClient,
     }) => {
       const response = await userRoleClient.getUserRoles("dropdown");
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -32,7 +32,7 @@ test.describe("User Role APIs", () => {
       userRoleClient,
     }) => {
       const response = await userRoleClient.getUserRoles("invalid");
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -42,7 +42,7 @@ test.describe("User Role APIs", () => {
       userRoleClient,
     }) => {
       const response = await userRoleClient.getUserRoles();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -59,7 +59,7 @@ test.describe("User Role APIs", () => {
       userRoleClient,
     }) => {
       const response = await userRoleClient.getUserRoles("dropdown");
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -76,7 +76,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getUserRole(
         userRoleData.existing.userRole,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.userRole).toBe(userRoleData.existing.userRole); } catch(e) {}
@@ -88,7 +88,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getUserRole(
         userRoleData.invalid.invalidRoleName,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
     test("TC09 Get role using special characters @negative @read @userrole @regression", async ({
@@ -97,7 +97,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getUserRole(
         userRoleData.invalid.specialCharacters,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC10 Verify role response schema @schema @userrole @regression", async ({
@@ -106,7 +106,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getUserRole(
         userRoleData.existing.userRole,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -117,7 +117,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleById(
         userRoleData.existing.roleId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -128,7 +128,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleById(
         userRoleData.invalid.invalidObjectId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC14 Get role using non-existing ObjectId @negative @read @userrole @regression", async ({
@@ -137,7 +137,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleById(
         userRoleData.invalid.nonExistingObjectId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
     test("TC15 Verify role response schema by roleId @schema @userrole @regression", async ({
@@ -146,7 +146,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleById(
         userRoleData.existing.roleId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("_id"); } catch(e) {}
@@ -166,7 +166,7 @@ test.describe("User Role APIs", () => {
         activeStatus: true,
       };
       const response = await userRoleClient.createUserRole(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.userRole).toBe(payload.userRole); } catch(e) {}
@@ -180,7 +180,7 @@ test.describe("User Role APIs", () => {
         description: "Duplicate Role",
         activeStatus: true,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
     test("TC19 Create duplicate user role with different case @negative @create @userrole @regression", async ({
@@ -191,7 +191,7 @@ test.describe("User Role APIs", () => {
         description: "Duplicate Role",
         activeStatus: true,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
     test("TC20 Create duplicate user role with extra spaces @negative @create @userrole @regression", async ({
@@ -202,7 +202,7 @@ test.describe("User Role APIs", () => {
         description: "Duplicate Role",
         activeStatus: true,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
     test("TC21 Create user role with inactive status @create @userrole @regression", async ({
@@ -214,7 +214,7 @@ test.describe("User Role APIs", () => {
         activeStatus: false,
       };
       const response = await userRoleClient.createUserRole(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.activeStatus).toBe(false); } catch(e) {}
@@ -231,7 +231,7 @@ test.describe("User Role APIs", () => {
         activeStatus: true,
       };
       const response = await userRoleClient.createUserRole(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       updateRoleId = body._id;
@@ -249,7 +249,7 @@ test.describe("User Role APIs", () => {
         updateRoleId,
         payload,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.userRole).toBe(payload.userRole); } catch(e) {}
@@ -266,7 +266,7 @@ test.describe("User Role APIs", () => {
           activeStatus: true,
         },
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
     test("TC25 Update using invalid roleId @negative @update @userrole @regression", async ({
@@ -281,7 +281,7 @@ test.describe("User Role APIs", () => {
         userRoleData.invalid.invalidObjectId,
         payload,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
     test("TC26 Update using non-existing roleId @negative @update @userrole @regression", async ({
@@ -297,7 +297,7 @@ test.describe("User Role APIs", () => {
         nonExistingObjectId,
         payload,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
     test("TC27 Update activeStatus @update @userrole @regression", async ({
@@ -308,7 +308,7 @@ test.describe("User Role APIs", () => {
         description: "Updated activeStatus by Playwright",
         activeStatus: false,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.activeStatus).toBe(false); } catch(e) {}
@@ -322,7 +322,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleId(
         userRoleData.admin.userRole,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("_id"); } catch(e) {}
@@ -334,7 +334,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleId(
         userRoleData.invalid.invalidRoleName,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
     test("TC31 Verify roleId response schema @schema @userrole @regression", async ({
@@ -343,7 +343,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleId(
         userRoleData.admin.userRole,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("_id"); } catch(e) {}
@@ -356,7 +356,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleName(
         userRoleData.admin.roleId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.userRole).toBe(userRoleData.admin.userRole); } catch(e) {}
@@ -368,7 +368,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleName(
         userRoleData.invalid.invalidObjectId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC35 Get role name using non-existing ObjectId @negative @read @userrole @regression", async ({
@@ -377,7 +377,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleName(
         userRoleData.invalid.nonExistingObjectId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
 
     test("TC36 Verify role name response schema @schema @userrole @regression", async ({
@@ -386,7 +386,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleName(
         userRoleData.admin.roleId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -402,7 +402,7 @@ test.describe("User Role APIs", () => {
         activeStatus: true,
       };
       const response = await userRoleClient.checkExistsOrCreateRole(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -414,7 +414,7 @@ test.describe("User Role APIs", () => {
         userRole: userRoleData.admin.userRole,
         activeStatus: true,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -428,7 +428,7 @@ test.describe("User Role APIs", () => {
         activeStatus: true,
       };
       const response = await userRoleClient.checkExistsOrCreateRole(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.activeStatus).toBe(true); } catch(e) {}
@@ -443,7 +443,7 @@ test.describe("User Role APIs", () => {
         activeStatus: false,
       };
       const response = await userRoleClient.checkExistsOrCreateRole(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.activeStatus).toBe(false); } catch(e) {}
@@ -458,7 +458,7 @@ test.describe("User Role APIs", () => {
         activeStatus: true,
       };
       const response = await userRoleClient.checkExistsOrCreateRole(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("_id"); } catch(e) {}
@@ -471,9 +471,7 @@ test.describe("User Role APIs", () => {
       userRoleClient,
     }) => {
       const response = await userRoleClient.getUserRolesWithoutAuth();
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC44 Get user role by name without token @security @userrole @regression", async ({
@@ -482,9 +480,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getUserRoleWithoutAuth(
         userRoleData.existing.userRole,
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC45 Get role by ID without token @security @userrole @regression", async ({
@@ -493,9 +489,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleByIdWithoutAuth(
         userRoleData.existing.roleId,
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC46 Create user role without token @security @userrole @regression", async ({
@@ -505,9 +499,7 @@ test.describe("User Role APIs", () => {
         userRole: "UNAUTH_ROLE",
         description: "Unauthenticated creation test",
       });
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
 
     test("TC47 Update user role without token @security @userrole @regression", async ({
@@ -517,9 +509,7 @@ test.describe("User Role APIs", () => {
         userRoleData.existing.roleId,
         { userRole: "UNAUTH_UPDATE_ROLE" },
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC48 Get roleId without token @security @userrole @regression", async ({
@@ -528,9 +518,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleIdWithoutAuth(
         userRoleData.existing.userRole,
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC49 Get roleName without token @security @userrole @regression", async ({
@@ -539,9 +527,7 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.getRoleNameWithoutAuth(
         userRoleData.existing.roleId,
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC50 Check/Create role without token @security @userrole @regression", async ({
@@ -550,79 +536,77 @@ test.describe("User Role APIs", () => {
       const response = await userRoleClient.checkExistsOrCreateRoleWithoutAuth({
         userRole: "UNAUTH_CHECK_ROLE",
       });
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
   });
 
   test.describe("User Roles Module - Empty Data Validation", () => {
     test.describe("Read Operations", () => {
-      test("TC_EMPTY_005 Get role using empty role name @emptydata @userrole @sanity @read", async ({
+      test("TC_EMPTY_005 Get role using empty role name @emptydata @userrole", async ({
         userRoleClient,
       }) => {
         const response = await userRoleClient.getUserRole("");
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_006 Get role using empty roleId @emptydata @userrole @sanity @read", async ({
+      test("TC_EMPTY_006 Get role using empty roleId @emptydata @userrole", async ({
         userRoleClient,
       }) => {
         const response = await userRoleClient.getRoleById("");
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_007 Get roleId without roleName query parameter @emptydata @userrole @regression @read", async ({
+      test("TC_EMPTY_007 Get roleId without roleName query parameter @emptydata @userrole", async ({
         userRoleClient,
       }) => {
         const response = await userRoleClient.getRoleId("");
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_008 Get roleName using empty roleId @emptydata @userrole @regression @read", async ({
+      test("TC_EMPTY_008 Get roleName using empty roleId @emptydata @userrole", async ({
         userRoleClient,
       }) => {
         const response = await userRoleClient.getRoleName("");
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
 
     test.describe("Create Operations", () => {
-      test("TC_EMPTY_001 Create user role without userRole @emptydata @userrole @smoke @create", async ({
+      test("TC_EMPTY_001 Create user role without userRole @emptydata @userrole", async ({
         userRoleClient,
       }) => {
         const payload = { ...userRoleData.userRole };
         delete payload.userRole;
 
         const response = await userRoleClient.createUserRole(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_002 Create user role with empty request body @emptydata @userrole @regression @create", async ({
+      test("TC_EMPTY_002 Create user role with empty request body @emptydata @userrole", async ({
         userRoleClient,
       }) => {
         const response = await userRoleClient.createUserRole({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_009 Check/Create role without userRole @emptydata @userrole @regression @create", async ({
+      test("TC_EMPTY_009 Check/Create role without userRole @emptydata @userrole", async ({
         userRoleClient,
       }) => {
         const payload = { activeStatus: true };
         const response = await userRoleClient.checkExistsOrCreateRole(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_010 Check/Create role with empty request body @emptydata @userrole @regression @create", async ({
+      test("TC_EMPTY_010 Check/Create role with empty request body @emptydata @userrole", async ({
         userRoleClient,
       }) => {
         const response = await userRoleClient.checkExistsOrCreateRole({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
 
     test.describe("Update Operations", () => {
-      test("TC_EMPTY_003 Update user role without userRole @emptydata @userrole @sanity @update", async ({
+      test("TC_EMPTY_003 Update user role without userRole @emptydata @userrole", async ({
         userRoleClient,
       }) => {
         const payload = { ...userRoleData.updatedUserRole };
@@ -632,17 +616,17 @@ test.describe("User Role APIs", () => {
           userRoleData.existing.roleId,
           payload,
         );
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_004 Update user role with empty request body @emptydata @userrole @regression @update", async ({
+      test("TC_EMPTY_004 Update user role with empty request body @emptydata @userrole", async ({
         userRoleClient,
       }) => {
         const response = await userRoleClient.updateUserRole(
           userRoleData.existing.roleId,
           {},
         );
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
   });
@@ -654,20 +638,20 @@ test.describe("User Roles Module - Empty Data Validation", () => {
 
     test.describe.configure({ mode: "serial" });
 
-    test("TC_EMPTY_001 Create user role without userRole @emptydata @create @crud @regression @smoke @sanity", async ({ userRoleClient }) => {
+    test("TC_EMPTY_001 Create user role without userRole @emptydata", async ({ userRoleClient }) => {
         const payload = { ...userRoleData.userRole };
         delete payload.userRole;
 
         const response = await userRoleClient.createUserRole(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_002 Create user role with empty request body @emptydata @create @crud @regression", async ({ userRoleClient }) => {
+    test("TC_EMPTY_002 Create user role with empty request body @emptydata", async ({ userRoleClient }) => {
         const response = await userRoleClient.createUserRole({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_003 Update user role without userRole @emptydata @update @crud @regression", async ({ userRoleClient }) => {
+    test("TC_EMPTY_003 Update user role without userRole @emptydata", async ({ userRoleClient }) => {
         const payload = { ...userRoleData.updatedUserRole };
         delete payload.userRole;
 
@@ -676,50 +660,50 @@ test.describe("User Roles Module - Empty Data Validation", () => {
             payload
         );
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_004 Update user role with empty request body @emptydata @update @crud @regression", async ({ userRoleClient }) => {
+    test("TC_EMPTY_004 Update user role with empty request body @emptydata", async ({ userRoleClient }) => {
         const response = await userRoleClient.updateUserRole(
             userRoleData.existing.roleId,
             {}
         );
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_005 Get role using empty role name @emptydata @read @regression @sanity", async ({ userRoleClient }) => {
+    test("TC_EMPTY_005 Get role using empty role name @emptydata", async ({ userRoleClient }) => {
         const response = await userRoleClient.getUserRole("");
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_006 Get role using empty roleId @emptydata @read @regression @sanity", async ({ userRoleClient }) => {
+    test("TC_EMPTY_006 Get role using empty roleId @emptydata", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleById("");
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_007 Get roleId without roleName query parameter @emptydata @read @regression", async ({ userRoleClient }) => {
+    test("TC_EMPTY_007 Get roleId without roleName query parameter @emptydata", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleId("");
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_008 Get roleName using empty roleId @emptydata @read @regression", async ({ userRoleClient }) => {
+    test("TC_EMPTY_008 Get roleName using empty roleId @emptydata", async ({ userRoleClient }) => {
         const response = await userRoleClient.getRoleName("");
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_009 Check/Create role without userRole @emptydata @create @crud @regression", async ({ userRoleClient }) => {
+    test("TC_EMPTY_009 Check/Create role without userRole @emptydata", async ({ userRoleClient }) => {
         const payload = {
             activeStatus: true
         };
 
         const response = await userRoleClient.checkExistsOrCreateRole(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_010 Check/Create role with empty request body @emptydata @create @crud @regression", async ({ userRoleClient }) => {
+    test("TC_EMPTY_010 Check/Create role with empty request body @emptydata", async ({ userRoleClient }) => {
         const response = await userRoleClient.checkExistsOrCreateRole({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
 });

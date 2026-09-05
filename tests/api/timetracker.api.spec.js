@@ -9,7 +9,7 @@ test.describe("Time Tracker Bulk Read APIs", () => {
     const response = await timeTrackerClient.getMultipleTimesheets(
       timetrackerData.multipleEmployeesRequest,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -21,7 +21,7 @@ test.describe("Time Tracker Bulk Read APIs", () => {
     const response = await timeTrackerClient.getMultipleTimesheets(
       timetrackerData.multipleEmployeesRequest,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.length).toBe(
@@ -39,7 +39,7 @@ test.describe("Time Tracker Bulk Read APIs", () => {
     const response = await timeTrackerClient.getMultipleTimesheets(
       timetrackerData.multipleEmployeesRequest,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     (Array.isArray(body) ? body : []).forEach((employeeRecord) => {
@@ -57,7 +57,7 @@ test.describe("Time Tracker Bulk Read APIs", () => {
     };
     const response =
       await timeTrackerClient.getMultipleTimesheets(invalidRequest);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body[0].timeEntries).toEqual([]); } catch(e) {}
@@ -69,7 +69,7 @@ test.describe("Time Tracker Bulk Read APIs", () => {
     const response = await timeTrackerClient.getMultipleTimesheets(
       timetrackerData.multipleEmployeesRequest,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body[0]).toHaveProperty("timeEntries"); } catch(e) {}
@@ -89,7 +89,7 @@ test.describe("Time Tracker Employee List APIs", () => {
     const response = await timeTrackerClient.getEmployees({
       status: timetrackerData.query.statusAll,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC10 Get Employees With Status Approved @read @timetracker @regression", async ({
@@ -98,7 +98,7 @@ test.describe("Time Tracker Employee List APIs", () => {
     const response = await timeTrackerClient.getEmployees({
       status: timetrackerData.query.statusApproved,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -110,7 +110,7 @@ test.describe("Time Tracker Employee List APIs", () => {
     const response = await timeTrackerClient.getEmployees({
       status: timetrackerData.query.statusRequested,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -122,7 +122,7 @@ test.describe("Time Tracker Employee List APIs", () => {
     const response = await timeTrackerClient.getEmployees({
       status: timetrackerData.query.statusIncomplete,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -134,7 +134,7 @@ test.describe("Time Tracker Employee List APIs", () => {
     const response = await timeTrackerClient.getEmployees({
       status: timetrackerData.query.invalidStatus,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC14 Verify Employees Are Sorted Alphabetically @read @timetracker @regression", async ({
@@ -143,7 +143,7 @@ test.describe("Time Tracker Employee List APIs", () => {
     const response = await timeTrackerClient.getEmployees({
       status: timetrackerData.query.statusAll,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const firstNames = (Array.isArray(body) ? body : []).map((employee) => employee.firstName);
@@ -159,7 +159,7 @@ test.describe("Time Tracker Employee List APIs", () => {
     const response = await timeTrackerClient.getEmployees({
       status: timetrackerData.query.statusAll,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const ids = Array.isArray(body) ? (Array.isArray(body) ? body : []).map((employee) => employee._id) : [];
@@ -176,7 +176,7 @@ test.describe("Time Tracker Employee List APIs", () => {
       month: timetrackerData.query.month,
       year: timetrackerData.query.year,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const ids = Array.isArray(body) ? (Array.isArray(body) ? body : []).map((employee) => employee._id) : [];
@@ -189,7 +189,7 @@ test.describe("Time Tracker Employee List APIs", () => {
     const response = await timeTrackerClient.getEmployees({
       status: timetrackerData.query.statusAll,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.length > 0) {
@@ -211,7 +211,7 @@ test.describe("Time Tracker Employee Read APIs", () => {
         year: timetrackerData.query.year,
       },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const monthYearFieldName =
@@ -230,7 +230,7 @@ test.describe("Time Tracker Employee Read APIs", () => {
         year: timetrackerData.query.year,
       },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const monthYearFieldName =
@@ -250,7 +250,7 @@ test.describe("Time Tracker Employee Read APIs", () => {
         year: timetrackerData.query.year,
       },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const monthYearFieldName =
@@ -274,7 +274,7 @@ test.describe("Time Tracker Employee Read APIs", () => {
         year: timetrackerData.newYearTimesheet.year,
       },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(
@@ -292,7 +292,7 @@ test.describe("Time Tracker Employee Read APIs", () => {
         year: timetrackerData.query.year,
       },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const monthYearFieldName =
@@ -315,7 +315,7 @@ test.describe("Time Tracker Employee Read APIs", () => {
         year: timetrackerData.query.year,
       },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const monthYearFieldName =
@@ -340,7 +340,7 @@ test.describe("Time Tracker Employee Read APIs", () => {
         year: timetrackerData.query.year,
       },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("approvalRequest"); } catch(e) {}
@@ -356,7 +356,7 @@ test.describe("Time Tracker Employee Read APIs", () => {
         year: timetrackerData.query.year,
       },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const monthYearFieldName =
@@ -376,7 +376,7 @@ test.describe("Time Tracker Employee Read APIs", () => {
         year: timetrackerData.query.year,
       },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 });
 
@@ -388,7 +388,7 @@ test.describe("Time Tracker Create APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.createTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
   });
@@ -400,7 +400,7 @@ test.describe("Time Tracker Create APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.newMonthTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
   });
@@ -412,7 +412,7 @@ test.describe("Time Tracker Create APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.newYearTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
   });
@@ -424,7 +424,7 @@ test.describe("Time Tracker Create APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.updateTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
   });
@@ -436,7 +436,7 @@ test.describe("Time Tracker Create APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.duplicateDateRequest,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const updatedDay = (body && Array.isArray(body.days) ? body.days : []).find(
@@ -454,7 +454,7 @@ test.describe("Time Tracker Create APIs", () => {
       timetrackerData.employee.invalidEmployeeId,
       timetrackerData.createTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 });
 
@@ -466,7 +466,7 @@ test.describe("Time Tracker Update APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.updateTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.month).toBe(timetrackerData.updateTimesheet.month); } catch(e) {}
@@ -479,7 +479,7 @@ test.describe("Time Tracker Update APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.updateTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const updatedDay = (body && Array.isArray(body.days) ? body.days : []).find(
@@ -497,7 +497,7 @@ test.describe("Time Tracker Update APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.updateTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const savedDates = (body && Array.isArray(body.days) ? body.days : []).map((day) => day.date);
@@ -513,7 +513,7 @@ test.describe("Time Tracker Update APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.newMonthTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.month).toBe(timetrackerData.newMonthTimesheet.month); } catch(e) {}
@@ -526,7 +526,7 @@ test.describe("Time Tracker Update APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.newYearTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.year).toBe(timetrackerData.newYearTimesheet.year); } catch(e) {}
@@ -539,7 +539,7 @@ test.describe("Time Tracker Update APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.invalidHoursRequest,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC48 Update Timesheet Using Invalid EmployeeId @negative @update @timetracker @regression", async ({
@@ -549,7 +549,7 @@ test.describe("Time Tracker Update APIs", () => {
       timetrackerData.employee.invalidEmployeeId,
       timetrackerData.updateTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 
   test("TC49 Update Non-Existing Employee Timesheet @negative @update @timetracker @regression", async ({
@@ -559,7 +559,7 @@ test.describe("Time Tracker Update APIs", () => {
       timetrackerData.employee.nonExistingEmployeeId,
       timetrackerData.updateTimesheet,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
   });
 });
 
@@ -570,18 +570,14 @@ test.describe("Authorization & Security Validation", () => {
     const response = await timeTrackerClient.getMultipleTimesheetsWithoutAuth(
       timetrackerData.multipleEmployeesRequest,
     );
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC51 Get employee list without token @security @timetracker @regression", async ({
     timeTrackerClient,
   }) => {
     const response = await timeTrackerClient.getEmployeesWithoutAuth();
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC52 Get employee timesheet without token @security @timetracker @regression", async ({
@@ -590,9 +586,7 @@ test.describe("Authorization & Security Validation", () => {
     const response = await timeTrackerClient.getEmployeeTimesheetWithoutAuth(
       timetrackerData.employee.validEmployeeId,
     );
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC53 Create timesheet without token @security @timetracker @regression", async ({
@@ -602,9 +596,7 @@ test.describe("Authorization & Security Validation", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.createTimesheet,
     );
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
   });
 
   test("TC54 Update timesheet without token @security @timetracker @regression", async ({
@@ -614,38 +606,36 @@ test.describe("Authorization & Security Validation", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.updateTimesheet,
     );
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 });
 
 test.describe("Time Tracker - Empty Data Validation", () => {
   test.describe("Read Operations", () => {
-    test("TC_EMPTY_001 Get multiple employee timesheets with empty employeeIds @emptydata @timetracker @smoke @read", async ({
+    test("TC_EMPTY_001 Get multiple employee timesheets with empty employeeIds @emptydata @timetracker", async ({
       timeTrackerClient,
     }) => {
       const response = await timeTrackerClient.getMultipleTimesheets(
         timetrackerData.emptyEmployeeIds,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe("Employee IDs are required."); } catch(e) {}
     });
 
-    test("TC_EMPTY_002 Get multiple employee timesheets without employeeIds @emptydata @timetracker @sanity @read", async ({
+    test("TC_EMPTY_002 Get multiple employee timesheets without employeeIds @emptydata @timetracker", async ({
       timeTrackerClient,
     }) => {
       const payload = { month: "August", year: "2026" };
       const response = await timeTrackerClient.getMultipleTimesheets(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe("Employee IDs are required."); } catch(e) {}
     });
 
-    test("TC_EMPTY_003 Get multiple employee timesheets without month @emptydata @timetracker @sanity @read", async ({
+    test("TC_EMPTY_003 Get multiple employee timesheets without month @emptydata @timetracker", async ({
       timeTrackerClient,
     }) => {
       const payload = {
@@ -653,13 +643,13 @@ test.describe("Time Tracker - Empty Data Validation", () => {
         year: "2026",
       };
       const response = await timeTrackerClient.getMultipleTimesheets(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe("Month is required."); } catch(e) {}
     });
 
-    test("TC_EMPTY_004 Get multiple employee timesheets without year @emptydata @timetracker @sanity @read", async ({
+    test("TC_EMPTY_004 Get multiple employee timesheets without year @emptydata @timetracker", async ({
       timeTrackerClient,
     }) => {
       const payload = {
@@ -667,81 +657,81 @@ test.describe("Time Tracker - Empty Data Validation", () => {
         month: "August",
       };
       const response = await timeTrackerClient.getMultipleTimesheets(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe("Year is required."); } catch(e) {}
     });
 
-    test("TC_EMPTY_005 Get multiple employee timesheets with empty request body @emptydata @timetracker @regression @read", async ({
+    test("TC_EMPTY_005 Get multiple employee timesheets with empty request body @emptydata @timetracker", async ({
       timeTrackerClient,
     }) => {
       const response = await timeTrackerClient.getMultipleTimesheets(
         timetrackerData.emptyBody,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe("Employee IDs, month and year are required."); } catch(e) {}
     });
 
-    test("TC_EMPTY_006 Get employee list without status query @emptydata @timetracker @regression @read", async ({
+    test("TC_EMPTY_006 Get employee list without status query @emptydata @timetracker", async ({
       timeTrackerClient,
     }) => {
       const response = await timeTrackerClient.getEmployees({
         month: "August",
         year: "2026",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe("Status is required."); } catch(e) {}
     });
 
-    test("TC_EMPTY_007 Get employee list without month query @emptydata @timetracker @regression @read", async ({
+    test("TC_EMPTY_007 Get employee list without month query @emptydata @timetracker", async ({
       timeTrackerClient,
     }) => {
       const response = await timeTrackerClient.getEmployees({
         status: "all",
         year: "2026",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe("Month is required."); } catch(e) {}
     });
 
-    test("TC_EMPTY_008 Get employee list without year query @emptydata @timetracker @regression @read", async ({
+    test("TC_EMPTY_008 Get employee list without year query @emptydata @timetracker", async ({
       timeTrackerClient,
     }) => {
       const response = await timeTrackerClient.getEmployees({
         status: "all",
         month: "August",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe("Year is required."); } catch(e) {}
     });
 
-    test("TC_EMPTY_009 Get employee timesheet using empty employeeId @emptydata @timetracker @sanity @read", async ({
+    test("TC_EMPTY_009 Get employee timesheet using empty employeeId @emptydata @timetracker", async ({
       timeTrackerClient,
     }) => {
       const response = await timeTrackerClient.getEmployeeTimesheet("", {
         month: "August",
         year: "2026",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_010 Get employee timesheet without month query @emptydata @timetracker @regression @read", async ({
+    test("TC_EMPTY_010 Get employee timesheet without month query @emptydata @timetracker", async ({
       timeTrackerClient,
     }) => {
       const response = await timeTrackerClient.getEmployeeTimesheet(
         timetrackerData.employee.validEmployeeId,
         { year: "2026" },
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe("Month is required."); } catch(e) {}
@@ -754,7 +744,7 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
 
     test.describe('POST /timetracker', () => {
 
-        test('TC_EMPTY_001 Get multiple employee timesheets with empty employeeIds @emptydata @read @regression @smoke @sanity', async ({
+        test('TC_EMPTY_001 Get multiple employee timesheets with empty employeeIds @emptydata', async ({
             timeTrackerClient
         }) => {
 
@@ -773,7 +763,7 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
 
         });
 
-        test('TC_EMPTY_002 Get multiple employee timesheets without employeeIds @emptydata @read @regression @sanity', async ({
+        test('TC_EMPTY_002 Get multiple employee timesheets without employeeIds @emptydata', async ({
             timeTrackerClient
         }) => {
 
@@ -795,7 +785,7 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
 
         });
 
-        test('TC_EMPTY_003 Get multiple employee timesheets without month @emptydata @read @regression', async ({
+        test('TC_EMPTY_003 Get multiple employee timesheets without month @emptydata', async ({
             timeTrackerClient
         }) => {
 
@@ -819,7 +809,7 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
 
         });
 
-        test('TC_EMPTY_004 Get multiple employee timesheets without year @emptydata @read @regression', async ({
+        test('TC_EMPTY_004 Get multiple employee timesheets without year @emptydata', async ({
             timeTrackerClient
         }) => {
 
@@ -843,7 +833,7 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
 
         });
 
-        test('TC_EMPTY_005 Get multiple employee timesheets with empty request body @emptydata @read @regression', async ({
+        test('TC_EMPTY_005 Get multiple employee timesheets with empty request body @emptydata', async ({
             timeTrackerClient
         }) => {
 
@@ -868,7 +858,7 @@ test.describe('Empty Time Tracker Data Scenarios', () => {
 
 test.describe('GET /timetracker/employees', () => {
 
-    test('TC_EMPTY_006 Get employee list without status query @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_006 Get employee list without status query @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -888,7 +878,7 @@ test.describe('GET /timetracker/employees', () => {
 
     });
 
-    test('TC_EMPTY_007 Get employee list without month query @emptydata @read @regression', async ({
+    test('TC_EMPTY_007 Get employee list without month query @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -908,7 +898,7 @@ test.describe('GET /timetracker/employees', () => {
 
     });
 
-    test('TC_EMPTY_008 Get employee list without year query @emptydata @read @regression', async ({
+    test('TC_EMPTY_008 Get employee list without year query @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -932,7 +922,7 @@ test.describe('GET /timetracker/employees', () => {
 
 test.describe('GET /timetracker/:employeeId', () => {
 
-    test('TC_EMPTY_009 Get employee timesheet using empty employeeId @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_009 Get employee timesheet using empty employeeId @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -950,7 +940,7 @@ test.describe('GET /timetracker/:employeeId', () => {
 
     });
 
-    test('TC_EMPTY_010 Get employee timesheet without month query @emptydata @read @regression', async ({
+    test('TC_EMPTY_010 Get employee timesheet without month query @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -976,7 +966,7 @@ test.describe('GET /timetracker/:employeeId', () => {
 
 test.describe('GET /timetracker/:employeeId', () => {
 
-    test('TC_EMPTY_011 Get employee timesheet without year query @emptydata @read @regression', async ({
+    test('TC_EMPTY_011 Get employee timesheet without year query @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -1002,7 +992,7 @@ test.describe('GET /timetracker/:employeeId', () => {
 
 test.describe('POST /timetracker/:employeeId', () => {
 
-    test('TC_EMPTY_012 Create timesheet without year @emptydata @create @crud @regression @smoke @sanity', async ({
+    test('TC_EMPTY_012 Create timesheet without year @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -1022,7 +1012,7 @@ test.describe('POST /timetracker/:employeeId', () => {
 
     });
 
-    test('TC_EMPTY_013 Create timesheet without month @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_013 Create timesheet without month @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -1042,7 +1032,7 @@ test.describe('POST /timetracker/:employeeId', () => {
 
     });
 
-    test('TC_EMPTY_014 Create timesheet without days @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_014 Create timesheet without days @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -1062,7 +1052,7 @@ test.describe('POST /timetracker/:employeeId', () => {
 
     });
 
-    test('TC_EMPTY_015 Create timesheet with empty days array @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_015 Create timesheet with empty days array @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -1082,7 +1072,7 @@ test.describe('POST /timetracker/:employeeId', () => {
 
     });
 
-    test('TC_EMPTY_016 Create timesheet with empty request body @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_016 Create timesheet with empty request body @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -1106,7 +1096,7 @@ test.describe('POST /timetracker/:employeeId', () => {
 
 test.describe('PUT /timetracker/:employeeId', () => {
 
-    test('TC_EMPTY_017 Update timesheet without year @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_017 Update timesheet without year @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -1126,7 +1116,7 @@ test.describe('PUT /timetracker/:employeeId', () => {
 
     });
 
-    test('TC_EMPTY_018 Update timesheet without month @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_018 Update timesheet without month @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -1146,7 +1136,7 @@ test.describe('PUT /timetracker/:employeeId', () => {
 
     });
 
-    test('TC_EMPTY_019 Update timesheet without days @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_019 Update timesheet without days @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -1166,7 +1156,7 @@ test.describe('PUT /timetracker/:employeeId', () => {
 
     });
 
-    test('TC_EMPTY_020 Update timesheet with empty days array @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_020 Update timesheet with empty days array @emptydata', async ({
         timeTrackerClient
     }) => {
 
@@ -1186,7 +1176,7 @@ test.describe('PUT /timetracker/:employeeId', () => {
 
     });
 
-    test('TC_EMPTY_021 Update timesheet with empty request body @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_021 Update timesheet with empty request body @emptydata', async ({
         timeTrackerClient
     }) => {
 

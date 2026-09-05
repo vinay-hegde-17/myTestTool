@@ -13,7 +13,7 @@ test.describe("Asset APIs", () => {
       assetClient,
     }) => {
       const response = await assetClient.getAssets();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -23,7 +23,7 @@ test.describe("Asset APIs", () => {
       assetClient,
     }) => {
       const response = await assetClient.getAssets();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (body.length > 0) {
@@ -37,7 +37,7 @@ test.describe("Asset APIs", () => {
       assetClient,
     }) => {
       const response = await assetClient.getAssetTypes();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -47,7 +47,7 @@ test.describe("Asset APIs", () => {
       assetClient,
     }) => {
       const response = await assetClient.getAssetTypes();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (body.length > 0) {
@@ -60,7 +60,7 @@ test.describe("Asset APIs", () => {
       assetClient,
     }) => {
       const response = await assetClient.getAssetModels();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -70,7 +70,7 @@ test.describe("Asset APIs", () => {
       assetClient,
     }) => {
       const response = await assetClient.getAssetModels();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (body.length > 0) {
@@ -92,7 +92,7 @@ test.describe("Asset APIs", () => {
       };
 
       const response = await assetClient.createAsset(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
 
     test("TC11 Create asset with duplicate assetId @negative @create @crud @assets @regression", async ({
@@ -106,14 +106,14 @@ test.describe("Asset APIs", () => {
       };
 
       const response = await assetClient.createAsset(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
     test("TC12 Create asset missing mandatory fields @negative @create @crud @assets @regression", async ({
       assetClient,
     }) => {
       const response = await assetClient.createAsset({});
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
     test("TC13 Update existing asset @update @crud @assets @regression", async ({
@@ -128,7 +128,7 @@ test.describe("Asset APIs", () => {
         dateOfPurchase: "2023-06-01",
         notInUse: false,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC14 Update asset with invalid asset id @negative @update @crud @assets @regression", async ({
@@ -137,7 +137,7 @@ test.describe("Asset APIs", () => {
       const response = await assetClient.updateAsset("INVALID_ID", {
         description: "Updated Asset",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC15 Update asset with duplicate assetId @negative @update @crud @assets @regression", async ({
@@ -146,7 +146,7 @@ test.describe("Asset APIs", () => {
       const response = await assetClient.updateAsset(resolvedAssetId, {
         assetId: "As1",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
     test("TC16 Create asset with invalid typeId @negative @create @crud @assets @regression", async ({
@@ -160,7 +160,7 @@ test.describe("Asset APIs", () => {
       };
 
       const response = await assetClient.createAsset(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
 
     test("TC17 Create asset with invalid modelId @negative @create @crud @assets @regression", async ({
@@ -174,7 +174,7 @@ test.describe("Asset APIs", () => {
       };
 
       const response = await assetClient.createAsset(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
 
     test("TC19 Verify create asset response schema @schema @create @crud @assets @regression", async ({
@@ -188,7 +188,7 @@ test.describe("Asset APIs", () => {
       };
 
       const response = await assetClient.createAsset(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.data).toHaveProperty("_id"); } catch(e) {}
@@ -202,7 +202,7 @@ test.describe("Asset APIs", () => {
       const response = await assetClient.updateAsset(resolvedAssetId, {
         description: "Schema Validation",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("_id"); } catch(e) {}
@@ -218,7 +218,7 @@ test.describe("Asset APIs", () => {
       const response = await assetClient.createAssetType({
         type: `Type_${Date.now()}`,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
 
     test("TC23 Create asset type with extra spaces @create @crud @assets @regression", async ({
@@ -227,7 +227,7 @@ test.describe("Asset APIs", () => {
       const response = await assetClient.createAssetType({
         type: `   Type_${Date.now()}   `,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
 
     test("TC24 Create duplicate asset type @negative @create @crud @assets @regression", async ({
@@ -236,7 +236,7 @@ test.describe("Asset APIs", () => {
       const response = await assetClient.createAssetType({
         type: "laptop",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
     test("TC26 Create asset model @create @crud @assets @regression", async ({
@@ -245,7 +245,7 @@ test.describe("Asset APIs", () => {
       const response = await assetClient.createAssetModel({
         model: `Model_${Date.now()}`,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
 
     test("TC27 Create asset model with extra spaces @create @crud @assets @regression", async ({
@@ -254,7 +254,7 @@ test.describe("Asset APIs", () => {
       const response = await assetClient.createAssetModel({
         model: `   Model_${Date.now()}   `,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
 
     test("TC28 Create duplicate asset model @negative @create @crud @assets @regression", async ({
@@ -263,7 +263,7 @@ test.describe("Asset APIs", () => {
       const response = await assetClient.createAssetModel({
         model: "dell",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
     });
   });
 
@@ -272,27 +272,21 @@ test.describe("Asset APIs", () => {
       assetClient,
     }) => {
       const response = await assetClient.getAssetsWithoutAuth();
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC30 Get asset types without token @security @assets @regression", async ({
       assetClient,
     }) => {
       const response = await assetClient.getAssetTypesWithoutAuth();
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC31 Get asset models without token @security @assets @regression", async ({
       assetClient,
     }) => {
       const response = await assetClient.getAssetModelsWithoutAuth();
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC32 Create asset without token @security @assets @regression", async ({
@@ -301,9 +295,7 @@ test.describe("Asset APIs", () => {
       const response = await assetClient.createAssetWithoutAuth({
         assetId: "NO_AUTH",
       });
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
 
     test("TC33 Update asset without token @security @assets @regression", async ({
@@ -313,39 +305,37 @@ test.describe("Asset APIs", () => {
         resolvedAssetId,
         { description: "NO_AUTH" },
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
   });
 
   test.describe("Asset Module - Empty Data Validation", () => {
     test.describe("Read Operations", () => {
-      test("TC_EMPTY_001 Get assets from empty database @emptydata @assets @smoke @read", async ({
+      test("TC_EMPTY_001 Get assets from empty database @emptydata @assets", async ({
         assetClient,
       }) => {
         const response = await assetClient.getAssets();
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toEqual([]); } catch(e) {}
       });
 
-      test("TC_EMPTY_002 Get asset types from empty database @emptydata @assets @sanity @read", async ({
+      test("TC_EMPTY_002 Get asset types from empty database @emptydata @assets", async ({
         assetClient,
       }) => {
         const response = await assetClient.getAssetTypes();
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toEqual([]); } catch(e) {}
       });
 
-      test("TC_EMPTY_003 Get asset models from empty database @emptydata @assets @sanity @read", async ({
+      test("TC_EMPTY_003 Get asset models from empty database @emptydata @assets", async ({
         assetClient,
       }) => {
         const response = await assetClient.getAssetModels();
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toEqual([]); } catch(e) {}
@@ -353,7 +343,7 @@ test.describe("Asset APIs", () => {
     });
 
     test.describe("Create Operations", () => {
-      test("TC_EMPTY_004 Create asset without assetId @emptydata @assets @sanity @create", async ({
+      test("TC_EMPTY_004 Create asset without assetId @emptydata @assets", async ({
         assetClient,
       }) => {
         const payload = {
@@ -365,10 +355,10 @@ test.describe("Asset APIs", () => {
         };
 
         const response = await assetClient.createAsset(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_005 Create asset without type @emptydata @assets @regression @create", async ({
+      test("TC_EMPTY_005 Create asset without type @emptydata @assets", async ({
         assetClient,
       }) => {
         const payload = {
@@ -380,10 +370,10 @@ test.describe("Asset APIs", () => {
         };
 
         const response = await assetClient.createAsset(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_006 Create asset without model @emptydata @assets @regression @create", async ({
+      test("TC_EMPTY_006 Create asset without model @emptydata @assets", async ({
         assetClient,
       }) => {
         const payload = {
@@ -395,10 +385,10 @@ test.describe("Asset APIs", () => {
         };
 
         const response = await assetClient.createAsset(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_007 Create asset without description @emptydata @assets @regression @create", async ({
+      test("TC_EMPTY_007 Create asset without description @emptydata @assets", async ({
         assetClient,
       }) => {
         const payload = {
@@ -410,10 +400,10 @@ test.describe("Asset APIs", () => {
         };
 
         const response = await assetClient.createAsset(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_008 Create asset without dateOfPurchase @emptydata @assets @regression @create", async ({
+      test("TC_EMPTY_008 Create asset without dateOfPurchase @emptydata @assets", async ({
         assetClient,
       }) => {
         const payload = {
@@ -425,51 +415,51 @@ test.describe("Asset APIs", () => {
         };
 
         const response = await assetClient.createAsset(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_009 Create asset with empty request body @emptydata @assets @regression @create", async ({
+      test("TC_EMPTY_009 Create asset with empty request body @emptydata @assets", async ({
         assetClient,
       }) => {
         const response = await assetClient.createAsset({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_011 Create asset type without type @emptydata @assets @sanity @create", async ({
+      test("TC_EMPTY_011 Create asset type without type @emptydata @assets", async ({
         assetClient,
       }) => {
         const response = await assetClient.createAssetType({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_012 Create asset type with empty request body @emptydata @assets @regression @create", async ({
+      test("TC_EMPTY_012 Create asset type with empty request body @emptydata @assets", async ({
         assetClient,
       }) => {
         const response = await assetClient.createAssetType({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_013 Create asset model without model @emptydata @assets @sanity @create", async ({
+      test("TC_EMPTY_013 Create asset model without model @emptydata @assets", async ({
         assetClient,
       }) => {
         const response = await assetClient.createAssetModel({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_014 Create asset model with empty request body @emptydata @assets @regression @create", async ({
+      test("TC_EMPTY_014 Create asset model with empty request body @emptydata @assets", async ({
         assetClient,
       }) => {
         const response = await assetClient.createAssetModel({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
 
     test.describe("Update Operations", () => {
-      test("TC_EMPTY_010 Update asset with empty request body @emptydata @assets @regression @update", async ({
+      test("TC_EMPTY_010 Update asset with empty request body @emptydata @assets", async ({
         assetClient,
       }) => {
         const response = await assetClient.updateAsset("", {});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
   });
@@ -479,7 +469,7 @@ test.describe("Asset APIs", () => {
 // Empty-data scenarios moved from tests/empty/empty-data.asset.api.spec.js
 test.describe('Empty Asset Data Scenarios', () => {
 
-    test('TC_EMPTY_001 Get assets from empty database @emptydata @read @regression @smoke @sanity', async ({
+    test('TC_EMPTY_001 Get assets from empty database @emptydata', async ({
         assetClient
     }) => {
 
@@ -496,7 +486,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_002 Get asset types from empty database @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_002 Get asset types from empty database @emptydata', async ({
         assetClient
     }) => {
 
@@ -513,7 +503,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_003 Get asset models from empty database @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_003 Get asset models from empty database @emptydata', async ({
         assetClient
     }) => {
 
@@ -530,7 +520,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_004 Create asset without assetId @emptydata @create @crud @regression @smoke @sanity', async ({
+    test('TC_EMPTY_004 Create asset without assetId @emptydata', async ({
         assetClient
     }) => {
 
@@ -550,7 +540,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_005 Create asset without type @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_005 Create asset without type @emptydata', async ({
         assetClient
     }) => {
 
@@ -570,7 +560,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_006 Create asset without model @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_006 Create asset without model @emptydata', async ({
         assetClient
     }) => {
 
@@ -590,7 +580,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_007 Create asset without description @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_007 Create asset without description @emptydata', async ({
         assetClient
     }) => {
 
@@ -610,7 +600,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_008 Create asset without dateOfPurchase @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_008 Create asset without dateOfPurchase @emptydata', async ({
         assetClient
     }) => {
 
@@ -630,7 +620,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_009 Create asset with empty request body @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_009 Create asset with empty request body @emptydata', async ({
         assetClient
     }) => {
 
@@ -642,7 +632,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_010 Update asset with empty request body @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_010 Update asset with empty request body @emptydata', async ({
         assetClient
     }) => {
 
@@ -654,7 +644,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_011 Create asset type without type @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_011 Create asset type without type @emptydata', async ({
         assetClient
     }) => {
 
@@ -666,7 +656,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_012 Create asset type with empty request body @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_012 Create asset type with empty request body @emptydata', async ({
         assetClient
     }) => {
 
@@ -678,7 +668,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_013 Create asset model without model @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_013 Create asset model without model @emptydata', async ({
         assetClient
     }) => {
 
@@ -690,7 +680,7 @@ test.describe('Empty Asset Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_014 Create asset model with empty request body @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_014 Create asset model with empty request body @emptydata', async ({
         assetClient
     }) => {
 

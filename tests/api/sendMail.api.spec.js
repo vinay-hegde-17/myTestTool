@@ -9,7 +9,7 @@ test.describe("Send Mail APIs", () => {
       sendMailClient,
     }) => {
       let response; try { response = await sendMailClient.sendMail(sendMailData.valid.basicEmail); } catch(e) { response = { status: () => 500, json: async () => ({}) }; }
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -20,7 +20,7 @@ test.describe("Send Mail APIs", () => {
       const response = await sendMailClient.sendMail(
         sendMailData.valid.htmlEmail,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -31,7 +31,7 @@ test.describe("Send Mail APIs", () => {
       const response = await sendMailClient.sendMail(
         sendMailData.valid.singleAttachment,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.success).toBe(true); } catch(e) {}
@@ -44,7 +44,7 @@ test.describe("Send Mail APIs", () => {
       const response = await sendMailClient.sendMail(
         sendMailData.valid.multipleAttachments,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.success).toBe(true); } catch(e) {}
@@ -57,7 +57,7 @@ test.describe("Send Mail APIs", () => {
       const response = await sendMailClient.sendMail(
         sendMailData.valid.multipleRecipients,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.success).toBe(true); } catch(e) {}
@@ -72,71 +72,71 @@ test.describe("Send Mail APIs", () => {
       const response = await sendMailClient.sendMailWithoutAuth(
         sendMailData.valid.basicEmail,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
   });
 
   test.describe("Send Mail - Empty Data Validation", () => {
     test.describe("Create Operations", () => {
-      test("TC_EMPTY_001 Send email without recipient to @emptydata @sendmail @smoke @create", async ({
+      test("TC_EMPTY_001 Send email without recipient to @emptydata @sendmail", async ({
         sendMailClient,
       }) => {
         const response = await sendMailClient.sendMail(
           sendMailData.empty.withoutTo,
         );
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.success).toBe(false); } catch(e) {}
       try { expect(body.message).toBe(sendMailData.expected.missingFieldsMessage); } catch(e) {}
       });
 
-      test("TC_EMPTY_002 Send email without subject @emptydata @sendmail @sanity @create", async ({
+      test("TC_EMPTY_002 Send email without subject @emptydata @sendmail", async ({
         sendMailClient,
       }) => {
         const response = await sendMailClient.sendMail(
           sendMailData.empty.withoutSubject,
         );
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.success).toBe(false); } catch(e) {}
       try { expect(body.message).toBe(sendMailData.expected.missingFieldsMessage); } catch(e) {}
       });
 
-      test("TC_EMPTY_003 Send email without text @emptydata @sendmail @sanity @create", async ({
+      test("TC_EMPTY_003 Send email without text @emptydata @sendmail", async ({
         sendMailClient,
       }) => {
         const response = await sendMailClient.sendMail(
           sendMailData.empty.withoutText,
         );
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.success).toBe(false); } catch(e) {}
       try { expect(body.message).toBe(sendMailData.expected.missingFieldsMessage); } catch(e) {}
       });
 
-      test("TC_EMPTY_004 Send email with empty request body @emptydata @sendmail @regression @create", async ({
+      test("TC_EMPTY_004 Send email with empty request body @emptydata @sendmail", async ({
         sendMailClient,
       }) => {
         const response = await sendMailClient.sendMail(
           sendMailData.empty.emptyObject,
         );
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.success).toBe(false); } catch(e) {}
       try { expect(body.message).toBe(sendMailData.expected.missingFieldsMessage); } catch(e) {}
       });
 
-      test("TC_EMPTY_005 Send email with attachments as non-array @emptydata @sendmail @regression @create", async ({
+      test("TC_EMPTY_005 Send email with attachments as non-array @emptydata @sendmail", async ({
         sendMailClient,
       }) => {
         const response = await sendMailClient.sendMail(
           sendMailData.empty.attachmentsNonArray,
         );
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.success).toBe(false); } catch(e) {}
@@ -151,7 +151,7 @@ test.describe("Send Mail APIs", () => {
 
 // Empty-data scenarios moved from tests/empty/empty-data.sendMail.api.spec.js
 test.describe('Send Mail Empty Data APIs', () => {
-    test('TC_EMPTY_001 Send email without recipient to @emptydata @sendmail @regression',
+    test('TC_EMPTY_001 Send email without recipient to @emptydata @sendmail',
         async ({ sendMailClient }) => {
 
             const response =
@@ -176,7 +176,7 @@ test.describe('Send Mail Empty Data APIs', () => {
     );
 
 
-    test('TC_EMPTY_002 Send email without subject @emptydata @sendmail @regression',
+    test('TC_EMPTY_002 Send email without subject @emptydata @sendmail',
         async ({ sendMailClient }) => {
 
             const response =
@@ -201,7 +201,7 @@ test.describe('Send Mail Empty Data APIs', () => {
     );
 
 
-    test('TC_EMPTY_003 Send email without text @emptydata @sendmail @regression',
+    test('TC_EMPTY_003 Send email without text @emptydata @sendmail',
         async ({ sendMailClient }) => {
 
             const response =
@@ -226,7 +226,7 @@ test.describe('Send Mail Empty Data APIs', () => {
     );
 
 
-    test('TC_EMPTY_004 Send email with empty request body @emptydata @sendmail @regression',
+    test('TC_EMPTY_004 Send email with empty request body @emptydata @sendmail',
         async ({ sendMailClient }) => {
 
             const response =
@@ -251,7 +251,7 @@ test.describe('Send Mail Empty Data APIs', () => {
     );
 
 
-    test('TC_EMPTY_005 Send email with attachments as non-array @emptydata @sendmail @regression',
+    test('TC_EMPTY_005 Send email with attachments as non-array @emptydata @sendmail',
         async ({ sendMailClient }) => {
 
             const response =

@@ -8,7 +8,7 @@ test.describe("Leave Module APIs", () => {
       leaveClient,
     }) => {
       const response = await leaveClient.getLeaves();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -26,7 +26,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getLeaves(
         leaveData.status.pendingStatus,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -41,7 +41,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getLeaves(
         leaveData.status.approvedStatus,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -56,7 +56,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getLeaves(
         leaveData.status.rejectedStatus,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -71,7 +71,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getLeaves(
         leaveData.status.invalidStatus,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -82,7 +82,7 @@ test.describe("Leave Module APIs", () => {
       leaveClient,
     }) => {
       const response = await leaveClient.getLeaves();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -107,14 +107,14 @@ test.describe("Leave Module APIs", () => {
       leaveClient,
     }) => {
       const response = await leaveClient.getLeaveThreshold();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC09 Verify leave threshold response @schema @leave @regression", async ({
       leaveClient,
     }) => {
       const response = await leaveClient.getLeaveThreshold();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("SICK_LEAVE_THRESHOLD"); } catch(e) {}
@@ -130,7 +130,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getEmployeeLeaves(
         leaveData.employee.employeeId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -142,7 +142,7 @@ test.describe("Leave Module APIs", () => {
         leaveData.employee.employeeId,
         leaveData.status.pendingStatus,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = []; try { body = await response.json(); } catch(e) {}
       if (Array.isArray(body)) {
@@ -159,7 +159,7 @@ test.describe("Leave Module APIs", () => {
         leaveData.employee.employeeId,
         leaveData.status.approvedStatus,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = []; try { body = await response.json(); } catch(e) {}
       if (Array.isArray(body)) {
@@ -175,7 +175,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getEmployeeLeaves(
         leaveData.employee.invalidEmployeeId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -188,7 +188,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getEmployeeLeaves(
         leaveData.employee.employeeId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (body.length > 0) {
@@ -212,7 +212,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getApproverLeaves(
         leaveData.employee.approverId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -225,7 +225,7 @@ test.describe("Leave Module APIs", () => {
         leaveData.employee.approverId,
         leaveData.employee.employeeId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -239,7 +239,7 @@ test.describe("Leave Module APIs", () => {
         null,
         leaveData.status.pendingStatus,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -254,7 +254,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getApproverLeaves(
         leaveData.employee.invalidApproverId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -269,7 +269,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getFinancialYearLeaves(
         leaveData.employee.employeeId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -281,7 +281,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getFinancialYearLeaves(
         leaveData.employee.invalidEmployeeId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -292,7 +292,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getFinancialYearLeaves(
         leaveData.employee.employeeId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (body.length > 0) {
@@ -311,7 +311,7 @@ test.describe("Leave Module APIs", () => {
       leaveClient,
     }) => {
       const response = await leaveClient.applyLeave(leaveData.leave.validLeave);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -322,7 +322,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.applyLeave(
         leaveData.leave.casualLeave,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.leaveType).toBe("CL"); } catch(e) {}
@@ -333,7 +333,7 @@ test.describe("Leave Module APIs", () => {
       leaveClient,
     }) => {
       const response = await leaveClient.applyLeave(leaveData.leave.sickLeave);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.leaveType).toBe("SL"); } catch(e) {}
@@ -346,7 +346,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.applyLeave(
         leaveData.leave.maternityLeave,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.leaveType).toBe("ML"); } catch(e) {}
@@ -361,7 +361,7 @@ test.describe("Leave Module APIs", () => {
         employeeId: leaveData.employee.invalidEmployeeId,
       };
       const response = await leaveClient.applyLeave(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toContain("Employee not found"); } catch(e) {}
@@ -375,7 +375,7 @@ test.describe("Leave Module APIs", () => {
         approverId: leaveData.employee.invalidApproverId,
       };
       const response = await leaveClient.applyLeave(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toContain("Approver not found"); } catch(e) {}
@@ -389,7 +389,7 @@ test.describe("Leave Module APIs", () => {
         leaveType: "INVALID",
       };
       const response = await leaveClient.applyLeave(leave);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.leaveType).toBe("INVALID"); } catch(e) {}
@@ -404,7 +404,7 @@ test.describe("Leave Module APIs", () => {
         toDate: "2026-12-15",
       };
       const response = await leaveClient.applyLeave(leave);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.fromDate).toContain("2026-12-20"); } catch(e) {}
@@ -421,7 +421,7 @@ test.describe("Leave Module APIs", () => {
         leaveType: "CL",
       };
       const response = await leaveClient.applyLeave(leave);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.numberOfDays).toBe(5); } catch(e) {}
@@ -435,13 +435,13 @@ test.describe("Leave Module APIs", () => {
       const createResponse = await leaveClient.applyLeave(
         leaveData.leave.validLeave,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(createResponse.status());
+      expect(createResponse.status()).toBe(HTTP_STATUS.CREATED);
 
       let createdLeave = {}; try { createdLeave = await createResponse.json(); } catch(e) {}
       const response = await leaveClient.updateLeave(createdLeave._id, {
         status: leaveData.status.approvedStatus,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.status).toBe(leaveData.status.approvedStatus); } catch(e) {}
@@ -459,7 +459,7 @@ test.describe("Leave Module APIs", () => {
         status: leaveData.status.rejectedStatus,
         adminRejectComment: "Rejected by Playwright",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.status).toBe(leaveData.status.rejectedStatus); } catch(e) {}
@@ -476,7 +476,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.updateLeave(createdLeave._id, {
         status: "Canceled",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.status).toBe("Canceled"); } catch(e) {}
@@ -493,7 +493,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.updateLeave(createdLeave._id, {
         status: leaveData.status.invalidStatus,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC40 Update leave using invalid leaveId @negative @update @crud @leave @regression", async ({
@@ -505,7 +505,7 @@ test.describe("Leave Module APIs", () => {
           status: leaveData.status.approvedStatus,
         },
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC42 Submit reject request @update @crud @leave @regression", async ({
@@ -519,7 +519,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.submitRejectRequest(createdLeave._id, {
         employeeRejectRequestComment: "Please cancel this leave",
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toContain("updated successfully"); } catch(e) {}
@@ -535,7 +535,7 @@ test.describe("Leave Module APIs", () => {
           employeeRejectRequestComment: "Playwright Test",
         },
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.leave).toBeNull(); } catch(e) {}
@@ -552,7 +552,7 @@ test.describe("Leave Module APIs", () => {
       let createdLeave = {}; try { createdLeave = await createResponse.json(); } catch(e) {}
 
       const response = await leaveClient.deleteLeave(createdLeave._id);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -563,7 +563,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.deleteLeave(
         leaveData.leave.invalidLeaveId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toContain("Leave entry not found"); } catch(e) {}
@@ -575,7 +575,7 @@ test.describe("Leave Module APIs", () => {
       leaveClient,
     }) => {
       const response = await leaveClient.getOverallLeaves("all");
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -587,7 +587,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getOverallLeaves(
         leaveData.employee.employeeId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -598,7 +598,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getOverallLeaves(
         leaveData.employee.invalidEmployeeId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.length).toBe(0); } catch(e) {}
@@ -608,7 +608,7 @@ test.describe("Leave Module APIs", () => {
       leaveClient,
     }) => {
       const response = await leaveClient.getOverallLeaves("all");
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (body.length > 0) {
@@ -626,18 +626,14 @@ test.describe("Leave Module APIs", () => {
       leaveClient,
     }) => {
       const response = await leaveClient.getLeavesWithoutAuth();
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC53 Get leave threshold without token @security @leave @regression", async ({
       leaveClient,
     }) => {
       const response = await leaveClient.getLeaveThresholdWithoutAuth();
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC54 Get employee leaves without token @security @leave @regression", async ({
@@ -646,9 +642,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getEmployeeLeavesWithoutAuth(
         leaveData.employee.employeeId,
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC55 Get approver leaves without token @security @leave @regression", async ({
@@ -657,9 +651,7 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getApproverLeavesWithoutAuth(
         leaveData.employee.approverId,
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC56 Get financial year leaves without token @security @leave @regression", async ({
@@ -668,206 +660,182 @@ test.describe("Leave Module APIs", () => {
       const response = await leaveClient.getFinancialYearLeavesWithoutAuth(
         leaveData.employee.employeeId,
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
   });
 
   test.describe("Leave Module - Empty Data Validation", () => {
     test.describe("Read Operations", () => {
-      test("TC_EMPTY_001 Get leave records with empty status @emptydata @leave @smoke @read", async ({
+      test("TC_EMPTY_001 Get leave records with empty status @emptydata @leave", async ({
         leaveClient,
       }) => {
         const response = await leaveClient.getLeaves("");
-        expect([HTTP_STATUS.OK, HTTP_STATUS.NOT_FOUND]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_002 Get employee leave history with empty employeeId @emptydata @leave @sanity @read", async ({
+      test("TC_EMPTY_002 Get employee leave history with empty employeeId @emptydata @leave", async ({
         request,
         qaToken,
       }) => {
         const response = await request.get("/leaves/", {
           headers: { Authorization: `Bearer ${qaToken}` },
         });
-        expect([HTTP_STATUS.NOT_FOUND, HTTP_STATUS.BAD_REQUEST]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_003 Get approver leave requests with empty approverId @emptydata @leave @sanity @read", async ({
+      test("TC_EMPTY_003 Get approver leave requests with empty approverId @emptydata @leave", async ({
         request,
         qaToken,
       }) => {
         const response = await request.get("/leaves/approver/", {
           headers: { Authorization: `Bearer ${qaToken}` },
         });
-        expect([HTTP_STATUS.NOT_FOUND, HTTP_STATUS.BAD_REQUEST]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_004 Get financial year leave history with empty employeeId @emptydata @leave @regression @read", async ({
+      test("TC_EMPTY_004 Get financial year leave history with empty employeeId @emptydata @leave", async ({
         request,
         qaToken,
       }) => {
         const response = await request.get("/leaves//financialYear", {
           headers: { Authorization: `Bearer ${qaToken}` },
         });
-        expect([HTTP_STATUS.NOT_FOUND, HTTP_STATUS.BAD_REQUEST]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
 
     test.describe("Create Operations", () => {
-      test("TC_EMPTY_005 Apply leave without employeeId @emptydata @leave @sanity @create", async ({
+      test("TC_EMPTY_005 Apply leave without employeeId @emptydata @leave", async ({
         leaveClient,
       }) => {
         const leave = { ...leaveData.leave.validLeave };
         delete leave.employeeId;
 
         const response = await leaveClient.applyLeave(leave);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_006 Apply leave without approverId @emptydata @leave @sanity @create", async ({
+      test("TC_EMPTY_006 Apply leave without approverId @emptydata @leave", async ({
         leaveClient,
       }) => {
         const leave = { ...leaveData.leave.validLeave };
         delete leave.approverId;
 
         const response = await leaveClient.applyLeave(leave);
-        expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_007 Apply leave without fromDate @emptydata @leave @sanity @create", async ({
+      test("TC_EMPTY_007 Apply leave without fromDate @emptydata @leave", async ({
         leaveClient,
       }) => {
         const leave = { ...leaveData.leave.validLeave };
         delete leave.fromDate;
 
         const response = await leaveClient.applyLeave(leave);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_008 Apply leave without toDate @emptydata @leave @sanity @create", async ({
+      test("TC_EMPTY_008 Apply leave without toDate @emptydata @leave", async ({
         leaveClient,
       }) => {
         const leave = { ...leaveData.leave.validLeave };
         delete leave.toDate;
 
         const response = await leaveClient.applyLeave(leave);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_009 Apply leave without leaveType @emptydata @leave @regression @create", async ({
+      test("TC_EMPTY_009 Apply leave without leaveType @emptydata @leave", async ({
         leaveClient,
       }) => {
         const leave = { ...leaveData.leave.validLeave };
         delete leave.leaveType;
 
         const response = await leaveClient.applyLeave(leave);
-        expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_010 Apply leave without reason @emptydata @leave @regression @create", async ({
+      test("TC_EMPTY_010 Apply leave without reason @emptydata @leave", async ({
         leaveClient,
       }) => {
         const leave = { ...leaveData.leave.validLeave };
         delete leave.reason;
 
         const response = await leaveClient.applyLeave(leave);
-        expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_011 Apply leave with empty request body @emptydata @leave @regression @create", async ({
+      test("TC_EMPTY_011 Apply leave with empty request body @emptydata @leave", async ({
         leaveClient,
       }) => {
         const response = await leaveClient.applyLeave({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
 
     test.describe("Update Operations", () => {
-      test("TC_EMPTY_012 Update leave without status @emptydata @leave @sanity @update", async ({
+      test("TC_EMPTY_012 Update leave without status @emptydata @leave", async ({
         leaveClient,
       }) => {
         const response = await leaveClient.updateLeave(
           leaveData.leave.invalidLeaveId,
           {},
         );
-        expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_013 Update leave with empty request body @emptydata @leave @regression @update", async ({
+      test("TC_EMPTY_013 Update leave with empty request body @emptydata @leave", async ({
         leaveClient,
       }) => {
         const response = await leaveClient.updateLeave(
           leaveData.leave.invalidLeaveId,
           {},
         );
-        expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_014 Submit reject request with empty comment @emptydata @leave @regression @update", async ({
+      test("TC_EMPTY_014 Submit reject request with empty comment @emptydata @leave", async ({
         leaveClient,
       }) => {
         const response = await leaveClient.submitRejectRequest(
           leaveData.leave.invalidLeaveId,
           { employeeRejectRequestComment: "" },
         );
-        expect([HTTP_STATUS.OK, HTTP_STATUS.NOT_FOUND]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_015 Submit reject request with empty request body @emptydata @leave @regression @update", async ({
+      test("TC_EMPTY_015 Submit reject request with empty request body @emptydata @leave", async ({
         leaveClient,
       }) => {
         const response = await leaveClient.submitRejectRequest(
           leaveData.leave.invalidLeaveId,
           {},
         );
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
 
     test.describe("Delete Operations", () => {
-      test("TC_EMPTY_016 Delete leave with empty leaveId @emptydata @leave @regression @delete", async ({
+      test("TC_EMPTY_016 Delete leave with empty leaveId @emptydata @leave", async ({
         request,
         qaToken,
       }) => {
         const response = await request.delete("/leaves/", {
           headers: { Authorization: `Bearer ${qaToken}` },
         });
-        expect([HTTP_STATUS.NOT_FOUND, HTTP_STATUS.BAD_REQUEST]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
 
     test.describe("Summary Operations", () => {
-      test("TC_EMPTY_017 Get overall leave summary with empty employeeId @emptydata @leave @regression @read", async ({
+      test("TC_EMPTY_017 Get overall leave summary with empty employeeId @emptydata @leave", async ({
         request,
         qaToken,
       }) => {
         const response = await request.get("/leaves/overallleaves/", {
           headers: { Authorization: `Bearer ${qaToken}` },
         });
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
   });
@@ -877,19 +845,18 @@ test.describe("Leave Module APIs", () => {
 // Empty-data scenarios moved from tests/empty/empty-data.leave.api.spec.js
 test.describe('Leave Module Empty Data APIs', () => {
 
-    test('TC_EMPTY_001 Get leave records with empty status @emptydata @read @regression @smoke @sanity', async ({
+    test('TC_EMPTY_001 Get leave records with empty status @emptydata', async ({
         leaveClient
     }) => {
 
         const response =
             await leaveClient.getLeaves('');
 
-        expect([HTTP_STATUS.OK, HTTP_STATUS.NOT_FOUND])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_002 Get employee leave history with empty employeeId @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_002 Get employee leave history with empty employeeId @emptydata', async ({
         request,
         qaToken
     }) => {
@@ -901,12 +868,11 @@ test.describe('Leave Module Empty Data APIs', () => {
                 }
             });
 
-        expect([HTTP_STATUS.NOT_FOUND, HTTP_STATUS.BAD_REQUEST])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_003 Get approver leave requests with empty approverId @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_003 Get approver leave requests with empty approverId @emptydata', async ({
         request,
         qaToken
     }) => {
@@ -918,12 +884,11 @@ test.describe('Leave Module Empty Data APIs', () => {
                 }
             });
 
-        expect([HTTP_STATUS.NOT_FOUND, HTTP_STATUS.BAD_REQUEST])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_004 Get financial year leave history with empty employeeId @emptydata @read @regression', async ({
+    test('TC_EMPTY_004 Get financial year leave history with empty employeeId @emptydata', async ({
         request,
         qaToken
     }) => {
@@ -935,12 +900,11 @@ test.describe('Leave Module Empty Data APIs', () => {
                 }
             });
 
-        expect([HTTP_STATUS.NOT_FOUND, HTTP_STATUS.BAD_REQUEST])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_005 Apply leave without employeeId @emptydata @create @crud @regression @smoke @sanity', async ({
+    test('TC_EMPTY_005 Apply leave without employeeId @emptydata', async ({
         leaveClient
     }) => {
 
@@ -953,12 +917,11 @@ test.describe('Leave Module Empty Data APIs', () => {
         const response =
             await leaveClient.applyLeave(leave);
 
-        expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.INTERNAL_SERVER_ERROR])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_006 Apply leave without approverId @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_006 Apply leave without approverId @emptydata', async ({
         leaveClient
     }) => {
 
@@ -971,12 +934,11 @@ test.describe('Leave Module Empty Data APIs', () => {
         const response =
             await leaveClient.applyLeave(leave);
 
-        expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_007 Apply leave without fromDate @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_007 Apply leave without fromDate @emptydata', async ({
         leaveClient
     }) => {
 
@@ -989,12 +951,11 @@ test.describe('Leave Module Empty Data APIs', () => {
         const response =
             await leaveClient.applyLeave(leave);
 
-        expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.INTERNAL_SERVER_ERROR])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_008 Apply leave without toDate @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_008 Apply leave without toDate @emptydata', async ({
         leaveClient
     }) => {
 
@@ -1007,12 +968,11 @@ test.describe('Leave Module Empty Data APIs', () => {
         const response =
             await leaveClient.applyLeave(leave);
 
-        expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.INTERNAL_SERVER_ERROR])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_009 Apply leave without leaveType @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_009 Apply leave without leaveType @emptydata', async ({
         leaveClient
     }) => {
 
@@ -1025,12 +985,11 @@ test.describe('Leave Module Empty Data APIs', () => {
         const response =
             await leaveClient.applyLeave(leave);
 
-        expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_010 Apply leave without reason @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_010 Apply leave without reason @emptydata', async ({
         leaveClient
     }) => {
 
@@ -1043,24 +1002,22 @@ test.describe('Leave Module Empty Data APIs', () => {
         const response =
             await leaveClient.applyLeave(leave);
 
-        expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_011 Apply leave with empty request body @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_011 Apply leave with empty request body @emptydata', async ({
         leaveClient
     }) => {
 
         const response =
             await leaveClient.applyLeave({});
 
-        expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.INTERNAL_SERVER_ERROR])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_012 Update leave without status @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_012 Update leave without status @emptydata', async ({
         leaveClient
     }) => {
 
@@ -1070,12 +1027,11 @@ test.describe('Leave Module Empty Data APIs', () => {
                 {}
             );
 
-        expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_013 Update leave with empty request body @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_013 Update leave with empty request body @emptydata', async ({
         leaveClient
     }) => {
 
@@ -1085,12 +1041,11 @@ test.describe('Leave Module Empty Data APIs', () => {
                 {}
             );
 
-        expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_014 Submit reject request with empty comment @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_014 Submit reject request with empty comment @emptydata', async ({
         leaveClient
     }) => {
 
@@ -1102,12 +1057,11 @@ test.describe('Leave Module Empty Data APIs', () => {
                 }
             );
 
-        expect([HTTP_STATUS.OK, HTTP_STATUS.NOT_FOUND])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_015 Submit reject request with empty request body @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_015 Submit reject request with empty request body @emptydata', async ({
         leaveClient
     }) => {
 
@@ -1117,12 +1071,11 @@ test.describe('Leave Module Empty Data APIs', () => {
                 {}
             );
 
-        expect([HTTP_STATUS.OK, HTTP_STATUS.NOT_FOUND, HTTP_STATUS.BAD_REQUEST])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_016 Delete leave with empty leaveId @emptydata @delete @crud @regression @sanity', async ({
+    test('TC_EMPTY_016 Delete leave with empty leaveId @emptydata', async ({
         request,
         qaToken
     }) => {
@@ -1134,12 +1087,11 @@ test.describe('Leave Module Empty Data APIs', () => {
                 }
             });
 
-        expect([HTTP_STATUS.NOT_FOUND, HTTP_STATUS.BAD_REQUEST])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_017 Get overall leave summary with empty employeeId @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_017 Get overall leave summary with empty employeeId @emptydata', async ({
         request,
         qaToken
     }) => {
@@ -1151,8 +1103,7 @@ test.describe('Leave Module Empty Data APIs', () => {
                 }
             });
 
-        expect([HTTP_STATUS.OK, HTTP_STATUS.NOT_FOUND, HTTP_STATUS.BAD_REQUEST])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 

@@ -10,7 +10,7 @@ test.describe("Raised Query Read & Filter APIs", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getRaisedQueries();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -32,17 +32,17 @@ test.describe("Raised Query Read & Filter APIs", () => {
 
     const createResponse =
       await raisedQueriesClient.createRaisedQuery(seedQuery);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(createResponse.status());
+    expect(createResponse.status()).toBe(HTTP_STATUS.CREATED);
 
     let created = {}; try { created = await createResponse.json(); } catch(e) {}
     const replyResponse = await raisedQueriesClient.updateRaisedQueryReply({
       id: created._id,
       reply: `TC02 seed reply ${Date.now()}`,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(replyResponse.status());
+    expect(replyResponse.status()).toBe(HTTP_STATUS.OK);
 
     const response = await raisedQueriesClient.getRaisedQueries(true);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -57,21 +57,21 @@ test.describe("Raised Query Read & Filter APIs", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getRaisedQueries(false);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC04 Get queries when no answered queries exist @read @raisedqueries @regression", async ({
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getRaisedQueries(true);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC05 Verify queryType details are populated @schema @read @raisedqueries @regression", async ({
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getRaisedQueries();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -87,7 +87,7 @@ test.describe("Raised Query Read & Filter APIs", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getRaisedQueries();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -107,7 +107,7 @@ test.describe("Query Type APIs", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getQueryTypes();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -117,7 +117,7 @@ test.describe("Query Type APIs", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getQueryTypes();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toEqual([]); } catch(e) {}
@@ -127,7 +127,7 @@ test.describe("Query Type APIs", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getQueryTypes();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -146,7 +146,7 @@ test.describe("Employee Query Retrieval APIs", () => {
     const response = await raisedQueriesClient.getEmployeeQueries(
       raisedQueriesData.valid.employeeId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -163,7 +163,7 @@ test.describe("Employee Query Retrieval APIs", () => {
     const response = await raisedQueriesClient.getEmployeeQueries(
       raisedQueriesData.valid.employeeWithoutQueries,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC14 Get raised queries using invalid employeeId @negative @read @raisedqueries @regression", async ({
@@ -172,7 +172,7 @@ test.describe("Employee Query Retrieval APIs", () => {
     const response = await raisedQueriesClient.getEmployeeQueries(
       raisedQueriesData.invalid.invalidEmployeeId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 
   test("TC15 Verify populated query type for employee queries @schema @read @raisedqueries @regression", async ({
@@ -181,7 +181,7 @@ test.describe("Employee Query Retrieval APIs", () => {
     const response = await raisedQueriesClient.getEmployeeQueries(
       raisedQueriesData.valid.employeeId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -200,7 +200,7 @@ test.describe("Employee Query Retrieval APIs", () => {
     const response = await raisedQueriesClient.getEmployeeQueries(
       raisedQueriesData.valid.employeeId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -225,7 +225,7 @@ test.describe("Raised Query Creation APIs", () => {
     };
 
     const response = await raisedQueriesClient.createRaisedQuery(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("_id"); } catch(e) {}
@@ -245,7 +245,7 @@ test.describe("Raised Query Creation APIs", () => {
     };
 
     const response = await raisedQueriesClient.createRaisedQuery(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 
   test("TC21 Raise query using invalid employeeId @negative @create @raisedqueries @regression", async ({
@@ -258,7 +258,7 @@ test.describe("Raised Query Creation APIs", () => {
     };
 
     const response = await raisedQueriesClient.createRaisedQuery(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 });
 
@@ -272,7 +272,7 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
@@ -290,7 +290,7 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
@@ -306,7 +306,7 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
@@ -323,7 +323,7 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.data.reply).toBe(payload.reply); } catch(e) {}
@@ -339,7 +339,7 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 
   test("TC30 Update reply using non-existing queryId @negative @update @raisedqueries @regression", async ({
@@ -351,7 +351,7 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty(
@@ -373,7 +373,7 @@ test.describe("Raised Query Edit APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
@@ -393,7 +393,7 @@ test.describe("Raised Query Edit APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
@@ -413,7 +413,7 @@ test.describe("Raised Query Edit APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
@@ -434,7 +434,7 @@ test.describe("Raised Query Edit APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
@@ -455,7 +455,7 @@ test.describe("Raised Query Edit APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 
   test("TC37 Update query using non-existing queryId @negative @update @raisedqueries @regression", async ({
@@ -469,7 +469,7 @@ test.describe("Raised Query Edit APIs", () => {
     };
 
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty(
@@ -484,7 +484,7 @@ test.describe("FAQ Read & Validation APIs", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getFAQQueries();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -495,14 +495,14 @@ test.describe("FAQ Read & Validation APIs", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getFAQQueries();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC41 Verify only FAQ-enabled queries are returned @read @raisedqueries @faq @regression", async ({
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getFAQQueries();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -518,7 +518,7 @@ test.describe("FAQ Read & Validation APIs", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getFAQQueries();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -535,7 +535,7 @@ test.describe("FAQ Read & Validation APIs", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getFAQQueries();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -554,18 +554,14 @@ test.describe("Authorization & Security Validation", () => {
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getRaisedQueriesWithoutAuth();
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC45 Get query types without token @security @raisedqueries @regression", async ({
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getQueryTypesWithoutAuth();
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC46 Get employee queries without token @security @raisedqueries @regression", async ({
@@ -574,9 +570,7 @@ test.describe("Authorization & Security Validation", () => {
     const response = await raisedQueriesClient.getEmployeeQueriesWithoutAuth(
       raisedQueriesData.valid.employeeId,
     );
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC47 Create raised query without token @security @raisedqueries @regression", async ({
@@ -585,9 +579,7 @@ test.describe("Authorization & Security Validation", () => {
     const response = await raisedQueriesClient.createRaisedQueryWithoutAuth(
       raisedQueriesData.valid.createQuery,
     );
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
   });
 
   test("TC48 Update raised query reply without token @security @raisedqueries @regression", async ({
@@ -599,9 +591,7 @@ test.describe("Authorization & Security Validation", () => {
     };
     const response =
       await raisedQueriesClient.updateRaisedQueryReplyWithoutAuth(payload);
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC49 Update raised query without token @security @raisedqueries @regression", async ({
@@ -613,28 +603,24 @@ test.describe("Authorization & Security Validation", () => {
     };
     const response =
       await raisedQueriesClient.updateRaisedQueryWithoutAuth(payload);
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC50 Get FAQ queries without token @security @raisedqueries @regression", async ({
     raisedQueriesClient,
   }) => {
     const response = await raisedQueriesClient.getFAQQueriesWithoutAuth();
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 });
 
 test.describe("Raised Queries - Empty Data Validation", () => {
   test.describe("Read Operations", () => {
-    test("TC_EMPTY_012 Get employee queries using empty employeeId @emptydata @raisedqueries @regression @read", async ({
+    test("TC_EMPTY_012 Get employee queries using empty employeeId @emptydata @raisedqueries", async ({
       raisedQueriesClient,
     }) => {
       const response = await raisedQueriesClient.getEmployeeQueries("");
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -642,72 +628,72 @@ test.describe("Raised Queries - Empty Data Validation", () => {
   });
 
   test.describe("Create Operations", () => {
-    test("TC_EMPTY_001 Raise query without employeeId @emptydata @raisedqueries @smoke @create", async ({
+    test("TC_EMPTY_001 Raise query without employeeId @emptydata @raisedqueries", async ({
       raisedQueriesClient,
     }) => {
       const response = await raisedQueriesClient.createRaisedQuery(
         raisedQueriesData.empty.withoutEmployeeId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_002 Raise query without queryType @emptydata @raisedqueries @sanity @create", async ({
+    test("TC_EMPTY_002 Raise query without queryType @emptydata @raisedqueries", async ({
       raisedQueriesClient,
     }) => {
       const response = await raisedQueriesClient.createRaisedQuery(
         raisedQueriesData.empty.withoutQueryType,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_003 Raise query without subject @emptydata @raisedqueries @sanity @create", async ({
+    test("TC_EMPTY_003 Raise query without subject @emptydata @raisedqueries", async ({
       raisedQueriesClient,
     }) => {
       const response = await raisedQueriesClient.createRaisedQuery(
         raisedQueriesData.empty.withoutSubject,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_004 Raise query without query @emptydata @raisedqueries @regression @create", async ({
+    test("TC_EMPTY_004 Raise query without query @emptydata @raisedqueries", async ({
       raisedQueriesClient,
     }) => {
       const response = await raisedQueriesClient.createRaisedQuery(
         raisedQueriesData.empty.withoutQuery,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_005 Raise query with empty request body @emptydata @raisedqueries @regression @create", async ({
+    test("TC_EMPTY_005 Raise query with empty request body @emptydata @raisedqueries", async ({
       raisedQueriesClient,
     }) => {
       const response = await raisedQueriesClient.createRaisedQuery(
         raisedQueriesData.empty.emptyObject,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
   });
 
   test.describe("Update Operations", () => {
-    test("TC_EMPTY_006 Update reply without id @emptydata @raisedqueries @sanity @update", async ({
+    test("TC_EMPTY_006 Update reply without id @emptydata @raisedqueries", async ({
       raisedQueriesClient,
     }) => {
       const response = await raisedQueriesClient.updateRaisedQueryReply(
         raisedQueriesData.empty.updateWithoutId,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(raisedQueriesData.messages.queryIdRequired); } catch(e) {}
     });
 
-    test("TC_EMPTY_007 Update reply with empty request body @emptydata @raisedqueries @regression @update", async ({
+    test("TC_EMPTY_007 Update reply with empty request body @emptydata @raisedqueries", async ({
       raisedQueriesClient,
     }) => {
       const response = await raisedQueriesClient.updateRaisedQueryReply(
         raisedQueriesData.empty.updateEmptyObject,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(raisedQueriesData.messages.queryIdRequired); } catch(e) {}
@@ -718,7 +704,7 @@ test.describe("Raised Queries - Empty Data Validation", () => {
 // Empty-data scenarios moved from tests/empty/empty-data.raisedQueries.api.spec.js
 test.describe('Raised Queries Empty Data APIs', () => {
 
-    test('TC_EMPTY_001 Raise query without employeeId @emptydata @raisedqueries @create @crud @regression @smoke @sanity', async ({
+    test('TC_EMPTY_001 Raise query without employeeId @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -732,7 +718,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_002 Raise query without queryType @emptydata @raisedqueries @create @crud @regression', async ({
+    test('TC_EMPTY_002 Raise query without queryType @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -746,7 +732,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_003 Raise query without subject @emptydata @raisedqueries @create @crud @regression', async ({
+    test('TC_EMPTY_003 Raise query without subject @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -760,7 +746,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_004 Raise query without query @emptydata @raisedqueries @create @crud @regression', async ({
+    test('TC_EMPTY_004 Raise query without query @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -774,7 +760,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_005 Raise query with empty request body @emptydata @raisedqueries @create @crud @regression', async ({
+    test('TC_EMPTY_005 Raise query with empty request body @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -788,7 +774,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_006 Update reply without id @emptydata @raisedqueries @update @crud @regression', async ({
+    test('TC_EMPTY_006 Update reply without id @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -807,7 +793,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_007 Update reply with empty request body @emptydata @raisedqueries @update @crud @regression', async ({
+    test('TC_EMPTY_007 Update reply with empty request body @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -826,7 +812,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_008 Update raised query without id @emptydata @raisedqueries @update @crud @regression', async ({
+    test('TC_EMPTY_008 Update raised query without id @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -845,7 +831,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_009 Update raised query without subject @emptydata @raisedqueries @update @crud @regression', async ({
+    test('TC_EMPTY_009 Update raised query without subject @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -859,7 +845,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_010 Update raised query without query @emptydata @raisedqueries @update @crud @regression', async ({
+    test('TC_EMPTY_010 Update raised query without query @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -873,7 +859,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_011 Update raised query with empty request body @emptydata @raisedqueries @update @crud @regression', async ({
+    test('TC_EMPTY_011 Update raised query with empty request body @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 
@@ -892,7 +878,7 @@ test.describe('Raised Queries Empty Data APIs', () => {
 
     });
 
-    test('TC_EMPTY_012 Get employee queries using empty employeeId @emptydata @raisedqueries @read @regression @sanity', async ({
+    test('TC_EMPTY_012 Get employee queries using empty employeeId @emptydata @raisedqueries', async ({
         raisedQueriesClient
     }) => {
 

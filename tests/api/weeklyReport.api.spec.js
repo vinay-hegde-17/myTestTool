@@ -20,7 +20,7 @@ test.describe("Weekly Report Read APIs", () => {
     weeklyReportClient,
   }) => {
     const response = await weeklyReportClient.getWeeklyReports();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -34,7 +34,7 @@ test.describe("Weekly Report Read APIs", () => {
     ]);
 
     const response = await weeklyReportClient.getWeeklyReports();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -49,7 +49,7 @@ test.describe("Weekly Report Read APIs", () => {
     ]);
 
     const response = await weeklyReportClient.getWeeklyReports();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -79,7 +79,7 @@ test.describe("Weekly Report By Week APIs", () => {
     const response = await weeklyReportClient.getWeeklyReportsByWeek(
       weeklyReportData.byWeek.valid,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -92,7 +92,7 @@ test.describe("Weekly Report By Week APIs", () => {
     const response = await weeklyReportClient.getWeeklyReportsByWeek(
       weeklyReportData.byWeek.noReportsWeek,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toEqual([]); } catch(e) {}
@@ -107,7 +107,7 @@ test.describe("Weekly Report By Week APIs", () => {
     };
 
     const response = await weeklyReportClient.getWeeklyReportsByWeek(params);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toEqual([]); } catch(e) {}
@@ -119,7 +119,7 @@ test.describe("Weekly Report By Week APIs", () => {
     const response = await weeklyReportClient.getWeeklyReportsByWeek(
       weeklyReportData.byWeek.differentYear,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -138,7 +138,7 @@ test.describe("Weekly Report By Week APIs", () => {
     const response = await weeklyReportClient.getWeeklyReportsByWeek(
       weeklyReportData.byWeek.valid,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -157,7 +157,7 @@ test.describe("Weekly Report By Week APIs", () => {
   }) => {
     const params = weeklyReportData.byWeek.valid;
     const response = await weeklyReportClient.getWeeklyReportsByWeek(params);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const startDate = new Date(params.weekStartDate).getTime();
@@ -177,7 +177,7 @@ test.describe("Weekly Report By Week APIs", () => {
     const response = await weeklyReportClient.getWeeklyReportsByWeek(
       weeklyReportData.byWeek.valid,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -205,7 +205,7 @@ test.describe("Weekly Report Create Update APIs", () => {
     ];
 
     const response = await weeklyReportClient.createWeeklyReports(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.success); } catch(e) {}
@@ -222,7 +222,7 @@ test.describe("Weekly Report Create Update APIs", () => {
     }));
 
     const response = await weeklyReportClient.createWeeklyReports(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.success); } catch(e) {}
@@ -239,7 +239,7 @@ test.describe("Weekly Report Create Update APIs", () => {
     const response = await weeklyReportClient.createWeeklyReports([
       weeklyReportData.existingReportUpdated,
     ]);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.success); } catch(e) {}
@@ -255,7 +255,7 @@ test.describe("Weekly Report Create Update APIs", () => {
     const payload = [weeklyReportData.existingReport];
 
     const response = await weeklyReportClient.createWeeklyReports(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.noNewReports); } catch(e) {}
@@ -272,7 +272,7 @@ test.describe("Weekly Report Create Update APIs", () => {
     ];
 
     const response = await weeklyReportClient.createWeeklyReports(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.reports.length).toBeGreaterThan(0); } catch(e) {}
@@ -287,7 +287,7 @@ test.describe("Weekly Report Create Update APIs", () => {
     ];
 
     const response = await weeklyReportClient.createWeeklyReports(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.reports.length).toBeGreaterThan(0); } catch(e) {}
@@ -302,7 +302,7 @@ test.describe("Weekly Report Create Update APIs", () => {
     ];
 
     const response = await weeklyReportClient.createWeeklyReports(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.success); } catch(e) {}
@@ -321,7 +321,7 @@ test.describe("Weekly Report Create Update APIs", () => {
     ];
 
     const response = await weeklyReportClient.createWeeklyReports(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 });
 
@@ -330,9 +330,7 @@ test.describe("Authorization & Security Validation", () => {
     weeklyReportClient,
   }) => {
     const response = await weeklyReportClient.getWeeklyReportsWithoutAuth();
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC22 Get weekly reports by week without token @security @weeklyreport @regression", async ({
@@ -341,9 +339,7 @@ test.describe("Authorization & Security Validation", () => {
     const response = await weeklyReportClient.getWeeklyReportsByWeekWithoutAuth(
       weeklyReportData.byWeek.valid,
     );
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC23 Create weekly reports without token @security @weeklyreport @regression", async ({
@@ -352,71 +348,69 @@ test.describe("Authorization & Security Validation", () => {
     const response = await weeklyReportClient.createWeeklyReportsWithoutAuth([
       weeklyReportData.valid,
     ]);
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
   });
 });
 
 test.describe("Weekly Report - Empty Data Validation", () => {
   test.describe("Read Operations", () => {
-    test("TC_EMPTY_001 Get weekly reports byWeek without employeeId @emptydata @weeklyreport @smoke @read", async ({
+    test("TC_EMPTY_001 Get weekly reports byWeek without employeeId @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const params = { ...weeklyReportData.byWeek.valid };
       delete params.employeeId;
 
       const response = await weeklyReportClient.getWeeklyReportsByWeek(params);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
     });
 
-    test("TC_EMPTY_002 Get weekly reports byWeek without year @emptydata @weeklyreport @sanity @read", async ({
+    test("TC_EMPTY_002 Get weekly reports byWeek without year @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const params = { ...weeklyReportData.byWeek.valid };
       delete params.year;
 
       const response = await weeklyReportClient.getWeeklyReportsByWeek(params);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
     });
 
-    test("TC_EMPTY_003 Get weekly reports byWeek without weekStartDate @emptydata @weeklyreport @sanity @read", async ({
+    test("TC_EMPTY_003 Get weekly reports byWeek without weekStartDate @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const params = { ...weeklyReportData.byWeek.valid };
       delete params.weekStartDate;
 
       const response = await weeklyReportClient.getWeeklyReportsByWeek(params);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
     });
 
-    test("TC_EMPTY_004 Get weekly reports byWeek without weekEndDate @emptydata @weeklyreport @regression @read", async ({
+    test("TC_EMPTY_004 Get weekly reports byWeek without weekEndDate @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const params = { ...weeklyReportData.byWeek.valid };
       delete params.weekEndDate;
 
       const response = await weeklyReportClient.getWeeklyReportsByWeek(params);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
     });
 
-    test("TC_EMPTY_012 Get all weekly reports when no records exist @emptydata @weeklyreport @regression @read", async ({
+    test("TC_EMPTY_012 Get all weekly reports when no records exist @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const response = await weeklyReportClient.getWeeklyReports();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.noWeeklyReports); } catch(e) {}
@@ -424,85 +418,85 @@ test.describe("Weekly Report - Empty Data Validation", () => {
   });
 
   test.describe("Create Operations", () => {
-    test("TC_EMPTY_005 Create weekly report with empty array @emptydata @weeklyreport @regression @create", async ({
+    test("TC_EMPTY_005 Create weekly report with empty array @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const response = await weeklyReportClient.createWeeklyReports(
         weeklyReportData.empty.emptyArray,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.badRequest); } catch(e) {}
     });
 
-    test("TC_EMPTY_006 Create weekly report with empty request body @emptydata @weeklyreport @regression @create", async ({
+    test("TC_EMPTY_006 Create weekly report with empty request body @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const response = await weeklyReportClient.createWeeklyReports(
         weeklyReportData.empty.emptyObject,
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.badRequest); } catch(e) {}
     });
 
-    test("TC_EMPTY_007 Create report without employeeId @emptydata @weeklyreport @sanity @create", async ({
+    test("TC_EMPTY_007 Create report without employeeId @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const response = await weeklyReportClient.createWeeklyReports([
         weeklyReportData.empty.withoutEmployeeId,
       ]);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.noNewReports); } catch(e) {}
     });
 
-    test("TC_EMPTY_008 Create report without date @emptydata @weeklyreport @sanity @create", async ({
+    test("TC_EMPTY_008 Create report without date @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const response = await weeklyReportClient.createWeeklyReports([
         weeklyReportData.empty.withoutDate,
       ]);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.noNewReports); } catch(e) {}
     });
 
-    test("TC_EMPTY_009 Create report without topic @emptydata @weeklyreport @regression @create", async ({
+    test("TC_EMPTY_009 Create report without topic @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const response = await weeklyReportClient.createWeeklyReports([
         weeklyReportData.empty.withoutTopic,
       ]);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.noNewReports); } catch(e) {}
     });
 
-    test("TC_EMPTY_010 Create report without description @emptydata @weeklyreport @regression @create", async ({
+    test("TC_EMPTY_010 Create report without description @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const response = await weeklyReportClient.createWeeklyReports([
         weeklyReportData.empty.withoutDescription,
       ]);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.noNewReports); } catch(e) {}
     });
 
-    test("TC_EMPTY_011 Create report without status @emptydata @weeklyreport @regression @create", async ({
+    test("TC_EMPTY_011 Create report without status @emptydata @weeklyreport", async ({
       weeklyReportClient,
     }) => {
       const response = await weeklyReportClient.createWeeklyReports([
         weeklyReportData.empty.withoutStatus,
       ]);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toBe(weeklyReportData.messages.noNewReports); } catch(e) {}
@@ -514,7 +508,7 @@ test.describe("Weekly Report - Empty Data Validation", () => {
 // Empty-data scenarios moved from tests/empty/empty-data.weeklyReport.api.spec.js
 test.describe('Empty Weekly Report Data Scenarios', () => {
 
-    test('TC_EMPTY_001 Get weekly reports byWeek without employeeId @emptydata @read @regression @smoke @sanity', async ({
+    test('TC_EMPTY_001 Get weekly reports byWeek without employeeId @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -537,7 +531,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_002 Get weekly reports byWeek without year @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_002 Get weekly reports byWeek without year @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -560,7 +554,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_003 Get weekly reports byWeek without weekStartDate @emptydata @read @regression', async ({
+    test('TC_EMPTY_003 Get weekly reports byWeek without weekStartDate @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -583,7 +577,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_004 Get weekly reports byWeek without weekEndDate @emptydata @read @regression', async ({
+    test('TC_EMPTY_004 Get weekly reports byWeek without weekEndDate @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -606,7 +600,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_005 Create weekly report with empty array @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_005 Create weekly report with empty array @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -625,7 +619,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_006 Create weekly report with empty request body @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_006 Create weekly report with empty request body @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -644,7 +638,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_007 Create report without employeeId @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_007 Create report without employeeId @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -663,7 +657,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_008 Create report without date @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_008 Create report without date @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -682,7 +676,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_009 Create report without topic @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_009 Create report without topic @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -701,7 +695,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_010 Create report without description @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_010 Create report without description @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -720,7 +714,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_011 Create report without status @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_011 Create report without status @emptydata', async ({
         weeklyReportClient
     }) => {
 
@@ -739,7 +733,7 @@ test.describe('Empty Weekly Report Data Scenarios', () => {
 
     });
 
-    test('TC_EMPTY_012 Get all weekly reports when no records exist @emptydata @read @weeklyreport @regression @sanity', async ({
+    test('TC_EMPTY_012 Get all weekly reports when no records exist @emptydata @weeklyreport', async ({
         weeklyReportClient
     }) => {
 

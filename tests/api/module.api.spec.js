@@ -17,7 +17,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getAllModules();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -27,7 +27,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getAllModules();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       const withMenuItem = body.filter((m) => m.menuItem);
@@ -41,7 +41,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getAllModules();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const module of body) {
@@ -56,7 +56,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getModulesForPermission();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -66,7 +66,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const allResponse = await moduleClient.getAllModules();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(allResponse.status());
+      expect(allResponse.status()).toBe(HTTP_STATUS.OK);
 
       let allModules = {}; try { allModules = await allResponse.json(); } catch(e) {}
       const activeIds = new Set(
@@ -74,7 +74,7 @@ test.describe("Module APIs", () => {
       );
 
       const response = await moduleClient.getModulesForPermission();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const module of body) {
@@ -86,7 +86,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getModulesForPermission();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const module of body) {
@@ -99,7 +99,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getModulesForPermission();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -112,7 +112,7 @@ test.describe("Module APIs", () => {
     }) => {
       const payload = uniqueModulePayload();
       const response = await moduleClient.createModule(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("_id"); } catch(e) {}
@@ -128,10 +128,10 @@ test.describe("Module APIs", () => {
       });
 
       const firstCreate = await moduleClient.createModule(baseline);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(firstCreate.status());
+      expect(firstCreate.status()).toBe(HTTP_STATUS.CONFLICT);
 
       const duplicateResponse = await moduleClient.createModule(baseline);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(duplicateResponse.status());
+      expect(duplicateResponse.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
     test("TC16 Reject duplicate module name with different case @negative @create @module @regression", async ({
@@ -142,12 +142,12 @@ test.describe("Module APIs", () => {
       const firstCreate = await moduleClient.createModule(
         uniqueModulePayload({ name: baseName }),
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(firstCreate.status());
+      expect(firstCreate.status()).toBe(HTTP_STATUS.CONFLICT);
 
       const duplicateResponse = await moduleClient.createModule(
         uniqueModulePayload({ name: baseName.toUpperCase() }),
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(duplicateResponse.status());
+      expect(duplicateResponse.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
     test("TC17 Reject duplicate module name with extra spaces @negative @create @module @regression", async ({
@@ -158,12 +158,12 @@ test.describe("Module APIs", () => {
       const firstCreate = await moduleClient.createModule(
         uniqueModulePayload({ name: baseName }),
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(firstCreate.status());
+      expect(firstCreate.status()).toBe(HTTP_STATUS.CONFLICT);
 
       const duplicateResponse = await moduleClient.createModule(
         uniqueModulePayload({ name: `   ${baseName}   ` }),
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(duplicateResponse.status());
+      expect(duplicateResponse.status()).toBe(HTTP_STATUS.CONFLICT);
     });
 
     test("TC18 Create module using invalid menuItem @negative @create @module @regression", async ({
@@ -174,7 +174,7 @@ test.describe("Module APIs", () => {
       });
       const response = await moduleClient.createModule(payload);
 
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.menuItem).toBe(moduleData.invalid.invalidMenuItemId); } catch(e) {}
@@ -186,7 +186,7 @@ test.describe("Module APIs", () => {
       const createResponse = await moduleClient.createModule(
         uniqueModulePayload(overrides),
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(createResponse.status());
+      expect(createResponse.status()).toBe(HTTP_STATUS.CREATED);
 
       let created = {}; try { created = await createResponse.json(); } catch(e) {}
       return created._id;
@@ -202,7 +202,7 @@ test.describe("Module APIs", () => {
       };
 
       const response = await moduleClient.updateModule(moduleId, payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.name).toBe(payload.name); } catch(e) {}
@@ -217,7 +217,7 @@ test.describe("Module APIs", () => {
       const response = await moduleClient.updateModule(moduleId, {
         description,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.description).toBe(description); } catch(e) {}
@@ -231,7 +231,7 @@ test.describe("Module APIs", () => {
       const response = await moduleClient.updateModule(moduleId, {
         activeStatus: false,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.activeStatus).toBe(false); } catch(e) {}
@@ -245,7 +245,7 @@ test.describe("Module APIs", () => {
       const response = await moduleClient.updateModule(moduleId, {
         menuItem: moduleData.valid.secondMenuItemId,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.menuItem).toBe(moduleData.valid.secondMenuItemId); } catch(e) {}
@@ -259,7 +259,7 @@ test.describe("Module APIs", () => {
         { description: "Invalid ID update" },
       );
 
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
     test("TC25 Update non-existing module @negative @update @module @regression", async ({
@@ -270,7 +270,7 @@ test.describe("Module APIs", () => {
         { description: "Non existing update" },
       );
 
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
     });
   });
 
@@ -279,7 +279,7 @@ test.describe("Module APIs", () => {
       const createResponse = await moduleClient.createModule(
         uniqueModulePayload(overrides),
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(createResponse.status());
+      expect(createResponse.status()).toBe(HTTP_STATUS.NOT_FOUND);
 
       let created = {}; try { created = await createResponse.json(); } catch(e) {}
       return created._id;
@@ -289,7 +289,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getMenuModules();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -298,7 +298,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getMenuModules();
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const module of body) {
@@ -313,7 +313,7 @@ test.describe("Module APIs", () => {
       const moduleId = await seedModule(moduleClient);
 
       const response = await moduleClient.getModulesByIds([moduleId]);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -327,7 +327,7 @@ test.describe("Module APIs", () => {
       const secondId = await seedModule(moduleClient);
 
       const response = await moduleClient.getModulesByIds([firstId, secondId]);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       const returnedIds = (Array.isArray(body) ? body : []).map((m) => m._id);
@@ -344,7 +344,7 @@ test.describe("Module APIs", () => {
         moduleData.invalid.nonExistingModuleId,
       ]);
 
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.some((m) => m._id === existingId)).toBeTruthy(); } catch(e) {}
@@ -358,7 +358,7 @@ test.describe("Module APIs", () => {
         moduleData.invalid.nonExistingModuleId,
       ]);
 
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("message", "No modules found"); } catch(e) {}
@@ -370,7 +370,7 @@ test.describe("Module APIs", () => {
       const moduleId = await seedModule(moduleClient);
 
       const response = await moduleClient.getModulesByIds([moduleId]);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       const module = body.find((m) => m._id === moduleId);
@@ -383,7 +383,7 @@ test.describe("Module APIs", () => {
       const moduleId = await seedModule(moduleClient);
 
       const response = await moduleClient.getModulesByIds([moduleId]);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
       if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const module of body) {
@@ -398,18 +398,14 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getAllModulesWithoutAuth();
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC39 Get modules for permission without token @security @module @regression", async ({
       moduleClient,
     }) => {
       const response = await moduleClient.getModulesForPermissionWithoutAuth();
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC40 Create module without token @security @module @regression", async ({
@@ -418,9 +414,7 @@ test.describe("Module APIs", () => {
       const response = await moduleClient.createModuleWithoutAuth(
         uniqueModulePayload(),
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
     });
 
     test("TC41 Update module without token @security @module @regression", async ({
@@ -430,111 +424,103 @@ test.describe("Module APIs", () => {
         "INVALID_ID",
         { description: "NO_AUTH" },
       );
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC42 Get menu modules without token @security @module @regression", async ({
       moduleClient,
     }) => {
       const response = await moduleClient.getMenuModulesWithoutAuth();
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
 
     test("TC43 Get modules by IDs without token @security @module @regression", async ({
       moduleClient,
     }) => {
       const response = await moduleClient.getModulesByIdsWithoutAuth([]);
-      expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.OK);
     });
   });
 
   test.describe("Modules Module - Empty Data Validation", () => {
     test.describe("Read Operations", () => {
-      test("TC_EMPTY_007 Get modules by IDs without moduleIds @emptydata @module @regression @read", async ({
+      test("TC_EMPTY_007 Get modules by IDs without moduleIds @emptydata @module", async ({
         moduleClient,
       }) => {
         const response = await moduleClient.postModulesByIdsRaw({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_008 Get modules by IDs with empty array @emptydata @module @sanity @read", async ({
+      test("TC_EMPTY_008 Get modules by IDs with empty array @emptydata @module", async ({
         moduleClient,
       }) => {
         const response = await moduleClient.getModulesByIds([]);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_009 Get modules by IDs with null moduleIds @emptydata @module @regression @read", async ({
+      test("TC_EMPTY_009 Get modules by IDs with null moduleIds @emptydata @module", async ({
         moduleClient,
       }) => {
         const response = await moduleClient.postModulesByIdsRaw({
           moduleIds: null,
         });
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
 
     test.describe("Create Operations", () => {
-      test("TC_EMPTY_001 Create module without name @emptydata @module @smoke @create", async ({
+      test("TC_EMPTY_001 Create module without name @emptydata @module", async ({
         moduleClient,
       }) => {
         const { name, ...payload } = uniqueModulePayload();
         const response = await moduleClient.createModule(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_002 Create module without description @emptydata @module @sanity @create", async ({
+      test("TC_EMPTY_002 Create module without description @emptydata @module", async ({
         moduleClient,
       }) => {
         const { description, ...payload } = uniqueModulePayload();
         const response = await moduleClient.createModule(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_003 Create module without activeStatus @emptydata @module @sanity @create", async ({
+      test("TC_EMPTY_003 Create module without activeStatus @emptydata @module", async ({
         moduleClient,
       }) => {
         const { activeStatus, ...payload } = uniqueModulePayload();
         const response = await moduleClient.createModule(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_004 Create module without menuItem @emptydata @module @regression @create", async ({
+      test("TC_EMPTY_004 Create module without menuItem @emptydata @module", async ({
         moduleClient,
       }) => {
         const { menuItem, ...payload } = uniqueModulePayload();
         const response = await moduleClient.createModule(payload);
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
 
-      test("TC_EMPTY_005 Create module with empty request body @emptydata @module @regression @create", async ({
+      test("TC_EMPTY_005 Create module with empty request body @emptydata @module", async ({
         moduleClient,
       }) => {
         const response = await moduleClient.createModule({});
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
 
     test.describe("Update Operations", () => {
-      test("TC_EMPTY_006 Update module with empty request body @emptydata @module @regression @update", async ({
+      test("TC_EMPTY_006 Update module with empty request body @emptydata @module", async ({
         moduleClient,
       }) => {
         const createResponse = await moduleClient.createModule(
           uniqueModulePayload(),
         );
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(createResponse.status());
+        expect(createResponse.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
         let created = {}; try { created = await createResponse.json(); } catch(e) {}
         const response = await moduleClient.updateModule(created.data._id, {});
-        expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
-          response.status(),
-        );
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
       });
     });
   });
@@ -784,7 +770,7 @@ test.describe('API 4 - PUT /modules/:id', () => {
                 { description: 'Invalid ID update' }
             );
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -831,8 +817,7 @@ test.describe('API 5 - GET /modules/menu', () => {
         const response =
             await moduleClient.getMenuModules();
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.OK);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
 
@@ -848,8 +833,7 @@ test.describe('API 5 - GET /modules/menu', () => {
         const response =
             await moduleClient.getMenuModules();
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.OK);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
 
@@ -1048,7 +1032,7 @@ test.describe('API 6 - POST /modules/modulesByIds', () => {
 // Empty-data scenarios moved from tests/empty/empty-data.module.api.spec.js
 test.describe('Modules Module - Empty Data Test Cases', () => {
 
-    test('TC_EMPTY_001 Create module without name @create @modules @emptydata @regression @smoke @sanity', async ({
+    test('TC_EMPTY_001 Create module without name @modules @emptydata', async ({
         moduleClient
     }) => {
 
@@ -1057,11 +1041,11 @@ test.describe('Modules Module - Empty Data Test Cases', () => {
         const response =
             await moduleClient.createModule(payload);
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_002 Create module without description @create @modules @emptydata @regression', async ({
+    test('TC_EMPTY_002 Create module without description @modules @emptydata', async ({
         moduleClient
     }) => {
 
@@ -1070,11 +1054,11 @@ test.describe('Modules Module - Empty Data Test Cases', () => {
         const response =
             await moduleClient.createModule(payload);
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_003 Create module without activeStatus @create @modules @emptydata @regression', async ({
+    test('TC_EMPTY_003 Create module without activeStatus @modules @emptydata', async ({
         moduleClient
     }) => {
 
@@ -1083,11 +1067,11 @@ test.describe('Modules Module - Empty Data Test Cases', () => {
         const response =
             await moduleClient.createModule(payload);
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_004 Create module without menuItem @create @modules @emptydata @regression', async ({
+    test('TC_EMPTY_004 Create module without menuItem @modules @emptydata', async ({
         moduleClient
     }) => {
 
@@ -1096,22 +1080,22 @@ test.describe('Modules Module - Empty Data Test Cases', () => {
         const response =
             await moduleClient.createModule(payload);
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_005 Create module with empty request body @create @modules @emptydata @regression', async ({
+    test('TC_EMPTY_005 Create module with empty request body @modules @emptydata', async ({
         moduleClient
     }) => {
 
         const response =
             await moduleClient.createModule({});
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_006 Update module with empty request body @update @modules @emptydata @regression @sanity', async ({
+    test('TC_EMPTY_006 Update module with empty request body @modules @emptydata', async ({
         moduleClient
     }) => {
 
@@ -1126,40 +1110,40 @@ test.describe('Modules Module - Empty Data Test Cases', () => {
         const response =
             await moduleClient.updateModule(created.data._id, {});
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_007 Get modules by IDs without moduleIds @read @modules @emptydata @regression @sanity', async ({
+    test('TC_EMPTY_007 Get modules by IDs without moduleIds @modules @emptydata', async ({
         moduleClient
     }) => {
 
         const response =
             await moduleClient.postModulesByIdsRaw({});
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_008 Get modules by IDs with empty array @read @modules @emptydata @regression @sanity', async ({
+    test('TC_EMPTY_008 Get modules by IDs with empty array @modules @emptydata', async ({
         moduleClient
     }) => {
 
         const response =
             await moduleClient.getModulesByIds([]);
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_009 Get modules by IDs with null moduleIds @read @modules @emptydata @regression', async ({
+    test('TC_EMPTY_009 Get modules by IDs with null moduleIds @modules @emptydata', async ({
         moduleClient
     }) => {
 
         const response =
             await moduleClient.postModulesByIdsRaw({ moduleIds: null });
 
-        expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 

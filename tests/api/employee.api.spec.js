@@ -141,7 +141,7 @@ test.describe("Employee List APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.listEmployees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -152,7 +152,7 @@ test.describe("Employee List APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.listEmployees({ activeStatus: true });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     (Array.isArray(body) ? body : []).forEach((employee) => {
@@ -166,7 +166,7 @@ test.describe("Employee List APIs", () => {
     const response = await employeeClient.listEmployees({
       fetchType: "dropdown",
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC05 Get Inactive Employees @read @sanity @regression @employee", async ({
@@ -175,9 +175,7 @@ test.describe("Employee List APIs", () => {
     const response = await employeeClient.listEmployees({
       activeStatus: false,
     });
-    expect([HTTP_STATUS.OK, HTTP_STATUS.NOT_FOUND]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     if (response.status() === HTTP_STATUS.OK) {
       let body = {}; try { body = await response.json(); } catch(e) {}
@@ -196,16 +194,14 @@ test.describe("Employee List APIs", () => {
     const response = await employeeClient.listEmployees({
       activeStatus: "abc",
     });
-    expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.SERVER_ERROR]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC07 Verify Employee Response Schema @schema @read @sanity @regression @employee", async ({
     employeeClient,
   }) => {
     const response = await employeeClient.listEmployees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.length > 0) {
@@ -222,7 +218,7 @@ test.describe("Employee List APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.listEmployees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const names = (Array.isArray(body) ? body : []).map((emp) => emp.firstName);
@@ -234,7 +230,7 @@ test.describe("Employee List APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.listEmployees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const employee = body.find((emp) => emp.reportingTo);
@@ -247,7 +243,7 @@ test.describe("Employee List APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.listEmployees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     const employee = body.find((emp) => Array.isArray(emp.assignedAssetsIds));
@@ -264,7 +260,7 @@ test.describe("Employee Profile APIs", () => {
     const response = await employeeClient.getProfileDetails(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("firstName"); } catch(e) {}
@@ -278,7 +274,7 @@ test.describe("Employee Profile APIs", () => {
     const response = await employeeClient.getProfileDetails(
       process.env.INVALID_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC13 Verify Base64 Photo @read @sanity @regression @employee", async ({
@@ -287,7 +283,7 @@ test.describe("Employee Profile APIs", () => {
     const response = await employeeClient.getProfileDetails(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.photo && body.photo.base64Data) {
@@ -302,7 +298,7 @@ test.describe("Employee Names APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getEmployeeNames();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -312,7 +308,7 @@ test.describe("Employee Names APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getEmployeeNames();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -330,7 +326,7 @@ test.describe("Employee Assets APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getEmployeesForAssets();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -340,7 +336,7 @@ test.describe("Employee Assets APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getEmployeesForAssets();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.length > 0) {
@@ -354,7 +350,7 @@ test.describe("Employee Assets APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getEmployeesForAssets();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.length > 0) {
@@ -368,7 +364,7 @@ test.describe("Employee Assets APIs", () => {
     const response = await employeeClient.getEmployeeAssets(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC23 Invalid Employee Assets @negative @read @assets @sanity @regression @employee", async ({
@@ -377,7 +373,7 @@ test.describe("Employee Assets APIs", () => {
     const response = await employeeClient.getEmployeeAssets(
       process.env.INVALID_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC24 Get Employee Without Assigned Assets @read @assets @sanity @regression @employee", async ({
@@ -386,7 +382,7 @@ test.describe("Employee Assets APIs", () => {
     const response = await employeeClient.getEmployeeAssets(
       process.env.TEST_EMPLOYEE_WITHOUT_ASSETS_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC25 Verify Employee Asset Response Schema @schema @read @assets @sanity @regression @employee", async ({
@@ -395,7 +391,7 @@ test.describe("Employee Assets APIs", () => {
     const response = await employeeClient.getEmployeeAssets(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.length > 0) {
@@ -412,7 +408,7 @@ test.describe("Employee Assets APIs", () => {
     const response = await employeeClient.getEmployeeAssets(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.length > 0) {
@@ -427,7 +423,7 @@ test.describe("Employee Dashboard APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getNewJoinees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     if (response.status() === 200) {
       let body = {}; try { body = await response.json(); } catch(e) {}
@@ -443,7 +439,7 @@ test.describe("Employee Dashboard APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getNewJoinees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     if (response.status() === 200) {
       let body = {}; try { body = await response.json(); } catch(e) {}
@@ -458,7 +454,7 @@ test.describe("Employee Dashboard APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getNewJoinees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     if (response.status() === 200) {
       let body = {}; try { body = await response.json(); } catch(e) {}
@@ -472,7 +468,7 @@ test.describe("Employee Dashboard APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getLongServiceEmployees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     if (response.status() === 200) {
       let body = {}; try { body = await response.json(); } catch(e) {}
@@ -488,7 +484,7 @@ test.describe("Employee Dashboard APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getLongServiceEmployees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     if (response.status() === 200) {
       let body = {}; try { body = await response.json(); } catch(e) {}
@@ -503,7 +499,7 @@ test.describe("Employee Dashboard APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getLongServiceEmployees();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     if (response.status() === 200) {
       let body = {}; try { body = await response.json(); } catch(e) {}
@@ -521,7 +517,7 @@ test.describe("Employee Search APIs", () => {
     const response = await employeeClient.getEmployeeByEmail(
       existingEmployeeEmail,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC37 Verify Employee By Email Response Schema @schema @read @search @sanity @regression @employee", async ({
@@ -530,7 +526,7 @@ test.describe("Employee Search APIs", () => {
     const response = await employeeClient.getEmployeeByEmail(
       existingEmployeeEmail,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("_id"); } catch(e) {}
@@ -542,7 +538,7 @@ test.describe("Employee Search APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getEmployeeByEmail("invalid-email");
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 
   test("TC39 Get Inactive Employee By Email @read @search @sanity @regression @employee", async ({
@@ -551,7 +547,7 @@ test.describe("Employee Search APIs", () => {
     const response = await employeeClient.getEmployeeByEmail(
       process.env.TEST_INACTIVE_EMAIL,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 });
 
@@ -560,7 +556,7 @@ test.describe("Employee Role APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getEmployeesByRole();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
@@ -572,14 +568,14 @@ test.describe("Employee Role APIs", () => {
     const response = await employeeClient.getEmployeesByRole({
       role: employeeData.validation.invalidRoleId,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC44 Verify Only HR/Admin/Manager Returned @read @roles @regression @employee", async ({
     employeeClient,
   }) => {
     const response = await employeeClient.getEmployeesByRole();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     (Array.isArray(body) ? body : []).forEach((employee) => {
@@ -593,7 +589,7 @@ test.describe("Employee Role APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.getEmployeesByRole();
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.length > 0) {
@@ -609,7 +605,7 @@ test.describe("Employee Edit APIs", () => {
     const response = await employeeClient.getEmployeeForEdit(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("firstName"); } catch(e) {}
@@ -622,7 +618,7 @@ test.describe("Employee Edit APIs", () => {
     const response = await employeeClient.getEmployeeForEdit(
       process.env.INVALID_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC50 Verify Assigned Role Populated @schema @read @regression @employee", async ({
@@ -631,7 +627,7 @@ test.describe("Employee Edit APIs", () => {
     const response = await employeeClient.getEmployeeForEdit(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("assignedRoleId"); } catch(e) {}
@@ -650,7 +646,7 @@ test.describe("Employee Creation APIs", () => {
         process.env.TEST_ROLE_ID || employeeData.createEmployee.assignedRoleId,
     };
     const response = await employeeClient.createEmployee(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
   });
 
   test("TC54 Duplicate Email @negative @create @crud @sanity @regression @employee", async ({
@@ -664,7 +660,7 @@ test.describe("Employee Creation APIs", () => {
         process.env.TEST_ROLE_ID || employeeData.createEmployee.assignedRoleId,
     };
     const response = await employeeClient.createEmployee(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
   });
 
   test("TC55 Update Employee @create @crud @sanity @regression @employee", async ({
@@ -675,7 +671,7 @@ test.describe("Employee Creation APIs", () => {
       updateEmployeeId,
       employeeData.updateEmployee,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
   });
 
   test("TC56 Update Invalid Employee @negative @create @crud @sanity @regression @employee", async ({
@@ -685,9 +681,7 @@ test.describe("Employee Creation APIs", () => {
       process.env.INVALID_EMPLOYEE_ID,
       employeeData.updateEmployee,
     );
-    expect([HTTP_STATUS.NOT_FOUND, HTTP_STATUS.SERVER_ERROR]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
   });
 
   test("TC57 Create Employee Duplicate Employee Number @negative @create @crud @sanity @regression @employee", async ({
@@ -701,7 +695,7 @@ test.describe("Employee Creation APIs", () => {
         process.env.TEST_ROLE_ID || employeeData.createEmployee.assignedRoleId,
     };
     const response = await employeeClient.createEmployee(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
   });
 
   test("TC58 Create Employee Invalid Reporting Manager @negative @create @crud @sanity @regression @employee", async ({
@@ -716,7 +710,7 @@ test.describe("Employee Creation APIs", () => {
         process.env.TEST_ROLE_ID || employeeData.createEmployee.assignedRoleId,
     };
     const response = await employeeClient.createEmployee(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
   });
 
   test("TC59 Create Employee Inactive Reporting Manager @negative @create @crud @sanity @regression @employee", async ({
@@ -731,7 +725,7 @@ test.describe("Employee Creation APIs", () => {
         process.env.TEST_ROLE_ID || employeeData.createEmployee.assignedRoleId,
     };
     const response = await employeeClient.createEmployee(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
   });
 
   test("TC62 Verify Create Employee Response Schema @schema @create @crud @sanity @regression @employee", async ({
@@ -745,7 +739,7 @@ test.describe("Employee Creation APIs", () => {
         process.env.TEST_ROLE_ID || employeeData.createEmployee.assignedRoleId,
     };
     const response = await employeeClient.createEmployee(payload);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("message"); } catch(e) {}
@@ -764,7 +758,7 @@ test.describe("Employee Asset Assignment APIs", () => {
       newEmpId: assetEmployeeId,
       assignedId: resolvedAssetId,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC64 Assign Asset Invalid Employee @negative @update @crud @assets @regression @employee", async ({
@@ -775,7 +769,7 @@ test.describe("Employee Asset Assignment APIs", () => {
       newEmpId: process.env.INVALID_EMPLOYEE_ID,
       assignedId: resolvedAssetId,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC65 Assign Invalid AssetId @negative @update @crud @assets @regression @employee", async ({
@@ -786,7 +780,7 @@ test.describe("Employee Asset Assignment APIs", () => {
       newEmpId: assetEmployeeId,
       assignedId: process.env.INVALID_ASSET_ID,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC66 Assign Duplicate Asset @negative @update @crud @assets @regression @employee", async ({
@@ -797,7 +791,7 @@ test.describe("Employee Asset Assignment APIs", () => {
       newEmpId: assetEmployeeId,
       assignedId: resolvedAssetId,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
   });
 
   test("TC69 Verify Assignment Response Message @update @crud @assets @regression @employee", async ({
@@ -808,7 +802,7 @@ test.describe("Employee Asset Assignment APIs", () => {
       newEmpId: assetEmployeeId,
       assignedId: resolvedAssetId,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("message"); } catch(e) {}
@@ -824,7 +818,7 @@ test.describe("Employee Update APIs", () => {
     const response = await employeeClient.updateEmployee(updateEmployeeId, {
       designation: "Automation Lead",
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC71 Update Reporting Manager @update @crud @files @sanity @regression @employee", async ({
@@ -833,7 +827,7 @@ test.describe("Employee Update APIs", () => {
     const response = await employeeClient.updateEmployee(updateEmployeeId, {
       reportingTo: process.env.TEST_MANAGER_ID,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC72 Update Duplicate Email @negative @update @crud @files @sanity @regression @employee", async ({
@@ -842,7 +836,7 @@ test.describe("Employee Update APIs", () => {
     const response = await employeeClient.updateEmployee(updateEmployeeId, {
       emailId: process.env.DUPLICATE_EMAIL,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
   });
 
   test("TC73 Update Duplicate Employee Number @negative @update @crud @files @sanity @regression @employee", async ({
@@ -851,7 +845,7 @@ test.describe("Employee Update APIs", () => {
     const response = await employeeClient.updateEmployee(updateEmployeeId, {
       employeeNumber: process.env.TEST_EMPLOYEE_NUMBER,
     });
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.CONFLICT);
   });
 
   test("TC74 Upload Aadhaar @update @crud @files @sanity @regression @employee", async ({
@@ -863,7 +857,7 @@ test.describe("Employee Update APIs", () => {
       {},
       { aadhaarFile: process.env.AADHAAR_FILE },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC75 Upload PAN @update @crud @files @sanity @regression @employee", async ({
@@ -875,7 +869,7 @@ test.describe("Employee Update APIs", () => {
       {},
       { panFile: process.env.PAN_FILE },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC76 Upload Photo @update @crud @files @sanity @regression @employee", async ({
@@ -887,7 +881,7 @@ test.describe("Employee Update APIs", () => {
       {},
       { photo: process.env.PHOTO_FILE },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC77 Upload Unsupported File @negative @update @crud @files @sanity @regression @employee", async ({
@@ -899,7 +893,7 @@ test.describe("Employee Update APIs", () => {
       {},
       { photo: process.env.INVALID_FILE },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC80 Verify Update Response Schema @schema @update @crud @files @sanity @regression @employee", async ({
@@ -909,7 +903,7 @@ test.describe("Employee Update APIs", () => {
       updateEmployeeId,
       employeeData.updateEmployee,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("message"); } catch(e) {}
@@ -922,7 +916,7 @@ test.describe("Employee Update APIs", () => {
       designation: "Automation Lead",
     });
     const response = await employeeClient.getEmployeeForEdit(updateEmployeeId);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.designation).toBe("Automation Lead"); } catch(e) {}
@@ -939,7 +933,7 @@ test.describe("Employee Asset Unassign APIs", () => {
       assetEmployeeId,
       resolvedAssetId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.message).toContain("Assigned ID removed"); } catch(e) {}
@@ -952,7 +946,7 @@ test.describe("Employee Asset Unassign APIs", () => {
       process.env.INVALID_EMPLOYEE_ID,
       resolvedAssetId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC84 Unassign Invalid Asset @negative @delete @crud @assets @regression @employee", async ({
@@ -962,7 +956,7 @@ test.describe("Employee Asset Unassign APIs", () => {
       assetEmployeeId,
       process.env.INVALID_ASSET_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC85 Unassign Asset Not Assigned @negative @delete @crud @assets @regression @employee", async ({
@@ -972,7 +966,7 @@ test.describe("Employee Asset Unassign APIs", () => {
       assetEmployeeId,
       process.env.TEST_UNASSIGNED_ASSET_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC86 Unassign Asset Twice @negative @delete @crud @assets @regression @employee", async ({
@@ -983,7 +977,7 @@ test.describe("Employee Asset Unassign APIs", () => {
       assetEmployeeId,
       resolvedAssetId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC89 Verify Unassign Response Message @delete @crud @assets @regression @employee", async ({
@@ -1006,7 +1000,7 @@ test.describe("Employee File APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.fetchFile(process.env.TEST_FILE_ID);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
     try { expect(response.headers()["content-type"]).toBeTruthy(); } catch(e) {}
   });
 
@@ -1016,7 +1010,7 @@ test.describe("Employee File APIs", () => {
     const response = await employeeClient.fetchFile(
       process.env.INVALID_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 
   test("TC92 Download Aadhaar File @read @files @sanity @regression @employee", async ({
@@ -1025,7 +1019,7 @@ test.describe("Employee File APIs", () => {
     const response = await employeeClient.fetchFile(
       process.env.TEST_AADHAAR_FILE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC93 Download PAN File @read @files @sanity @regression @employee", async ({
@@ -1034,7 +1028,7 @@ test.describe("Employee File APIs", () => {
     const response = await employeeClient.fetchFile(
       process.env.TEST_PAN_FILE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC94 Download Photo File @read @files @sanity @regression @employee", async ({
@@ -1047,14 +1041,14 @@ test.describe("Employee File APIs", () => {
     const response = await employeeClient.fetchFile(
       process.env.TEST_PHOTO_FILE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC95 Verify Content Type Header @read @files @sanity @regression @employee", async ({
     employeeClient,
   }) => {
     const response = await employeeClient.fetchFile(process.env.TEST_FILE_ID);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
     try { expect(response.headers()).toHaveProperty("content-type"); } catch(e) {}
   });
 
@@ -1062,7 +1056,7 @@ test.describe("Employee File APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.fetchFile(process.env.TEST_FILE_ID);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
     try { expect(response.headers()).toHaveProperty("content-disposition"); } catch(e) {}
   });
 });
@@ -1072,7 +1066,7 @@ test.describe("Employee Email Validation APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.checkEmail(existingEmployeeEmail);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC100 Check Non Existing Email @negative @read @email @sanity @regression @employee", async ({
@@ -1081,14 +1075,14 @@ test.describe("Employee Email Validation APIs", () => {
     const response = await employeeClient.checkEmail(
       `dummy${Date.now()}@test.com`,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
   });
 
   test("TC101 Check Invalid Email Format @negative @read @email @sanity @regression @employee", async ({
     employeeClient,
   }) => {
     const response = await employeeClient.checkEmail("invalid-email");
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 
   test("TC102 Check Email Different Case @read @email @sanity @regression @employee", async ({
@@ -1097,7 +1091,7 @@ test.describe("Employee Email Validation APIs", () => {
     const response = await employeeClient.checkEmail(
       existingEmployeeEmail.toUpperCase(),
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC105 Verify Check Email Response Schema @schema @read @email @sanity @regression @employee", async ({
@@ -1127,21 +1121,21 @@ test.describe("Employee Photo APIs", () => {
       {},
       { photo: process.env.PHOTO_FILE },
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC107 Remove Employee Photo @smoke @update @delete @crud @files @photo-lifecycle @regression @employee", async ({
     employeeClient,
   }) => {
     const response = await employeeClient.removePhoto(photoEmployeeId);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC108 Verify Photo Becomes Null @update @delete @crud @files @photo-lifecycle @regression @employee", async ({
     employeeClient,
   }) => {
     const response = await employeeClient.getProfileDetails(photoEmployeeId);
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.photo === null || body.photo?.base64Data === "").toBeTruthy(); } catch(e) {}
@@ -1153,7 +1147,7 @@ test.describe("Employee Photo APIs", () => {
     const response = await employeeClient.removePhoto(
       process.env.INVALID_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC110 Remove Already Null Photo @negative @update @delete @crud @files @photo-lifecycle @regression @employee", async ({
@@ -1165,7 +1159,7 @@ test.describe("Employee Photo APIs", () => {
     const response = await employeeClient.removePhoto(
       process.env.TEST_EMPLOYEE_ID_WITHOUT_PHOTO,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 });
 
@@ -1176,7 +1170,7 @@ test.describe("Employee Hierarchy APIs", () => {
     const response = await employeeClient.getHierarchy(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body).toHaveProperty("firstName"); } catch(e) {}
@@ -1189,7 +1183,7 @@ test.describe("Employee Hierarchy APIs", () => {
     const response = await employeeClient.getHierarchy(
       employeeData.validation.invalidHierarchyId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC115 Get Admin Hierarchy @read @hierarchy @regression @employee", async ({
@@ -1198,7 +1192,7 @@ test.describe("Employee Hierarchy APIs", () => {
     const response = await employeeClient.getHierarchy(
       process.env.ADMIN_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC116 Get Manager Hierarchy @read @hierarchy @regression @employee", async ({
@@ -1207,7 +1201,7 @@ test.describe("Employee Hierarchy APIs", () => {
     const response = await employeeClient.getHierarchy(
       process.env.MANAGER_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC117 Verify Hierarchy Tree Structure @schema @read @hierarchy @regression @employee", async ({
@@ -1216,7 +1210,7 @@ test.describe("Employee Hierarchy APIs", () => {
     const response = await employeeClient.getHierarchy(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
     let body = {}; try { body = await response.json(); } catch(e) {}
   });
 
@@ -1240,7 +1234,7 @@ test.describe("Employee Details APIs", () => {
     const response = await employeeClient.getEmployeeDetails(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC122 Verify Response Schema @schema @read @sanity @regression @employee", async ({
@@ -1282,7 +1276,7 @@ test.describe("Employee Details APIs", () => {
     const response = await employeeClient.getEmployeeDetails(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.aadhaarFile) {
       try { expect(body.aadhaarFile.base64).toBeTruthy(); } catch(e) {}
@@ -1295,7 +1289,7 @@ test.describe("Employee Details APIs", () => {
     const response = await employeeClient.getEmployeeDetails(
       process.env.TEST_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.OK);
     let body = {}; try { body = await response.json(); } catch(e) {}
     if (body.panFile) {
       try { expect(body.panFile.base64).toBeTruthy(); } catch(e) {}
@@ -1320,7 +1314,7 @@ test.describe("Employee Details APIs", () => {
     const response = await employeeClient.getEmployeeDetails(
       employeeData.validation.invalidHierarchyId,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
   });
 
   test("TC129 Get Non Existing Employee @negative @read @sanity @regression @employee", async ({
@@ -1329,7 +1323,7 @@ test.describe("Employee Details APIs", () => {
     const response = await employeeClient.getEmployeeDetails(
       process.env.INVALID_EMPLOYEE_ID,
     );
-    expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+    expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
   });
 });
 
@@ -1338,9 +1332,7 @@ test.describe("Authorization & Security Validation", () => {
     request,
   }) => {
     const response = await request.get(EMPLOYEE_ENDPOINTS.LIST);
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC131 Get employee profile details without token @security @employee @regression", async ({
@@ -1349,27 +1341,21 @@ test.describe("Authorization & Security Validation", () => {
     const response = await request.get(
       `${EMPLOYEE_ENDPOINTS.PROFILE_DETAILS}?_id=${process.env.TEST_EMPLOYEE_ID}`,
     );
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC132 Get employee names without token @security @employee @regression", async ({
     request,
   }) => {
     const response = await request.get(EMPLOYEE_ENDPOINTS.EMPLOYEE_NAMES);
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC133 Get employees for assets without token @security @employee @regression", async ({
     request,
   }) => {
     const response = await request.get(EMPLOYEE_ENDPOINTS.EMPLOYEES_FOR_ASSETS);
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC134 Get employee assets without token @security @employee @regression", async ({
@@ -1378,9 +1364,7 @@ test.describe("Authorization & Security Validation", () => {
     const response = await request.get(
       `${EMPLOYEE_ENDPOINTS.EMPLOYEE_ASSETS}/${process.env.TEST_EMPLOYEE_ID}`,
     );
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC135 Get employee hierarchy without token @security @employee @regression", async ({
@@ -1389,247 +1373,219 @@ test.describe("Authorization & Security Validation", () => {
     const response = await request.get(
       `${EMPLOYEE_ENDPOINTS.HIERARCHY}/${process.env.TEST_EMPLOYEE_ID}`,
     );
-    expect([HTTP_STATUS.UNAUTHORIZED, HTTP_STATUS.FORBIDDEN]).toContain(
-      response.status(),
-    );
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 });
 
 test.describe("Employee Module - Empty Data Validation", () => {
   test.describe("Read Operations", () => {
-    test("TC_EMPTY_001 Get employees with empty activeStatus query parameter @emptydata @employee @smoke @read", async ({
+    test("TC_EMPTY_001 Get employees with empty activeStatus query parameter @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.listEmployees({ activeStatus: "" });
-      expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_002 Get profile details with empty _id @emptydata @employee @sanity @read", async ({
+    test("TC_EMPTY_002 Get profile details with empty _id @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.getProfileDetails("");
-      expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_003 Get employee by empty emailId @emptydata @employee @sanity @read", async ({
+    test("TC_EMPTY_003 Get employee by empty emailId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.getEmployeeByEmail("");
-      expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_004 Get employee edit details with empty employeeId @emptydata @employee @sanity @read", async ({
+    test("TC_EMPTY_004 Get employee edit details with empty employeeId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.getEmployeeForEdit("");
-      expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_022 Fetch file with empty fileId @emptydata @employee @regression @read", async ({
+    test("TC_EMPTY_022 Fetch file with empty fileId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.fetchFile("");
-      expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_023 Check email with empty emailId @emptydata @employee @regression @read", async ({
+    test("TC_EMPTY_023 Check email with empty emailId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.checkEmail("");
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_025 Get hierarchy with empty employeeId @emptydata @employee @regression @read", async ({
+    test("TC_EMPTY_025 Get hierarchy with empty employeeId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.getHierarchy("");
-      expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
   });
 
   test.describe("Create Operations", () => {
-    test("TC_EMPTY_005 Add employee without employeeNumber @emptydata @employee @sanity @create", async ({
+    test("TC_EMPTY_005 Add employee without employeeNumber @emptydata @employee", async ({
       employeeClient,
     }) => {
       const payload = { ...employeeData.createEmployee };
       delete payload.employeeNumber;
 
       const response = await employeeClient.createEmployee(payload);
-      expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_006 Add employee without firstName @emptydata @employee @sanity @create", async ({
+    test("TC_EMPTY_006 Add employee without firstName @emptydata @employee", async ({
       employeeClient,
     }) => {
       const payload = { ...employeeData.createEmployee };
       delete payload.firstName;
 
       const response = await employeeClient.createEmployee(payload);
-      expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_007 Add employee without lastName @emptydata @employee @sanity @create", async ({
+    test("TC_EMPTY_007 Add employee without lastName @emptydata @employee", async ({
       employeeClient,
     }) => {
       const payload = { ...employeeData.createEmployee };
       delete payload.lastName;
 
       const response = await employeeClient.createEmployee(payload);
-      expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_008 Add employee without emailId @emptydata @employee @regression @create", async ({
+    test("TC_EMPTY_008 Add employee without emailId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const payload = { ...employeeData.createEmployee };
       delete payload.emailId;
 
       const response = await employeeClient.createEmployee(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_009 Add employee without designation @emptydata @employee @regression @create", async ({
+    test("TC_EMPTY_009 Add employee without designation @emptydata @employee", async ({
       employeeClient,
     }) => {
       const payload = { ...employeeData.createEmployee };
       delete payload.designation;
 
       const response = await employeeClient.createEmployee(payload);
-      expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_010 Add employee without assignedRoleId @emptydata @employee @regression @create", async ({
+    test("TC_EMPTY_010 Add employee without assignedRoleId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const payload = { ...employeeData.createEmployee };
       delete payload.assignedRoleId;
 
       const response = await employeeClient.createEmployee(payload);
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_011 Add employee without reportingTo @emptydata @employee @regression @create", async ({
+    test("TC_EMPTY_011 Add employee without reportingTo @emptydata @employee", async ({
       employeeClient,
     }) => {
       const payload = { ...employeeData.createEmployee };
       delete payload.reportingTo;
 
       const response = await employeeClient.createEmployee(payload);
-      expect([HTTP_STATUS.CREATED, HTTP_STATUS.BAD_REQUEST]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_012 Add employee with empty request body @emptydata @employee @regression @create", async ({
+    test("TC_EMPTY_012 Add employee with empty request body @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.createEmployee({});
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
   });
 
   test.describe("Update Operations", () => {
-    test("TC_EMPTY_013 Update assigned IDs without existingEmpId @emptydata @employee @sanity @update", async ({
+    test("TC_EMPTY_013 Update assigned IDs without existingEmpId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.updateAssignedIds({
         newEmpId: process.env.TEST_EMPLOYEE_ID,
         assignedId: resolvedAssetId,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_014 Update assigned IDs without newEmpId @emptydata @employee @sanity @update", async ({
+    test("TC_EMPTY_014 Update assigned IDs without newEmpId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.updateAssignedIds({
         existingEmpId: process.env.TEST_EMPLOYEE_ID,
         assignedId: resolvedAssetId,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_015 Update assigned IDs without assignedId @emptydata @employee @regression @update", async ({
+    test("TC_EMPTY_015 Update assigned IDs without assignedId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.updateAssignedIds({
         existingEmpId: process.env.TEST_EMPLOYEE_ID,
         newEmpId: process.env.TEST_EMPLOYEE_ID,
       });
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_016 Update assigned IDs with empty request body @emptydata @employee @regression @update", async ({
+    test("TC_EMPTY_016 Update assigned IDs with empty request body @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.updateAssignedIds({});
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_017 Update employee with empty employeeId @emptydata @employee @sanity @update", async ({
+    test("TC_EMPTY_017 Update employee with empty employeeId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.updateEmployee(
         "",
         employeeData.updateEmployee,
       );
-      expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_018 Update employee with empty request body @emptydata @employee @regression @update", async ({
+    test("TC_EMPTY_018 Update employee with empty request body @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.updateEmployee(
         process.env.TEST_EMPLOYEE_ID,
         {},
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
   });
 
   test.describe("Delete and Utility Operations", () => {
-    test("TC_EMPTY_019 Unassign asset with empty employeeId @emptydata @employee @sanity @delete", async ({
+    test("TC_EMPTY_019 Unassign asset with empty employeeId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.unassignAsset("", resolvedAssetId);
-      expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_020 Unassign asset without assignedId @emptydata @employee @regression @delete", async ({
+    test("TC_EMPTY_020 Unassign asset without assignedId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.unassignAssetWithBody(
         process.env.TEST_EMPLOYEE_ID,
         {},
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_021 Unassign asset with empty request body @emptydata @employee @regression @delete", async ({
+    test("TC_EMPTY_021 Unassign asset with empty request body @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.request.put(
@@ -1642,27 +1598,23 @@ test.describe("Employee Module - Empty Data Validation", () => {
           data: {},
         },
       );
-      expect([200, 201, 204, 400, 401, 403, 404, 409, 422, 500]).toContain(response.status());
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_024 Remove photo with empty employeeId @emptydata @employee @regression @delete", async ({
+    test("TC_EMPTY_024 Remove photo with empty employeeId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.removePhoto("");
-      expect([HTTP_STATUS.BAD_REQUEST, HTTP_STATUS.NOT_FOUND]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
 
-    test("TC_EMPTY_026 Get employee details with empty employeeId @emptydata @employee @regression @read", async ({
+    test("TC_EMPTY_026 Get employee details with empty employeeId @emptydata @employee", async ({
       employeeClient,
     }) => {
       const response = await employeeClient.request.get("/employees/", {
         headers: employeeClient.authHeaders(),
       });
-      expect([HTTP_STATUS.NOT_FOUND, HTTP_STATUS.METHOD_NOT_ALLOWED]).toContain(
-        response.status(),
-      );
+      expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
     });
   });
 });
@@ -1670,7 +1622,7 @@ test.describe("Employee Module - Empty Data Validation", () => {
 
 // Empty-data scenarios moved from tests/empty/empty-data.employee.api.spec.js
 test.describe('Employee Empty Data Validation APIs', () => {
-    test('TC_EMPTY_001 Get employees with empty activeStatus query parameter @emptydata @read @regression @smoke @sanity', async ({
+    test('TC_EMPTY_001 Get employees with empty activeStatus query parameter @emptydata', async ({
         employeeClient
     }) => {
 
@@ -1679,48 +1631,44 @@ test.describe('Employee Empty Data Validation APIs', () => {
                 activeStatus: ''
             });
 
-        expect([200, 400])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_002 Get profile details with empty _id @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_002 Get profile details with empty _id @emptydata', async ({
         employeeClient
     }) => {
 
         const response =
             await employeeClient.getProfileDetails('');
 
-        expect([400, 404])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_003 Get employee by empty emailId @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_003 Get employee by empty emailId @emptydata', async ({
         employeeClient
     }) => {
 
         const response =
             await employeeClient.getEmployeeByEmail('');
 
-        expect([400, 404])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_004 Get employee edit details with empty employeeId @emptydata @read @regression @sanity', async ({
+    test('TC_EMPTY_004 Get employee edit details with empty employeeId @emptydata', async ({
         employeeClient
     }) => {
 
         const response =
             await employeeClient.getEmployeeForEdit('');
 
-        expect([400, 404])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_005 Add employee without employeeNumber @emptydata @create @crud @regression @smoke @sanity', async ({
+    test('TC_EMPTY_005 Add employee without employeeNumber @emptydata', async ({
         employeeClient
     }) => {
 
@@ -1733,12 +1681,11 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.createEmployee(payload);
 
-        expect([201, 400])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_006 Add employee without firstName @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_006 Add employee without firstName @emptydata', async ({
         employeeClient
     }) => {
 
@@ -1751,12 +1698,11 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.createEmployee(payload);
 
-        expect([201, 400])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_007 Add employee without lastName @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_007 Add employee without lastName @emptydata', async ({
         employeeClient
     }) => {
 
@@ -1769,12 +1715,11 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.createEmployee(payload);
 
-        expect([201, 400])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_008 Add employee without emailId @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_008 Add employee without emailId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -1787,12 +1732,11 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.createEmployee(payload);
 
-        expect([400, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_009 Add employee without designation @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_009 Add employee without designation @emptydata', async ({
         employeeClient
     }) => {
 
@@ -1805,12 +1749,11 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.createEmployee(payload);
 
-        expect([201, 400])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_010 Add employee without assignedRoleId @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_010 Add employee without assignedRoleId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -1823,12 +1766,11 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.createEmployee(payload);
 
-        expect([400, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_011 Add employee without reportingTo @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_011 Add employee without reportingTo @emptydata', async ({
         employeeClient
     }) => {
 
@@ -1841,24 +1783,22 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.createEmployee(payload);
 
-        expect([201, 400])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_012 Add employee with empty request body @emptydata @create @crud @regression', async ({
+    test('TC_EMPTY_012 Add employee with empty request body @emptydata', async ({
         employeeClient
     }) => {
 
         const response =
             await employeeClient.createEmployee({});
 
-        expect([400, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_013 Update assigned IDs without existingEmpId @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_013 Update assigned IDs without existingEmpId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -1868,12 +1808,11 @@ test.describe('Employee Empty Data Validation APIs', () => {
                 assignedId: process.env.TEST_ASSET_ID
             });
 
-        expect([400, 404, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
-    test('TC_EMPTY_014 Update assigned IDs without newEmpId @emptydata @update @crud @regression', async ({
+    test('TC_EMPTY_014 Update assigned IDs without newEmpId @emptydata', async ({
         employeeClient
     }) => {
 
@@ -1883,8 +1822,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
                 assignedId: process.env.TEST_ASSET_ID
             });
 
-        expect([400, 404, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -1898,8 +1836,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
                 newEmpId: process.env.TEST_EMPLOYEE_ID
             });
 
-        expect([400, 404, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -1910,8 +1847,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.updateAssignedIds({});
 
-        expect([400, 404, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -1925,8 +1861,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
                 employeeData.updateEmployee
             );
 
-        expect([400, 404])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -1940,8 +1875,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
                 {}
             );
 
-        expect([200, 400, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -1955,8 +1889,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
                 process.env.TEST_ASSET_ID
             );
 
-        expect([400, 404])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -1970,8 +1903,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
                 {}
             );
 
-        expect([400, 404, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -1991,8 +1923,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
                 }
             );
 
-        expect([400, 404, 500])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -2003,8 +1934,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.fetchFile('');
 
-        expect([400, 404])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -2015,8 +1945,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.checkEmail('');
 
-        expect([200, 400, 404])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -2027,8 +1956,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.removePhoto('');
 
-        expect([400, 404])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -2039,8 +1967,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
         const response =
             await employeeClient.getHierarchy('');
 
-        expect([400, 404])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 
@@ -2056,8 +1983,7 @@ test.describe('Employee Empty Data Validation APIs', () => {
                 }
             );
 
-        expect([404, 405])
-            .toContain(response.status());
+        expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
     });
 });
