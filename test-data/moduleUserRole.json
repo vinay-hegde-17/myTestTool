@@ -1,15 +1,15 @@
 {
   "valid": {
-    "userRoleId": "{{TEST_USER_ROLE_ID}}",
+    "userRoleId": "{{TEST_MUTABLE_ROLE_ID}}",
     "moduleId": "{{TEST_MODULE_ID}}",
     "secondModuleId": "{{TEST_SECOND_MODULE_ID}}",
     "thirdModuleId": "{{TEST_THIRD_MODULE_ID}}"
   },
   "noAssignedModules": {
-    "userRoleId": "{{TEST_USER_ROLE_ID}}"
+    "userRoleId": "{{TEST_MUTABLE_ROLE_ID}}"
   },
   "activeAssignment": {
-    "userRoleId": "{{TEST_USER_ROLE_ID}}",
+    "userRoleId": "{{TEST_MUTABLE_ROLE_ID}}",
     "moduleIds": [
       "{{TEST_MODULE_ID}}",
       "{{TEST_SECOND_MODULE_ID}}"
@@ -20,7 +20,7 @@
     "moduleIds": [
       "{{TEST_MODULE_ID}}"
     ],
-    "userRoleId": "{{TEST_USER_ROLE_ID}}",
+    "userRoleId": "{{TEST_MUTABLE_ROLE_ID}}",
     "activeStatus": true
   },
   "multipleModules": {
@@ -29,7 +29,7 @@
       "{{TEST_SECOND_MODULE_ID}}",
       "{{TEST_THIRD_MODULE_ID}}"
     ],
-    "userRoleId": "{{TEST_USER_ROLE_ID}}",
+    "userRoleId": "{{TEST_MUTABLE_ROLE_ID}}",
     "activeStatus": true
   },
   "update": {
@@ -48,7 +48,7 @@
     "emptyArray": [],
     "emptyObject": {},
     "withoutModuleIds": {
-      "userRoleId": "{{TEST_USER_ROLE_ID}}",
+      "userRoleId": "{{TEST_MUTABLE_ROLE_ID}}",
       "activeStatus": true
     },
     "withoutUserRoleId": {
