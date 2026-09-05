@@ -256,7 +256,7 @@ test.describe("IT Declaration - Read Operations", () => {
       "old",
       itdData.oldRegime.financialYear,
     );
-    expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
     try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}

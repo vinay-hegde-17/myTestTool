@@ -1067,7 +1067,7 @@ test.describe("Employee Email Validation APIs", () => {
     employeeClient,
   }) => {
     const response = await employeeClient.checkEmail(existingEmployeeEmail);
-    expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC100 Check Non Existing Email @negative @read @email @sanity @regression @employee", async ({
@@ -1122,7 +1122,7 @@ test.describe("Employee Photo APIs", () => {
       {},
       { photo: process.env.PHOTO_FILE },
     );
-    expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC107 Remove Employee Photo @smoke @update @delete @crud @files @photo-lifecycle @regression @employee", async ({

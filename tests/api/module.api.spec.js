@@ -289,7 +289,7 @@ test.describe("Module APIs", () => {
       moduleClient,
     }) => {
       const response = await moduleClient.getMenuModules();
-      expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+      expect(response.status()).toBe(HTTP_STATUS.OK);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
@@ -817,7 +817,7 @@ test.describe('API 5 - GET /modules/menu', () => {
         const response =
             await moduleClient.getMenuModules();
 
-        expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+        expect(response.status()).toBe(HTTP_STATUS.OK);
 
         let body = {}; try { body = await response.json(); } catch(e) {}
 

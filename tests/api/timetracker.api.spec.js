@@ -90,7 +90,7 @@ test.describe("Time Tracker Employee List APIs", () => {
     const response = await timeTrackerClient.getEmployees({
       status: timetrackerData.query.statusAll,
     });
-    expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+    expect(response.status()).toBe(HTTP_STATUS.OK);
   });
 
   test("TC10 Get Employees With Status Approved @read @timetracker @regression", async ({
@@ -467,7 +467,7 @@ test.describe("Time Tracker Update APIs", () => {
       timetrackerData.employee.validEmployeeId,
       timetrackerData.updateTimesheet,
     );
-    expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+    expect(response.status()).toBe(HTTP_STATUS.OK);
 
     let body = {}; try { body = await response.json(); } catch(e) {}
       try { expect(body.month).toBe(timetrackerData.updateTimesheet.month); } catch(e) {}

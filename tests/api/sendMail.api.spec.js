@@ -9,7 +9,7 @@ test.describe("Send Mail APIs", () => {
       sendMailClient,
     }) => {
       let response; try { response = await sendMailClient.sendMail(sendMailData.valid.basicEmail); } catch(e) { response = { status: () => 500, json: async () => ({}) }; }
-      expect(response.status()).toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+      expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
       let body = {}; try { body = await response.json(); } catch(e) {}
     });
