@@ -1,6 +1,4 @@
-const {
-  MODULE_USER_ROLE_ENDPOINTS,
-} = require("../constants/moduleUserRole.constants");
+const { MODULE_USER_ROLE_ENDPOINTS } = require("../constants/moduleUserRole.constants");
 
 class ModuleUserRoleClient {
   constructor(request, token = null) {
@@ -11,8 +9,8 @@ class ModuleUserRoleClient {
   authHeaders() {
     return this.token
       ? {
-          Authorization: `Bearer ${this.token}`,
-        }
+        Authorization: `Bearer ${this.token}`,
+      }
       : {};
   }
 

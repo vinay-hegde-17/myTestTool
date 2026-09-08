@@ -1,5 +1,4 @@
 const { test: base, expect } = require("./auth.fixture");
-
 const SendMailClient = require("../api/clients/sendMail.client");
 
 const test = base.extend({

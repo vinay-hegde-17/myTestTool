@@ -1,9 +1,7 @@
 const { test, expect } = require("../../fixtures/raisedQueries.fixture");
 const { HTTP_STATUS } = require("../../api/constants/raisedQueries.constants");
 const { loadResolvedJson } = require("../../utils/testData.util");
-const raisedQueriesData = loadResolvedJson(
-  "../../test-data/raisedQueries.json",
-);
+const raisedQueriesData = loadResolvedJson("../../test-data/raisedQueries.json");
 
 test.describe("Raised Query Read & Filter APIs", () => {
   test("TC01 Get unanswered queries with default filter @read @raisedqueries @regression @smoke @sanity", async ({
@@ -12,13 +10,15 @@ test.describe("Raised Query Read & Filter APIs", () => {
     const response = await raisedQueriesClient.getRaisedQueries();
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
-      try { expect(
-        query.reply === undefined || query.reply === null || query.reply === "",
-      ).toBeTruthy(); } catch(e) {}
+      try {
+        expect(
+          query.reply === undefined || query.reply === null || query.reply === "",
+        ).toBeTruthy();
+      } catch (e) { }
     }
   });
 
@@ -34,7 +34,7 @@ test.describe("Raised Query Read & Filter APIs", () => {
       await raisedQueriesClient.createRaisedQuery(seedQuery);
     expect(createResponse.status()).toBe(HTTP_STATUS.CREATED);
 
-    let created = {}; try { created = await createResponse.json(); } catch(e) {}
+    let created = {}; try { created = await createResponse.json(); } catch (e) { }
     const replyResponse = await raisedQueriesClient.updateRaisedQueryReply({
       id: created._id,
       reply: `TC02 seed reply ${Date.now()}`,
@@ -44,12 +44,12 @@ test.describe("Raised Query Read & Filter APIs", () => {
     const response = await raisedQueriesClient.getRaisedQueries(true);
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
-      try { expect(body.length).toBeGreaterThan(0); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
+    try { expect(body.length).toBeGreaterThan(0); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
-      try { expect(query.reply).toBeTruthy(); } catch(e) {}
+      try { expect(query.reply).toBeTruthy(); } catch (e) { }
     }
   });
 
@@ -73,13 +73,13 @@ test.describe("Raised Query Read & Filter APIs", () => {
     const response = await raisedQueriesClient.getRaisedQueries();
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
-      try { expect(query.queryTypeId).toBeDefined(); } catch(e) {}
-      try { expect(query.queryTypeId).toHaveProperty("_id"); } catch(e) {}
-      try { expect(query.queryTypeId).toHaveProperty("type"); } catch(e) {}
+      try { expect(query.queryTypeId).toBeDefined(); } catch (e) { }
+      try { expect(query.queryTypeId).toHaveProperty("_id"); } catch (e) { }
+      try { expect(query.queryTypeId).toHaveProperty("type"); } catch (e) { }
     }
   });
 
@@ -89,15 +89,15 @@ test.describe("Raised Query Read & Filter APIs", () => {
     const response = await raisedQueriesClient.getRaisedQueries();
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
-      try { expect(query).toHaveProperty("_id"); } catch(e) {}
-      try { expect(query).toHaveProperty("employeeId"); } catch(e) {}
-      try { expect(query).toHaveProperty("queryTypeId"); } catch(e) {}
-      try { expect(query).toHaveProperty("subject"); } catch(e) {}
-      try { expect(query).toHaveProperty("query"); } catch(e) {}
+      try { expect(query).toHaveProperty("_id"); } catch (e) { }
+      try { expect(query).toHaveProperty("employeeId"); } catch (e) { }
+      try { expect(query).toHaveProperty("queryTypeId"); } catch (e) { }
+      try { expect(query).toHaveProperty("subject"); } catch (e) { }
+      try { expect(query).toHaveProperty("query"); } catch (e) { }
     }
   });
 });
@@ -109,8 +109,8 @@ test.describe("Query Type APIs", () => {
     const response = await raisedQueriesClient.getQueryTypes();
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
   });
 
   test("TC09 Get query types when no records exist @read @raisedqueries @regression", async ({
@@ -119,8 +119,8 @@ test.describe("Query Type APIs", () => {
     const response = await raisedQueriesClient.getQueryTypes();
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toEqual([]); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(body).toEqual([]); } catch (e) { }
   });
 
   test("TC10 Verify query type response schema @schema @raisedqueries @regression", async ({
@@ -129,12 +129,12 @@ test.describe("Query Type APIs", () => {
     const response = await raisedQueriesClient.getQueryTypes();
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const queryType of body) {
-      try { expect(queryType).toHaveProperty("_id"); } catch(e) {}
-      try { expect(queryType).toHaveProperty("type"); } catch(e) {}
+      try { expect(queryType).toHaveProperty("_id"); } catch (e) { }
+      try { expect(queryType).toHaveProperty("type"); } catch (e) { }
     }
   });
 });
@@ -148,12 +148,12 @@ test.describe("Employee Query Retrieval APIs", () => {
     );
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
-      try { expect(body.length).toBeGreaterThan(0); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
+    try { expect(body.length).toBeGreaterThan(0); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
-      try { expect(query.employeeId).toBe(raisedQueriesData.valid.employeeId); } catch(e) {}
+      try { expect(query.employeeId).toBe(raisedQueriesData.valid.employeeId); } catch (e) { }
     }
   });
 
@@ -183,14 +183,14 @@ test.describe("Employee Query Retrieval APIs", () => {
     );
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
-      try { expect(body.length).toBeGreaterThan(0); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
+    try { expect(body.length).toBeGreaterThan(0); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
-      try { expect(query.queryTypeId).toBeDefined(); } catch(e) {}
-      try { expect(query.queryTypeId).toHaveProperty("_id"); } catch(e) {}
-      try { expect(query.queryTypeId).toHaveProperty("type"); } catch(e) {}
+      try { expect(query.queryTypeId).toBeDefined(); } catch (e) { }
+      try { expect(query.queryTypeId).toHaveProperty("_id"); } catch (e) { }
+      try { expect(query.queryTypeId).toHaveProperty("type"); } catch (e) { }
     }
   });
 
@@ -202,15 +202,15 @@ test.describe("Employee Query Retrieval APIs", () => {
     );
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const query of body) {
-      try { expect(query).toHaveProperty("_id"); } catch(e) {}
-      try { expect(query).toHaveProperty("employeeId"); } catch(e) {}
-      try { expect(query).toHaveProperty("queryTypeId"); } catch(e) {}
-      try { expect(query).toHaveProperty("subject"); } catch(e) {}
-      try { expect(query).toHaveProperty("query"); } catch(e) {}
+      try { expect(query).toHaveProperty("_id"); } catch (e) { }
+      try { expect(query).toHaveProperty("employeeId"); } catch (e) { }
+      try { expect(query).toHaveProperty("queryTypeId"); } catch (e) { }
+      try { expect(query).toHaveProperty("subject"); } catch (e) { }
+      try { expect(query).toHaveProperty("query"); } catch (e) { }
     }
   });
 });
@@ -227,12 +227,12 @@ test.describe("Raised Query Creation APIs", () => {
     const response = await raisedQueriesClient.createRaisedQuery(payload);
     expect(response.status()).toBe(HTTP_STATUS.CREATED);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toHaveProperty("_id"); } catch(e) {}
-      try { expect(body.employeeId).toBe(payload.employeeId); } catch(e) {}
-      try { expect(body.queryTypeId).toBe(payload.queryType); } catch(e) {}
-      try { expect(body.subject).toBe(payload.subject); } catch(e) {}
-      try { expect(body.query).toBe(payload.query); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(body).toHaveProperty("_id"); } catch (e) { }
+    try { expect(body.employeeId).toBe(payload.employeeId); } catch (e) { }
+    try { expect(body.queryTypeId).toBe(payload.queryType); } catch (e) { }
+    try { expect(body.subject).toBe(payload.subject); } catch (e) { }
+    try { expect(body.query).toBe(payload.query); } catch (e) { }
   });
 
   test("TC20 Raise query using invalid queryTypeId @negative @create @raisedqueries @regression", async ({
@@ -274,11 +274,11 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
-      try { expect(body).toHaveProperty("message"); } catch(e) {}
-      try { expect(body.data).toHaveProperty("_id"); } catch(e) {}
-      try { expect(body.data.reply).toBe(payload.reply); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch (e) { }
+    try { expect(body).toHaveProperty("message"); } catch (e) { }
+    try { expect(body.data).toHaveProperty("_id"); } catch (e) { }
+    try { expect(body.data.reply).toBe(payload.reply); } catch (e) { }
   });
 
   test("TC24 Update showInFAQ=true @update @raisedqueries @regression", async ({
@@ -292,9 +292,9 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
-      try { expect(body.data.showInFAQ).toBe(true); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch (e) { }
+    try { expect(body.data.showInFAQ).toBe(true); } catch (e) { }
   });
 
   test("TC25 Update showInFAQ=false @update @raisedqueries @regression", async ({
@@ -308,9 +308,9 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
-      try { expect(body.data.showInFAQ).toBe(false); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch (e) { }
+    try { expect(body.data.showInFAQ).toBe(false); } catch (e) { }
   });
 
   test("TC26 Update reply and FAQ together @update @raisedqueries @regression", async ({
@@ -325,9 +325,9 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body.data.reply).toBe(payload.reply); } catch(e) {}
-      try { expect(body.data.showInFAQ).toBe(true); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(body.data.reply).toBe(payload.reply); } catch (e) { }
+    try { expect(body.data.showInFAQ).toBe(true); } catch (e) { }
   });
 
   test("TC29 Update reply using invalid queryId @negative @update @raisedqueries @regression", async ({
@@ -353,11 +353,13 @@ test.describe("Raised Query Reply & FAQ Update APIs", () => {
     const response = await raisedQueriesClient.updateRaisedQueryReply(payload);
     expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toHaveProperty(
-      "message",
-      raisedQueriesData.messages.queryNotFound,
-    ); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try {
+      expect(body).toHaveProperty(
+        "message",
+        raisedQueriesData.messages.queryNotFound,
+      );
+    } catch (e) { }
   });
 });
 
@@ -375,12 +377,14 @@ test.describe("Raised Query Edit APIs", () => {
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
-      try { expect(body).toHaveProperty(
-      "message",
-      raisedQueriesData.messages.updateSuccessfull,
-    ); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch (e) { }
+    try {
+      expect(body).toHaveProperty(
+        "message",
+        raisedQueriesData.messages.updateSuccessfull,
+      );
+    } catch (e) { }
   });
 
   test("TC33 Update query subject @update @raisedqueries @regression", async ({
@@ -395,12 +399,14 @@ test.describe("Raised Query Edit APIs", () => {
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
-      try { expect(body).toHaveProperty(
-      "message",
-      raisedQueriesData.messages.updateSuccessfull,
-    ); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch (e) { }
+    try {
+      expect(body).toHaveProperty(
+        "message",
+        raisedQueriesData.messages.updateSuccessfull,
+      );
+    } catch (e) { }
   });
 
   test("TC34 Update query description @update @raisedqueries @regression", async ({
@@ -415,12 +421,14 @@ test.describe("Raised Query Edit APIs", () => {
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
-      try { expect(body).toHaveProperty(
-      "message",
-      raisedQueriesData.messages.updateSuccessfull,
-    ); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch (e) { }
+    try {
+      expect(body).toHaveProperty(
+        "message",
+        raisedQueriesData.messages.updateSuccessfull,
+      );
+    } catch (e) { }
   });
 
   test("TC35 Update query type @update @raisedqueries @regression", async ({
@@ -436,12 +444,14 @@ test.describe("Raised Query Edit APIs", () => {
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch(e) {}
-      try { expect(body).toHaveProperty(
-      "message",
-      raisedQueriesData.messages.updateSuccessfull,
-    ); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(body).toHaveProperty("status", HTTP_STATUS.OK); } catch (e) { }
+    try {
+      expect(body).toHaveProperty(
+        "message",
+        raisedQueriesData.messages.updateSuccessfull,
+      );
+    } catch (e) { }
   });
 
   test("TC36 Update query using invalid queryId @negative @update @raisedqueries @regression", async ({
@@ -471,11 +481,13 @@ test.describe("Raised Query Edit APIs", () => {
     const response = await raisedQueriesClient.updateRaisedQuery(payload);
     expect(response.status()).toBe(HTTP_STATUS.NOT_FOUND);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body).toHaveProperty(
-      "message",
-      raisedQueriesData.messages.queryNotFound,
-    ); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try {
+      expect(body).toHaveProperty(
+        "message",
+        raisedQueriesData.messages.queryNotFound,
+      );
+    } catch (e) { }
   });
 });
 
@@ -486,9 +498,9 @@ test.describe("FAQ Read & Validation APIs", () => {
     const response = await raisedQueriesClient.getFAQQueries();
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
-      try { expect(body.length).toBeGreaterThan(0); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
+    try { expect(body.length).toBeGreaterThan(0); } catch (e) { }
   });
 
   test("TC40 Get FAQ when no records exist @read @raisedqueries @faq @regression", async ({
@@ -504,13 +516,13 @@ test.describe("FAQ Read & Validation APIs", () => {
     const response = await raisedQueriesClient.getFAQQueries();
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
-      try { expect(body.length).toBeGreaterThan(0); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
+    try { expect(body.length).toBeGreaterThan(0); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const faq of body) {
-      try { expect(faq).toHaveProperty("query"); } catch(e) {}
-      try { expect(faq).toHaveProperty("reply"); } catch(e) {}
+      try { expect(faq).toHaveProperty("query"); } catch (e) { }
+      try { expect(faq).toHaveProperty("reply"); } catch (e) { }
     }
   });
 
@@ -520,13 +532,15 @@ test.describe("FAQ Read & Validation APIs", () => {
     const response = await raisedQueriesClient.getFAQQueries();
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const faq of body) {
-      try { expect(Object.keys(faq)).toEqual(
-        expect.arrayContaining(["query", "reply"]),
-      ); } catch(e) {}
+      try {
+        expect(Object.keys(faq)).toEqual(
+          expect.arrayContaining(["query", "reply"]),
+        );
+      } catch (e) { }
       expect(Object.keys(faq)).not.toContain("_id");
     }
   });
@@ -537,14 +551,14 @@ test.describe("FAQ Read & Validation APIs", () => {
     const response = await raisedQueriesClient.getFAQQueries();
     expect(response.status()).toBe(HTTP_STATUS.OK);
 
-    let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+    let body = {}; try { body = await response.json(); } catch (e) { }
+    try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
 
     if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) if (Array.isArray(body)) for (const faq of body) {
-      try { expect(faq).toHaveProperty("query"); } catch(e) {}
-      try { expect(faq).toHaveProperty("reply"); } catch(e) {}
-      try { expect(typeof faq.query).toBe("string"); } catch(e) {}
-      try { expect(typeof faq.reply).toBe("string"); } catch(e) {}
+      try { expect(faq).toHaveProperty("query"); } catch (e) { }
+      try { expect(faq).toHaveProperty("reply"); } catch (e) { }
+      try { expect(typeof faq.query).toBe("string"); } catch (e) { }
+      try { expect(typeof faq.reply).toBe("string"); } catch (e) { }
     }
   });
 });
@@ -622,8 +636,8 @@ test.describe("Raised Queries - Empty Data Validation", () => {
       const response = await raisedQueriesClient.getEmployeeQueries("");
       expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
-      let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(Array.isArray(body)).toBeTruthy(); } catch(e) {}
+      let body = {}; try { body = await response.json(); } catch (e) { }
+      try { expect(Array.isArray(body)).toBeTruthy(); } catch (e) { }
     });
   });
 
@@ -683,8 +697,8 @@ test.describe("Raised Queries - Empty Data Validation", () => {
       );
       expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
-      let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body.message).toBe(raisedQueriesData.messages.queryIdRequired); } catch(e) {}
+      let body = {}; try { body = await response.json(); } catch (e) { }
+      try { expect(body.message).toBe(raisedQueriesData.messages.queryIdRequired); } catch (e) { }
     });
 
     test("TC_EMPTY_007 Update reply with empty request body @emptydata @raisedqueries", async ({
@@ -695,205 +709,215 @@ test.describe("Raised Queries - Empty Data Validation", () => {
       );
       expect(response.status()).toBe(HTTP_STATUS.BAD_REQUEST);
 
-      let body = {}; try { body = await response.json(); } catch(e) {}
-      try { expect(body.message).toBe(raisedQueriesData.messages.queryIdRequired); } catch(e) {}
+      let body = {}; try { body = await response.json(); } catch (e) { }
+      try { expect(body.message).toBe(raisedQueriesData.messages.queryIdRequired); } catch (e) { }
     });
 
-});
+  });
 
-// Empty-data scenarios moved from tests/empty/empty-data.raisedQueries.api.spec.js
-test.describe('Raised Queries Empty Data APIs', () => {
+  // Empty-data scenarios moved from tests/empty/empty-data.raisedQueries.api.spec.js
+  test.describe('Raised Queries Empty Data APIs', () => {
 
     test('TC_EMPTY_001 Raise query without employeeId @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.createRaisedQuery(
-                raisedQueriesData.empty.withoutEmployeeId
-            );
+      const response =
+        await raisedQueriesClient.createRaisedQuery(
+          raisedQueriesData.empty.withoutEmployeeId
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+      expect(response.status())
+        .toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
 
     });
 
     test('TC_EMPTY_002 Raise query without queryType @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.createRaisedQuery(
-                raisedQueriesData.empty.withoutQueryType
-            );
+      const response =
+        await raisedQueriesClient.createRaisedQuery(
+          raisedQueriesData.empty.withoutQueryType
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+      expect(response.status())
+        .toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
 
     });
 
     test('TC_EMPTY_003 Raise query without subject @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.createRaisedQuery(
-                raisedQueriesData.empty.withoutSubject
-            );
+      const response =
+        await raisedQueriesClient.createRaisedQuery(
+          raisedQueriesData.empty.withoutSubject
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.CREATED);
+      expect(response.status())
+        .toBe(HTTP_STATUS.CREATED);
 
     });
 
     test('TC_EMPTY_004 Raise query without query @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.createRaisedQuery(
-                raisedQueriesData.empty.withoutQuery
-            );
+      const response =
+        await raisedQueriesClient.createRaisedQuery(
+          raisedQueriesData.empty.withoutQuery
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.CREATED);
+      expect(response.status())
+        .toBe(HTTP_STATUS.CREATED);
 
     });
 
     test('TC_EMPTY_005 Raise query with empty request body @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.createRaisedQuery(
-                raisedQueriesData.empty.emptyObject
-            );
+      const response =
+        await raisedQueriesClient.createRaisedQuery(
+          raisedQueriesData.empty.emptyObject
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
+      expect(response.status())
+        .toBe(HTTP_STATUS.INTERNAL_SERVER_ERROR);
 
     });
 
     test('TC_EMPTY_006 Update reply without id @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.updateRaisedQueryReply(
-                raisedQueriesData.empty.updateWithoutId
-            );
+      const response =
+        await raisedQueriesClient.updateRaisedQueryReply(
+          raisedQueriesData.empty.updateWithoutId
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.BAD_REQUEST);
+      expect(response.status())
+        .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        let body = {}; try { body = await response.json(); } catch(e) {}
+      let body = {}; try { body = await response.json(); } catch (e) { }
 
-        try { expect(body.message)
-            .toBe(raisedQueriesData.messages.queryIdRequired); } catch(e) {}
+      try {
+        expect(body.message)
+        .toBe(raisedQueriesData.messages.queryIdRequired);
+      } catch (e) { }
 
     });
 
     test('TC_EMPTY_007 Update reply with empty request body @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.updateRaisedQueryReply(
-                raisedQueriesData.empty.updateEmptyObject
-            );
+      const response =
+        await raisedQueriesClient.updateRaisedQueryReply(
+          raisedQueriesData.empty.updateEmptyObject
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.BAD_REQUEST);
+      expect(response.status())
+        .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        let body = {}; try { body = await response.json(); } catch(e) {}
+      let body = {}; try { body = await response.json(); } catch (e) { }
 
-        try { expect(body.message)
-            .toBe(raisedQueriesData.messages.queryIdRequired); } catch(e) {}
+      try {
+        expect(body.message)
+        .toBe(raisedQueriesData.messages.queryIdRequired);
+      } catch (e) { }
 
     });
 
     test('TC_EMPTY_008 Update raised query without id @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.updateRaisedQuery(
-                raisedQueriesData.empty.updateRaisedQueryWithoutId
-            );
+      const response =
+        await raisedQueriesClient.updateRaisedQuery(
+          raisedQueriesData.empty.updateRaisedQueryWithoutId
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.BAD_REQUEST);
+      expect(response.status())
+        .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        let body = {}; try { body = await response.json(); } catch(e) {}
+      let body = {}; try { body = await response.json(); } catch (e) { }
 
-        try { expect(body.message)
-            .toBe(raisedQueriesData.messages.idRequired); } catch(e) {}
+      try {
+        expect(body.message)
+        .toBe(raisedQueriesData.messages.idRequired);
+      } catch (e) { }
 
     });
 
     test('TC_EMPTY_009 Update raised query without subject @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.updateRaisedQuery(
-                raisedQueriesData.empty.updateRaisedQueryWithoutSubject
-            );
+      const response =
+        await raisedQueriesClient.updateRaisedQuery(
+          raisedQueriesData.empty.updateRaisedQueryWithoutSubject
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.OK);
+      expect(response.status())
+        .toBe(HTTP_STATUS.OK);
 
     });
 
     test('TC_EMPTY_010 Update raised query without query @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.updateRaisedQuery(
-                raisedQueriesData.empty.updateRaisedQueryWithoutQuery
-            );
+      const response =
+        await raisedQueriesClient.updateRaisedQuery(
+          raisedQueriesData.empty.updateRaisedQueryWithoutQuery
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.OK);
+      expect(response.status())
+        .toBe(HTTP_STATUS.OK);
 
     });
 
     test('TC_EMPTY_011 Update raised query with empty request body @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.updateRaisedQuery(
-                raisedQueriesData.empty.updateEmptyObject
-            );
+      const response =
+        await raisedQueriesClient.updateRaisedQuery(
+          raisedQueriesData.empty.updateEmptyObject
+        );
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.BAD_REQUEST);
+      expect(response.status())
+        .toBe(HTTP_STATUS.BAD_REQUEST);
 
-        let body = {}; try { body = await response.json(); } catch(e) {}
+      let body = {}; try { body = await response.json(); } catch (e) { }
 
-        try { expect(body.message)
-            .toBe(raisedQueriesData.messages.idRequired); } catch(e) {}
+      try {
+        expect(body.message)
+        .toBe(raisedQueriesData.messages.idRequired);
+      } catch (e) { }
 
     });
 
     test('TC_EMPTY_012 Get employee queries using empty employeeId @emptydata @raisedqueries', async ({
-        raisedQueriesClient
+      raisedQueriesClient
     }) => {
 
-        const response =
-            await raisedQueriesClient.getEmployeeQueries('');
+      const response =
+        await raisedQueriesClient.getEmployeeQueries('');
 
-        expect(response.status())
-            .toBe(HTTP_STATUS.OK);
+      expect(response.status())
+        .toBe(HTTP_STATUS.OK);
 
-        let body = {}; try { body = await response.json(); } catch(e) {}
+      let body = {}; try { body = await response.json(); } catch (e) { }
 
-        try { expect(Array.isArray(body))
-            .toBeTruthy(); } catch(e) {}
+      try {
+        expect(Array.isArray(body))
+        .toBeTruthy();
+      } catch (e) { }
 
     });
 
-});
+  });
 });

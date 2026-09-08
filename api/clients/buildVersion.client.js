@@ -1,6 +1,4 @@
-const {
-  BUILD_VERSION_ENDPOINTS,
-} = require("../constants/buildVersion.constants");
+const { BUILD_VERSION_ENDPOINTS } = require("../constants/buildVersion.constants");
 
 class BuildVersionClient {
   constructor(request, token = null) {
@@ -11,8 +9,8 @@ class BuildVersionClient {
   authHeaders() {
     return this.token
       ? {
-          Authorization: `Bearer ${this.token}`,
-        }
+        Authorization: `Bearer ${this.token}`,
+      }
       : {};
   }
 

@@ -2,17 +2,14 @@
     "valid": {
         "menuItemId": "viewholidays",
         "secondMenuItemId": "applyleave",
-
         "existingModuleId": "{{TEST_MODULE_ID}}",
         "existingModuleName": "View Holidays",
-
         "createModule": {
             "name": "Playwright Module",
             "description": "Module created via Playwright API automation",
             "activeStatus": true,
             "menuItem": "viewholidays"
         },
-
         "updateModule": {
             "name": "Updated Module Name",
             "description": "Updated module description",
@@ -20,11 +17,9 @@
             "menuItem": "viewholidays"
         }
     },
-
     "invalid": {
         "invalidModuleId": "invalid-module-id",
         "nonExistingModuleId": "665f0000000000000000ffff",
-
         "invalidMenuItemId": "invalid-menu-item-id"
     }
 }

@@ -1,6 +1,4 @@
-const {
-  TIME_TRACKER_ENDPOINTS,
-} = require("../constants/timetracker.constants");
+const { TIME_TRACKER_ENDPOINTS } = require("../constants/timetracker.constants");
 
 class TimeTrackerClient {
   constructor(request, token = null) {

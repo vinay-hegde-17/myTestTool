@@ -1,5 +1,4 @@
 const { test: base, expect } = require("./auth.fixture");
-
 const SendEmailClient = require("../api/clients/sendEmail.client");
 
 const test = base.extend({
@@ -8,7 +7,4 @@ const test = base.extend({
   },
 });
 
-module.exports = {
-  test,
-  expect,
-};
+module.exports = { test, expect };

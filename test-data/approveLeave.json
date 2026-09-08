@@ -6,16 +6,13 @@
         "approveStatus": "Approved",
         "rejectStatus": "Rejected"
     },
-
     "processed": {
         "leaveId": "{{TEST_LEAVE_ID}}",
         "expectedMessage": "Leave Request Already Processed"
     },
-
     "invalid": {
         "nonExistingLeaveId": "507f1f77bcf86cd799439011"
     },
-
     "expected": {
         "approvedMessage": "Leave Approved Successfully!",
         "rejectedMessage": "Leave Rejected Successfully!",

@@ -39,8 +39,6 @@ API request context, shared fixtures, JSON test data, and Allure reporting for f
 |-- tests/
 |   `-- api/
 |       |-- *.api.spec.js              # Main API tests (discovers via *.api.spec.js pattern)
-|-- scripts/
-|   `-- run-tests.js                   # Playwright runner and Allure report helper
 |-- utils/
 |   `-- token.util.js                  # Cached-token reader
 |-- globalSetup.js                     # Pre-run: creates and caches QA token

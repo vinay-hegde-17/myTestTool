@@ -1,6 +1,4 @@
-const {
-  IT_DECLARATION_ENDPOINTS,
-} = require("../constants/itDeclaration.constants");
+const { IT_DECLARATION_ENDPOINTS } = require("../constants/itDeclaration.constants");
 
 class ItDeclarationClient {
   constructor(request, token = null) {

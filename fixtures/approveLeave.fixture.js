@@ -1,5 +1,4 @@
 const { test: base, expect } = require("./auth.fixture");
-
 const ApproveLeaveClient = require("../api/clients/approveLeave.client");
 
 const test = base.extend({
@@ -8,7 +7,4 @@ const test = base.extend({
   },
 });
 
-module.exports = {
-  test,
-  expect,
-};
+module.exports = { test, expect };

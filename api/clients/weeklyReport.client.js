@@ -1,6 +1,4 @@
-const {
-  WEEKLY_REPORT_ENDPOINTS,
-} = require("../constants/weeklyReport.constants");
+const { WEEKLY_REPORT_ENDPOINTS } = require("../constants/weeklyReport.constants");
 
 class WeeklyReportClient {
   constructor(request, token = null) {

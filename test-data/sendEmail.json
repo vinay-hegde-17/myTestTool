@@ -9,14 +9,12 @@
             "leaveReason": "Personal work",
             "id": "{{TEST_LEAVE_ID}}"
         },
-
         "timesheetApproval": {
             "employeeId": "{{TEST_EMPLOYEE_ID}}",
             "month": "August",
             "year": "2026",
             "status": "requested"
         },
-
         "timesheetStatusUpdate": {
             "employeeId": "{{TEST_EMPLOYEE_ID}}",
             "month": "August",
@@ -24,15 +22,12 @@
             "status": "approved"
         }
     },
-
     "invalid": {
         "nonExistingEmployeeId": "685000000000000000000001"
     },
-
     "empty": {
         "emptyObject": {}
     },
-
     "expected": {
         "leaveEmailMessage": "Emails sent successfully",
         "timesheetRequestedMessage": "Timesheet Approval email sent successfully",

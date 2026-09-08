@@ -1,6 +1,4 @@
-const {
-  APPROVE_LEAVE_ENDPOINTS,
-} = require("../constants/approveLeave.constants");
+const { APPROVE_LEAVE_ENDPOINTS } = require("../constants/approveLeave.constants");
 
 class ApproveLeaveClient {
   constructor(request, token) {

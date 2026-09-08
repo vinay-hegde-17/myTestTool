@@ -1,6 +1,4 @@
-const {
-  RAISED_QUERIES_ENDPOINTS,
-} = require("../constants/raisedQueries.constants");
+const { RAISED_QUERIES_ENDPOINTS } = require("../constants/raisedQueries.constants");
 
 class RaisedQueriesClient {
   constructor(request, token = null) {

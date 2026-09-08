@@ -5,28 +5,24 @@
         "queryTypeId": "{{TEST_QUERY_TYPE_ID}}",
         "secondQueryTypeId": "{{TEST_SECOND_QUERY_TYPE_ID}}",
         "existingQueryId": "{{TEST_EXISTING_QUERY_ID}}",
-
         "createQuery": {
             "employeeId": "{{TEST_EMPLOYEE_ID}}",
             "queryType": "{{TEST_QUERY_TYPE_ID}}",
             "subject": "Playwright API testing",
             "query": "Raised query created using Playwright API automation"
         },
-
         "updateRaisedQuery": {
             "queryTypeId": "{{TEST_QUERY_TYPE_ID}}",
             "subject": "Updated subject",
             "query": "Updated query description"
         }
     },
-
     "invalid": {
         "invalidEmployeeId": "685000000000000000000001",
         "invalidQueryTypeId": "invalid-query-type-id",
         "invalidQueryId": "invalid-query-id",
         "nonExistingQueryId": "6a68e26a245f4ee9786ebd9f"
     },
-
     "messages": {
         "queryNotFound": "Query not found",
         "updateSuccessfull": "update successfull"
